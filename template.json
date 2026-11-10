@@ -1,0 +1,420 @@
+{
+ "asOf": "November 9, 2026",
+ "source": "Brian Diederich Strategy Research Overview",
+ "capital": 10000,
+ "moneyMin": 8800,
+ "moneyMax": 10600,
+ "strategies": [
+  {
+   "n": 1,
+   "name": "Scale-in momentum + 50-day exit",
+   "category": "Trend / momentum",
+   "tag": "Lead candidate · unproven",
+   "plain": "Buys crypto only while it has been rising, and steps aside when the short trend breaks.",
+   "color": "#3c7dff",
+   "universe": "Forward basket: BTC, ETH, XRP, BNB, SOL. Daily bars.",
+   "window": "Nov 5–25, 2026. First report Nov 26.",
+   "start": "2026-11-05",
+   "asOf": "2026-11-08",
+   "asOfLabel": "through the Nov 8 close",
+   "points": [
+    {
+     "date": "2026-11-05",
+     "equity": 10000
+    },
+    {
+     "date": "2026-11-08",
+     "equity": 10000
+    }
+   ],
+   "latest": 10000,
+   "change": "100% cash",
+   "benchmark": null,
+   "hypothesis": "Crypto trends persist across a few horizons. A close below the 50-day average is meant to cut off the deep bear markets that make holding painful. The 200-day average is meant to keep the book out of an established downtrend.",
+   "rules": [
+    "Target exposure is one third for each of the 30-, 90-, and 180-day returns that is positive, and only while the close is above the 200-day average.",
+    "A daily close below the 50-day average goes to cash. Re-entry needs a fresh 20-day closing high, and the momentum and 200-day filters still have to allow exposure.",
+    "Forward basket: up to one fifth of equity per coin, times that target fraction. Rebalance only when the target level changes.",
+    "Cost on the research note: 0.10% per side. A doubled-fee check was also run on the backtest."
+   ],
+   "backtest": "In-sample BTC backtest, Nov 1, 2021 to Nov 4, 2026: +203.4%, maximum drawdown −21.7%, against buy-and-hold +31.7% and −76.6%. Doubled fees: +189.8%. The 2025–26 window had already been looked at, so it is not a clean holdout. That path is not drawn here.",
+   "forward": "$10,000, 100% cash through the Nov 8 close. Every coin was in the 50-day lockout. The forward test has not proven anything yet.",
+   "risk": "Whipsaw around the 50-day line, and a three-week window that is too short to judge."
+  },
+  {
+   "n": 2,
+   "name": "Crypto z-score mean reversion",
+   "category": "Mean reversion",
+   "tag": "Forward paper",
+   "plain": "Buys a coin after a sharp dip, looking for a bounce back toward its recent average.",
+   "color": "#e24632",
+   "universe": "Ten large-cap coins, daily: BTC, ETH, SOL, XRP, BNB, DOGE, ADA, AVAX, LINK, LTC.",
+   "window": "Nov 5, 2026 – Feb 2, 2027.",
+   "start": "2026-11-05",
+   "asOf": "2026-11-09",
+   "asOfLabel": "as of Nov 9, 2026",
+   "points": [
+    {
+     "date": "2026-11-05",
+     "equity": 10000
+    },
+    {
+     "date": "2026-11-09",
+     "equity": 9871.2
+    }
+   ],
+   "latest": 9871.2,
+   "change": "−1.29%",
+   "benchmark": {
+    "name": "BTC buy-and-hold",
+    "color": "#3c7dff",
+    "points": [
+     {
+      "date": "2026-11-05",
+      "equity": 10000
+     },
+     {
+      "date": "2026-11-09",
+      "equity": 9254.3
+     }
+    ]
+   },
+   "hypothesis": "Sharp selloffs of about one standard deviation in liquid coins tend to retrace part of the way toward the 30-day mean.",
+   "rules": [
+    "z = (close − 30-day mean) / 30-day sample standard deviation, including the signal day.",
+    "Buy when z crosses from at or above −1 to below −1. Fill at the next UTC day's open. Deepest z first.",
+    "Exit at the next open once a close has z at or above 0. Stop: −15% on a close, filled at that close. Time stop: 20 days.",
+    "$1,000 per position including the fee, maximum 10 positions. Cost 0.10% per side."
+   ],
+   "backtest": "No backtest of these exact rules. A different 20-day / −1.5σ variant is context only and is not drawn here.",
+   "forward": "$9,871.20 (−1.29%). 9 positions open, 0 closed. BTC bought at the Nov 5 open: $9,254.30 (−7.46%).",
+   "risk": "In a trending selloff the signals cluster, so ten positions can act like one large long-crypto bet. A close-only stop can lose more than 15% on a gap."
+  },
+  {
+   "n": 3,
+   "name": "Crypto Bollinger band reversion",
+   "category": "Mean reversion",
+   "tag": "Forward paper",
+   "plain": "Same dip idea, using a band around the average instead of a z-score.",
+   "color": "#3cba62",
+   "universe": "The same ten coins as the z-score book, daily. Run as its own account.",
+   "window": "Nov 5, 2026 – Feb 2, 2027.",
+   "start": "2026-11-05",
+   "asOf": "2026-11-09",
+   "asOfLabel": "as of Nov 9, 2026",
+   "points": [
+    {
+     "date": "2026-11-05",
+     "equity": 10000
+    },
+    {
+     "date": "2026-11-09",
+     "equity": 9474.3
+    }
+   ],
+   "latest": 9474.3,
+   "change": "−5.26%",
+   "benchmark": {
+    "name": "BTC buy-and-hold",
+    "color": "#f0c53a",
+    "points": [
+     {
+      "date": "2026-11-05",
+      "equity": 10000
+     },
+     {
+      "date": "2026-11-09",
+      "equity": 9268.2
+     }
+    ]
+   },
+   "hypothesis": "The same overreaction idea as the z-score book, with a volatility band as the trigger. The comparison asks whether the trigger matters.",
+   "rules": [
+    "Middle band is the 20-day mean. Lower band is the middle minus 2 population standard deviations, including that day's close.",
+    "Signal when the completed bar's low touches the lower band, or the close is below it, and the coin is not already held.",
+    "Exit when a completed close is back at or above the middle band. −15% close stop. 20-day maximum hold.",
+    "$1,000 per position including the fee, maximum 10. Cost 0.10% per side."
+   ],
+   "backtest": "None. This one is forward-only.",
+   "forward": "$9,474.30 (−5.26%). 9 open, 0 closed. BTC benchmark $9,268.20 (−7.32%).",
+   "risk": "The low-touch trigger fills the book faster in a selloff, so the same correlated drawdown shows up sooner."
+  },
+  {
+   "n": 4,
+   "name": "EMA 13/80 crossover",
+   "category": "Trend",
+   "tag": "Forward paper",
+   "plain": "Holds a coin only while a fast average sits above a slow one.",
+   "color": "#f0c53a",
+   "universe": "BTC, ETH, SOL. Forward test on daily bars. A 4-hour backtest was also run.",
+   "window": "Ongoing since Nov 5, 2026.",
+   "start": "2026-11-05",
+   "asOf": "2026-11-09",
+   "asOfLabel": "as of Nov 9, 2026",
+   "points": [
+    {
+     "date": "2026-11-05",
+     "equity": 10000
+    },
+    {
+     "date": "2026-11-09",
+     "equity": 9987.7
+    }
+   ],
+   "latest": 9987.7,
+   "change": "in cash",
+   "benchmark": null,
+   "hypothesis": "A classic moving-average filter for medium-term crypto trends. Long only. The source post also shorted; that side was left out.",
+   "rules": [
+    "Long an asset while its 13-day EMA is above its 80-day EMA. Otherwise flat.",
+    "Signal at the close, filled at the next close.",
+    "One third of equity per asset when long. The rest stays in cash. Trade only when the target changes.",
+    "0.10% fee plus 0.10% slippage per side."
+   ],
+   "backtest": "In-sample daily test, Nov 1, 2021 to Nov 5, 2026: +45.12%, maximum drawdown −55.19%, against BTC buy-and-hold +24.92%. The 2025–26 slice was −1.07%. That path is not drawn here.",
+   "forward": "$9,987.70, in cash. One closed trade so far, a small loss. No forward buy-and-hold dollar figure was stated.",
+   "risk": "The backtest drawdown, about −55%, is deeper than most people would sit through. The average lags turns."
+  },
+  {
+   "n": 5,
+   "name": "30-day breakout",
+   "category": "Breakout",
+   "tag": "Forward paper",
+   "plain": "Buys a coin that closes at a 30-day high, and sells when it falls under its 30-day average.",
+   "color": "#3c7dff",
+   "universe": "BTC, ETH, SOL, XRP, DOGE. Daily.",
+   "window": "Ongoing since Nov 5, 2026.",
+   "start": "2026-11-05",
+   "asOf": "2026-11-09",
+   "asOfLabel": "as of Nov 9, 2026",
+   "points": [
+    {
+     "date": "2026-11-05",
+     "equity": 10000
+    },
+    {
+     "date": "2026-11-09",
+     "equity": 10000
+    }
+   ],
+   "latest": 10000,
+   "change": "flat",
+   "benchmark": null,
+   "hypothesis": "New highs can keep going as later buyers and short-covering push price up. This is a control taken from a public Bot Wars post.",
+   "rules": [
+    "Enter or hold when the close is above the prior 30-day high. Today's close is not part of that high.",
+    "Exit when the close drops below the 30-day average close. No separate stop.",
+    "Equal weight across the coins that qualify. Cash if none qualify.",
+    "0.10% fee plus 0.10% slippage per side. Signal at the close, filled at the next close."
+   ],
+   "backtest": "In-sample, Nov 1, 2021 to Nov 5, 2026: +118.77%, maximum drawdown −47.8%, about $5,055 in fees. 2025–26: +2.67%. That path is not drawn here.",
+   "forward": "$10,000.00, flat. No coin has broken out since launch.",
+   "risk": "High turnover. In the five-year backtest, fees were about half the starting capital. Ranges produce many false breakouts."
+  },
+  {
+   "n": 6,
+   "name": "Halving 500",
+   "category": "Cycle",
+   "tag": "In cash",
+   "plain": "Owns bitcoin for 500 days before and after a halving. Cash the rest of the time. Still waiting to buy.",
+   "color": "#e24632",
+   "universe": "BTC only, daily.",
+   "window": "Waiting for a frozen buy on Dec 14, 2026. Hold would run toward Sep 9, 2029.",
+   "start": "2026-11-09",
+   "asOf": "2026-11-09",
+   "asOfLabel": "as of Nov 9, 2026",
+   "points": [
+    {
+     "date": "2026-11-09",
+     "equity": 10000
+    }
+   ],
+   "latest": 10000,
+   "change": "cash, waiting",
+   "benchmark": null,
+   "hypothesis": "Bitcoin's issuance cuts line up with a rough four-year boom and bust. Being in cash during the late bear is meant to avoid the worst of it.",
+   "rules": [
+    "Hold 100% BTC from 500 calendar days before a halving until 500 days after. Cash otherwise.",
+    "The next buy date is frozen at Dec 14, 2026, and the sell date at Sep 9, 2029, so the signal does not drift every day.",
+    "Fill at the next daily close. 0.10% fee plus 0.10% slippage per side."
+   ],
+   "backtest": "Three testable cycles versus buy-and-hold, all in-sample: 2015–17 +3,377% vs +3,285%; 2018–21 +1,017% (drawdown −61.8%) vs +989%; 2022–25 +546% vs +557%. Those paths are not drawn here. Only about three cycles can be tested.",
+   "forward": "$10,000.00, cash, waiting for Dec 14, 2026. Nothing has been bought.",
+   "risk": "A tiny sample, a chart that was drawn with hindsight, and an edge over buy-and-hold that was small in two of the three cycles."
+  },
+  {
+   "n": 7,
+   "name": "SEASONS",
+   "category": "Cycle",
+   "tag": "Planned · not launched",
+   "plain": "A four-season cycle for bitcoin. The rules are still being built, so there is no account yet.",
+   "color": "#3cba62",
+   "universe": "BTC, daily closes. Not running.",
+   "window": "12 months of tracking once it is live. No start date yet.",
+   "start": null,
+   "asOf": null,
+   "asOfLabel": "not launched",
+   "points": [],
+   "latest": null,
+   "change": "not started",
+   "benchmark": null,
+   "planned": true,
+   "hypothesis": "Price-confirmed seasons (a new all-time high, a 30% break, then capitulation and recovery) might time the cycle better than a fixed 500-day offset.",
+   "rules": [
+    "Spring starts at the halving. Summer starts on the first close above the prior cycle's all-time high.",
+    "Fall starts on a 30% drop from the summer high. The account is in cash during fall.",
+    "Winter starts after 300 or more days of fall, a drawdown of 60% or more, and a close above the 50-day average.",
+    "Exposure for each non-fall phase is still to be frozen before launch. Cost plan: 0.10% fee plus 0.10% slippage per side."
+   ],
+   "backtest": "Not yet backtested. The rules are still being built.",
+   "forward": "Not launched. No paper account, no marks, no curve.",
+   "risk": "About four halvings of history, phase rules that can be read more than one way, and a framework published after much of the history it describes."
+  },
+  {
+   "n": 8,
+   "name": "S&P 500 dip-buy",
+   "category": "Mean reversion",
+   "tag": "Forward paper",
+   "plain": "Buys large stocks that have fallen at least 20% under their short average.",
+   "color": "#3cba62",
+   "universe": "Current S&P 500 constituents, daily.",
+   "window": "Nov 3, 2026 – Feb 1, 2027.",
+   "start": "2026-11-03",
+   "asOf": "2026-11-09",
+   "asOfLabel": "as of Nov 9, 2026",
+   "points": [
+    {
+     "date": "2026-11-03",
+     "equity": 10000
+    },
+    {
+     "date": "2026-11-09",
+     "equity": 9212.25
+    }
+   ],
+   "latest": 9212.25,
+   "change": "−7.88%",
+   "benchmark": {
+    "name": "SPY buy-and-hold",
+    "color": "#3c7dff",
+    "points": [
+     {
+      "date": "2026-11-03",
+      "equity": 10000
+     },
+     {
+      "date": "2026-11-09",
+      "equity": 9865
+     }
+    ]
+   },
+   "hypothesis": "Panic selling can push large-cap stocks too far below a short trend, and part of that gap can close.",
+   "rules": [
+    "Signal when a stock's close is at least 20% below its 25-day average. The average includes today's close. Deepest discount first.",
+    "Buy at the next session's open. Exit at the next open after a close back at or above the 25-day average.",
+    "Stop: −15% on a close versus entry, filled at that close. Time stop: 20 trading days.",
+    "$1,000 per position. Up to 10 slots. Cost 0.05% per side."
+   ],
+   "backtest": "None for this equity version.",
+   "forward": "$9,212.25 (−7.88%) against SPY $9,865.00 (−1.35%). Four closed trades, all stop-outs (MRVL, LITE, TER, SNDK on Nov 5), about −$850 together. 9 positions were still open. Win rate on closed trades: 0%.",
+   "risk": "A stock down 20% is often down for a reason. Close-only stops can be blown through by a gap, which is what those four exits did."
+  },
+  {
+   "n": 9,
+   "name": "Nasdaq top-5 momentum",
+   "category": "Cross-sectional momentum",
+   "tag": "Forward paper",
+   "plain": "Each month, holds the five Nasdaq-100 stocks that rose the most over the prior six months.",
+   "color": "#f0c53a",
+   "universe": "Current Nasdaq-100 members with enough history. Monthly rebalance.",
+   "window": "Ongoing since Nov 4, 2026.",
+   "start": "2026-11-04",
+   "asOf": "2026-11-06",
+   "asOfLabel": "as of the Nov 6 close",
+   "points": [
+    {
+     "date": "2026-11-04",
+     "equity": 10000
+    },
+    {
+     "date": "2026-11-06",
+     "equity": 10239.95
+    }
+   ],
+   "latest": 10239.95,
+   "change": "+2.40%",
+   "benchmark": null,
+   "hypothesis": "Recent relative winners tend to keep outperforming for a while. Five names, equal weight.",
+   "rules": [
+    "At each month-end close, rank by the trailing 126 trading days and hold the top 5, 20% each.",
+    "Names that drop out are sold. Fill at the next trading day's close.",
+    "The 126-day lookback is the note's assumption. The source post did not specify it.",
+    "Cost 0.10% per side. Benchmark is QQQ. No forward QQQ dollar figure was stated."
+   ],
+   "backtest": "In-sample, Nov 2021 to Nov 4, 2026: +749.13%, maximum drawdown −38.67%, against QQQ +84.02%. The note says not to trust that number: today's index members are used, so removed losers are missing. That path is not drawn here.",
+   "forward": "$10,239.95 (+2.40%) as of the Nov 6 close. Holds PANW, MU, CRWD, DDOG, and MRNA from the Oct 30 ranking.",
+   "risk": "Five concentrated, mostly high-beta names. Momentum can reverse hard at a turn. The backtest is inflated by survivorship bias."
+  },
+  {
+   "n": 10,
+   "name": "9 EMA + VWAP intraday",
+   "category": "Intraday",
+   "tag": "Day 1 only",
+   "plain": "A day-trade that buys a small dip while price is above the day's average, and is flat by the close.",
+   "color": "#3c7dff",
+   "universe": "SPY and QQQ, 5-minute bars. $10,000 split into two $5,000 sleeves.",
+   "window": "Nov 9, 2026 – Feb 5, 2027.",
+   "start": "2026-11-09",
+   "asOf": "2026-11-09",
+   "asOfLabel": "day 1, Nov 9, 2026",
+   "scale": "sleeve",
+   "points": [
+    {
+     "date": "2026-11-09",
+     "equity": 5000,
+     "session": "open"
+    },
+    {
+     "date": "2026-11-09",
+     "equity": 4991,
+     "session": "close"
+    }
+   ],
+   "latest": null,
+   "change": "primary −0.18%",
+   "sleeveNote": "The note states day-1 percents, not sleeve dollar balances. The dots are $5,000 times those percents.",
+   "extra": {
+    "name": "Variant sleeve",
+    "color": "#e24632",
+    "points": [
+     {
+      "date": "2026-11-09",
+      "equity": 5000,
+      "session": "open"
+     },
+     {
+      "date": "2026-11-09",
+      "equity": 5009,
+      "session": "close"
+     }
+    ]
+   },
+   "benchmark": {
+    "name": "50/50 buy-and-hold, day-1 percent",
+    "color": "#3cba62",
+    "stated": 1.93,
+    "note": "+1.93% on day 1. Not drawn on this sleeve scale."
+   },
+   "hypothesis": "A widely shared day-trading setup: buy a pullback to a short average while price is above VWAP. The test asks whether it survives once the rules and costs are written down.",
+   "rules": [
+    "Primary entry: the previous close is above both VWAP and the 9-bar EMA, the EMA is rising, the bar's low touches the EMA, and the close finishes above both. Not the first or last bar of the session.",
+    "Enter at the next bar's open. Stop at VWAP minus one cent, checked first. Otherwise exit after a close below the EMA, or at the session's last close. Flat overnight.",
+    "Variant: enter when the close reclaims both EMA and VWAP. Same exit, no stop. Reported separately.",
+    "Each trade uses the full sleeve. Cost 0.03% per side. A 0.06% sensitivity run was also done on the backtest."
+   ],
+   "backtest": "Aug 17 to Nov 6, 2026, 59 sessions, in-sample: primary −9.79%, variant −14.37%, against 50/50 buy-and-hold −7.87%. That path is not drawn here.",
+   "forward": "Day 1 only (Nov 9): primary −0.18%, variant +0.18%, buy-and-hold +1.93%. A combined dollar balance was not stated.",
+   "risk": "Many trades and a low win rate. Small costs add up. The stop is checked on 5-minute bars; the source used 1-minute bars."
+  }
+ ]
+}

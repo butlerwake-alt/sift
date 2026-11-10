@@ -1,0 +1,1123 @@
+{
+ "note": "Append-only daily marks from the paper-test records. Existing marks are never rewritten.",
+ "series": {
+  "1": {
+   "acct": [
+    {
+     "date": "2026-11-04",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-05",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-06",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-07",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-08",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-09",
+     "equity": 10000.0
+    }
+   ],
+   "bench": [
+    {
+     "date": "2026-11-04",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-05",
+     "equity": 9444.92
+    },
+    {
+     "date": "2026-11-06",
+     "equity": 9420.64
+    },
+    {
+     "date": "2026-11-07",
+     "equity": 9420.72
+    },
+    {
+     "date": "2026-11-08",
+     "equity": 9276.09
+    },
+    {
+     "date": "2026-11-09",
+     "equity": 9355.5
+    }
+   ]
+  },
+  "2": {
+   "acct": [
+    {
+     "date": "2026-11-05",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-06",
+     "equity": 10079.14
+    },
+    {
+     "date": "2026-11-07",
+     "equity": 10032.65
+    },
+    {
+     "date": "2026-11-08",
+     "equity": 9963.73
+    },
+    {
+     "date": "2026-11-09",
+     "equity": 9871.2
+    },
+    {
+     "date": "2026-11-10",
+     "equity": 9701.24
+    }
+   ],
+   "bench": [
+    {
+     "date": "2026-11-05",
+     "equity": 9898.44
+    },
+    {
+     "date": "2026-11-06",
+     "equity": 9382.66
+    },
+    {
+     "date": "2026-11-07",
+     "equity": 9429.37
+    },
+    {
+     "date": "2026-11-08",
+     "equity": 9428.62
+    },
+    {
+     "date": "2026-11-09",
+     "equity": 9254.3
+    },
+    {
+     "date": "2026-11-10",
+     "equity": 9177.11
+    }
+   ]
+  },
+  "3": {
+   "acct": [
+    {
+     "date": "2026-11-05",
+     "equity": 9994.0
+    },
+    {
+     "date": "2026-11-06",
+     "equity": 9765.96
+    },
+    {
+     "date": "2026-11-07",
+     "equity": 9672.4
+    },
+    {
+     "date": "2026-11-08",
+     "equity": 9611.21
+    },
+    {
+     "date": "2026-11-09",
+     "equity": 9474.3
+    },
+    {
+     "date": "2026-11-10",
+     "equity": 9309.9
+    }
+   ],
+   "bench": [
+    {
+     "date": "2026-11-05",
+     "equity": 9859.97
+    },
+    {
+     "date": "2026-11-06",
+     "equity": 9379.49
+    },
+    {
+     "date": "2026-11-07",
+     "equity": 9430.35
+    },
+    {
+     "date": "2026-11-08",
+     "equity": 9429.37
+    },
+    {
+     "date": "2026-11-09",
+     "equity": 9268.2
+    },
+    {
+     "date": "2026-11-10",
+     "equity": 9168.75
+    }
+   ]
+  },
+  "4": {
+   "acct": [
+    {
+     "date": "2026-11-05",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-06",
+     "equity": 9993.33
+    },
+    {
+     "date": "2026-11-07",
+     "equity": 9987.7
+    },
+    {
+     "date": "2026-11-08",
+     "equity": 9987.7
+    },
+    {
+     "date": "2026-11-09",
+     "equity": 9987.7
+    }
+   ],
+   "bench": [
+    {
+     "date": "2026-11-05",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-06",
+     "equity": 9967.93
+    },
+    {
+     "date": "2026-11-07",
+     "equity": 9971.03
+    },
+    {
+     "date": "2026-11-08",
+     "equity": 9837.48
+    },
+    {
+     "date": "2026-11-09",
+     "equity": 9905.43
+    }
+   ]
+  },
+  "5": {
+   "acct": [
+    {
+     "date": "2026-11-05",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-06",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-07",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-08",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-09",
+     "equity": 10000.0
+    }
+   ],
+   "bench": [
+    {
+     "date": "2026-11-05",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-06",
+     "equity": 9967.93
+    },
+    {
+     "date": "2026-11-07",
+     "equity": 9971.03
+    },
+    {
+     "date": "2026-11-08",
+     "equity": 9837.48
+    },
+    {
+     "date": "2026-11-09",
+     "equity": 9905.43
+    }
+   ]
+  },
+  "6": {
+   "acct": [
+    {
+     "date": "2026-11-04",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-05",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-06",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-07",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-08",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-09",
+     "equity": 10000.0
+    }
+   ],
+   "bench": [
+    {
+     "date": "2026-11-04",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-05",
+     "equity": 9444.92
+    },
+    {
+     "date": "2026-11-06",
+     "equity": 9420.64
+    },
+    {
+     "date": "2026-11-07",
+     "equity": 9420.72
+    },
+    {
+     "date": "2026-11-08",
+     "equity": 9276.09
+    },
+    {
+     "date": "2026-11-09",
+     "equity": 9355.5
+    }
+   ]
+  },
+  "8": {
+   "acct": [
+    {
+     "date": "2026-11-03",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-04",
+     "equity": 9855.43
+    },
+    {
+     "date": "2026-11-05",
+     "equity": 8803.54
+    },
+    {
+     "date": "2026-11-06",
+     "equity": 8671.27
+    },
+    {
+     "date": "2026-11-09",
+     "equity": 9212.25
+    }
+   ],
+   "bench": [
+    {
+     "date": "2026-11-03",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-04",
+     "equity": 10050.07
+    },
+    {
+     "date": "2026-11-05",
+     "equity": 9606.94
+    },
+    {
+     "date": "2026-11-06",
+     "equity": 9636.95
+    },
+    {
+     "date": "2026-11-09",
+     "equity": 9865.0
+    }
+   ]
+  },
+  "9": {
+   "acct": [
+    {
+     "date": "2026-11-04",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-05",
+     "equity": 9990.01
+    },
+    {
+     "date": "2026-11-06",
+     "equity": 10239.95
+    },
+    {
+     "date": "2026-11-09",
+     "equity": 10715.31
+    }
+   ],
+   "bench": [
+    {
+     "date": "2026-11-04",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-05",
+     "equity": 9351.11
+    },
+    {
+     "date": "2026-11-06",
+     "equity": 9481.9
+    },
+    {
+     "date": "2026-11-09",
+     "equity": 9817.91
+    }
+   ]
+  },
+  "10": {
+   "acct": [
+    {
+     "date": "2026-11-09",
+     "equity": 10000.0,
+     "session": "open"
+    },
+    {
+     "date": "2026-11-09",
+     "equity": 9981.7,
+     "session": "close"
+    }
+   ],
+   "extra": [
+    {
+     "date": "2026-11-09",
+     "equity": 10000.0,
+     "session": "open"
+    },
+    {
+     "date": "2026-11-09",
+     "equity": 10018.22,
+     "session": "close"
+    }
+   ],
+   "bench": [
+    {
+     "date": "2026-11-09",
+     "equity": 10000.0,
+     "session": "open"
+    },
+    {
+     "date": "2026-11-09",
+     "equity": 10193.16,
+     "session": "close"
+    }
+   ]
+  }
+ },
+ "last": {
+  "1": {
+   "n": 1,
+   "name": "Scale-in momentum + 50-day exit",
+   "category": "Trend / momentum",
+   "tag": "Lead candidate \u00b7 unproven",
+   "plain": "Buys crypto only while it has been rising, and steps aside when the short trend breaks.",
+   "color": "#3c7dff",
+   "universe": "Forward basket: BTC, ETH, XRP, BNB, SOL. Daily bars.",
+   "window": "Nov 5\u201325, 2026. First report Nov 26.",
+   "start": "2026-11-04",
+   "asOf": "2026-11-09",
+   "asOfLabel": "mark of Nov 9",
+   "points": [
+    {
+     "date": "2026-11-04",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-05",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-06",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-07",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-08",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-09",
+     "equity": 10000.0
+    }
+   ],
+   "latest": 10000.0,
+   "change": "100% cash",
+   "benchmark": {
+    "name": "BTC buy-and-hold",
+    "color": "#f0c53a",
+    "points": [
+     {
+      "date": "2026-11-04",
+      "equity": 10000.0
+     },
+     {
+      "date": "2026-11-05",
+      "equity": 9444.92
+     },
+     {
+      "date": "2026-11-06",
+      "equity": 9420.64
+     },
+     {
+      "date": "2026-11-07",
+      "equity": 9420.72
+     },
+     {
+      "date": "2026-11-08",
+      "equity": 9276.09
+     },
+     {
+      "date": "2026-11-09",
+      "equity": 9355.5
+     }
+    ]
+   },
+   "hypothesis": "Crypto trends persist across a few horizons. A close below the 50-day average is meant to cut off the deep bear markets that make holding painful. The 200-day average is meant to keep the book out of an established downtrend.",
+   "rules": [
+    "Target exposure is one third for each of the 30-, 90-, and 180-day returns that is positive, and only while the close is above the 200-day average.",
+    "A daily close below the 50-day average goes to cash. Re-entry needs a fresh 20-day closing high, and the momentum and 200-day filters still have to allow exposure.",
+    "Forward basket: up to one fifth of equity per coin, times that target fraction. Rebalance only when the target level changes.",
+    "Cost on the research note: 0.10% per side. A doubled-fee check was also run on the backtest."
+   ],
+   "backtest": "In-sample BTC backtest, Nov 1, 2021 to Nov 4, 2026: +203.4%, maximum drawdown \u221221.7%, against buy-and-hold +31.7% and \u221276.6%. Doubled fees: +189.8%. The 2025\u201326 window had already been looked at, so it is not a clean holdout. That path is not drawn here.",
+   "forward": "$10,000.00 (0.00%), 100% cash through the Nov 9 close. Max drawdown 0.00%. BTC buy-and-hold $9,355.50 (\u22126.45%). Equal-weight basket hold $9,043.40. The forward test has not proven anything yet.",
+   "risk": "Whipsaw around the 50-day line, and a three-week window that is too short to judge.",
+   "stale": false
+  },
+  "2": {
+   "n": 2,
+   "name": "Crypto z-score mean reversion",
+   "category": "Mean reversion",
+   "tag": "Forward paper",
+   "plain": "Buys a coin after a sharp dip, looking for a bounce back toward its recent average.",
+   "color": "#e24632",
+   "universe": "Ten large-cap coins, daily: BTC, ETH, SOL, XRP, BNB, DOGE, ADA, AVAX, LINK, LTC.",
+   "window": "Nov 5, 2026 \u2013 Feb 2, 2027.",
+   "start": "2026-11-05",
+   "asOf": "2026-11-10",
+   "asOfLabel": "mark of Nov 10",
+   "points": [
+    {
+     "date": "2026-11-05",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-06",
+     "equity": 10079.14
+    },
+    {
+     "date": "2026-11-07",
+     "equity": 10032.65
+    },
+    {
+     "date": "2026-11-08",
+     "equity": 9963.73
+    },
+    {
+     "date": "2026-11-09",
+     "equity": 9871.2
+    },
+    {
+     "date": "2026-11-10",
+     "equity": 9701.24
+    }
+   ],
+   "latest": 9701.24,
+   "change": "\u22122.99%",
+   "benchmark": {
+    "name": "BTC buy-and-hold",
+    "color": "#3c7dff",
+    "points": [
+     {
+      "date": "2026-11-05",
+      "equity": 9898.44
+     },
+     {
+      "date": "2026-11-06",
+      "equity": 9382.66
+     },
+     {
+      "date": "2026-11-07",
+      "equity": 9429.37
+     },
+     {
+      "date": "2026-11-08",
+      "equity": 9428.62
+     },
+     {
+      "date": "2026-11-09",
+      "equity": 9254.3
+     },
+     {
+      "date": "2026-11-10",
+      "equity": 9177.11
+     }
+    ]
+   },
+   "hypothesis": "Sharp selloffs of about one standard deviation in liquid coins tend to retrace part of the way toward the 30-day mean.",
+   "rules": [
+    "z = (close \u2212 30-day mean) / 30-day sample standard deviation, including the signal day.",
+    "Buy when z crosses from at or above \u22121 to below \u22121. Fill at the next UTC day's open. Deepest z first.",
+    "Exit at the next open once a close has z at or above 0. Stop: \u221215% on a close, filled at that close. Time stop: 20 days.",
+    "$1,000 per position including the fee, maximum 10 positions. Cost 0.10% per side."
+   ],
+   "backtest": "No backtest of these exact rules. A different 20-day / \u22121.5\u03c3 variant is context only and is not drawn here.",
+   "forward": "$9,701.24 (\u22122.99%). 9 positions open, 0 closed. BTC buy-and-hold $9,177.11 (\u22128.23%).",
+   "risk": "In a trending selloff the signals cluster, so ten positions can act like one large long-crypto bet. A close-only stop can lose more than 15% on a gap.",
+   "stale": false
+  },
+  "3": {
+   "n": 3,
+   "name": "Crypto Bollinger band reversion",
+   "category": "Mean reversion",
+   "tag": "Forward paper",
+   "plain": "Same dip idea, using a band around the average instead of a z-score.",
+   "color": "#3cba62",
+   "universe": "The same ten coins as the z-score book, daily. Run as its own account.",
+   "window": "Nov 5, 2026 \u2013 Feb 2, 2027.",
+   "start": "2026-11-05",
+   "asOf": "2026-11-10",
+   "asOfLabel": "mark of Nov 10",
+   "points": [
+    {
+     "date": "2026-11-05",
+     "equity": 9994.0
+    },
+    {
+     "date": "2026-11-06",
+     "equity": 9765.96
+    },
+    {
+     "date": "2026-11-07",
+     "equity": 9672.4
+    },
+    {
+     "date": "2026-11-08",
+     "equity": 9611.21
+    },
+    {
+     "date": "2026-11-09",
+     "equity": 9474.3
+    },
+    {
+     "date": "2026-11-10",
+     "equity": 9309.9
+    }
+   ],
+   "latest": 9309.9,
+   "change": "\u22126.90%",
+   "benchmark": {
+    "name": "BTC buy-and-hold",
+    "color": "#f0c53a",
+    "points": [
+     {
+      "date": "2026-11-05",
+      "equity": 9859.97
+     },
+     {
+      "date": "2026-11-06",
+      "equity": 9379.49
+     },
+     {
+      "date": "2026-11-07",
+      "equity": 9430.35
+     },
+     {
+      "date": "2026-11-08",
+      "equity": 9429.37
+     },
+     {
+      "date": "2026-11-09",
+      "equity": 9268.2
+     },
+     {
+      "date": "2026-11-10",
+      "equity": 9168.75
+     }
+    ]
+   },
+   "hypothesis": "The same overreaction idea as the z-score book, with a volatility band as the trigger. The comparison asks whether the trigger matters.",
+   "rules": [
+    "Middle band is the 20-day mean. Lower band is the middle minus 2 population standard deviations, including that day's close.",
+    "Signal when the completed bar's low touches the lower band, or the close is below it, and the coin is not already held.",
+    "Exit when a completed close is back at or above the middle band. \u221215% close stop. 20-day maximum hold.",
+    "$1,000 per position including the fee, maximum 10. Cost 0.10% per side."
+   ],
+   "backtest": "None. This one is forward-only.",
+   "forward": "$9,309.90 (\u22126.90%). 10 positions open, 0 closed. BTC buy-and-hold $9,168.75 (\u22128.31%).",
+   "risk": "The low-touch trigger fills the book faster in a selloff, so the same correlated drawdown shows up sooner.",
+   "stale": false
+  },
+  "4": {
+   "n": 4,
+   "name": "EMA 13/80 crossover",
+   "category": "Trend",
+   "tag": "Forward paper",
+   "plain": "Holds a coin only while a fast average sits above a slow one.",
+   "color": "#f0c53a",
+   "universe": "BTC, ETH, SOL. Forward test on daily bars. A 4-hour backtest was also run.",
+   "window": "Ongoing since Nov 5, 2026.",
+   "start": "2026-11-05",
+   "asOf": "2026-11-09",
+   "asOfLabel": "mark of Nov 9",
+   "points": [
+    {
+     "date": "2026-11-05",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-06",
+     "equity": 9993.33
+    },
+    {
+     "date": "2026-11-07",
+     "equity": 9987.7
+    },
+    {
+     "date": "2026-11-08",
+     "equity": 9987.7
+    },
+    {
+     "date": "2026-11-09",
+     "equity": 9987.7
+    }
+   ],
+   "latest": 9987.7,
+   "change": "in cash \u00b7 \u22120.12%",
+   "benchmark": {
+    "name": "BTC buy-and-hold",
+    "color": "#3c7dff",
+    "points": [
+     {
+      "date": "2026-11-05",
+      "equity": 10000.0
+     },
+     {
+      "date": "2026-11-06",
+      "equity": 9967.93
+     },
+     {
+      "date": "2026-11-07",
+      "equity": 9971.03
+     },
+     {
+      "date": "2026-11-08",
+      "equity": 9837.48
+     },
+     {
+      "date": "2026-11-09",
+      "equity": 9905.43
+     }
+    ]
+   },
+   "hypothesis": "A classic moving-average filter for medium-term crypto trends. Long only. The source post also shorted; that side was left out.",
+   "rules": [
+    "Long an asset while its 13-day EMA is above its 80-day EMA. Otherwise flat.",
+    "Signal at the close, filled at the next close.",
+    "One third of equity per asset when long. The rest stays in cash. Trade only when the target changes.",
+    "0.10% fee plus 0.10% slippage per side."
+   ],
+   "backtest": "In-sample daily test, Nov 1, 2021 to Nov 5, 2026: +45.12%, maximum drawdown \u221255.19%, against BTC buy-and-hold +24.92%. The 2025\u201326 slice was \u22121.07%. That path is not drawn here.",
+   "forward": "$9,987.70 (\u22120.12%), in cash as of the Nov 9 close. 2 fills logged, 1 sells. BTC buy-and-hold $9,905.43 (\u22120.95%).",
+   "risk": "The backtest drawdown, about \u221255%, is deeper than most people would sit through. The average lags turns.",
+   "stale": false
+  },
+  "5": {
+   "n": 5,
+   "name": "30-day breakout",
+   "category": "Breakout",
+   "tag": "Forward paper",
+   "plain": "Buys a coin that closes at a 30-day high, and sells when it falls under its 30-day average.",
+   "color": "#3c7dff",
+   "universe": "BTC, ETH, SOL, XRP, DOGE. Daily.",
+   "window": "Ongoing since Nov 5, 2026.",
+   "start": "2026-11-05",
+   "asOf": "2026-11-09",
+   "asOfLabel": "mark of Nov 9",
+   "points": [
+    {
+     "date": "2026-11-05",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-06",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-07",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-08",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-09",
+     "equity": 10000.0
+    }
+   ],
+   "latest": 10000.0,
+   "change": "flat",
+   "benchmark": {
+    "name": "BTC buy-and-hold",
+    "color": "#f0c53a",
+    "points": [
+     {
+      "date": "2026-11-05",
+      "equity": 10000.0
+     },
+     {
+      "date": "2026-11-06",
+      "equity": 9967.93
+     },
+     {
+      "date": "2026-11-07",
+      "equity": 9971.03
+     },
+     {
+      "date": "2026-11-08",
+      "equity": 9837.48
+     },
+     {
+      "date": "2026-11-09",
+      "equity": 9905.43
+     }
+    ]
+   },
+   "hypothesis": "New highs can keep going as later buyers and short-covering push price up. This is a control taken from a public Bot Wars post.",
+   "rules": [
+    "Enter or hold when the close is above the prior 30-day high. Today's close is not part of that high.",
+    "Exit when the close drops below the 30-day average close. No separate stop.",
+    "Equal weight across the coins that qualify. Cash if none qualify.",
+    "0.10% fee plus 0.10% slippage per side. Signal at the close, filled at the next close."
+   ],
+   "backtest": "In-sample, Nov 1, 2021 to Nov 5, 2026: +118.77%, maximum drawdown \u221247.8%, about $5,055 in fees. 2025\u201326: +2.67%. That path is not drawn here.",
+   "forward": "$10,000.00 (0.00%), in cash as of the Nov 9 close. 0 fills logged, 0 sells. BTC buy-and-hold $9,905.43 (\u22120.95%).",
+   "risk": "High turnover. In the five-year backtest, fees were about half the starting capital. Ranges produce many false breakouts.",
+   "stale": false
+  },
+  "6": {
+   "n": 6,
+   "name": "Halving 500",
+   "category": "Cycle",
+   "tag": "In cash",
+   "plain": "Owns bitcoin for 500 days before and after a halving. Cash the rest of the time. Still waiting to buy.",
+   "color": "#e24632",
+   "universe": "BTC only, daily.",
+   "window": "Waiting for a frozen buy on Dec 14, 2026. Hold would run toward Sep 9, 2029.",
+   "start": "2026-11-04",
+   "asOf": "2026-11-09",
+   "asOfLabel": "mark of Nov 9",
+   "points": [
+    {
+     "date": "2026-11-04",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-05",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-06",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-07",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-08",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-09",
+     "equity": 10000.0
+    }
+   ],
+   "latest": 10000.0,
+   "change": "flat",
+   "benchmark": {
+    "name": "BTC buy-and-hold",
+    "color": "#f0c53a",
+    "points": [
+     {
+      "date": "2026-11-04",
+      "equity": 10000.0
+     },
+     {
+      "date": "2026-11-05",
+      "equity": 9444.92
+     },
+     {
+      "date": "2026-11-06",
+      "equity": 9420.64
+     },
+     {
+      "date": "2026-11-07",
+      "equity": 9420.72
+     },
+     {
+      "date": "2026-11-08",
+      "equity": 9276.09
+     },
+     {
+      "date": "2026-11-09",
+      "equity": 9355.5
+     }
+    ]
+   },
+   "hypothesis": "Bitcoin's issuance cuts line up with a rough four-year boom and bust. Being in cash during the late bear is meant to avoid the worst of it.",
+   "rules": [
+    "Hold 100% BTC from 500 calendar days before a halving until 500 days after. Cash otherwise.",
+    "The next buy date is frozen at Dec 14, 2026, and the sell date at Sep 9, 2029, so the signal does not drift every day.",
+    "Fill at the next daily close. 0.10% fee plus 0.10% slippage per side."
+   ],
+   "backtest": "Three testable cycles versus buy-and-hold, all in-sample: 2015\u201317 +3,377% vs +3,285%; 2018\u201321 +1,017% (drawdown \u221261.8%) vs +989%; 2022\u201325 +546% vs +557%. Those paths are not drawn here. Only about three cycles can be tested.",
+   "forward": "$10,000.00 (0.00%), in cash as of the Nov 9 close. 0 fills logged, 0 sells. BTC buy-and-hold $9,355.50 (\u22126.45%). Next frozen buy date: Dec 14, 2026.",
+   "risk": "A tiny sample, a chart that was drawn with hindsight, and an edge over buy-and-hold that was small in two of the three cycles.",
+   "stale": false
+  },
+  "8": {
+   "n": 8,
+   "name": "S&P 500 dip-buy",
+   "category": "Mean reversion",
+   "tag": "Forward paper",
+   "plain": "Buys large stocks that have fallen at least 20% under their short average.",
+   "color": "#3cba62",
+   "universe": "Current S&P 500 constituents, daily.",
+   "window": "Nov 3, 2026 \u2013 Feb 1, 2027.",
+   "start": "2026-11-03",
+   "asOf": "2026-11-09",
+   "asOfLabel": "mark of Nov 9",
+   "points": [
+    {
+     "date": "2026-11-03",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-04",
+     "equity": 9855.43
+    },
+    {
+     "date": "2026-11-05",
+     "equity": 8803.54
+    },
+    {
+     "date": "2026-11-06",
+     "equity": 8671.27
+    },
+    {
+     "date": "2026-11-09",
+     "equity": 9212.25
+    }
+   ],
+   "latest": 9212.25,
+   "change": "\u22127.88%",
+   "benchmark": {
+    "name": "SPY buy-and-hold",
+    "color": "#3c7dff",
+    "points": [
+     {
+      "date": "2026-11-03",
+      "equity": 10000.0
+     },
+     {
+      "date": "2026-11-04",
+      "equity": 10050.07
+     },
+     {
+      "date": "2026-11-05",
+      "equity": 9606.94
+     },
+     {
+      "date": "2026-11-06",
+      "equity": 9636.95
+     },
+     {
+      "date": "2026-11-09",
+      "equity": 9865.0
+     }
+    ]
+   },
+   "hypothesis": "Panic selling can push large-cap stocks too far below a short trend, and part of that gap can close.",
+   "rules": [
+    "Signal when a stock's close is at least 20% below its 25-day average. The average includes today's close. Deepest discount first.",
+    "Buy at the next session's open. Exit at the next open after a close back at or above the 25-day average.",
+    "Stop: \u221215% on a close versus entry, filled at that close. Time stop: 20 trading days.",
+    "$1,000 per position. Up to 10 slots. Cost 0.05% per side."
+   ],
+   "backtest": "None for this equity version.",
+   "forward": "$9,212.25 (\u22127.88%) against SPY $9,865.00 (\u22121.35%). 9 positions open, 4 closed (0 won, 4 lost, \u2212$849.88 total, win rate 0%).",
+   "risk": "A stock down 20% is often down for a reason. Close-only stops can be blown through by a gap, which is what those four exits did.",
+   "stale": false
+  },
+  "9": {
+   "n": 9,
+   "name": "Nasdaq top-5 momentum",
+   "category": "Cross-sectional momentum",
+   "tag": "Forward paper",
+   "plain": "Each month, holds the five Nasdaq-100 stocks that rose the most over the prior six months.",
+   "color": "#f0c53a",
+   "universe": "Current Nasdaq-100 members with enough history. Monthly rebalance.",
+   "window": "Ongoing since Nov 4, 2026.",
+   "start": "2026-11-04",
+   "asOf": "2026-11-09",
+   "asOfLabel": "mark of Nov 9",
+   "points": [
+    {
+     "date": "2026-11-04",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-05",
+     "equity": 9990.01
+    },
+    {
+     "date": "2026-11-06",
+     "equity": 10239.95
+    },
+    {
+     "date": "2026-11-09",
+     "equity": 10715.31
+    }
+   ],
+   "latest": 10715.31,
+   "change": "+7.15%",
+   "benchmark": {
+    "name": "QQQ buy-and-hold",
+    "color": "#3c7dff",
+    "points": [
+     {
+      "date": "2026-11-04",
+      "equity": 10000.0
+     },
+     {
+      "date": "2026-11-05",
+      "equity": 9351.11
+     },
+     {
+      "date": "2026-11-06",
+      "equity": 9481.9
+     },
+     {
+      "date": "2026-11-09",
+      "equity": 9817.91
+     }
+    ]
+   },
+   "hypothesis": "Recent relative winners tend to keep outperforming for a while. Five names, equal weight.",
+   "rules": [
+    "At each month-end close, rank by the trailing 126 trading days and hold the top 5, 20% each.",
+    "Names that drop out are sold. Fill at the next trading day's close.",
+    "The 126-day lookback is the note's assumption. The source post did not specify it.",
+    "Cost 0.10% per side. Benchmark is QQQ. No forward QQQ dollar figure was stated."
+   ],
+   "backtest": "In-sample, Nov 2021 to Nov 4, 2026: +749.13%, maximum drawdown \u221238.67%, against QQQ +84.02%. The note says not to trust that number: today's index members are used, so removed losers are missing. That path is not drawn here.",
+   "forward": "$10,715.31 (+7.15%), holds PANW, MU, CRWD, DDOG, MRNA as of the Nov 9 close. 15 fills logged, 7 sells. QQQ buy-and-hold $9,817.91 (\u22121.82%).",
+   "risk": "Five concentrated, mostly high-beta names. Momentum can reverse hard at a turn. The backtest is inflated by survivorship bias.",
+   "stale": false
+  },
+  "10": {
+   "n": 10,
+   "name": "9 EMA + VWAP intraday",
+   "category": "Intraday",
+   "tag": "Day 1",
+   "plain": "A day-trade that buys a small dip while price is above the day's average, and is flat by the close.",
+   "color": "#3c7dff",
+   "universe": "SPY and QQQ, 5-minute bars. $10,000 split into two $5,000 sleeves.",
+   "window": "Nov 9, 2026 \u2013 Feb 5, 2027.",
+   "start": "2026-11-09",
+   "asOf": "2026-11-09",
+   "asOfLabel": "session 1 \u00b7 Nov 9",
+   "points": [
+    {
+     "date": "2026-11-09",
+     "equity": 10000.0,
+     "session": "open"
+    },
+    {
+     "date": "2026-11-09",
+     "equity": 9981.7,
+     "session": "close"
+    }
+   ],
+   "latest": 9981.71,
+   "change": "primary \u22120.18% \u00b7 variant +0.18%",
+   "extra": {
+    "name": "Variant sleeve",
+    "color": "#e24632",
+    "points": [
+     {
+      "date": "2026-11-09",
+      "equity": 10000.0,
+      "session": "open"
+     },
+     {
+      "date": "2026-11-09",
+      "equity": 10018.22,
+      "session": "close"
+     }
+    ]
+   },
+   "benchmark": {
+    "name": "50/50 SPY/QQQ buy-and-hold",
+    "color": "#3cba62",
+    "points": [
+     {
+      "date": "2026-11-09",
+      "equity": 10000.0,
+      "session": "open"
+     },
+     {
+      "date": "2026-11-09",
+      "equity": 10193.16,
+      "session": "close"
+     }
+    ]
+   },
+   "hypothesis": "A widely shared day-trading setup: buy a pullback to a short average while price is above VWAP. The test asks whether it survives once the rules and costs are written down.",
+   "rules": [
+    "Primary entry: the previous close is above both VWAP and the 9-bar EMA, the EMA is rising, the bar's low touches the EMA, and the close finishes above both. Not the first or last bar of the session.",
+    "Enter at the next bar's open. Stop at VWAP minus one cent, checked first. Otherwise exit after a close below the EMA, or at the session's last close. Flat overnight.",
+    "Variant: enter when the close reclaims both EMA and VWAP. Same exit, no stop. Reported separately.",
+    "Each trade uses the full sleeve. Cost 0.03% per side. A 0.06% sensitivity run was also done on the backtest."
+   ],
+   "backtest": "Aug 17 to Nov 6, 2026, 59 sessions, in-sample: primary \u22129.79%, variant \u221214.37%, against 50/50 buy-and-hold \u22127.87%. That path is not drawn here.",
+   "forward": "1 session through Nov 9: primary $9,981.71 (\u22120.18%, 7 trades, win rate 29%); variant $10,018.21 (+0.18%, 7 trades, win rate 57%); 50/50 SPY/QQQ buy-and-hold $10,193.16 (+1.93%). Each version is its own $10,000 account split across SPY and QQQ.",
+   "risk": "Many trades and a low win rate. Small costs add up. The stop is checked on 5-minute bars; the source used 1-minute bars.",
+   "stale": false,
+   "lineName": "Primary account"
+  }
+ }
+}
