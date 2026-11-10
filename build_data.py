@@ -209,6 +209,14 @@ def main():
             report[n] = "STALE ({}: {})".format(type(e).__name__, e)
         strategies.append(s)
 
+    # 'why' (the original backtest that led to the pick) is REQUIRED for every strategy and always comes from template.json,
+    # so it survives regeneration and the stale-record fallback. See README.md.
+    why = {x["n"]: x.get("why") for x in tpl["strategies"]}
+    for s in strategies:
+        s["why"] = why.get(s["n"])
+        if not (isinstance(s["why"], dict) and s["why"].get("text")):
+            raise SystemExit("template.json strategy {} is missing the required 'why' field".format(s["n"]))
+
     vals = []
     for s in strategies:
         for k in ("points",): vals += [p["equity"] for p in s.get(k, [])]

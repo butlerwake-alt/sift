@@ -298,6 +298,13 @@ function renderBoard() {
   }
 }
 
+function whyHtml(strategy) {
+  const why = strategy.why;
+  if (!why || !why.text) return `<h2>Why we picked this</h2><p>No note recorded.</p>`;
+  const flag = why.hasRecord ? "Original backtest on record" : "No original backtest record for these exact rules";
+  return `<h2>Why we picked this</h2><div class="why-box"><p class="preview"><span>${flag}</span></p><p>${why.text}</p>${why.records && why.records.length ? `<p class="meta">Records: ${why.records.join(" · ")}</p>` : ""}</div>`;
+}
+
 function renderStrategy() {
   const params = new URLSearchParams(location.search);
   const strategy = SIFT.strategies.find((item) => item.n === Number(params.get("n")));
@@ -317,6 +324,7 @@ function renderStrategy() {
     ${factsHtml(result)}
     <p class="scale-note">${result.detail}. ${strategy.window} ${strategy.sleeveNote || "Each dot is one recorded daily mark from the paper-test records. Days without a mark are not drawn."}</p>
     ${plot}
+    ${whyHtml(strategy)}
     <h2>What it is testing</h2>
     <p>${strategy.hypothesis}</p>
     <h2>Rules</h2>

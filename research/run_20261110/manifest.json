@@ -1,0 +1,36 @@
+{
+ "retrieved_et": "2026-11-10 11:27 ",
+ "source": "Yahoo Finance via yfinance, auto_adjust=True (split/dividend adjusted OHLC)",
+ "files": {
+  "data/SPY.csv": {
+   "rows": 8504,
+   "first": "1993-01-29",
+   "last": "2026-11-10",
+   "sha256": "a4fe82f8c4d4c026eb6fe50b54c0d23522043f91cb3edb1c20a439ffdac2e54d"
+  },
+  "data/EFA.csv": {
+   "rows": 6339,
+   "first": "2001-08-27",
+   "last": "2026-11-10",
+   "sha256": "14e93009b97958f0b39c1382990c30926078f2a24ccba56a687fa7836b4e61f4"
+  },
+  "data/AGG.csv": {
+   "rows": 5817,
+   "first": "2003-09-29",
+   "last": "2026-11-10",
+   "sha256": "1532ff50a823aaa718f784050e0b2ea627220c6a46c63782ba584279c4d0e833"
+  },
+  "data/IRX.csv": {
+   "rows": 8501,
+   "first": "1993-01-04",
+   "last": "2026-11-10",
+   "sha256": "ae8a078e28dc327be6d51fed86fa3f6c00b73093e5783d012008dd9e9aa39555"
+  },
+  "data/BTC-USD.csv": {
+   "rows": 4438,
+   "first": "2014-09-17",
+   "last": "2026-11-10",
+   "sha256": "623dc6efd7505bae65d2fbab575477e8e15ddc245041ebc6b6a6a5caaa4fe574"
+  }
+ }
+}

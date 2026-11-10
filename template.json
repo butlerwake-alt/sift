@@ -39,7 +39,15 @@
    ],
    "backtest": "In-sample BTC backtest, Nov 1, 2021 to Nov 4, 2026: +203.4%, maximum drawdown −21.7%, against buy-and-hold +31.7% and −76.6%. Doubled fees: +189.8%. The 2025–26 window had already been looked at, so it is not a clean holdout. That path is not drawn here.",
    "forward": "$10,000, 100% cash through the Nov 8 close. Every coin was in the 50-day lockout. The forward test has not proven anything yet.",
-   "risk": "Whipsaw around the 50-day line, and a three-week window that is too short to judge."
+   "risk": "Whipsaw around the 50-day line, and a three-week window that is too short to judge.",
+   "why": {
+    "text": "The first BTC runs that led to this pick (Nov 4, 2026) printed +223% with a −20% worst drop for scale-in + 50-day exit, but they saved only console output, so that figure was withdrawn as unverifiable. The saved re-run (new experiment, Nov 5, next-day fills, 0.10% fees): Nov 1, 2021 to Nov 4, 2026, +203.4% with a −21.7% maximum drawdown, against BTC buy-and-hold +31.7% and −76.6%; doubled fees +189.8%. Same re-run, five-coin basket with the 50-day exit: +128.2% (−36.1%), and +16.1% (−12.3%) for Jan 2025 to Nov 4, 2026. Separate Nov 5 comparison, three coins (BTC/ETH/SOL), Jan 1, 2025 to Nov 4, 2026, next-open fills: +21.05%, maximum drawdown −14.53%, 16 trades. All in-sample; the 2025–26 window had already been looked at.",
+    "records": [
+     "sift_evidence_bundle_20261105/REPORT.md",
+     "astral_compare/report.md"
+    ],
+    "hasRecord": true
+   }
   },
   {
    "n": 2,
@@ -88,7 +96,15 @@
    ],
    "backtest": "No backtest of these exact rules. A different 20-day / −1.5σ variant is context only and is not drawn here.",
    "forward": "$9,871.20 (−1.29%). 9 positions open, 0 closed. BTC bought at the Nov 5 open: $9,254.30 (−7.46%).",
-   "risk": "In a trending selloff the signals cluster, so ten positions can act like one large long-crypto bet. A close-only stop can lose more than 15% on a gap."
+   "risk": "In a trending selloff the signals cluster, so ten positions can act like one large long-crypto bet. A close-only stop can lose more than 15% on a gap.",
+   "why": {
+    "text": "No saved backtest of these exact rules (30-day z-score, enter below −1, $1,000 slots, −15% stop, 20-day max hold) exists in the records. The closest record is a different variant (20-day z-score, enter below −1.5, 200-day filter) in the Nov 5 comparison: BTC, Mar 1, 2021 to Nov 4, 2026, +20.22% with a −11.78% maximum drawdown, 28 trades, 78.6% winners; BTC/ETH/SOL +29.39% (−10.50%). That is context only, not a test of this account's rules.",
+    "records": [
+     "zscore_crypto/README.md",
+     "astral_compare/report.md"
+    ],
+    "hasRecord": false
+   }
   },
   {
    "n": 3,
@@ -137,7 +153,14 @@
    ],
    "backtest": "None. This one is forward-only.",
    "forward": "$9,474.30 (−5.26%). 9 open, 0 closed. BTC benchmark $9,268.20 (−7.32%).",
-   "risk": "The low-touch trigger fills the book faster in a selloff, so the same correlated drawdown shows up sooner."
+   "risk": "The low-touch trigger fills the book faster in a selloff, so the same correlated drawdown shows up sooner.",
+   "why": {
+    "text": "No original backtest record exists for this strategy. It was launched as a forward-only paper test, run next to the z-score test so the two dip-buying rules can be compared on the same dates.",
+    "records": [
+     "bollinger_crypto/README.md"
+    ],
+    "hasRecord": false
+   }
   },
   {
    "n": 4,
@@ -173,7 +196,14 @@
    ],
    "backtest": "In-sample daily test, Nov 1, 2021 to Nov 5, 2026: +45.12%, maximum drawdown −55.19%, against BTC buy-and-hold +24.92%. The 2025–26 slice was −1.07%. That path is not drawn here.",
    "forward": "$9,987.70, in cash. One closed trade so far, a small loss. No forward buy-and-hold dollar figure was stated.",
-   "risk": "The backtest drawdown, about −55%, is deeper than most people would sit through. The average lags turns."
+   "risk": "The backtest drawdown, about −55%, is deeper than most people would sit through. The average lags turns.",
+   "why": {
+    "text": "Taken from a Reddit post (r/CryptoTradingBot). Saved baseline, Nov 1, 2021 to Nov 5, 2026, BTC/ETH/SOL daily, next-close fills, 0.10% fee plus 0.10% slippage per side: +45.12% with a −55.19% maximum drawdown, 198 trades, against BTC buy-and-hold +24.92%. Jan 2025 onward: −1.07% against −19.56%. In-sample, and the drawdown is far past the 10% limit.",
+    "records": [
+     "social_paper/runs/baseline/REPORT.md"
+    ],
+    "hasRecord": true
+   }
   },
   {
    "n": 5,
@@ -209,7 +239,14 @@
    ],
    "backtest": "In-sample, Nov 1, 2021 to Nov 5, 2026: +118.77%, maximum drawdown −47.8%, about $5,055 in fees. 2025–26: +2.67%. That path is not drawn here.",
    "forward": "$10,000.00, flat. No coin has broken out since launch.",
-   "risk": "High turnover. In the five-year backtest, fees were about half the starting capital. Ranges produce many false breakouts."
+   "risk": "High turnover. In the five-year backtest, fees were about half the starting capital. Ranges produce many false breakouts.",
+   "why": {
+    "text": "Taken from an X post (@ainotesus, \"Bot Wars\"). Saved baseline, Nov 1, 2021 to Nov 5, 2026, five coins: +118.77% with a −47.8% maximum drawdown, 530 trades and about $5,055 in fees, against BTC buy-and-hold +24.92%. Jan 2025 onward: +2.67% against −19.56%. In-sample.",
+    "records": [
+     "social_paper/runs/baseline/REPORT.md"
+    ],
+    "hasRecord": true
+   }
   },
   {
    "n": 6,
@@ -240,7 +277,14 @@
    ],
    "backtest": "Three testable cycles versus buy-and-hold, all in-sample: 2015–17 +3,377% vs +3,285%; 2018–21 +1,017% (drawdown −61.8%) vs +989%; 2022–25 +546% vs +557%. Those paths are not drawn here. Only about three cycles can be tested.",
    "forward": "$10,000.00, cash, waiting for Dec 14, 2026. Nothing has been bought.",
-   "risk": "A tiny sample, a chart that was drawn with hindsight, and an edge over buy-and-hold that was small in two of the three cycles."
+   "risk": "A tiny sample, a chart that was drawn with hindsight, and an edge over buy-and-hold that was small in two of the three cycles.",
+   "why": {
+    "text": "Taken from a viral X chart (hold BTC from 500 days before each halving to 500 days after). Saved baseline, per cycle versus buy-and-hold: 2015–17 +3,377% vs +3,285%; 2018–21 +1,017% (drawdown −61.8%) vs +989%; 2022–25 +546% (−28.1%) vs +557%. A fresh $10,000 from Nov 1, 2021: +545.7% with a −28.14% maximum drawdown vs BTC +31.8%. Only about three cycles, and the chart was drawn in hindsight.",
+    "records": [
+     "social_paper/runs/baseline/halving_500/REPORT.md"
+    ],
+    "hasRecord": true
+   }
   },
   {
    "n": 7,
@@ -268,7 +312,12 @@
    ],
    "backtest": "Not yet backtested. The rules are still being built.",
    "forward": "Not launched. No paper account, no marks, no curve.",
-   "risk": "About four halvings of history, phase rules that can be read more than one way, and a framework published after much of the history it describes."
+   "risk": "About four halvings of history, phase rules that can be read more than one way, and a framework published after much of the history it describes.",
+   "why": {
+    "text": "Picked from Jeff Terpin's \"Four Seasons\" halving-cycle book as a rule set worth tracking. No backtest record exists yet; the rules are still being built, so there is no number to show.",
+    "records": [],
+    "hasRecord": false
+   }
   },
   {
    "n": 8,
@@ -317,7 +366,15 @@
    ],
    "backtest": "None for this equity version.",
    "forward": "$9,212.25 (−7.88%) against SPY $9,865.00 (−1.35%). Four closed trades, all stop-outs (MRVL, LITE, TER, SNDK on Nov 5), about −$850 together. 9 positions were still open. Win rate on closed trades: 0%.",
-   "risk": "A stock down 20% is often down for a reason. Close-only stops can be blown through by a gap, which is what those four exits did."
+   "risk": "A stock down 20% is often down for a reason. Close-only stops can be blown through by a gap, which is what those four exits did.",
+   "why": {
+    "text": "No original backtest of this equity rule (close 20% below the 25-day average, $1,000 slots, −15% stop, 20-day max hold) exists in the records. The only related record is a different market: a crypto dip-buy grid on the quant desk (Nov 4, 2026, 32 coins pooled), whose 200-day-filtered form had a −32% maximum drawdown and a deflated Sharpe of −0.64, which breaks the 10% limit. That is not a test of this account's rules.",
+    "records": [
+     "dipbuy_sp500/README.md",
+     "quantdesk/hypotheses.md"
+    ],
+    "hasRecord": false
+   }
   },
   {
    "n": 9,
@@ -353,7 +410,14 @@
    ],
    "backtest": "In-sample, Nov 2021 to Nov 4, 2026: +749.13%, maximum drawdown −38.67%, against QQQ +84.02%. The note says not to trust that number: today's index members are used, so removed losers are missing. That path is not drawn here.",
    "forward": "$10,239.95 (+2.40%) as of the Nov 6 close. Holds PANW, MU, CRWD, DDOG, and MRNA from the Oct 30 ranking.",
-   "risk": "Five concentrated, mostly high-beta names. Momentum can reverse hard at a turn. The backtest is inflated by survivorship bias."
+   "risk": "Five concentrated, mostly high-beta names. Momentum can reverse hard at a turn. The backtest is inflated by survivorship bias.",
+   "why": {
+    "text": "Taken from an X post (@QuantifiedStrat). Saved baseline, Nov 2021 to Nov 4, 2026: +749.13% with a −38.67% maximum drawdown, 345 trades, against QQQ +84.02%; Jan 2025 onward +274.85% vs +36.77%. Do not trust that number: it uses today's Nasdaq-100 members, so companies that fell out of the index are missing (survivorship bias), and the 126-day lookback is our assumption because the post did not say.",
+    "records": [
+     "social_paper/runs/baseline/REPORT.md"
+    ],
+    "hasRecord": true
+   }
   },
   {
    "n": 10,
@@ -414,7 +478,15 @@
    ],
    "backtest": "Aug 17 to Nov 6, 2026, 59 sessions, in-sample: primary −9.79%, variant −14.37%, against 50/50 buy-and-hold −7.87%. That path is not drawn here.",
    "forward": "Day 1 only (Nov 9): primary −0.18%, variant +0.18%, buy-and-hold +1.93%. A combined dollar balance was not stated.",
-   "risk": "Many trades and a low win rate. Small costs add up. The stop is checked on 5-minute bars; the source used 1-minute bars."
+   "risk": "Many trades and a low win rate. Small costs add up. The stop is checked on 5-minute bars; the source used 1-minute bars.",
+   "why": {
+    "text": "Picked to check a popular YouTube/blog day-trading claim, not because the backtest looked good. Saved baseline, Aug 17 to Nov 6, 2026 (59 sessions), 5-minute bars, 0.03% cost per side: SPY primary −8.91% (153 trades, 13.7% winners) vs buy-and-hold −5.26%; QQQ primary −10.66% (172 trades) vs −10.47%. At 0.06% per side the losses roughly double. In-sample and short.",
+    "records": [
+     "ema_vwap_paper/runs/baseline.json",
+     "ema_vwap_paper/RULES.md"
+    ],
+    "hasRecord": true
+   }
   }
  ]
 }

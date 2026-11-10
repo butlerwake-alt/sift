@@ -153,3 +153,26 @@ footer, .fine { margin-top: 1.4rem; color: var(--muted); font: 0.85rem/1.45 var(
 @media (prefers-reduced-motion: reduce) {
   * { scroll-behavior: auto; }
 }
+
+/* Researched strategies page */
+.rgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.9rem; }
+.rcard { cursor: default; }
+.rcard:hover { background: var(--panel); }
+.rcard h3 { margin: 0.9rem 0 0.25rem; font: 0.75rem/1.3 var(--sans); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.rcard .rules { font: 0.9rem/1.4 var(--sans); margin: 0.2rem 0; }
+.rcard .why { margin: 0; font: 0.9rem/1.45 var(--sans); }
+.rcard a, .ladder a, .meta a { color: var(--yellow); }
+.rplot { aspect-ratio: 720 / 300; }
+.rtable { overflow-x: auto; margin: 0.6rem 0 0.2rem; }
+.rtable table { width: 100%; border-collapse: collapse; font: 0.84rem/1.3 var(--sans); font-variant-numeric: tabular-nums; }
+.rtable th, .rtable td { padding: 0.3rem 0.45rem; border-bottom: 1px solid #241e19; text-align: right; white-space: nowrap; }
+.rtable th:first-child { text-align: left; font-weight: 500; color: var(--cream); }
+.rtable thead th { color: var(--muted); font-weight: 500; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; }
+.rtable td.tone-up { color: var(--green); } .rtable td.tone-down { color: var(--red); } .rtable td.tone-flat { color: var(--yellow); }
+.research-link { display: block; margin: 0 0 0.9rem; padding: 0.8rem 1rem; background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--yellow); text-decoration: none; font: 0.95rem/1.4 var(--sans); }
+.research-link b { color: var(--yellow); }
+.research-link:hover { background: #161310; }
+.why-box { background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--teal); padding: 0.6rem 0.9rem; }
+.why-box p { margin: 0.3rem 0; font: 0.95rem/1.45 var(--sans); }
+@media (max-width: 800px) { .rgrid { grid-template-columns: 1fr; } }
+.ladder ul.rules li { display: list-item; margin: 0.35rem 0; font: 0.92rem/1.45 var(--sans); }

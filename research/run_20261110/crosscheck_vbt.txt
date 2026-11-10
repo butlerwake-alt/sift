@@ -1,0 +1,3 @@
+golden_cross_btc 11420.74 maxdd -69.27 trades 10
+macd_12_26_9_btc 17275.6 maxdd -51.33 trades 136
+supertrend_10_3_btc 6960.68 maxdd -52.6 trades 56
