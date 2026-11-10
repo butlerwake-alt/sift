@@ -184,7 +184,7 @@ function resultOf(strategy) {
   const pct = (strategy.latest / SIFT.capital - 1) * 100;
   const status = toneOf(pct);
   const benchPct = benchPctOf(strategy);
-  const span = days == null ? strategy.asOfLabel : days === 0 ? "Same day" : days + (days === 1 ? " day" : " days") + " between marks";
+  const span = days == null ? strategy.asOfLabel : days === 0 ? "Same day" : days + (days === 1 ? " day" : " days") + " tracked";
   return {
     word: status.word,
     tone: status.tone,
