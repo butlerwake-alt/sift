@@ -487,6 +487,435 @@
     ],
     "hasRecord": true
    }
+  },
+  {
+   "n": 11,
+   "name": "Large-cap 55/20 breakout",
+   "category": "Breakout",
+   "tag": "Proven in backtest · forward paper",
+   "plain": "Buys big US stocks when they close at a 55-day high, and sells when they close under their 20-day low.",
+   "color": "#22b07d",
+   "universe": "About 100 of the largest US stocks (today's list). Daily. Up to 10 positions, $1,000 each.",
+   "window": "Forward paper from the Nov 10, 2026 close. First review after 30 trading days.",
+   "start": "2026-11-10",
+   "asOf": "2026-11-10",
+   "asOfLabel": "mark of Nov 10 · forward start",
+   "points": [
+    {
+     "date": "2026-11-10",
+     "equity": 10000
+    }
+   ],
+   "latest": 10000,
+   "change": "not launched",
+   "benchmark": null,
+   "hypothesis": "New highs in large companies tend to keep running for weeks. A 20-day low is far enough away to ride the trend and close enough to cap a broken trade.",
+   "rules": [
+    "Universe: about 100 of the largest US stocks by today's market value. Daily closes.",
+    "Buy when a stock closes above its highest close of the prior 55 days. If more than the open slots qualify, take the strongest 6-month gainers first.",
+    "Sell when it closes below its lowest close of the prior 20 days.",
+    "Ten slots of one tenth of equity each. Uninvested cash sits idle. Fill at the next daily close. Cost 0.05% per side.",
+    "This is the classic Turtle-style channel breakout, applied to a stock basket."
+   ],
+   "backtest": "Backtest Jan 2015 to Nov 10, 2026, $10,000, signal on the close and fill at the next close, costs 0.05% per side: CAGR +18.3%, maximum drawdown −23.2%, Sharpe 1.03, 746 closed trades, win rate 47%, profit factor 2.04. First half 2015–2020: CAGR +23.2%, Sharpe 1.38. Second half 2021–2026: CAGR +13.5%, drawdown −23.2%, Sharpe 0.74. SPY buy-and-hold, same second half: CAGR +14.2%, drawdown −24.5%, Sharpe 0.88. Up in 92% of calendar years. Cash earning 0%: second-half CAGR +13.4%.",
+   "forward": "$10,000 paper, not launched yet.",
+   "risk": "Long stretches of small losing trades in choppy markets, and a 2022-style drawdown of about −23%.",
+   "regime": {
+    "best": "trend_up",
+    "sitOut": "none needed in the backtest (it held up in every regime); weakest in shock",
+    "annualizedByRegime": {
+     "trend_up": 19.6,
+     "range": 15.9,
+     "risk_off": 27.5,
+     "trend_down": 10.0,
+     "shock": 6.7
+    },
+    "bestList": [
+     "trend_up"
+    ],
+    "sitOutList": [],
+    "market": "stocks"
+   },
+   "label": "proven in backtest",
+   "why": {
+    "text": "New experiment dated Nov 10, 2026 (SIFT strategy lab). Passed all five checks of the pre-registered 'proven' rule: both halves profitable with Sharpe ≥ 0.40, ≥ 60% of years up, beats or matches buy-and-hold on Sharpe or drawdown, every parameter variant still profitable, ≥ 15 trades. Second half CAGR +13.5%, drawdown −23.2%, Sharpe 0.74. Annualized return by regime: trend_up +19.6%; range +15.9%; risk_off +27.5%; trend_down +10.0%; shock +6.7%. Parameters are textbook defaults, not tuned. Universe is today's list (survivorship bias).",
+    "records": [
+     "sift_strategy_lab/run_20261110/results/results.json",
+     "sift_strategy_lab/run_20261110/backtest.py",
+     "sift_strategy_lab/run_20261110/strategies.py",
+     "sift_strategy_lab/run_20261110/results/sensitivity.json"
+    ],
+    "hasRecord": true
+   }
+  },
+  {
+   "n": 12,
+   "name": "Large-cap squeeze breakout",
+   "category": "Breakout / volatility",
+   "tag": "Proven in backtest · forward paper",
+   "plain": "Waits for a big stock to go unusually quiet, then buys when it breaks out to a 20-day high.",
+   "color": "#8e6cf0",
+   "universe": "About 100 of the largest US stocks (today's list). Daily. Up to 10 positions, $1,000 each.",
+   "window": "Forward paper from the Nov 10, 2026 close. First review after 30 trading days.",
+   "start": "2026-11-10",
+   "asOf": "2026-11-10",
+   "asOfLabel": "mark of Nov 10 · forward start",
+   "points": [
+    {
+     "date": "2026-11-10",
+     "equity": 10000
+    }
+   ],
+   "latest": 10000,
+   "change": "not launched",
+   "benchmark": null,
+   "hypothesis": "Volatility comes in cycles. A tight Bollinger band often comes before a large move, and a breakout to a new 20-day high picks the upward one.",
+   "rules": [
+    "Squeeze: the 20-day Bollinger band width (4 standard deviations divided by the 20-day average) was in the lowest 20% of its last 126 days at some point in the last 5 days.",
+    "Buy when a squeezed stock closes above its highest close of the prior 20 days. Tightest band first if more qualify than there are open slots.",
+    "Sell on a close under the 20-day average, or after 40 trading days.",
+    "Ten slots of one tenth of equity. Fill at the next daily close. Cost 0.05% per side."
+   ],
+   "backtest": "Backtest Jan 2015 to Nov 10, 2026, $10,000, signal on the close and fill at the next close, costs 0.05% per side: CAGR +10.3%, maximum drawdown −21.0%, Sharpe 0.83, 1727 closed trades, win rate 40%, profit factor 1.38. First half 2015–2020: CAGR +11.0%, Sharpe 0.98. Second half 2021–2026: CAGR +9.5%, drawdown −21.0%, Sharpe 0.71. SPY buy-and-hold, same second half: CAGR +14.2%, drawdown −24.5%, Sharpe 0.88. Up in 83% of calendar years. Cash earning 0%: second-half CAGR +9.0%.",
+   "forward": "$10,000 paper, not launched yet.",
+   "risk": "Win rate under 40%: it lives on a few big winners. False breakouts cluster in sell-offs.",
+   "regime": {
+    "best": "trend_up and range",
+    "sitOut": "none needed in the backtest; weakest in shock",
+    "annualizedByRegime": {
+     "trend_up": 11.7,
+     "range": 9.3,
+     "risk_off": 9.7,
+     "trend_down": 7.1,
+     "shock": 5.8
+    },
+    "bestList": [
+     "trend_up",
+     "range"
+    ],
+    "sitOutList": [],
+    "market": "stocks"
+   },
+   "label": "proven in backtest",
+   "why": {
+    "text": "New experiment dated Nov 10, 2026 (SIFT strategy lab). Passed all five checks of the pre-registered 'proven' rule: both halves profitable with Sharpe ≥ 0.40, ≥ 60% of years up, beats or matches buy-and-hold on Sharpe or drawdown, every parameter variant still profitable, ≥ 15 trades. Second half CAGR +9.5%, drawdown −21.0%, Sharpe 0.71. Annualized return by regime: trend_up +11.7%; range +9.3%; risk_off +9.7%; trend_down +7.1%; shock +5.8%. Parameters are textbook defaults, not tuned. Universe is today's list (survivorship bias).",
+    "records": [
+     "sift_strategy_lab/run_20261110/results/results.json",
+     "sift_strategy_lab/run_20261110/backtest.py",
+     "sift_strategy_lab/run_20261110/strategies.py",
+     "sift_strategy_lab/run_20261110/results/sensitivity.json"
+    ],
+    "hasRecord": true
+   }
+  },
+  {
+   "n": 13,
+   "name": "Bitcoin 200-day trend",
+   "category": "Trend",
+   "tag": "Proven in backtest · forward paper",
+   "plain": "Owns bitcoin only while it closes above its 200-day average. Cash the rest of the time.",
+   "color": "#f39c32",
+   "universe": "BTC only, daily closes.",
+   "window": "Forward paper from the Nov 10, 2026 close. First review after 30 trading days.",
+   "start": "2026-11-10",
+   "asOf": "2026-11-10",
+   "asOfLabel": "mark of Nov 10 · forward start",
+   "points": [
+    {
+     "date": "2026-11-10",
+     "equity": 10000
+    }
+   ],
+   "latest": 10000,
+   "change": "not launched",
+   "benchmark": null,
+   "hypothesis": "Bitcoin's worst crashes happen below its 200-day average. Stepping aside there gives up some upside to avoid most of the deep bear markets.",
+   "rules": [
+    "Hold 100% BTC when the daily close is above the 200-day simple average.",
+    "Go to cash when the close is at or below it.",
+    "Fill at the next daily close. Cost 0.25% per side."
+   ],
+   "backtest": "Backtest Nov 2018 to Nov 9, 2026, $10,000, signal on the close and fill at the next close, costs 0.25% per side: CAGR +32.2%, maximum drawdown −56.1%, Sharpe 0.85, 30 closed trades, win rate 37%, profit factor 5.44. First half Nov 2018–2021: CAGR +57.4%, Sharpe 1.09. Second half 2022–2026: CAGR +17.9%, drawdown −36.6%, Sharpe 0.66. BTC buy-and-hold, same second half: CAGR +10.5%, drawdown −66.9%, Sharpe 0.45. Up in 75% of calendar years.",
+   "forward": "$10,000 paper, not launched yet.",
+   "risk": "Whipsaws around the line, and a −36.6% drawdown even in the second half. It is the simple bitcoin control for the hybrids below.",
+   "regime": {
+    "best": "trend_up",
+    "sitOut": "trend_down and risk_off (it is in cash for most of these by design)",
+    "annualizedByRegime": {
+     "trend_up": 83.2,
+     "range": 27.8,
+     "risk_off": -31.9,
+     "trend_down": -1.4,
+     "shock": 66.5
+    },
+    "bestList": [
+     "trend_up"
+    ],
+    "sitOutList": [
+     "trend_down",
+     "risk_off"
+    ],
+    "market": "crypto"
+   },
+   "label": "proven in backtest",
+   "why": {
+    "text": "New experiment dated Nov 10, 2026 (SIFT strategy lab). Passed all five checks of the pre-registered 'proven' rule: both halves profitable with Sharpe ≥ 0.40, ≥ 60% of years up, beats or matches buy-and-hold on Sharpe or drawdown, every parameter variant still profitable, ≥ 15 trades. Second half CAGR +17.9%, drawdown −36.6%, Sharpe 0.66. Annualized return by regime: trend_up +83.2%; range +27.8%; risk_off −31.9%; trend_down −1.4%; shock +66.5%. Parameters are textbook defaults, not tuned. Universe is today's list (survivorship bias).",
+    "records": [
+     "sift_strategy_lab/run_20261110/results/results.json",
+     "sift_strategy_lab/run_20261110/backtest.py",
+     "sift_strategy_lab/run_20261110/strategies.py",
+     "sift_strategy_lab/run_20261110/results/sensitivity.json"
+    ],
+    "hasRecord": true
+   }
+  },
+  {
+   "n": 14,
+   "name": "Leader pullback + regime gate",
+   "category": "Hybrid · momentum + mean reversion",
+   "tag": "New hybrid · forward paper",
+   "plain": "Buys a short dip in this year's strongest big stocks, only when the overall market is calm or rising, and sells on the first bounce.",
+   "color": "#e24694",
+   "universe": "The 20 strongest of about 100 large US stocks by 12-month momentum. Daily. Up to 10 positions, $1,000 each.",
+   "window": "Forward paper from the Nov 10, 2026 close. First review after 30 trading days.",
+   "start": "2026-11-10",
+   "asOf": "2026-11-10",
+   "asOfLabel": "mark of Nov 10 · forward start",
+   "points": [
+    {
+     "date": "2026-11-10",
+     "equity": 10000
+    }
+   ],
+   "latest": 10000,
+   "change": "not launched",
+   "benchmark": null,
+   "hypothesis": "Momentum picks what to own and a two-day RSI picks when to buy it. The market regime decides whether to play at all.",
+   "rules": [
+    "Leaders: the 20 stocks with the best return from 12 months ago to 1 month ago, re-ranked daily.",
+    "Buy a leader when it is above its 200-day average and its 2-day RSI closes under 10. Lowest RSI first.",
+    "Sell when it closes above its 5-day average, after 10 trading days, or when the market regime turns trend_down or shock.",
+    "New buys only when the SPY regime is trend_up or range. Ten slots of one tenth of equity. Fill at the next close. Cost 0.05% per side."
+   ],
+   "backtest": "Backtest Jan 2015 to Nov 10, 2026, $10,000, signal on the close and fill at the next close, costs 0.05% per side: CAGR +11.8%, maximum drawdown −13.3%, Sharpe 1.13, 1848 closed trades, win rate 61%, profit factor 1.65. First half 2015–2020: CAGR +6.1%, Sharpe 0.78. Second half 2021–2026: CAGR +18.0%, drawdown −13.3%, Sharpe 1.41. SPY buy-and-hold, same second half: CAGR +14.2%, drawdown −24.5%, Sharpe 0.88. Up in 83% of calendar years. Cash earning 0%: second-half CAGR +15.3%.",
+   "forward": "$10,000 paper, not launched yet.",
+   "risk": "It is in cash about three quarters of the time, so forward results may take weeks to show anything. A short sharp crash can still hit open positions.",
+   "regime": {
+    "best": "trend_up and range",
+    "sitOut": "trend_down and shock (no new buys and open positions are sold)",
+    "annualizedByRegime": {
+     "trend_up": 13.6,
+     "range": 8.2,
+     "risk_off": 17.1,
+     "trend_down": 1.4,
+     "shock": 1.5
+    },
+    "bestList": [
+     "trend_up",
+     "range"
+    ],
+    "sitOutList": [
+     "trend_down",
+     "shock"
+    ],
+    "market": "stocks"
+   },
+   "label": "new forward-test hybrid",
+   "why": {
+    "text": "New experiment dated Nov 10, 2026 (SIFT strategy lab). Passed all five checks of the pre-registered 'proven' rule: both halves profitable with Sharpe ≥ 0.40, ≥ 60% of years up, beats or matches buy-and-hold on Sharpe or drawdown, every parameter variant still profitable, ≥ 15 trades. Second half CAGR +18.0%, drawdown −13.3%, Sharpe 1.41. Annualized return by regime: trend_up +13.6%; range +8.2%; risk_off +17.1%; trend_down +1.4%; shock +1.5%. Parameters are textbook defaults, not tuned. Universe is today's list (survivorship bias).",
+    "records": [
+     "sift_strategy_lab/run_20261110/results/results.json",
+     "sift_strategy_lab/run_20261110/backtest.py",
+     "sift_strategy_lab/run_20261110/strategies.py",
+     "sift_strategy_lab/run_20261110/results/sensitivity.json"
+    ],
+    "hasRecord": true
+   }
+  },
+  {
+   "n": 15,
+   "name": "Crypto breakout + regime gate",
+   "category": "Hybrid · breakout + regime",
+   "tag": "New hybrid · forward paper",
+   "plain": "Buys top coins breaking to 20-day highs, but only while bitcoin's market is trending up or ranging, and exits when it turns.",
+   "color": "#2bb3c8",
+   "universe": "Top 10 coins excluding stablecoins: BTC, ETH, XRP, BNB, SOL, DOGE, ADA, TRX, LINK, AVAX. Daily. Up to 5 positions, $2,000 each.",
+   "window": "Forward paper from the Nov 10, 2026 close. First review after 30 trading days.",
+   "start": "2026-11-10",
+   "asOf": "2026-11-10",
+   "asOfLabel": "mark of Nov 10 · forward start",
+   "points": [
+    {
+     "date": "2026-11-10",
+     "equity": 10000
+    }
+   ],
+   "latest": 10000,
+   "change": "not launched",
+   "benchmark": null,
+   "hypothesis": "Breakouts work in crypto only when bitcoin's market is healthy. The regime gate is meant to stop the deep alt-coin drawdowns that plain breakouts suffer.",
+   "rules": [
+    "Buy a coin when it closes above its highest close of the prior 20 days. Strongest 30-day gainers first if more qualify than open slots.",
+    "Sell on a close below its lowest close of the prior 10 days, or as soon as the BTC regime is risk_off, trend_down or shock.",
+    "New buys only when the BTC regime is trend_up or range. Five slots of one fifth of equity. Fill at the next daily close. Cost 0.25% per side."
+   ],
+   "backtest": "Backtest Nov 2018 to Nov 9, 2026, $10,000, signal on the close and fill at the next close, costs 0.25% per side: CAGR +83.0%, maximum drawdown −32.5%, Sharpe 1.59, 301 closed trades, win rate 50%, profit factor 3.61. First half Nov 2018–2021: CAGR +219.0%, Sharpe 2.25. Second half 2022–2026: CAGR +27.4%, drawdown −32.5%, Sharpe 0.96. BTC buy-and-hold, same second half: CAGR +10.5%, drawdown −66.9%, Sharpe 0.45. Up in 100% of calendar years.",
+   "forward": "$10,000 paper, not launched yet.",
+   "risk": "The 2021 alt-coin boom dominates the full-sample figure. The second half is the more honest number.",
+   "regime": {
+    "best": "trend_up",
+    "sitOut": "risk_off, trend_down and shock (no new buys and open positions are sold)",
+    "annualizedByRegime": {
+     "trend_up": 162.9,
+     "range": 38.7,
+     "risk_off": -0.3,
+     "trend_down": -1.1,
+     "shock": -1.2
+    },
+    "bestList": [
+     "trend_up"
+    ],
+    "sitOutList": [
+     "risk_off",
+     "trend_down",
+     "shock"
+    ],
+    "market": "crypto"
+   },
+   "label": "new forward-test hybrid",
+   "why": {
+    "text": "New experiment dated Nov 10, 2026 (SIFT strategy lab). Passed all five checks of the pre-registered 'proven' rule: both halves profitable with Sharpe ≥ 0.40, ≥ 60% of years up, beats or matches buy-and-hold on Sharpe or drawdown, every parameter variant still profitable, ≥ 15 trades. Second half CAGR +27.4%, drawdown −32.5%, Sharpe 0.96. Annualized return by regime: trend_up +162.9%; range +38.7%; risk_off −0.3%; trend_down −1.1%; shock −1.2%. Parameters are textbook defaults, not tuned. Universe is today's list (survivorship bias).",
+    "records": [
+     "sift_strategy_lab/run_20261110/results/results.json",
+     "sift_strategy_lab/run_20261110/backtest.py",
+     "sift_strategy_lab/run_20261110/strategies.py",
+     "sift_strategy_lab/run_20261110/results/sensitivity.json"
+    ],
+    "hasRecord": true
+   }
+  },
+  {
+   "n": 16,
+   "name": "BTC-gated crypto top-3 momentum",
+   "category": "Hybrid · rotation",
+   "tag": "New hybrid · forward paper",
+   "plain": "Each week, holds the three strongest top-10 coins, but only while bitcoin is above its 200-day average.",
+   "color": "#c9a227",
+   "universe": "Top 10 coins excluding stablecoins. Weekly rebalance. Three positions, one third each.",
+   "window": "Forward paper from the Nov 10, 2026 close. First review after 30 trading days.",
+   "start": "2026-11-10",
+   "asOf": "2026-11-10",
+   "asOfLabel": "mark of Nov 10 · forward start",
+   "points": [
+    {
+     "date": "2026-11-10",
+     "equity": 10000
+    }
+   ],
+   "latest": 10000,
+   "change": "not launched",
+   "benchmark": null,
+   "hypothesis": "Alt coins follow bitcoin. Rotating into the coins with the best month only works while bitcoin itself is in an uptrend.",
+   "rules": [
+    "Every 7 days: rank the ten coins by 30-day return.",
+    "Hold the top three that have a positive 30-day return and close above their 50-day average, one third each. Empty slots stay in cash.",
+    "Everything goes to cash at a weekly check when BTC closes at or below its 200-day average.",
+    "Fill at the next daily close. Cost 0.25% per side."
+   ],
+   "backtest": "Backtest Nov 2018 to Nov 9, 2026, $10,000, signal on the close and fill at the next close, costs 0.25% per side: CAGR +99.8%, maximum drawdown −60.0%, Sharpe 1.38, 209 closed trades, win rate 50%, profit factor 3.39. First half Nov 2018–2021: CAGR +319.6%, Sharpe 2.08. Second half 2022–2026: CAGR +23.1%, drawdown −52.4%, Sharpe 0.68. BTC buy-and-hold, same second half: CAGR +10.5%, drawdown −66.9%, Sharpe 0.45. Up in 75% of calendar years.",
+   "forward": "$10,000 paper, not launched yet.",
+   "risk": "The deepest drawdown of the set: −52.4% in the second half. Weekly checks mean it can sit through a fast crash for days.",
+   "regime": {
+    "best": "trend_up and range",
+    "sitOut": "risk_off (worst regime in the backtest) and trend_down (mostly in cash by the BTC gate)",
+    "annualizedByRegime": {
+     "trend_up": 186.0,
+     "range": 105.7,
+     "risk_off": -148.1,
+     "trend_down": 5.3,
+     "shock": 73.7
+    },
+    "bestList": [
+     "trend_up",
+     "range"
+    ],
+    "sitOutList": [
+     "risk_off",
+     "trend_down"
+    ],
+    "market": "crypto"
+   },
+   "label": "new forward-test hybrid",
+   "why": {
+    "text": "New experiment dated Nov 10, 2026 (SIFT strategy lab). Passed all five checks of the pre-registered 'proven' rule: both halves profitable with Sharpe ≥ 0.40, ≥ 60% of years up, beats or matches buy-and-hold on Sharpe or drawdown, every parameter variant still profitable, ≥ 15 trades. Second half CAGR +23.1%, drawdown −52.4%, Sharpe 0.68. Annualized return by regime: trend_up +186.0%; range +105.7%; risk_off −148.1%; trend_down +5.3%; shock +73.7%. Parameters are textbook defaults, not tuned. Universe is today's list (survivorship bias).",
+    "records": [
+     "sift_strategy_lab/run_20261110/results/results.json",
+     "sift_strategy_lab/run_20261110/backtest.py",
+     "sift_strategy_lab/run_20261110/strategies.py",
+     "sift_strategy_lab/run_20261110/results/sensitivity.json"
+    ],
+    "hasRecord": true
+   }
+  },
+  {
+   "n": 17,
+   "name": "Regime rotator (walk-forward)",
+   "category": "Hybrid · regime switch",
+   "tag": "New hybrid · forward paper",
+   "plain": "Reads the market's mood every day and hands the money to whichever strategy has done best in that mood in past years.",
+   "color": "#6a8caf",
+   "universe": "The stock and ETF strategies above plus SPY, GLD/IEF and cash. Daily regime check. The table is re-picked once a year.",
+   "window": "Forward paper from the Nov 10, 2026 close. First review after 30 trading days.",
+   "start": "2026-11-10",
+   "asOf": "2026-11-10",
+   "asOfLabel": "mark of Nov 10 · forward start",
+   "points": [
+    {
+     "date": "2026-11-10",
+     "equity": 10000
+    }
+   ],
+   "latest": 10000,
+   "change": "not launched",
+   "benchmark": null,
+   "hypothesis": "No single strategy fits every market. Picking the strategy per regime using only past years tests whether knowing the regime actually helps.",
+   "rules": [
+    "Daily SPY regime, checked in this order: shock, trend_down, risk_off, trend_up, range (see the regime box).",
+    "Sleeves: 12-1 momentum top 10, RSI-2 pullback, leader pullback, squeeze breakout, 55/20 breakout, sector top-3, 50/50 GLD/IEF, SPY.",
+    "Each Jan 1, for each regime, pick the sleeve with the best average daily return in that regime over all prior years (at least 30 days of history, else cash).",
+    "Frozen 2026 table: trend_up → 55/20 breakout; range → 55/20 breakout; risk_off → momentum top 10; trend_down → SPY; shock → SPY. Re-pick on Jan 1, 2027 with data through Dec 31, 2026.",
+    "Each day, hold whatever the chosen sleeve holds. Fill at the next close. Cost 0.05% per side."
+   ],
+   "backtest": "Backtest Jan 2017 to Nov 10, 2026 (walk-forward), $10,000, signal on the close and fill at the next close, costs 0.05% per side: CAGR +16.8%, maximum drawdown −39.4%, Sharpe 0.8, 1042 closed trades, win rate 51%, profit factor 1.75. First half 2017–2020: CAGR +29.0%, Sharpe 1.26. Second half 2021–2026: CAGR +9.0%, drawdown −39.4%, Sharpe 0.49. SPY buy-and-hold, same second half: CAGR +14.2%, drawdown −24.5%, Sharpe 0.88. Up in 80% of calendar years.",
+   "forward": "$10,000 paper, not launched yet.",
+   "risk": "It trailed plain SPY buy-and-hold in the second half and had a deeper drawdown (−39.4%). It is here to test whether regime switching adds anything, not because it already wins.",
+   "regime": {
+    "best": "trend_up and risk_off",
+    "sitOut": "range was its weakest regime",
+    "annualizedByRegime": {
+     "trend_up": 17.4,
+     "range": 1.3,
+     "risk_off": 35.4,
+     "trend_down": 15.2,
+     "shock": 26.1
+    },
+    "bestList": [
+     "trend_up",
+     "risk_off"
+    ],
+    "sitOutList": [],
+    "market": "stocks"
+   },
+   "label": "new forward-test hybrid",
+   "why": {
+    "text": "New experiment dated Nov 10, 2026 (SIFT strategy lab). Passed all five checks of the pre-registered 'proven' rule: both halves profitable with Sharpe ≥ 0.40, ≥ 60% of years up, beats or matches buy-and-hold on Sharpe or drawdown, every parameter variant still profitable, ≥ 15 trades. Second half CAGR +9.0%, drawdown −39.4%, Sharpe 0.49. Annualized return by regime: trend_up +17.4%; range +1.3%; risk_off +35.4%; trend_down +15.2%; shock +26.1%. Parameters are textbook defaults, not tuned. Universe is today's list (survivorship bias).",
+    "records": [
+     "sift_strategy_lab/run_20261110/results/results.json",
+     "sift_strategy_lab/run_20261110/backtest.py",
+     "sift_strategy_lab/run_20261110/strategies.py"
+    ],
+    "hasRecord": true
+   }
   }
  ]
 }

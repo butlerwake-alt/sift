@@ -224,7 +224,7 @@ function renderBoard() {
     });
     const top = document.createElement("div");
     top.className = "card-top";
-    top.innerHTML = `<span class="num">${String(strategy.n).padStart(2, "0")} · ${strategy.category}</span><span class="tag">${strategy.tag}</span>`;
+    top.innerHTML = `<span class="num">${String(strategy.n).padStart(2, "0")} · ${strategy.category}</span>${strategy.label ? labelChip(strategy) : `<span class="tag">${strategy.tag}</span>`}`;
     const title = document.createElement("h2");
     title.textContent = strategy.name;
     const plain = document.createElement("p");
@@ -262,6 +262,7 @@ function renderBoard() {
     ];
     tally.innerHTML = bits.map(([tone, count, label]) => `<article class="tone-${tone}"><strong>${count}</strong><span>${label}</span></article>`).join("");
   }
+  renderRegime();
   const book = document.getElementById("book");
   const ladder = document.getElementById("ladder");
   const priced = SIFT.strategies.filter((item) => item.latest != null);
@@ -290,12 +291,80 @@ function renderBoard() {
     }).join("");
     ladder.innerHTML = `<h2>Recorded change from the start</h2><ol>${rows}</ol>`;
   }
-  for (let slot = 11; slot <= 12; slot += 1) {
+  const maxN = Math.max(...SIFT.strategies.map((item) => item.n));
+  const open = (3 - (SIFT.strategies.length % 3)) % 3;
+  for (let slot = maxN + 1; slot <= maxN + open; slot += 1) {
     const cell = document.createElement("article");
     cell.className = "slot";
     cell.innerHTML = `<div class="slot-top"><span class="num">${slot}</span><span class="tag">Open</span></div><h2>Room for a later test</h2><div class="empty-plot">Empty on purpose. A new strategy can take this card without moving the others.</div>`;
     board.append(cell);
   }
+}
+
+const REGIME_TEXT = {
+  trend_up: { name: "Trend up", stocks: "Rising: above the 50- and 200-day averages, and up over the last 3 months.", crypto: "Rising: above the 50- and 200-day averages, and up over the last 3 months." },
+  range: { name: "Range", stocks: "Sideways: no clear trend either way.", crypto: "Sideways: no clear trend either way." },
+  risk_off: { name: "Risk-off", stocks: "Under the 50-day average while bonds and gold lead stocks.", crypto: "Under the 50-day average while stocks are weak." },
+  trend_down: { name: "Trend down", stocks: "Falling: under the 200-day average, and the 50-day is under the 200-day.", crypto: "Falling: under the 200-day average, and the 50-day is under the 200-day." },
+  shock: { name: "Shock", stocks: "A volatility spike with a sharp drop from the 20-day high.", crypto: "A volatility spike with a sharp drop from the 20-day high." }
+};
+const REGIME_ORDER = ["trend_up", "range", "risk_off", "trend_down", "shock"];
+function regimeName(key) { return (REGIME_TEXT[key] || { name: key || "n/a" }).name; }
+
+function labelChip(strategy) {
+  const proven = strategy.label === "proven in backtest";
+  return `<span class="chip ${proven ? "chip-proven" : "chip-hybrid"}">${proven ? "Proven in backtest" : "New forward-test hybrid"}</span>`;
+}
+
+function regimeFitToday(strategy) {
+  const reg = SIFT.regime && strategy.regime ? SIFT.regime[strategy.regime.market === "crypto" ? "crypto" : "stock"] : null;
+  if (!reg) return null;
+  const r = strategy.regime;
+  if ((r.sitOutList || []).includes(reg.regime)) return "sit";
+  if ((r.bestList || []).includes(reg.regime)) return "best";
+  return "neutral";
+}
+
+function renderRegime() {
+  const host = document.getElementById("regime");
+  if (!host || !SIFT.regime) return;
+  const pill = (key, label, market) => {
+    const r = SIFT.regime[key];
+    if (!r) return "";
+    const t = REGIME_TEXT[r.regime] || { name: r.regime, stocks: "", crypto: "" };
+    return `<article class="regime-pill reg-${r.regime}">
+      <span class="regime-market">${label}</span>
+      <strong>${t.name}</strong>
+      <p>${t[market]}</p>
+      <p class="meta">${r.asset} close ${r.close.toLocaleString("en-US")} on ${shortDate(r.date)} · 50-day ${r.sma50.toLocaleString("en-US")} · 200-day ${r.sma200.toLocaleString("en-US")} · 3-month ${signedPct(r.ret63)} · volatility ${r.vol_ratio}× normal</p>
+    </article>`;
+  };
+  const rows = SIFT.strategies.filter((s) => s.regime && s.label);
+  const best = rows.filter((s) => regimeFitToday(s) === "best");
+  const sit = rows.filter((s) => regimeFitToday(s) === "sit");
+  const list = (items) => items.length ? items.map((s) => `<a href="strategy.html?n=${s.n}">${String(s.n).padStart(2, "0")} ${s.name}</a>`).join(" · ") : "None";
+  host.innerHTML = `<h2>Current market regime</h2>
+    <div class="regime-grid">${pill("stock", "Stocks · SPY", "stocks")}${pill("crypto", "Crypto · BTC", "crypto")}</div>
+    <p class="regime-fit"><b>In their best regime today:</b> ${list(best)}</p>
+    <p class="regime-fit"><b>Sitting out today:</b> ${list(sit)}</p>
+    <p class="meta">A daily label from closing prices only, checked in this order: shock, trend down, risk-off, trend up, range. Updated ${SIFT.regime.asOf}. It describes the market; it is not a forecast.</p>`;
+}
+
+function regimeFitHtml(strategy) {
+  if (!strategy.regime) return "";
+  const r = strategy.regime;
+  const market = r.market === "crypto" ? "crypto" : "stock";
+  const today = SIFT.regime && SIFT.regime[market];
+  const rowsHtml = REGIME_ORDER.map((key) => {
+    const v = (r.annualizedByRegime || {})[key];
+    const tone = v == null ? "" : v > 0.05 ? "tone-up" : v < -0.05 ? "tone-down" : "tone-flat";
+    const marks = [(r.bestList || []).includes(key) ? "best" : "", (r.sitOutList || []).includes(key) ? "sit out" : "", today && today.regime === key ? "today" : ""].filter(Boolean).join(" · ");
+    return `<tr${today && today.regime === key ? ' class="is-today"' : ""}><th>${regimeName(key)}</th><td class="${tone}">${v == null ? "—" : signedPct(v)}</td><td>${marks}</td></tr>`;
+  }).join("");
+  return `<h2>Market regime fit</h2>
+    <p>Best regime: ${r.best}. Sit out: ${r.sitOut}.${today ? ` Today (${today.asset}, ${shortDate(today.date)}): <b>${regimeName(today.regime)}</b>.` : ""}</p>
+    <div class="rtable"><table><thead><tr><th>Regime</th><th>Backtest annualized return</th><th></th></tr></thead><tbody>${rowsHtml}</tbody></table></div>
+    <p class="meta">Historical backtest by regime (new experiment, Nov 10, 2026). Separate from the forward paper result above.</p>`;
 }
 
 function whyHtml(strategy) {
@@ -318,6 +387,7 @@ function renderStrategy() {
   const plot = strategy.planned ? `<div class="empty-plot">Not launched. No marks to plot.</div>` : `<div class="plot" id="detail-plot"></div>`;
   root.innerHTML = `
     <p class="eyebrow">Strategy ${String(strategy.n).padStart(2, "0")} · ${strategy.category}</p>
+    ${strategy.label ? `<p>${labelChip(strategy)}</p>` : ""}
     <h1>${strategy.name}</h1>
     <p class="lede">${strategy.plain}</p>
     <p class="result tone-${result.tone}"><span class="figure">${result.figure}</span><span class="status">${result.word}</span></p>
@@ -329,12 +399,14 @@ function renderStrategy() {
     <p>${strategy.hypothesis}</p>
     <h2>Rules</h2>
     <ul class="rules">${strategy.rules.map((rule) => `<li>${rule}</li>`).join("")}</ul>
-    <h2>Backtest, in-sample</h2>
+    ${regimeFitHtml(strategy)}
+    <h2>${strategy.label ? "Backtest, historical (separate from the forward paper)" : "Backtest, in-sample"}</h2>
     <p>${strategy.backtest}</p>
     <h2>Forward paper</h2>
     <p>${strategy.forward}</p>
     <h2>Main risk</h2>
     <p>${strategy.risk}</p>
+    ${strategy.label ? `<p class="fine">Backtest = new experiment dated Nov 10, 2026. Universe is today's list of large stocks/coins, so results carry survivorship bias. Halves are a stability check; parameters were not tuned. “Proven in backtest” means it passed the historical checks only; nothing is proven going forward. Forward paper only, not a forecast.</p>` : ""}
     <p class="fine">Paper only. Simulated $10,000. No live orders. Not financial advice. None of these strategies is proven. Source: ${SIFT.source}, ${SIFT.asOf}.</p>
   `;
   const host = document.getElementById("detail-plot");
