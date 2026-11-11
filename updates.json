@@ -1,0 +1,47 @@
+{
+ "meta": {
+  "fingerprint": "d199b0b6642ae46e",
+  "lastUpdatedISO": "2026-11-11T17:18:33-05:00",
+  "lastUpdatedET": "Nov 11, 2026, 5:18 PM ET",
+  "dataDay": "2026-11-11"
+ },
+ "entries": [
+  {
+   "date": "2026-11-11",
+   "kind": "milestone",
+   "title": "Milestone · Wed Nov 11",
+   "updatedET": "Nov 11, 2026, 5:22 PM ET",
+   "items": [
+    "Added strategies 18–22, all marked Aggressive: 3x Nasdaq trend (TQQQ 200-day), 3x chip trend (SOXL 200-day), Residual momentum top 10, 3x Nasdaq IBS dip-buy, and Crypto vol-targeted trend + regime gate.",
+    "Picked from 14 aggressive, less-crowded candidates backtested in a new experiment (SIFT strategy lab run_20261111) with the same costs, fills and five pre-set checks as strategies 11–17.",
+    "Each opened with $10,000 paper at the Nov 11 close (#22 at the Nov 10 crypto close). Backtest drawdowns for the 3x strategies run from −57% to −83%.",
+    "Added this Updates log and a Last updated stamp at the top of every page."
+   ]
+  },
+  {
+   "date": "2026-11-11",
+   "kind": "daily",
+   "title": "Daily update · Wed Nov 11",
+   "updatedET": "Nov 11, 2026, 5:18 PM ET",
+   "items": [
+    "#11 Large-cap 55/20 breakout: bought AAPL, ABBV, ACN, ADP, COST, JNJ, KO, LLY, TMO, V.",
+    "#12 Large-cap squeeze breakout: bought AAPL, ABBV, AXP, COST, DIS, KO, MA, SBUX, V, WFC.",
+    "#14 Leader pullback + regime gate: bought COP, CVX, PANW, PM, XOM.",
+    "#17 Regime rotator (walk-forward): bought AAPL, ABBV, ACN, ADP, COST, JNJ, KO, LLY, TMO, V.",
+    "Biggest gains since the previous mark: #8 S&P 500 dip-buy +7.14%; #2 Crypto z-score mean reversion +0.07%; #10 9 EMA + VWAP intraday +0.04%.",
+    "Biggest drops: #11 Large-cap 55/20 breakout −0.05%; #12 Large-cap squeeze breakout −0.05%; #17 Regime rotator (walk-forward) −0.05%.",
+    "Market regime: stocks (SPY) range, crypto (BTC) range."
+   ]
+  },
+  {
+   "date": "2026-11-10",
+   "kind": "milestone",
+   "title": "Milestone · Tue Nov 10",
+   "updatedET": "Nov 10, 2026, 10:56 PM ET",
+   "items": [
+    "Added strategies 11–17 with a daily market-regime label for stocks (SPY) and crypto (BTC): 55/20 breakout, squeeze breakout, Bitcoin 200-day trend, Leader pullback, Crypto breakout, BTC-gated crypto top-3 momentum and the Regime rotator.",
+    "New design: SIFT icon and logo, home-screen and share icons, leaderboard, regime box, and 'Why we picked this' notes on each strategy page."
+   ]
+  }
+ ]
+}

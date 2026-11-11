@@ -25,7 +25,9 @@ def ret(v, base=CAP): return (v / base - 1) * 100
 def d10(s): return str(s)[:10]
 def label(iso):
     d = dt.date.fromisoformat(iso); return d.strftime("%b ") + str(d.day)
+READ_FILES = set()
 def rows(path):
+    READ_FILES.add(path)
     with open(path, newline="") as f: return list(csv.DictReader(f))
 
 # ---------- readers: each returns dict(series=..., fields=...) ----------
@@ -197,6 +199,69 @@ def merge(hist, series):
     hist.sort(key=lambda p: (p["date"], p.get("session") == "close"))
     return hist
 
+# ---------- "Last updated" stamp + Updates log (updates.json, newest first, one auto entry per data day) ----------
+UPDATES_CAP = 60
+def _fmt_et(t):
+    return t.strftime("%b ") + str(t.day) + t.strftime(", %Y, ") + (t.strftime("%I:%M %p").lstrip("0")) + " ET"
+
+def _fingerprint(strategies, reg):
+    import hashlib
+    key = [(s["n"], (s.get("points") or [{}])[-1].get("date"), (s.get("points") or [{}])[-1].get("equity"), len(s.get("points") or [])) for s in strategies]
+    key.append(((reg or {}).get("stock", {}).get("regime"), (reg or {}).get("crypto", {}).get("regime")))
+    return hashlib.sha256(json.dumps(key, default=str).encode()).hexdigest()[:16]
+
+def _data_run_time():
+    """Newest modification time of the paper-test record files this build read (= when the engines last wrote data)."""
+    ts = [os.path.getmtime(f) for f in READ_FILES if os.path.exists(f)]
+    t = dt.datetime.fromtimestamp(max(ts), NY) if ts else dt.datetime.now(NY)
+    return min(t, dt.datetime.now(NY))
+
+def _day_entry(day, strategies, reg, when):
+    """Short auto summary for one data day: trades by strategies 11-22, biggest movers since the previous mark, regime."""
+    items = []
+    byn = {s["n"]: s for s in strategies}
+    for n, (tag, _b) in sorted(RP_TAGS.items()):
+        tp = f"{RP}/runs/{tag}/trades.csv"
+        if not os.path.exists(tp): continue
+        tr = [r for r in rows(tp) if r["date"] == day]
+        if not tr: continue
+        buys = sorted({r["asset"] for r in tr if r["side"] == "BUY"}); sells = sorted({r["asset"] for r in tr if r["side"] == "SELL"})
+        bits = (["bought " + ", ".join(buys)] if buys else []) + (["sold " + ", ".join(sells)] if sells else [])
+        items.append("#{} {}: {}.".format(n, byn[n]["name"] if n in byn else tag, "; ".join(bits)))
+    moves = []
+    for s in strategies:
+        pts = s.get("points") or []
+        if s.get("planned") or len(pts) < 2 or pts[-1]["date"] != day: continue
+        prev = next((p for p in reversed(pts[:-1]) if p["date"] < day), None)
+        if prev and prev["equity"]:
+            moves.append(((pts[-1]["equity"] / prev["equity"] - 1) * 100, s))
+    moves = [m for m in moves if abs(m[0]) >= 0.005]
+    if moves:
+        moves.sort(key=lambda m: m[0])
+        up = [m for m in reversed(moves) if m[0] > 0][:3]; dn = [m for m in moves if m[0] < 0][:3]
+        if up: items.append("Biggest gains since the previous mark: " + "; ".join("#{} {} {}".format(s["n"], s["name"], pct(v)) for v, s in up) + ".")
+        if dn: items.append("Biggest drops: " + "; ".join("#{} {} {}".format(s["n"], s["name"], pct(v)) for v, s in dn) + ".")
+    if not items: items.append("New daily marks recorded; no trades by strategies 11–22 and no strategy moved more than 0.01%.")
+    if reg:
+        items.append("Market regime: stocks (SPY) {}, crypto (BTC) {}.".format(reg.get("stock", {}).get("regime", "n/a").replace("_", " "), reg.get("crypto", {}).get("regime", "n/a").replace("_", " ")))
+    d = dt.date.fromisoformat(day)
+    return {"date": day, "kind": "daily", "title": "Daily update · " + d.strftime("%a %b ") + str(d.day), "updatedET": _fmt_et(when), "items": items}
+
+def update_log(strategies, reg, data_day):
+    up = f"{HERE}/updates.json"
+    U = json.load(open(up)) if os.path.exists(up) else {"meta": {}, "entries": []}
+    fp = _fingerprint(strategies, reg); meta = U.setdefault("meta", {})
+    if fp != meta.get("fingerprint") or not meta.get("lastUpdatedISO"):
+        when = _data_run_time()
+        meta.update(fingerprint=fp, lastUpdatedISO=when.isoformat(timespec="seconds"), lastUpdatedET=_fmt_et(when), dataDay=data_day)
+        ent = _day_entry(data_day, strategies, reg, when)
+        E = [e for e in U["entries"] if not (e.get("kind") == "daily" and e.get("date") == data_day)]   # one auto entry per data day (upsert)
+        E.append(ent)
+        E.sort(key=lambda e: (e["date"], e.get("kind") != "daily"), reverse=True)
+        U["entries"] = E[:UPDATES_CAP]
+        tmp = up + ".tmp"; json.dump(U, open(tmp, "w"), indent=1, ensure_ascii=False); os.replace(tmp, up)
+    return U
+
 def main():
     tpl = json.load(open(f"{HERE}/template.json"))
     hp = f"{HERE}/history.json"
@@ -270,6 +335,17 @@ def main():
             "capital": CAP, "moneyMin": mmin, "moneyMax": mmax, "strategies": strategies}
     reg = read_regime()
     if reg: SIFT["regime"] = reg
+    data_day = max(s["asOf"] for s in strategies if s.get("asOf"))
+    try:
+        U = update_log(strategies, reg, data_day)
+    except Exception as e:   # the log must never block the data update
+        print("updates log ERROR:", type(e).__name__, e)
+        U = json.load(open(f"{HERE}/updates.json")) if os.path.exists(f"{HERE}/updates.json") else {"meta": {}, "entries": []}
+        if not U["meta"].get("lastUpdatedISO"):
+            w = _data_run_time(); U["meta"].update(lastUpdatedISO=w.isoformat(timespec="seconds"), lastUpdatedET=_fmt_et(w))
+    SIFT["lastUpdatedISO"] = U["meta"]["lastUpdatedISO"]; SIFT["lastUpdatedET"] = U["meta"]["lastUpdatedET"]
+    SIFT["nextUpdate"] = "Daily after the market close (about 8:30 PM ET)"
+    SIFT["updates"] = U["entries"]
     js = ("/* Generated by build_data.py at {} from the daily paper-test records.\n"
           "   Do not edit by hand. Marks accumulate in history.json and are never rewritten. Paper only. */\n"
           "const SIFT = {};\n").format(built, json.dumps(SIFT, indent=1, ensure_ascii=False))
@@ -281,8 +357,15 @@ def main():
     html = re.sub(r'(<p class="eyebrow">Paper research · )[^<]*(</p>)', r"\g<1>" + asof_txt + r"\g<2>", html)
     html = re.sub(r"Source: [^<]*</footer>", "Source: daily paper-test records, latest mark " + asof_txt + ", built " + built + ".</footer>", html)
     open(ip, "w").write(html)
+    stamp = "Last updated: " + U["meta"]["lastUpdatedET"]
+    for page in ("index.html", "strategy.html", "updates.html"):
+        pp = f"{HERE}/{page}"
+        if not os.path.exists(pp): continue
+        h = open(pp).read()
+        h2 = re.sub(r'(<b id="stamp-when">)[^<]*(</b>)', r"\g<1>" + stamp + r"\g<2>", h)
+        if h2 != h: open(pp, "w").write(h2)
     for n in sorted(report): print("{:>2} {}".format(n, report[n]))
-    print("asOf", asof_txt, "range", mmin, mmax)
+    print("asOf", asof_txt, "range", mmin, mmax, "| last updated", U["meta"]["lastUpdatedET"], "| updates", len(U["entries"]))
 
 if __name__ == "__main__":
     main()

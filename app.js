@@ -222,6 +222,8 @@ function maxDrawdownOf(strategy) {
   return worst;
 }
 function renderHero() {
+  renderStamp();
+  renderUpdates();
   const host = document.getElementById("hero-facts");
   if (!host) return;
   const live = SIFT.strategies.filter((s) => !s.planned).length;
@@ -469,6 +471,7 @@ function renderStrategy() {
     root.textContent = "That strategy is not on the board.";
     return;
   }
+  renderStamp();
   document.title = strategy.name + " · SIFT";
   const result = resultOf(strategy);
   const plot = strategy.planned ? `<div class="empty-plot">Not launched. No marks to plot.</div>` : `<div class="plot" id="detail-plot"></div>`;
@@ -501,4 +504,40 @@ function renderStrategy() {
     drawChart(host, strategy);
     host.after(legend(strategy));
   }
+}
+
+
+/* ---------- Last-updated stamp and Updates log ---------- */
+function esc(t) { return String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+function renderStamp() {
+  const host = document.getElementById("updated-stamp");
+  if (!host || !SIFT.lastUpdatedISO) return;
+  const ageDays = (Date.now() - Date.parse(SIFT.lastUpdatedISO)) / 86400000;
+  const stale = ageDays > 2;
+  host.classList.toggle("stale", stale);
+  host.innerHTML = `<b id="stamp-when">Last updated: ${esc(SIFT.lastUpdatedET)}</b>` +
+    (stale ? `<span class="stamp-stale">Stale: no new data for ${Math.floor(ageDays)} days</span>` : "") +
+    `<span class="stamp-next">Next update: ${esc(SIFT.nextUpdate || "daily after the market close (about 8:30 PM ET)")}</span><a href="updates.html">All updates →</a>`;
+}
+function updateEntryHtml(e) {
+  const tag = e.kind === "milestone" ? `<span class="chip chip-milestone">Milestone</span>` : `<span class="chip chip-daily">Daily</span>`;
+  return `<article class="update-entry update-${e.kind}"><header><time datetime="${esc(e.date)}">${esc(e.title)}</time>${tag}</header>
+    <ul>${(e.items || []).map((i) => `<li>${esc(i)}</li>`).join("")}</ul>${e.updatedET ? `<p class="meta">Recorded ${esc(e.updatedET)}</p>` : ""}</article>`;
+}
+function renderUpdates() {
+  const host = document.getElementById("updates");
+  if (!host || !SIFT.updates) return;
+  host.innerHTML = `<div class="section-head"><h2>Latest updates</h2><p>The board refreshes once a day after the market close. Each day's trades, biggest movers and market regime are logged here, newest first.</p></div>
+    <div class="updates-list">${SIFT.updates.slice(0, 3).map(updateEntryHtml).join("")}</div>
+    <p class="updates-more"><a href="updates.html">See all ${SIFT.updates.length} updates →</a></p>`;
+}
+function renderUpdatesPage() {
+  renderStamp();
+  const root = document.getElementById("updates-page");
+  if (!root) return;
+  document.title = "Updates · SIFT";
+  root.innerHTML = `<p class="eyebrow">Updates log</p><h1>What changed, day by day</h1>
+    <p class="lede">Newest first. A short entry is added automatically after each daily run (about 8:30 PM ET); milestones mark new strategies and design changes. The last ${SIFT.updates ? SIFT.updates.length : 0} entries are kept.</p>
+    <div class="updates-list">${(SIFT.updates || []).map(updateEntryHtml).join("")}</div>
+    <p class="fine">Paper only. Simulated $10,000 accounts. No live orders. Not financial advice.</p>`;
 }
