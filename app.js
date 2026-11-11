@@ -207,6 +207,88 @@ function factsHtml(result) {
   </dl>`;
 }
 
+
+// ---------- informative layer: hero facts, leaderboard, last-updated stamps (display only; numbers come from data.js) ----------
+const MARKET_BY_N = { 1: "Crypto", 2: "Crypto", 3: "Crypto", 4: "Crypto", 5: "Crypto", 6: "Crypto", 7: "Crypto", 8: "Stocks", 9: "Stocks", 10: "ETFs, intraday" };
+function marketOf(strategy) {
+  if (strategy.regime && strategy.regime.market) return strategy.regime.market === "crypto" ? "Crypto" : "Stocks";
+  return MARKET_BY_N[strategy.n] || "—";
+}
+function maxDrawdownOf(strategy) {
+  const pts = strategy.points || [];
+  if (pts.length < 2) return pts.length ? 0 : null;
+  let peak = -Infinity, worst = 0;
+  pts.forEach((p) => { peak = Math.max(peak, p.equity); worst = Math.min(worst, (p.equity / peak - 1) * 100); });
+  return worst;
+}
+function renderHero() {
+  const host = document.getElementById("hero-facts");
+  if (!host) return;
+  const live = SIFT.strategies.filter((s) => !s.planned).length;
+  host.innerHTML = `
+    <div><dt>Strategies</dt><dd>${SIFT.strategies.length} <small>(${live} running)</small></dd></div>
+    <div><dt>Paper per strategy</dt><dd>${money(SIFT.capital).replace(".00", "")}</dd></div>
+    <div><dt>Latest mark</dt><dd>${SIFT.asOf}</dd></div>
+    <div><dt>Board built</dt><dd>${SIFT.builtAt || "—"}</dd></div>`;
+  const foot = document.getElementById("footer-updated");
+  if (foot) foot.textContent = `Last updated: latest mark ${SIFT.asOf}; board built ${SIFT.builtAt || "—"}${SIFT.regime ? "; market regime " + SIFT.regime.asOf : ""}.`;
+}
+const LB_COLS = [
+  { key: "rank", label: "#", num: true },
+  { key: "name", label: "Strategy" },
+  { key: "market", label: "Market" },
+  { key: "pct", label: "Forward return", num: true },
+  { key: "delta", label: "Dollars", num: true },
+  { key: "dd", label: "Max drawdown", num: true },
+  { key: "days", label: "Days live", num: true },
+  { key: "gap", label: "Versus hold", num: true }
+];
+let LB_SORT = { key: "pct", dir: -1 };
+function leaderboardRows() {
+  return SIFT.strategies.map((s) => {
+    const r = resultOf(s);
+    const b = benchPctOf(s);
+    return { s, r, name: s.name, market: marketOf(s), pct: r.pct, delta: r.delta, dd: s.planned ? null : maxDrawdownOf(s),
+      days: s.planned ? null : dayCount(s.start, s.asOf), gap: r.pct == null || b == null ? null : r.pct - b };
+  });
+}
+function renderLeaderboard() {
+  const host = document.getElementById("leaderboard");
+  if (!host) return;
+  const rows = leaderboardRows();
+  const byReturn = [...rows].filter((x) => x.pct != null).sort((a, b) => b.pct - a.pct || a.s.n - b.s.n);
+  byReturn.forEach((x, i) => { x.rank = i + 1; });
+  const k = LB_SORT.key, dir = LB_SORT.dir;
+  rows.sort((a, b) => {
+    const av = a[k], bv = b[k];
+    if (av == null && bv == null) return a.s.n - b.s.n;
+    if (av == null) return 1;
+    if (bv == null) return -1;
+    if (typeof av === "string") return dir * av.localeCompare(bv);
+    return dir * (av - bv) || a.s.n - b.s.n;
+  });
+  const tone = (v) => v == null ? "" : v > 0.005 ? "tone-up" : v < -0.005 ? "tone-down" : "tone-flat";
+  const pts = (v) => v == null ? "—" : (Math.abs(v) < 0.005 ? "even" : (v > 0 ? "+" : "−") + Math.abs(v).toFixed(2) + " pts");
+  const head = LB_COLS.map((c) => `<th scope="col" class="${c.num ? "num-col" : ""}"><button type="button" data-key="${c.key}" aria-label="Sort by ${c.label}">${c.label}${LB_SORT.key === c.key ? (LB_SORT.dir < 0 ? " ▼" : " ▲") : ""}</button></th>`).join("");
+  const body = rows.map((x) => `<tr class="${x.s.stale ? "is-stale" : ""}">
+      <td class="num-col">${x.rank || "—"}</td>
+      <th scope="row"><a href="strategy.html?n=${x.s.n}"><span class="lb-n">${String(x.s.n).padStart(2, "0")}</span> ${x.s.name}</a>${x.s.label ? " " + labelChip(x.s) : ""}<span class="lb-sub">${x.s.category}${x.s.stale ? " · stale" : ""}</span></th>
+      <td>${x.market}</td>
+      <td class="num-col ${tone(x.pct)}">${x.pct == null ? "Not started" : signedPct(x.pct)}</td>
+      <td class="num-col ${tone(x.delta)}">${x.delta == null ? "—" : signedMoney(x.delta)}</td>
+      <td class="num-col">${x.dd == null ? "—" : (x.dd > -0.005 ? "0.00%" : signedPct(x.dd))}</td>
+      <td class="num-col">${x.days == null ? "—" : x.days}</td>
+      <td class="num-col ${tone(x.gap)}">${pts(x.gap)}</td>
+    </tr>`).join("");
+  host.innerHTML = `<div class="section-head"><h2>Leaderboard</h2><p>Every strategy ranked by its forward paper return since its own start date, as of ${SIFT.asOf}. Click a column to sort. Max drawdown is the worst drop between recorded daily marks. Strategies that started recently have little history, so early ranks mean little.</p></div>
+    <div class="rtable lb-table"><table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div>`;
+  host.querySelectorAll("thead button").forEach((btn) => btn.addEventListener("click", () => {
+    const key = btn.dataset.key;
+    LB_SORT = LB_SORT.key === key ? { key, dir: -LB_SORT.dir } : { key, dir: key === "name" || key === "market" || key === "rank" ? 1 : -1 };
+    renderLeaderboard();
+  }));
+}
+
 function renderBoard() {
   const board = document.getElementById("board");
   const tally = document.getElementById("tally");
@@ -263,6 +345,8 @@ function renderBoard() {
     tally.innerHTML = bits.map(([tone, count, label]) => `<article class="tone-${tone}"><strong>${count}</strong><span>${label}</span></article>`).join("");
   }
   renderRegime();
+  renderHero();
+  renderLeaderboard();
   const book = document.getElementById("book");
   const ladder = document.getElementById("ladder");
   const priced = SIFT.strategies.filter((item) => item.latest != null);
@@ -344,10 +428,12 @@ function renderRegime() {
   const sit = rows.filter((s) => regimeFitToday(s) === "sit");
   const list = (items) => items.length ? items.map((s) => `<a href="strategy.html?n=${s.n}">${String(s.n).padStart(2, "0")} ${s.name}</a>`).join(" · ") : "None";
   host.innerHTML = `<h2>Current market regime</h2>
+    <p class="regime-intro">What kind of market are we in today? Each strategy works best in some conditions and steps aside in others. This label is worked out each day from closing prices for stocks (SPY) and crypto (BTC).</p>
     <div class="regime-grid">${pill("stock", "Stocks · SPY", "stocks")}${pill("crypto", "Crypto · BTC", "crypto")}</div>
     <p class="regime-fit"><b>In their best regime today:</b> ${list(best)}</p>
     <p class="regime-fit"><b>Sitting out today:</b> ${list(sit)}</p>
-    <p class="meta">A daily label from closing prices only, checked in this order: shock, trend down, risk-off, trend up, range. Updated ${SIFT.regime.asOf}. It describes the market; it is not a forecast.</p>`;
+    <details class="regime-legend"><summary>What the five regimes mean</summary><ul>${REGIME_ORDER.map((k) => `<li><b class="reg-word reg-${k}">${REGIME_TEXT[k].name}</b> ${REGIME_TEXT[k].stocks}${k === "risk_off" ? " For crypto: under the 50-day average while stocks are weak." : ""}${k === "shock" ? " The drop threshold is 7% for SPY and 15% for BTC." : ""}</li>`).join("")}</ul><p>Why it matters: each new strategy lists the regimes where it did best in its backtest and the ones where it steps aside. The label is checked in this order: shock, trend down, risk-off, trend up, range.</p></details>
+    <p class="meta">A daily label from closing prices only. Updated ${SIFT.regime.asOf}. It describes the market; it is not a forecast.</p>`;
 }
 
 function regimeFitHtml(strategy) {

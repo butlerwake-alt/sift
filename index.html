@@ -29,7 +29,7 @@
   <meta name="twitter:title" content="SIFT">
   <meta name="twitter:description" content="Educational paper-trading research board. Seventeen simulated tests. Paper results. Not a forecast. Not financial advice.">
   <meta name="twitter:image" content="https://butlerwake-alt.github.io/sift/og-image.png">
-  <link rel="stylesheet" href="styles.css?v=202611102253">
+  <link rel="stylesheet" href="styles.css?v=202611102256">
 </head>
 <body>
   <header class="sky">
@@ -39,21 +39,94 @@
         <img class="brand-mark" src="brand-mark.svg" width="72" height="72" alt="">
         <h1>SIFT</h1>
       </div>
-      <p class="lede">Seventeen simulated tests. Green is up, red is down, yellow is still at the start. Click a card for the rules.</p>
+      <p class="lede">An educational paper-trading research board. Seventeen strategies each run their own simulated $10,000 account, and every result is marked from real closing prices. No real money moves.</p>
+      <dl class="hero-facts" id="hero-facts"></dl>
     </div>
+    <nav class="site-nav" aria-label="Sections">
+      <div class="nav-inner">
+        <a href="#regime">Market regime</a><a href="#leaderboard">Leaderboard</a><a href="#board">All strategies</a><a href="#method">How it works</a><a href="#glossary">Glossary</a><a href="research.html">Researched strategies</a>
+      </div>
+    </nav>
   </header>
   <div class="wrap">
     <a class="research-link" href="research.html"><b>New: Researched strategies →</b> Ten strategies shared online and on social media, backtested on past prices with fees (historical backtests, new experiment dated 2026-11-10). Not live signals.</a>
     <section class="regime" id="regime"></section>
     <section class="book" id="book"></section>
     <div class="tally" id="tally"></div>
+    <section class="panel leaderboard" id="leaderboard"></section>
     <section class="ladder" id="ladder"></section>
+    <div class="section-head" id="board-head">
+      <h2>All strategies</h2>
+      <p>Green is up, red is down, yellow is still at the start. Click a card for its rules, backtest and forward record.</p>
+    </div>
     <p class="scale-note">Each dot is one daily mark from the paper-test records, updated after the daily runs. Days with no recorded mark are skipped. A dashed line is buy-and-hold over those same dates. “Points” means percentage points versus that buy-and-hold.</p>
     <div class="grid" id="board"></div>
-    <footer>Paper results. Not brokerage balances. Not a forecast. Nothing here is proven, and a loss is a possible result. Source: daily paper-test records, latest mark November 10, 2026, built 2026-11-10 22:53 EST.</footer>
+
+    <section class="panel method" id="method">
+      <h2 class="kicker">How it works</h2>
+      <div class="method-grid">
+        <article>
+          <h3>Backtest vs forward test</h3>
+          <p>A <b>backtest</b> replays a strategy's rules on past prices. It shows how the rules would have done, but the past was already known when the rules were chosen. A <b>forward test</b> runs the same rules from a start date onward, one new close at a time, so nobody can see the result in advance. Each card's big number and chart are the forward test. Backtest figures appear only on the strategy page, under their own heading.</p>
+        </article>
+        <article>
+          <h3>$10,000 paper per strategy</h3>
+          <p>Every strategy has its own simulated $10,000 account. Accounts never share money, use no leverage and place no real orders. There are no exchange keys. The dashed line on each chart is what simply buying and holding the benchmark would have done over the same dates.</p>
+        </article>
+        <article>
+          <h3>Fills and costs</h3>
+          <p>Daily strategies decide on one closing price and trade at the next close, so a signal is never filled at a price that was already known. The intraday test uses 5-minute bars and is flat by the close. Every trade pays a cost: the older tests use about 0.10% per side, and strategies 11–17 use 0.05% for stocks and 0.25% for crypto. Each strategy page lists its exact rules and costs.</p>
+        </article>
+        <article>
+          <h3>How results update</h3>
+          <p>Each paper engine records a mark after the market closes. Stocks close at 4 PM ET; crypto uses the daily candle that closes at 7 PM ET (midnight UTC). The board is rebuilt from those records, and existing marks are never rewritten. If a strategy's records stop updating, its card is marked stale.</p>
+        </article>
+        <article>
+          <h3>What “proven in backtest” means</h3>
+          <p>A strategy earns this label only if it passed five checks set before the test: profitable in both halves of the history, up in at least 60% of years, risk-adjusted results at least close to buy-and-hold, still profitable when its settings are nudged, and at least 15 trades. It says nothing about the future. “New forward-test hybrid” marks strategies that combine ideas and are being tried forward for the first time.</p>
+        </article>
+        <article>
+          <h3>Known limits</h3>
+          <p>Stock and coin lists are today's large names, so the backtests carry survivorship bias: companies that shrank or failed are missing. Short forward windows prove little; a few weeks of marks can easily be luck. Free public price data can have gaps, and filled gaps are logged.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel glossary" id="glossary">
+      <h2 class="kicker">Glossary</h2>
+      <dl class="gloss">
+        <div><dt>Paper trading</dt><dd>Simulated trading with pretend money, marked at real prices.</dd></div>
+        <div><dt>Forward test</dt><dd>Running fixed rules from a start date onward on new data only.</dd></div>
+        <div><dt>Backtest</dt><dd>Replaying rules on past prices to see how they would have done.</dd></div>
+        <div><dt>Buy-and-hold</dt><dd>Buying the benchmark once at the start and doing nothing else. The yardstick on every chart.</dd></div>
+        <div><dt>Drawdown</dt><dd>The drop from an account's highest value to a later low, in percent. “Max drawdown” is the worst one.</dd></div>
+        <div><dt>CAGR</dt><dd>Compound annual growth rate: the steady yearly return that would turn the start value into the end value.</dd></div>
+        <div><dt>Sharpe ratio</dt><dd>Return divided by how bumpy the ride was (volatility), per year. Higher is smoother; about 1 is good for a simple strategy.</dd></div>
+        <div><dt>Win rate</dt><dd>The share of closed trades that made money. A low win rate can still be profitable if the winners are big.</dd></div>
+        <div><dt>Profit factor</dt><dd>Total gains on winning trades divided by total losses on losing trades. Above 1 means it made more than it lost.</dd></div>
+        <div><dt>Market regime</dt><dd>A daily label for the market's state (trend up, range, risk-off, trend down, shock) from closing prices only.</dd></div>
+        <div><dt>Moving average</dt><dd>The average closing price over the last N days, such as the 50-day or 200-day average.</dd></div>
+        <div><dt>RSI</dt><dd>Relative Strength Index. A 2-day RSI under 10 means the last two days were sharply down.</dd></div>
+        <div><dt>Breakout</dt><dd>A close above the highest close of a past window, such as a 55-day high.</dd></div>
+        <div><dt>Momentum</dt><dd>The tendency of recent winners to keep winning for a while. Measured here as past return over a set window.</dd></div>
+        <div><dt>Out-of-sample</dt><dd>Data the rules were not built on. The second half of each backtest is reported separately for this reason.</dd></div>
+        <div><dt>Survivorship bias</dt><dd>Testing only on names that are large today, which leaves out the ones that failed and flatters results.</dd></div>
+        <div><dt>Slippage and fees</dt><dd>The cost of trading: the gap between the quoted and filled price plus commissions. Charged on every simulated trade.</dd></div>
+        <div><dt>Percentage points</dt><dd>The plain difference between two percentages: +3% versus +1% is 2 points ahead.</dd></div>
+      </dl>
+    </section>
+
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand"><img src="favicon.svg" width="28" height="28" alt=""><span>SIFT</span><p>Educational paper-trading research. Built to test ideas honestly, losses included.</p></div>
+        <div><h3>Disclaimer</h3><p>Paper results only. Not brokerage balances, not a forecast, and not financial, investment or tax advice. Past and simulated results do not guarantee future results. A loss is a possible result for every strategy.</p></div>
+        <div><h3>Pages</h3><p><a href="#leaderboard">Leaderboard</a> · <a href="#method">How it works</a> · <a href="#glossary">Glossary</a> · <a href="research.html">Researched strategies</a></p></div>
+      </div>
+      <p class="footer-updated" id="footer-updated"></p>
+      Source: daily paper-test records, latest mark November 10, 2026, built 2026-11-10 22:56 EST.</footer>
   </div>
-  <script src="data.js?v=202611102253"></script>
-  <script src="app.js?v=202611102253"></script>
+  <script src="data.js?v=202611102256"></script>
+  <script src="app.js?v=202611102256"></script>
   <script>renderBoard();</script>
 </body>
 </html>
