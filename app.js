@@ -245,7 +245,7 @@ const LB_COLS = [
   { key: "days", label: "Days live", num: true },
   { key: "gap", label: "Versus hold", num: true }
 ];
-let LB_SORT = { key: "pct", dir: -1 };
+let LB_SORT = { key: "rank", dir: 1 };
 function leaderboardRows() {
   return SIFT.strategies.map((s) => {
     const r = resultOf(s);
@@ -258,8 +258,7 @@ function renderLeaderboard() {
   const host = document.getElementById("leaderboard");
   if (!host) return;
   const rows = leaderboardRows();
-  const byReturn = [...rows].filter((x) => x.pct != null).sort((a, b) => b.pct - a.pct || a.s.n - b.s.n);
-  byReturn.forEach((x, i) => { x.rank = i + 1; });
+  rows.forEach((x) => { x.rank = x.s.rank == null ? null : x.s.rank; });
   const k = LB_SORT.key, dir = LB_SORT.dir;
   rows.sort((a, b) => {
     const av = a[k], bv = b[k];
@@ -273,8 +272,8 @@ function renderLeaderboard() {
   const pts = (v) => v == null ? "—" : (Math.abs(v) < 0.005 ? "even" : (v > 0 ? "+" : "−") + Math.abs(v).toFixed(2) + " pts");
   const head = LB_COLS.map((c) => `<th scope="col" class="${c.num ? "num-col" : ""}"><button type="button" data-key="${c.key}" aria-label="Sort by ${c.label}">${c.label}${LB_SORT.key === c.key ? (LB_SORT.dir < 0 ? " ▼" : " ▲") : ""}</button></th>`).join("");
   const body = rows.map((x) => `<tr class="${x.s.stale ? "is-stale" : ""}">
-      <td class="num-col">${x.rank || "—"}</td>
-      <th scope="row"><a href="strategy.html?n=${x.s.n}"><span class="lb-n">${String(x.s.n).padStart(2, "0")}</span> ${x.s.name}</a>${x.s.label ? " " + labelChip(x.s) : ""}<span class="lb-sub">${x.s.category}${x.s.stale ? " · stale" : ""}</span></th>
+      <td class="num-col rank-col">${x.rank || "—"}${rankMoveHtml(x.s)}</td>
+      <th scope="row"><a href="strategy.html?n=${x.s.n}"><span class="lb-n">${String(x.s.n).padStart(2, "0")}</span> ${x.s.name}</a>${x.s.label ? " " + labelChip(x.s) : ""}${x.s.isNew ? ' <span class="chip chip-new">New</span>' : ""}<span class="lb-sub">${x.s.category} · started ${x.s.start ? shortDate(x.s.start) : "—"}${x.s.stale ? " · stale" : ""}</span></th>
       <td>${x.market}</td>
       <td class="num-col ${tone(x.pct)}">${x.pct == null ? "Not started" : signedPct(x.pct)}</td>
       <td class="num-col ${tone(x.delta)}">${x.delta == null ? "—" : signedMoney(x.delta)}</td>
@@ -282,7 +281,7 @@ function renderLeaderboard() {
       <td class="num-col">${x.days == null ? "—" : x.days}</td>
       <td class="num-col ${tone(x.gap)}">${pts(x.gap)}</td>
     </tr>`).join("");
-  host.innerHTML = `<div class="section-head"><h2>Leaderboard</h2><p>Every strategy ranked by its forward paper return since its own start date, as of ${SIFT.asOf}. Click a column to sort. Max drawdown is the worst drop between recorded daily marks. Strategies that started recently have little history, so early ranks mean little.</p></div>
+  host.innerHTML = `<div class="section-head"><h2>Leaderboard</h2><p>Every strategy ranked best to worst by its forward paper return since its own start date, as of ${SIFT.asOf}, and re-ranked after every daily update. Arrows show the move versus the previous day's rank${SIFT.rankPrevDay ? " (" + shortDate(SIFT.rankPrevDay) + ")" : ""}; “New” means fewer than 5 days live. Ties go to the lower strategy number; not-started strategies sit at the bottom. Click a column to sort. Max drawdown is the worst drop between recorded daily marks. Strategies that started recently have little history, so early ranks mean little.</p></div>
     <div class="rtable lb-table"><table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div>`;
   host.querySelectorAll("thead button").forEach((btn) => btn.addEventListener("click", () => {
     const key = btn.dataset.key;
@@ -308,7 +307,8 @@ function renderBoard() {
     });
     const top = document.createElement("div");
     top.className = "card-top";
-    top.innerHTML = `<span class="num">${String(strategy.n).padStart(2, "0")} · ${strategy.category}</span>${strategy.label ? labelChip(strategy) : `<span class="tag">${strategy.tag}</span>`}`;
+    const rankBadge = strategy.rank ? `<span class="rank-badge" title="Rank by forward return">#${strategy.rank}${rankMoveHtml(strategy)}${strategy.isNew ? '<em>New</em>' : ""}</span>` : `<span class="rank-badge rank-none">Not ranked</span>`;
+    top.innerHTML = `<span class="num">${rankBadge}${String(strategy.n).padStart(2, "0")} · ${strategy.category}</span>${strategy.label ? labelChip(strategy) : `<span class="tag">${strategy.tag}</span>`}`;
     const title = document.createElement("h2");
     title.textContent = strategy.name;
     const plain = document.createElement("p");
@@ -382,7 +382,7 @@ function renderBoard() {
   for (let slot = maxN + 1; slot <= maxN + open; slot += 1) {
     const cell = document.createElement("article");
     cell.className = "slot";
-    cell.innerHTML = `<div class="slot-top"><span class="num">${slot}</span><span class="tag">Open</span></div><h2>Room for a later test</h2><div class="empty-plot">Empty on purpose. A new strategy can take this card without moving the others.</div>`;
+    cell.innerHTML = `<div class="slot-top"><span class="num">${slot}</span><span class="tag">Open</span></div><h2>Room for a later test</h2><div class="empty-plot">Empty on purpose. A new strategy can be added here.</div>`;
     board.append(cell);
   }
 }
@@ -540,4 +540,12 @@ function renderUpdatesPage() {
     <p class="lede">Newest first. A short entry is added automatically after each daily run (about 8:30 PM ET); milestones mark new strategies and design changes. The last ${SIFT.updates ? SIFT.updates.length : 0} entries are kept.</p>
     <div class="updates-list">${(SIFT.updates || []).map(updateEntryHtml).join("")}</div>
     <p class="fine">Paper only. Simulated $10,000 accounts. No live orders. Not financial advice.</p>`;
+}
+
+function rankMoveHtml(s) {
+  if (!s || s.rank == null) return "";
+  if (s.rankMove == null) return s.prevRank == null && SIFT.rankPrevDay ? ` <span class="rank-move rm-new" title="Not ranked on the previous day">•</span>` : "";
+  if (s.rankMove > 0) return ` <span class="rank-move rm-up" title="Up ${s.rankMove} since the previous day">▲${s.rankMove}</span>`;
+  if (s.rankMove < 0) return ` <span class="rank-move rm-down" title="Down ${-s.rankMove} since the previous day">▼${-s.rankMove}</span>`;
+  return ` <span class="rank-move rm-same" title="Same rank as the previous day">=</span>`;
 }

@@ -732,6 +732,62 @@
      "equity": 10000.0
     }
    ]
+  },
+  "23": {
+   "acct": [
+    {
+     "date": "2026-11-10",
+     "equity": 10000.0
+    }
+   ],
+   "bench": [
+    {
+     "date": "2026-11-10",
+     "equity": 10000.0
+    }
+   ]
+  },
+  "24": {
+   "acct": [
+    {
+     "date": "2026-11-10",
+     "equity": 10000.0
+    }
+   ],
+   "bench": [
+    {
+     "date": "2026-11-10",
+     "equity": 10000.0
+    }
+   ]
+  },
+  "25": {
+   "acct": [
+    {
+     "date": "2026-11-10",
+     "equity": 10000.0
+    }
+   ],
+   "bench": [
+    {
+     "date": "2026-11-10",
+     "equity": 10000.0
+    }
+   ]
+  },
+  "26": {
+   "acct": [
+    {
+     "date": "2026-11-10",
+     "equity": 10000.0
+    }
+   ],
+   "bench": [
+    {
+     "date": "2026-11-10",
+     "equity": 10000.0
+    }
+   ]
   }
  },
  "last": {
@@ -831,7 +887,14 @@
     ],
     "hasRecord": true
    },
-   "stale": false
+   "stale": false,
+   "fwdPct": 0.0,
+   "marks": 7,
+   "daysLive": 6,
+   "isNew": false,
+   "rank": 2,
+   "prevRank": null,
+   "rankMove": null
   },
   "2": {
    "n": 2,
@@ -929,7 +992,14 @@
     ],
     "hasRecord": false
    },
-   "stale": false
+   "stale": false,
+   "fwdPct": -2.9181,
+   "marks": 7,
+   "daysLive": 6,
+   "isNew": false,
+   "rank": 24,
+   "prevRank": null,
+   "rankMove": null
   },
   "3": {
    "n": 3,
@@ -1026,7 +1096,14 @@
     ],
     "hasRecord": false
    },
-   "stale": false
+   "stale": false,
+   "fwdPct": -6.8792,
+   "marks": 7,
+   "daysLive": 6,
+   "isNew": false,
+   "rank": 25,
+   "prevRank": null,
+   "rankMove": null
   },
   "4": {
    "n": 4,
@@ -1115,7 +1192,14 @@
     ],
     "hasRecord": true
    },
-   "stale": false
+   "stale": false,
+   "fwdPct": -0.123,
+   "marks": 6,
+   "daysLive": 5,
+   "isNew": false,
+   "rank": 21,
+   "prevRank": null,
+   "rankMove": null
   },
   "5": {
    "n": 5,
@@ -1204,7 +1288,14 @@
     ],
     "hasRecord": true
    },
-   "stale": false
+   "stale": false,
+   "fwdPct": 0.0,
+   "marks": 6,
+   "daysLive": 5,
+   "isNew": false,
+   "rank": 3,
+   "prevRank": null,
+   "rankMove": null
   },
   "6": {
    "n": 6,
@@ -1300,7 +1391,14 @@
     ],
     "hasRecord": true
    },
-   "stale": false
+   "stale": false,
+   "fwdPct": 0.0,
+   "marks": 7,
+   "daysLive": 6,
+   "isNew": false,
+   "rank": 4,
+   "prevRank": null,
+   "rankMove": null
   },
   "8": {
    "n": 8,
@@ -1398,7 +1496,14 @@
     ],
     "hasRecord": false
    },
-   "stale": false
+   "stale": false,
+   "fwdPct": -2.5498,
+   "marks": 7,
+   "daysLive": 8,
+   "isNew": false,
+   "rank": 23,
+   "prevRank": null,
+   "rankMove": null
   },
   "9": {
    "n": 9,
@@ -1479,7 +1584,14 @@
     ],
     "hasRecord": true
    },
-   "stale": false
+   "stale": false,
+   "fwdPct": 4.7663,
+   "marks": 5,
+   "daysLive": 6,
+   "isNew": false,
+   "rank": 1,
+   "prevRank": null,
+   "rankMove": null
   },
   "10": {
    "n": 10,
@@ -1588,7 +1700,14 @@
     "hasRecord": true
    },
    "stale": false,
-   "lineName": "Primary account"
+   "lineName": "Primary account",
+   "fwdPct": -0.3262,
+   "marks": 3,
+   "daysLive": 2,
+   "isNew": true,
+   "rank": 22,
+   "prevRank": null,
+   "rankMove": null
   },
   "11": {
    "n": 11,
@@ -1666,7 +1785,14 @@
     ],
     "hasRecord": true
    },
-   "stale": false
+   "stale": false,
+   "fwdPct": -0.05,
+   "marks": 2,
+   "daysLive": 1,
+   "isNew": true,
+   "rank": 18,
+   "prevRank": null,
+   "rankMove": null
   },
   "12": {
    "n": 12,
@@ -1744,7 +1870,14 @@
     ],
     "hasRecord": true
    },
-   "stale": false
+   "stale": false,
+   "fwdPct": -0.05,
+   "marks": 2,
+   "daysLive": 1,
+   "isNew": true,
+   "rank": 19,
+   "prevRank": null,
+   "rankMove": null
   },
   "13": {
    "n": 13,
@@ -1815,7 +1948,14 @@
     ],
     "hasRecord": true
    },
-   "stale": false
+   "stale": false,
+   "fwdPct": 0.0,
+   "marks": 1,
+   "daysLive": 0,
+   "isNew": true,
+   "rank": 5,
+   "prevRank": null,
+   "rankMove": null
   },
   "14": {
    "n": 14,
@@ -1896,7 +2036,14 @@
     ],
     "hasRecord": true
    },
-   "stale": false
+   "stale": false,
+   "fwdPct": -0.025,
+   "marks": 2,
+   "daysLive": 1,
+   "isNew": true,
+   "rank": 17,
+   "prevRank": null,
+   "rankMove": null
   },
   "15": {
    "n": 15,
@@ -1968,7 +2115,14 @@
     ],
     "hasRecord": true
    },
-   "stale": false
+   "stale": false,
+   "fwdPct": 0.0,
+   "marks": 1,
+   "daysLive": 0,
+   "isNew": true,
+   "rank": 6,
+   "prevRank": null,
+   "rankMove": null
   },
   "16": {
    "n": 16,
@@ -2041,7 +2195,14 @@
     ],
     "hasRecord": true
    },
-   "stale": false
+   "stale": false,
+   "fwdPct": 0.0,
+   "marks": 1,
+   "daysLive": 0,
+   "isNew": true,
+   "rank": 7,
+   "prevRank": null,
+   "rankMove": null
   },
   "17": {
    "n": 17,
@@ -2119,7 +2280,14 @@
     ],
     "hasRecord": true
    },
-   "stale": false
+   "stale": false,
+   "fwdPct": -0.05,
+   "marks": 2,
+   "daysLive": 1,
+   "isNew": true,
+   "rank": 20,
+   "prevRank": null,
+   "rankMove": null
   },
   "18": {
    "n": 18,
@@ -2190,7 +2358,14 @@
     "sitOutList": [],
     "market": "stocks"
    },
-   "stale": false
+   "stale": false,
+   "fwdPct": 0.0,
+   "marks": 1,
+   "daysLive": 0,
+   "isNew": true,
+   "rank": 8,
+   "prevRank": null,
+   "rankMove": null
   },
   "19": {
    "n": 19,
@@ -2261,7 +2436,14 @@
     "sitOutList": [],
     "market": "stocks"
    },
-   "stale": false
+   "stale": false,
+   "fwdPct": 0.0,
+   "marks": 1,
+   "daysLive": 0,
+   "isNew": true,
+   "rank": 9,
+   "prevRank": null,
+   "rankMove": null
   },
   "20": {
    "n": 20,
@@ -2334,7 +2516,14 @@
     ],
     "market": "stocks"
    },
-   "stale": false
+   "stale": false,
+   "fwdPct": 0.0,
+   "marks": 1,
+   "daysLive": 0,
+   "isNew": true,
+   "rank": 10,
+   "prevRank": null,
+   "rankMove": null
   },
   "21": {
    "n": 21,
@@ -2407,7 +2596,14 @@
     ],
     "market": "stocks"
    },
-   "stale": false
+   "stale": false,
+   "fwdPct": 0.0,
+   "marks": 1,
+   "daysLive": 0,
+   "isNew": true,
+   "rank": 11,
+   "prevRank": null,
+   "rankMove": null
   },
   "22": {
    "n": 22,
@@ -2482,7 +2678,340 @@
     ],
     "market": "crypto"
    },
-   "stale": false
+   "stale": false,
+   "fwdPct": 0.0,
+   "marks": 1,
+   "daysLive": 0,
+   "isNew": true,
+   "rank": 12,
+   "prevRank": null,
+   "rankMove": null
+  },
+  "23": {
+   "n": 23,
+   "name": "Crypto momentum burst",
+   "category": "Momentum \u00b7 volatility",
+   "tag": "New hybrid \u00b7 forward paper",
+   "plain": "Buys BTC, ETH, SOL, BNB or XRP after an unusually big up day while it is above its 50-day average, and holds about a week.",
+   "color": "#ef5b9c",
+   "universe": "BTC, ETH, SOL, BNB, XRP. Daily. Up to 5 positions, one fifth each. In the market only about 8% of the time.",
+   "window": "Forward paper from the Nov 10, 2026 UTC daily close (the latest completed crypto close at launch). First review after 30 days.",
+   "start": "2026-11-10",
+   "asOf": "2026-11-10",
+   "asOfLabel": "mark of Nov 10",
+   "points": [
+    {
+     "date": "2026-11-10",
+     "equity": 10000.0
+    }
+   ],
+   "latest": 10000.0,
+   "change": "forward start",
+   "benchmark": {
+    "name": "BTC buy-and-hold",
+    "color": "#f0c53a",
+    "points": [
+     {
+      "date": "2026-11-10",
+      "equity": 10000.0
+     }
+    ]
+   },
+   "hypothesis": "Big up days on high volume often start a short run in crypto. Only buying the outsized days, inside an uptrend, should catch those runs and stay in cash otherwise.",
+   "rules": [
+    "Daily: a coin's return today is more than 2x its 30-day standard deviation of daily returns, and it closes above its 50-day average.",
+    "New buys only when the BTC regime is trend_up or range.",
+    "Sell after 5 days, or earlier on a close below the 20-day average.",
+    "Five slots of one fifth each. Fill at the next daily close. Cost 0.25% per side."
+   ],
+   "backtest": "Backtest Nov 2018 to Nov 10, 2026, $10,000, signal on the close and fill at the next close, costs 0.25% per side, uninvested cash earns 0%: CAGR +27.6%, maximum drawdown \u221213.4%, Sharpe 1.52, 235 closed trades, win rate 63%, profit factor 3.09. First half Nov 2018\u20132021: CAGR +49.1%, Sharpe 1.9. Second half 2022\u20132026: CAGR +15.3%, drawdown \u221213.4%, Sharpe 1.22. BTC buy-and-hold, same second half: CAGR +10.0%, drawdown \u221266.9%, Sharpe 0.44. Up in 75% of calendar years. Invested 8% of the time on average.",
+   "forward": "$10,000.00 paper, opened at the Nov 10 close. No buy signal at the start; waiting in cash. Regime at the start: range.",
+   "risk": "It is in cash most of the time, so long flat stretches are normal (2022 was 0%). A burst can reverse overnight; one bad week can cost 10%+. 2021 (+136%) dominates the full-sample figure.",
+   "regime": {
+    "best": "trend_up and range",
+    "sitOut": "risk_off, trend_down and shock (no new buys)",
+    "annualizedByRegime": {
+     "trend_up": 50.3,
+     "range": 32.0,
+     "risk_off": -0.3,
+     "trend_down": 2.1,
+     "shock": -21.1
+    },
+    "bestList": [
+     "trend_up",
+     "range"
+    ],
+    "sitOutList": [
+     "risk_off",
+     "trend_down",
+     "shock"
+    ],
+    "market": "crypto"
+   },
+   "label": "new forward-test hybrid",
+   "riskLevel": "Aggressive",
+   "why": {
+    "text": "New crypto experiment dated Nov 11, 2026 (SIFT strategy lab run_20261111_crypto): 17 crypto strategies on the top 10 coins. Idea: momentum bursts: a daily gain far above normal volatility tends to continue for days (short-horizon crypto momentum, Liu & Tsyvinski 2021). Passed all five checks of the same pre-registered 'proven' rule as strategies 11\u201322, and its daily returns are not a near-copy of strategies 13, 15, 16 or 22 (correlation 0.55 or less). Picked among the 4 best second-half Sharpe ratios, one per idea. Second half CAGR +15.3%, drawdown \u221213.4%, Sharpe 1.22. Annualized return by regime: trend_up +50.3%; range +32.0%; risk_off \u22120.3%; trend_down +2.1%; shock \u221221.1%. Parameters are common defaults, not tuned. Today's top-10 coin list (survivorship bias).",
+    "records": [
+     "sift_strategy_lab/run_20261111_crypto/results/results.json",
+     "sift_strategy_lab/run_20261111_crypto/backtest_crypto.py",
+     "sift_strategy_lab/run_20261111_crypto/strategies_crypto.py",
+     "sift_strategy_lab/run_20261111_crypto/summary.md"
+    ],
+    "hasRecord": true
+   },
+   "stale": false,
+   "fwdPct": 0.0,
+   "marks": 1,
+   "daysLive": 0,
+   "isNew": true,
+   "rank": 13,
+   "prevRank": null,
+   "rankMove": null
+  },
+  "24": {
+   "n": 24,
+   "name": "Crypto 52-week-high leaders",
+   "category": "Momentum \u00b7 52-week high",
+   "tag": "New hybrid \u00b7 forward paper",
+   "plain": "Each week holds up to 3 coins trading closest to their 1-year high (within 10%), only while bitcoin's market is trending up or ranging.",
+   "color": "#9b59b6",
+   "universe": "Top 10 coins excluding stablecoins: BTC, ETH, XRP, BNB, SOL, DOGE, ADA, TRX, LINK, AVAX. Weekly rebalance. Up to 3 positions, one third each.",
+   "window": "Forward paper from the Nov 10, 2026 UTC daily close (the latest completed crypto close at launch). First review after 30 days.",
+   "start": "2026-11-10",
+   "asOf": "2026-11-10",
+   "asOfLabel": "mark of Nov 10",
+   "points": [
+    {
+     "date": "2026-11-10",
+     "equity": 10000.0
+    }
+   ],
+   "latest": 10000.0,
+   "change": "forward start",
+   "benchmark": {
+    "name": "BTC buy-and-hold",
+    "color": "#f0c53a",
+    "points": [
+     {
+      "date": "2026-11-10",
+      "equity": 10000.0
+     }
+    ]
+   },
+   "hypothesis": "Assets near their 1-year high keep rising because traders anchor to the old high. Crypto leaders near their highs may be the cleanest trends to ride.",
+   "rules": [
+    "Every 7 days: each coin's close divided by its highest close of the past 365 days.",
+    "If the BTC regime is trend_up or range: hold the 3 coins with the highest ratio, among those within 10% of their 1-year high.",
+    "Otherwise, or if no coin qualifies, hold cash (0%).",
+    "Fill at the next daily close. Cost 0.25% per side."
+   ],
+   "backtest": "Backtest Nov 2018 to Nov 10, 2026, $10,000, signal on the close and fill at the next close, costs 0.25% per side, uninvested cash earns 0%: CAGR +72.6%, maximum drawdown \u221231.1%, Sharpe 1.52, 120 closed trades, win rate 52%, profit factor 4.24. First half Nov 2018\u20132021: CAGR +174.5%, Sharpe 2.11. Second half 2022\u20132026: CAGR +27.5%, drawdown \u221231.1%, Sharpe 0.98. BTC buy-and-hold, same second half: CAGR +10.0%, drawdown \u221266.9%, Sharpe 0.44. Up in 62% of calendar years. Invested 28% of the time on average.",
+   "forward": "$10,000.00 paper, opened at the Nov 10 close. No buy signal at the start; waiting in cash. Regime at the start: range.",
+   "risk": "The 2020\u20132021 bull run dominates the full-sample figure (+539% in 2021). It lost a little in 2025 and so far in 2026. Coins near highs can drop 30% in days, and weekly checks react slowly.",
+   "regime": {
+    "best": "trend_up",
+    "sitOut": "risk_off, trend_down and shock (cash)",
+    "annualizedByRegime": {
+     "trend_up": 149.1,
+     "range": 29.1,
+     "risk_off": -1.2,
+     "trend_down": -0.2,
+     "shock": -5.3
+    },
+    "bestList": [
+     "trend_up"
+    ],
+    "sitOutList": [
+     "risk_off",
+     "trend_down",
+     "shock"
+    ],
+    "market": "crypto"
+   },
+   "label": "new forward-test hybrid",
+   "riskLevel": "Aggressive",
+   "why": {
+    "text": "New crypto experiment dated Nov 11, 2026 (SIFT strategy lab run_20261111_crypto): 17 crypto strategies on the top 10 coins. Idea: 52-week-high proximity (George & Hwang 2004), applied to coins. Passed all five checks of the same pre-registered 'proven' rule as strategies 11\u201322, and its daily returns are not a near-copy of strategies 13, 15, 16 or 22 (correlation 0.67 or less). Picked among the 4 best second-half Sharpe ratios, one per idea. Second half CAGR +27.5%, drawdown \u221231.1%, Sharpe 0.98. Annualized return by regime: trend_up +149.1%; range +29.1%; risk_off \u22121.2%; trend_down \u22120.2%; shock \u22125.3%. Parameters are common defaults, not tuned. Today's top-10 coin list (survivorship bias).",
+    "records": [
+     "sift_strategy_lab/run_20261111_crypto/results/results.json",
+     "sift_strategy_lab/run_20261111_crypto/backtest_crypto.py",
+     "sift_strategy_lab/run_20261111_crypto/strategies_crypto.py",
+     "sift_strategy_lab/run_20261111_crypto/summary.md"
+    ],
+    "hasRecord": true
+   },
+   "stale": false,
+   "fwdPct": 0.0,
+   "marks": 1,
+   "daysLive": 0,
+   "isNew": true,
+   "rank": 14,
+   "prevRank": null,
+   "rankMove": null
+  },
+  "25": {
+   "n": 25,
+   "name": "Crypto squeeze breakout + regime gate",
+   "category": "Breakout \u00b7 volatility",
+   "tag": "New hybrid \u00b7 forward paper",
+   "plain": "Buys coins that break to a 20-day high right after a quiet, tight-range spell, only while bitcoin's market is healthy.",
+   "color": "#3498db",
+   "universe": "Top 10 coins excluding stablecoins: BTC, ETH, XRP, BNB, SOL, DOGE, ADA, TRX, LINK, AVAX. Daily. Up to 5 positions, one fifth each.",
+   "window": "Forward paper from the Nov 10, 2026 UTC daily close (the latest completed crypto close at launch). First review after 30 days.",
+   "start": "2026-11-10",
+   "asOf": "2026-11-10",
+   "asOfLabel": "mark of Nov 10",
+   "points": [
+    {
+     "date": "2026-11-10",
+     "equity": 10000.0
+    }
+   ],
+   "latest": 10000.0,
+   "change": "forward start",
+   "benchmark": {
+    "name": "BTC buy-and-hold",
+    "color": "#f0c53a",
+    "points": [
+     {
+      "date": "2026-11-10",
+      "equity": 10000.0
+     }
+    ]
+   },
+   "hypothesis": "Quiet periods in crypto tend to end with a big move. Buying only when the quiet spell breaks upward, and only in a healthy BTC market, aims to catch the start of new trends.",
+   "rules": [
+    "Band width = 4 x 20-day standard deviation / 20-day average. A squeeze = width in its lowest 20% of the past 180 days, within the last 5 days.",
+    "Buy when a coin in a squeeze closes above its highest close of the prior 20 days, and the BTC regime is trend_up or range. Tightest squeezes first.",
+    "Sell on a close below the 20-day average, after 30 days, or when the BTC regime turns risk_off, trend_down or shock.",
+    "Five slots of one fifth each. Fill at the next daily close. Cost 0.25% per side."
+   ],
+   "backtest": "Backtest Nov 2018 to Nov 10, 2026, $10,000, signal on the close and fill at the next close, costs 0.25% per side, uninvested cash earns 0%: CAGR +25.6%, maximum drawdown \u221236.8%, Sharpe 0.99, 202 closed trades, win rate 41%, profit factor 2.71. First half Nov 2018\u20132021: CAGR +37.8%, Sharpe 1.13. Second half 2022\u20132026: CAGR +18.3%, drawdown \u221219.9%, Sharpe 0.89. BTC buy-and-hold, same second half: CAGR +10.0%, drawdown \u221266.9%, Sharpe 0.44. Up in 75% of calendar years. Invested 18% of the time on average.",
+   "forward": "$10,000.00 paper, opened at the Nov 10 close. No buy signal at the start; waiting in cash. Regime at the start: range.",
+   "risk": "Most breakouts fail (win rate about 41%); profits come from a few big runs. 2019 lost 23%. Range regimes lost money in the backtest.",
+   "regime": {
+    "best": "trend_up",
+    "sitOut": "range was weak; risk_off, trend_down and shock force a sell",
+    "annualizedByRegime": {
+     "trend_up": 71.2,
+     "range": -4.4,
+     "risk_off": -0.2,
+     "trend_down": -0.6,
+     "shock": -0.2
+    },
+    "bestList": [
+     "trend_up"
+    ],
+    "sitOutList": [
+     "risk_off",
+     "trend_down",
+     "shock"
+    ],
+    "market": "crypto"
+   },
+   "label": "new forward-test hybrid",
+   "riskLevel": "Aggressive",
+   "why": {
+    "text": "New crypto experiment dated Nov 11, 2026 (SIFT strategy lab run_20261111_crypto): 17 crypto strategies on the top 10 coins. Idea: volatility contraction then expansion (Bollinger band squeeze, J. Bollinger 2001). Passed all five checks of the same pre-registered 'proven' rule as strategies 11\u201322, and its daily returns are not a near-copy of strategies 13, 15, 16 or 22 (correlation 0.69 or less). Picked among the 4 best second-half Sharpe ratios, one per idea. Second half CAGR +18.3%, drawdown \u221219.9%, Sharpe 0.89. Annualized return by regime: trend_up +71.2%; range \u22124.4%; risk_off \u22120.2%; trend_down \u22120.6%; shock \u22120.2%. Parameters are common defaults, not tuned. Today's top-10 coin list (survivorship bias).",
+    "records": [
+     "sift_strategy_lab/run_20261111_crypto/results/results.json",
+     "sift_strategy_lab/run_20261111_crypto/backtest_crypto.py",
+     "sift_strategy_lab/run_20261111_crypto/strategies_crypto.py",
+     "sift_strategy_lab/run_20261111_crypto/summary.md"
+    ],
+    "hasRecord": true
+   },
+   "stale": false,
+   "fwdPct": 0.0,
+   "marks": 1,
+   "daysLive": 0,
+   "isNew": true,
+   "rank": 15,
+   "prevRank": null,
+   "rankMove": null
+  },
+  "26": {
+   "n": 26,
+   "name": "BTC/ETH weekly momentum + regime gate",
+   "category": "Momentum \u00b7 time series",
+   "tag": "New hybrid \u00b7 forward paper",
+   "plain": "Each week holds bitcoin and/or ether if it rose over the past week, only while bitcoin's market is trending up or ranging.",
+   "color": "#e67e22",
+   "universe": "BTC and ETH. Weekly rebalance. Half in each coin that qualifies.",
+   "window": "Forward paper from the Nov 10, 2026 UTC daily close (the latest completed crypto close at launch). First review after 30 days.",
+   "start": "2026-11-10",
+   "asOf": "2026-11-10",
+   "asOfLabel": "mark of Nov 10",
+   "points": [
+    {
+     "date": "2026-11-10",
+     "equity": 10000.0
+    }
+   ],
+   "latest": 10000.0,
+   "change": "forward start",
+   "benchmark": {
+    "name": "BTC buy-and-hold",
+    "color": "#f0c53a",
+    "points": [
+     {
+      "date": "2026-11-10",
+      "equity": 10000.0
+     }
+    ]
+   },
+   "hypothesis": "Crypto shows strong one-week time-series momentum. Holding only last week's winners among the two largest coins, and only in a healthy market, tests that effect in its simplest form.",
+   "rules": [
+    "Every 7 days: each coin's 7-day return.",
+    "If the BTC regime is trend_up or range: hold half in each of BTC and ETH whose 7-day return is positive.",
+    "Otherwise cash (0%).",
+    "Fill at the next daily close. Cost 0.25% per side."
+   ],
+   "backtest": "Backtest Nov 2018 to Nov 10, 2026, $10,000, signal on the close and fill at the next close, costs 0.25% per side, uninvested cash earns 0%: CAGR +30.1%, maximum drawdown \u221236.6%, Sharpe 0.9, 134 closed trades, win rate 48%, profit factor 2.22. First half Nov 2018\u20132021: CAGR +62.6%, Sharpe 1.26. Second half 2022\u20132026: CAGR +12.5%, drawdown \u221236.6%, Sharpe 0.57. BTC buy-and-hold, same second half: CAGR +10.0%, drawdown \u221266.9%, Sharpe 0.44. Up in 62% of calendar years. Invested 33% of the time on average.",
+   "forward": "$10,000.00 paper, opened at the Nov 10 close. No buy signal at the start; waiting in cash. Regime at the start: range.",
+   "risk": "The weakest of the four on a risk-adjusted basis (second-half Sharpe 0.57) with a \u221236.6% drawdown. Weekly flips can whipsaw in choppy markets; it lost a little in 2022, 2025 and 2026.",
+   "regime": {
+    "best": "trend_up and range",
+    "sitOut": "risk_off, trend_down and shock (cash)",
+    "annualizedByRegime": {
+     "trend_up": 65.8,
+     "range": 44.7,
+     "risk_off": -8.6,
+     "trend_down": -0.8,
+     "shock": -21.1
+    },
+    "bestList": [
+     "trend_up",
+     "range"
+    ],
+    "sitOutList": [
+     "risk_off",
+     "trend_down",
+     "shock"
+    ],
+    "market": "crypto"
+   },
+   "label": "new forward-test hybrid",
+   "riskLevel": "Aggressive",
+   "why": {
+    "text": "New crypto experiment dated Nov 11, 2026 (SIFT strategy lab run_20261111_crypto): 17 crypto strategies on the top 10 coins. Idea: Liu & Tsyvinski (2021, Review of Financial Studies): crypto's past-week return predicts next week's. Passed all five checks of the same pre-registered 'proven' rule as strategies 11\u201322, and its daily returns are not a near-copy of strategies 13, 15, 16 or 22 (correlation 0.75 or less). Picked among the 4 best second-half Sharpe ratios, one per idea. Second half CAGR +12.5%, drawdown \u221236.6%, Sharpe 0.57. Annualized return by regime: trend_up +65.8%; range +44.7%; risk_off \u22128.6%; trend_down \u22120.8%; shock \u221221.1%. Parameters are common defaults, not tuned. Today's top-10 coin list (survivorship bias).",
+    "records": [
+     "sift_strategy_lab/run_20261111_crypto/results/results.json",
+     "sift_strategy_lab/run_20261111_crypto/backtest_crypto.py",
+     "sift_strategy_lab/run_20261111_crypto/strategies_crypto.py",
+     "sift_strategy_lab/run_20261111_crypto/summary.md"
+    ],
+    "hasRecord": true
+   },
+   "stale": false,
+   "fwdPct": 0.0,
+   "marks": 1,
+   "daysLive": 0,
+   "isNew": true,
+   "rank": 16,
+   "prevRank": null,
+   "rankMove": null
   }
  }
 }

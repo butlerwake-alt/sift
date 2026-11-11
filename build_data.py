@@ -183,7 +183,9 @@ RP_TAGS = {11: ("s11_breakout", "SPY buy-and-hold"), 12: ("s12_squeeze", "SPY bu
            14: ("s14_leader_pb", "SPY buy-and-hold"), 15: ("s15_crypto_brk", "BTC buy-and-hold"), 16: ("s16_crypto_mom3", "BTC buy-and-hold"),
            17: ("s17_rotator", "SPY buy-and-hold"),
            18: ("s18_tqqq_trend", "QQQ buy-and-hold"), 19: ("s19_soxl_trend", "SOXX buy-and-hold"), 20: ("s20_resid_mom", "SPY buy-and-hold"),
-           21: ("s21_ibs_tqqq", "QQQ buy-and-hold"), 22: ("s22_crypto_vt", "BTC buy-and-hold")}
+           21: ("s21_ibs_tqqq", "QQQ buy-and-hold"), 22: ("s22_crypto_vt", "BTC buy-and-hold"),
+           23: ("s23_crypto_burst", "BTC buy-and-hold"), 24: ("s24_crypto_hi365", "BTC buy-and-hold"), 25: ("s25_crypto_squeeze", "BTC buy-and-hold"),
+           26: ("s26_crypto_weekly", "BTC buy-and-hold")}
 
 READERS = {1: read_scalein, 2: read_zscore, 3: read_bollinger, 4: read_ema, 5: read_botwars,
            6: read_halving, 8: read_dipbuy, 9: read_nasdaq, 10: read_emavwap}  # 7 = SEASONS, planned
@@ -319,6 +321,31 @@ def main():
         if not (isinstance(s["why"], dict) and s["why"].get("text")):
             raise SystemExit("template.json strategy {} is missing the required 'why' field".format(s["n"]))
 
+    # ---------- ranking: best to worst by forward return since each strategy's own start; recomputed every build ----------
+    data_day_r = max(s["asOf"] for s in strategies if s.get("asOf"))
+    rp = f"{HERE}/ranks.json"
+    RK = json.load(open(rp)) if os.path.exists(rp) else {"note": "Daily rank snapshot per data day (last 60 days). Used for the up/down arrows.", "byDay": {}}
+    live = [s for s in strategies if not s.get("planned") and s.get("latest") is not None]
+    for s in live:
+        s["fwdPct"] = round((s["latest"] / CAP - 1) * 100, 4)
+        s["marks"] = len({p["date"] for p in s.get("points") or []})
+        d0, d1 = dt.date.fromisoformat(s["start"]), dt.date.fromisoformat(s["asOf"])
+        s["daysLive"] = (d1 - d0).days            # same count as the leaderboard's "Days live" column
+        s["isNew"] = s["daysLive"] < 5           # fewer than ~5 days live (crypto trades daily; stocks about 5 sessions a week)
+    live.sort(key=lambda s: (-s["fwdPct"], s["n"]))
+    prev_days = sorted(d for d in RK["byDay"] if d < data_day_r)
+    prev = RK["byDay"][prev_days[-1]] if prev_days else {}
+    for i, s in enumerate(live, 1):
+        s["rank"] = i; pr = prev.get(str(s["n"]))
+        s["prevRank"] = pr; s["rankMove"] = (pr - i) if pr else None
+    for s in strategies:
+        if s.get("planned"): s["rank"] = None; s["prevRank"] = None; s["rankMove"] = None
+    RK["byDay"][data_day_r] = {str(s["n"]): s["rank"] for s in live}
+    RK["byDay"] = {d: RK["byDay"][d] for d in sorted(RK["byDay"])[-60:]}
+    RK["prevDay"] = prev_days[-1] if prev_days else None
+    json.dump(RK, open(rp + ".tmp", "w"), indent=1); os.replace(rp + ".tmp", rp)
+    strategies = live + [s for s in strategies if s not in live]   # board order = rank; planned/inactive last
+
     vals = []
     for s in strategies:
         for k in ("points",): vals += [p["equity"] for p in s.get(k, [])]
@@ -332,7 +359,7 @@ def main():
     built = dt.datetime.now(NY).strftime("%Y-%m-%d %H:%M %Z")
     SIFT = {"asOf": asof_txt, "builtAt": built,
             "source": "Daily paper-test records (state and ledger files of each paper engine)",
-            "capital": CAP, "moneyMin": mmin, "moneyMax": mmax, "strategies": strategies}
+            "capital": CAP, "moneyMin": mmin, "moneyMax": mmax, "rankPrevDay": RK.get("prevDay"), "strategies": strategies}
     reg = read_regime()
     if reg: SIFT["regime"] = reg
     data_day = max(s["asOf"] for s in strategies if s.get("asOf"))
