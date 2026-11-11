@@ -253,6 +253,10 @@ footer {
 .chip { display: inline-block; font: 600 0.68rem/1.2 var(--sans); letter-spacing: 0.06em; text-transform: uppercase; padding: 0.22rem 0.45rem; border-radius: 3px; white-space: nowrap; }
 .chip-proven { color: #0c2a1a; background: var(--green); }
 .chip-hybrid { color: #2a2205; background: var(--yellow); }
+.chip-aggr { color: #fff; background: #c0392b; }
+.chips { display: inline-flex; flex-wrap: wrap; gap: 0.3rem; justify-content: flex-end; }
+.card-top .num { flex: 1 1 auto; min-width: 6.5rem; }
+.card-top .chips { flex: 0 1 auto; }
 .regime { background: var(--panel); border: 1px solid var(--line); border-top: 4px solid var(--teal); padding: 1rem 1.05rem 1.05rem; margin: 0 0 1rem; }
 .regime > h2 { margin: 0 0 0.7rem; font: 0.75rem/1.3 var(--sans); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
 .regime-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin: 0 0 0.7rem; }

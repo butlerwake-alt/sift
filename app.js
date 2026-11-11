@@ -397,7 +397,8 @@ function regimeName(key) { return (REGIME_TEXT[key] || { name: key || "n/a" }).n
 
 function labelChip(strategy) {
   const proven = strategy.label === "proven in backtest";
-  return `<span class="chip ${proven ? "chip-proven" : "chip-hybrid"}">${proven ? "Proven in backtest" : "New forward-test hybrid"}</span>`;
+  const risk = strategy.riskLevel ? `<span class="chip chip-aggr" title="High-risk strategy: large drawdowns in its backtest">${strategy.riskLevel}</span>` : "";
+  return `<span class="chips"><span class="chip ${proven ? "chip-proven" : "chip-hybrid"}">${proven ? "Proven in backtest" : "New forward-test hybrid"}</span>${risk}</span>`;
 }
 
 function regimeFitToday(strategy) {
@@ -492,7 +493,7 @@ function renderStrategy() {
     <p>${strategy.forward}</p>
     <h2>Main risk</h2>
     <p>${strategy.risk}</p>
-    ${strategy.label ? `<p class="fine">Backtest = new experiment dated Nov 10, 2026. Universe is today's list of large stocks/coins, so results carry survivorship bias. Halves are a stability check; parameters were not tuned. “Proven in backtest” means it passed the historical checks only; nothing is proven going forward. Forward paper only, not a forecast.</p>` : ""}
+    ${strategy.label ? `<p class="fine">Backtest = new experiment dated ${strategy.n >= 18 ? "Nov 11, 2026" : "Nov 10, 2026"}.${strategy.riskLevel ? " Aggressive: expect very large drawdowns; 3x ETFs reset daily and lose value in choppy markets." : ""} Universe is today's list of large stocks/coins, so results carry survivorship bias. Halves are a stability check; parameters were not tuned. “Proven in backtest” means it passed the historical checks only; nothing is proven going forward. Forward paper only, not a forecast.</p>` : ""}
     <p class="fine">Paper only. Simulated $10,000. No live orders. Not financial advice. None of these strategies is proven. Source: ${SIFT.source}, ${SIFT.asOf}.</p>
   `;
   const host = document.getElementById("detail-plot");

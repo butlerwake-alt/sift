@@ -150,7 +150,7 @@ def read_emavwap():
             money(veq), pct(ret(veq)), tstats(vpn), money(bl), pct(ret(bl))))
 
 
-# ---------- regime_paper (strategies 11-17, forward paper from the Nov 10, 2026 close) ----------
+# ---------- regime_paper (strategies 11-17 from the Nov 10, 2026 close; 18-22 from the Nov 11, 2026 close, #22 from the Nov 10 UTC crypto close) ----------
 RP = f"{W}/regime_paper"
 def read_regime_paper(tag, bench_name):
     acct, b = equity_series(f"{RP}/runs/{tag}/equity.csv", bench="benchmark", bench_is_price=True)
@@ -179,7 +179,9 @@ def read_regime():
 
 RP_TAGS = {11: ("s11_breakout", "SPY buy-and-hold"), 12: ("s12_squeeze", "SPY buy-and-hold"), 13: ("s13_btc200", "BTC buy-and-hold"),
            14: ("s14_leader_pb", "SPY buy-and-hold"), 15: ("s15_crypto_brk", "BTC buy-and-hold"), 16: ("s16_crypto_mom3", "BTC buy-and-hold"),
-           17: ("s17_rotator", "SPY buy-and-hold")}
+           17: ("s17_rotator", "SPY buy-and-hold"),
+           18: ("s18_tqqq_trend", "QQQ buy-and-hold"), 19: ("s19_soxl_trend", "SOXX buy-and-hold"), 20: ("s20_resid_mom", "SPY buy-and-hold"),
+           21: ("s21_ibs_tqqq", "QQQ buy-and-hold"), 22: ("s22_crypto_vt", "BTC buy-and-hold")}
 
 READERS = {1: read_scalein, 2: read_zscore, 3: read_bollinger, 4: read_ema, 5: read_botwars,
            6: read_halving, 8: read_dipbuy, 9: read_nasdaq, 10: read_emavwap}  # 7 = SEASONS, planned
