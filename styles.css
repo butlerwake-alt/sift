@@ -1106,3 +1106,11 @@ html { scroll-padding-top: 4.25rem; }
 @media (min-width: 769px) {
   .fold-chevron { display: none; }
 }
+/* Follow the Money live feed: copy lines, sector and stale chips */
+.chip-sector { color: #06263a; background: #9fd8ff; }
+.chip-stale { color: #2a0a05; background: #f0a23a; margin-right: 0.4rem; }
+.entity-tools { display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: flex-end; }
+.stream-asof { color: var(--muted); font: 0.85rem/1.4 var(--sans); }
+.fm-nfa { color: var(--yellow); font: 600 0.82rem/1.4 var(--sans); margin: 0.3rem 0 0.6rem; }
+.copy-line { flex: 1 1 16rem; min-width: 0; overflow-wrap: anywhere; padding: 0.45rem 0.55rem; border: 1px solid var(--line); border-radius: 6px; background: #120f0d; font: 0.82rem/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.copy-btn.is-copied { background: var(--teal); border-color: var(--teal); color: #f6e7c8; }

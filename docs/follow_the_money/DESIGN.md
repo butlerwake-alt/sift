@@ -2,6 +2,8 @@
 
 Status of this document: design for a proposed SIFT module. Section 8 of `SPEC.md` governs. This PR does not fetch filings, does not run a backtest, and does not deploy. The public page is a Phase 1–2 preview rendered only from `data/follow_money.json`. Every row in that file is marked `sample: true` and is not a filing, a holding, or a performance result.
 
+> **Update (Nov 2026, owner request):** `tools/follow_money.py` now fetches real public data daily (House Clerk PTRs, SEC Form 4 code P, SEC 13F-HR for a curated manager list, CoinGecko public-treasury data) into the same schema-1 JSON, with `sample: false`, a `source_url`, `sector`, `copy_line`, and `csv` on every real row, plus `stale`, `as_of`, `retrieved_at`, and `note` per section. Senate eFD, whale wallets, ETF flows, and social accounts are not connected; social shows "coming soon". Still research only: no orders, no backtest numbers.
+
 The module is research-only. It must not place orders, connect a wallet, or present a disclosure as a trade to copy for profit.
 
 ## 1. What this PR ships
