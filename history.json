@@ -434,6 +434,10 @@
     {
      "date": "2026-11-11",
      "equity": 9745.02
+    },
+    {
+     "date": "2026-11-12",
+     "equity": 9519.71
     }
    ],
    "bench": [
@@ -464,6 +468,10 @@
     {
      "date": "2026-11-11",
      "equity": 9958.32
+    },
+    {
+     "date": "2026-11-12",
+     "equity": 9923.07
     }
    ]
   },
@@ -542,6 +550,11 @@
      "date": "2026-11-11",
      "equity": 9967.37,
      "session": "close"
+    },
+    {
+     "date": "2026-11-12",
+     "equity": 9930.73,
+     "session": "close"
     }
    ],
    "extra": [
@@ -564,6 +577,11 @@
      "date": "2026-11-11",
      "equity": 10024.64,
      "session": "close"
+    },
+    {
+     "date": "2026-11-12",
+     "equity": 9969.01,
+     "session": "close"
     }
    ],
    "bench": [
@@ -585,6 +603,11 @@
     {
      "date": "2026-11-11",
      "equity": 10329.22,
+     "session": "close"
+    },
+    {
+     "date": "2026-11-12",
+     "equity": 10295.4,
      "session": "close"
     }
    ]
@@ -1514,8 +1537,8 @@
    "universe": "Current S&P 500 constituents, daily.",
    "window": "Nov 3, 2026 \u2013 Feb 1, 2027.",
    "start": "2026-11-03",
-   "asOf": "2026-11-11",
-   "asOfLabel": "mark of Nov 11",
+   "asOf": "2026-11-12",
+   "asOfLabel": "mark of Nov 12",
    "points": [
     {
      "date": "2026-11-03",
@@ -1544,10 +1567,14 @@
     {
      "date": "2026-11-11",
      "equity": 9745.02
+    },
+    {
+     "date": "2026-11-12",
+     "equity": 9519.71
     }
    ],
-   "latest": 9745.02,
-   "change": "\u22122.55%",
+   "latest": 9519.71,
+   "change": "\u22124.80%",
    "benchmark": {
     "name": "SPY buy-and-hold",
     "color": "#3c7dff",
@@ -1579,6 +1606,10 @@
      {
       "date": "2026-11-11",
       "equity": 9958.32
+     },
+     {
+      "date": "2026-11-12",
+      "equity": 9923.07
      }
     ]
    },
@@ -1590,7 +1621,7 @@
     "$1,000 per position. Up to 10 slots. Cost 0.05% per side."
    ],
    "backtest": "None for this equity version.",
-   "forward": "$9,745.02 (\u22122.55%) against SPY $9,958.32 (\u22120.42%). 9 positions open, 4 closed (0 won, 4 lost, \u2212$849.88 total, win rate 0%).",
+   "forward": "$9,519.71 (\u22124.80%) against SPY $9,923.07 (\u22120.77%). 9 positions open, 4 closed (0 won, 4 lost, \u2212$849.88 total, win rate 0%).",
    "risk": "A stock down 20% is often down for a reason. Close-only stops can be blown through by a gap, which is what those four exits did.",
    "why": {
     "text": "No original backtest of this equity rule (close 20% below the 25-day average, $1,000 slots, \u221215% stop, 20-day max hold) exists in the records. The only related record is a different market: a crypto dip-buy grid on the quant desk (Nov 4, 2026, 32 coins pooled), whose 200-day-filtered form had a \u221232% maximum drawdown and a deflated Sharpe of \u22120.64, which breaks the 10% limit. That is not a test of this account's rules.",
@@ -1601,9 +1632,9 @@
     "hasRecord": false
    },
    "stale": false,
-   "fwdPct": -2.5498,
-   "marks": 7,
-   "daysLive": 8,
+   "fwdPct": -4.8029,
+   "marks": 8,
+   "daysLive": 9,
    "isNew": false,
    "rank": 23,
    "prevRank": 23,
@@ -1709,14 +1740,14 @@
    "n": 10,
    "name": "9 EMA + VWAP intraday",
    "category": "Intraday",
-   "tag": "Day 3",
+   "tag": "Day 4",
    "plain": "A day-trade that buys a small dip while price is above the day's average, and is flat by the close.",
    "color": "#3c7dff",
    "universe": "SPY and QQQ, 5-minute bars. $10,000 split into two $5,000 sleeves.",
    "window": "Nov 9, 2026 \u2013 Feb 5, 2027.",
    "start": "2026-11-09",
-   "asOf": "2026-11-11",
-   "asOfLabel": "session 3 \u00b7 Nov 11",
+   "asOf": "2026-11-12",
+   "asOfLabel": "session 4 \u00b7 Nov 12",
    "points": [
     {
      "date": "2026-11-09",
@@ -1737,10 +1768,15 @@
      "date": "2026-11-11",
      "equity": 9967.37,
      "session": "close"
+    },
+    {
+     "date": "2026-11-12",
+     "equity": 9930.73,
+     "session": "close"
     }
    ],
-   "latest": 9967.38,
-   "change": "primary \u22120.33% \u00b7 variant +0.25%",
+   "latest": 9930.74,
+   "change": "primary \u22120.69% \u00b7 variant \u22120.31%",
    "extra": {
     "name": "Variant sleeve",
     "color": "#e24632",
@@ -1763,6 +1799,11 @@
      {
       "date": "2026-11-11",
       "equity": 10024.64,
+      "session": "close"
+     },
+     {
+      "date": "2026-11-12",
+      "equity": 9969.01,
       "session": "close"
      }
     ]
@@ -1790,6 +1831,11 @@
       "date": "2026-11-11",
       "equity": 10329.22,
       "session": "close"
+     },
+     {
+      "date": "2026-11-12",
+      "equity": 10295.4,
+      "session": "close"
      }
     ]
    },
@@ -1801,7 +1847,7 @@
     "Each trade uses the full sleeve. Cost 0.03% per side. A 0.06% sensitivity run was also done on the backtest."
    ],
    "backtest": "Aug 17 to Nov 6, 2026, 59 sessions, in-sample: primary \u22129.79%, variant \u221214.37%, against 50/50 buy-and-hold \u22127.87%. That path is not drawn here.",
-   "forward": "3 sessions through Nov 11: primary $9,967.38 (\u22120.33%, 13 trades, win rate 31%); variant $10,024.64 (+0.25%, 20 trades, win rate 45%); 50/50 SPY/QQQ buy-and-hold $10,329.22 (+3.29%). Each version is its own $10,000 account split across SPY and QQQ.",
+   "forward": "4 sessions through Nov 12: primary $9,930.74 (\u22120.69%, 20 trades, win rate 25%); variant $9,969.02 (\u22120.31%, 29 trades, win rate 31%); 50/50 SPY/QQQ buy-and-hold $10,295.40 (+2.95%). Each version is its own $10,000 account split across SPY and QQQ.",
    "risk": "Many trades and a low win rate. Small costs add up. The stop is checked on 5-minute bars; the source used 1-minute bars.",
    "why": {
     "text": "Picked to check a popular YouTube/blog day-trading claim, not because the backtest looked good. Saved baseline, Aug 17 to Nov 6, 2026 (59 sessions), 5-minute bars, 0.03% cost per side: SPY primary \u22128.91% (153 trades, 13.7% winners) vs buy-and-hold \u22125.26%; QQQ primary \u221210.66% (172 trades) vs \u221210.47%. At 0.06% per side the losses roughly double. In-sample and short.",
@@ -1813,9 +1859,9 @@
    },
    "stale": false,
    "lineName": "Primary account",
-   "fwdPct": -0.3262,
-   "marks": 3,
-   "daysLive": 2,
+   "fwdPct": -0.6926,
+   "marks": 4,
+   "daysLive": 3,
    "isNew": true,
    "rank": 22,
    "prevRank": 22,
