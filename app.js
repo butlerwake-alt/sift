@@ -89,11 +89,29 @@ function drawChart(host, strategy, options = {}) {
     text.textContent = money(tick);
     grid.append(text);
   });
+  const xAt = (index) => dates.length < 2
+    ? pad.l + (width - pad.l - pad.r) / 2
+    : pad.l + (index / (dates.length - 1)) * (width - pad.l - pad.r);
+  const minLabelGap = compact ? 96 : 84;
+  const labelIndexes = [];
   dates.forEach((key, index) => {
+    const edge = index === 0 || index === dates.length - 1;
+    if (edge) {
+      labelIndexes.push(index);
+      return;
+    }
+    const prev = labelIndexes[labelIndexes.length - 1];
+    if (xAt(index) - xAt(prev) < minLabelGap) return;
+    if (xAt(dates.length - 1) - xAt(index) < minLabelGap) return;
+    labelIndexes.push(index);
+  });
+  labelIndexes.forEach((index) => {
+    const key = dates[index];
     const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
-    text.setAttribute("x", dates.length < 2 ? pad.l + (width - pad.l - pad.r) / 2 : pad.l + (index / (dates.length - 1)) * (width - pad.l - pad.r));
+    text.setAttribute("x", xAt(index));
     text.setAttribute("y", height - 12);
-    text.setAttribute("text-anchor", dates.length < 2 ? "middle" : index === 0 ? "start" : "end");
+    const anchor = dates.length < 2 ? "middle" : index === 0 ? "start" : index === dates.length - 1 ? "end" : "middle";
+    text.setAttribute("text-anchor", anchor);
     text.setAttribute("font-size", fontSize);
     const [date, session] = key.split(" ");
     text.textContent = shortDate(date) + (session ? " " + session : "");
@@ -477,13 +495,23 @@ function renderStrategy() {
   const plot = strategy.planned ? `<div class="empty-plot">Not launched. No marks to plot.</div>` : `<div class="plot" id="detail-plot"></div>`;
   root.innerHTML = `
     <p class="eyebrow">Strategy ${String(strategy.n).padStart(2, "0")} · ${strategy.category}</p>
-    ${strategy.label ? `<p>${labelChip(strategy)}</p>` : ""}
+    ${strategy.label ? `<p class="chip-row">${labelChip(strategy)}</p>` : ""}
     <h1>${strategy.name}</h1>
     <p class="lede">${strategy.plain}</p>
-    <p class="result tone-${result.tone}"><span class="figure">${result.figure}</span><span class="status">${result.word}</span></p>
-    ${factsHtml(result)}
-    <p class="scale-note">${result.detail}. ${strategy.window} ${strategy.sleeveNote || "Each dot is one recorded daily mark from the paper-test records. Days without a mark are not drawn."}</p>
-    ${plot}
+    <section class="result-block forward-block" aria-labelledby="forward-heading">
+      <h2 id="forward-heading">Forward paper results</h2>
+      <p class="block-kicker">Simulated account from the daily paper test. Separate from the historical backtest below.</p>
+      <p class="result tone-${result.tone}"><span class="figure">${result.figure}</span><span class="status">${result.word}</span></p>
+      ${factsHtml(result)}
+      <p class="scale-note">${result.detail}. ${strategy.window} ${strategy.sleeveNote || "Each dot is one recorded daily mark from the paper-test records. Days without a mark are not drawn."}</p>
+      ${plot}
+    </section>
+    <section class="result-block backtest-block" id="backtest-panel" aria-labelledby="backtest-heading">
+      <h2 id="backtest-heading">Backtest performance</h2>
+      <p class="backtest-banner">Backtest (hypothetical, includes costs)</p>
+      <p class="block-kicker" id="backtest-method">Loading historical backtest…</p>
+      <div id="backtest-body"></div>
+    </section>
     ${whyHtml(strategy)}
     <h2>What it is testing</h2>
     <p>${strategy.hypothesis}</p>
@@ -504,6 +532,7 @@ function renderStrategy() {
     drawChart(host, strategy);
     host.after(legend(strategy));
   }
+  mountBacktest(strategy);
 }
 
 
@@ -548,4 +577,489 @@ function rankMoveHtml(s) {
   if (s.rankMove > 0) return ` <span class="rank-move rm-up" title="Up ${s.rankMove} since the previous day">▲${s.rankMove}</span>`;
   if (s.rankMove < 0) return ` <span class="rank-move rm-down" title="Down ${-s.rankMove} since the previous day">▼${-s.rankMove}</span>`;
   return ` <span class="rank-move rm-same" title="Same rank as the previous day">=</span>`;
+}
+
+/* ---------- Historical backtest by year (separate from forward paper marks) ---------- */
+const BACKTEST_YEARS = ["2020", "2021", "2022", "2023", "2024", "2025", "2026"];
+const TRADE_COUNT_LABEL = {
+  closed_exits: "closed trades",
+  fills: "fills",
+  flat_to_flat_episodes: "round trips"
+};
+let backtestDocPromise = null;
+
+function loadBacktestDoc() {
+  if (!backtestDocPromise) {
+    const src = (document.querySelector('script[src*="app.js"]') || {}).src || "";
+    const version = (src.match(/[?&]v=([^&]+)/) || [])[1] || "1";
+    backtestDocPromise = fetch("data/backtest_by_year.json?v=" + encodeURIComponent(version)).then((response) => {
+      if (!response.ok) throw new Error("Backtest file could not be loaded (" + response.status + ").");
+      return response.json();
+    });
+  }
+  return backtestDocPromise;
+}
+
+function isoLong(iso) {
+  if (!iso) return "";
+  const [year, month, day] = iso.split("-").map(Number);
+  const names = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  return names[month - 1] + " " + day + ", " + year;
+}
+
+function btPct(value) {
+  if (value == null || !Number.isFinite(value)) return "—";
+  const sign = value > 0 ? "+" : value < 0 ? "−" : "";
+  return sign + Math.abs(value).toFixed(1) + "%";
+}
+
+function btPoints(value) {
+  if (value == null || !Number.isFinite(value)) return "—";
+  const sign = value > 0 ? "+" : value < 0 ? "−" : "";
+  return sign + Math.abs(value).toFixed(1) + " points";
+}
+
+function toneClass(value) {
+  if (value == null || !Number.isFinite(value)) return "";
+  if (value > 0.05) return "tone-up";
+  if (value < -0.05) return "tone-down";
+  return "tone-flat";
+}
+
+function round1(value) {
+  return Math.round(value * 10) / 10;
+}
+
+function pointsInRange(points, startDate, endDate) {
+  return (points || []).filter((point) => point[0] >= startDate && point[0] <= endDate);
+}
+
+function priorPoint(points, startDate) {
+  let prior = null;
+  for (const point of points || []) {
+    if (point[0] < startDate) prior = point;
+    else break;
+  }
+  return prior;
+}
+
+function rebaseSlice(points, startDate, endDate, base) {
+  if (!base) return [];
+  const scale = 10000 / base;
+  return pointsInRange(points, startDate, endDate).map(([date, equity]) => ({ date, equity: equity * scale }));
+}
+
+function blendHalf(spyPoints, qqqPoints, startDate, endDate) {
+  const spy = rebaseSlice(spyPoints, startDate, endDate, (pointsInRange(spyPoints, startDate, endDate)[0] || [])[1]);
+  const qqq = rebaseSlice(qqqPoints, startDate, endDate, (pointsInRange(qqqPoints, startDate, endDate)[0] || [])[1]);
+  const spyMap = new Map(spy.map((point) => [point.date, point.equity]));
+  const qqqMap = new Map(qqq.map((point) => [point.date, point.equity]));
+  const dates = [...new Set([...spyMap.keys(), ...qqqMap.keys()])].sort();
+  let lastSpy = null;
+  let lastQqq = null;
+  const out = [];
+  dates.forEach((date) => {
+    if (spyMap.has(date)) lastSpy = spyMap.get(date);
+    if (qqqMap.has(date)) lastQqq = qqqMap.get(date);
+    if (lastSpy == null || lastQqq == null) return;
+    out.push({ date, equity: (lastSpy + lastQqq) / 2 });
+  });
+  return out;
+}
+
+function maxDrawdownPct(values) {
+  let peak = -Infinity;
+  let worst = 0;
+  values.forEach((value) => {
+    if (!Number.isFinite(value) || value <= 0) return;
+    peak = Math.max(peak, value);
+    worst = Math.min(worst, (value / peak - 1) * 100);
+  });
+  return peak === -Infinity ? null : worst;
+}
+
+function benchSeriesFor(rec, doc, startDate, endDate, shared2019) {
+  if (rec.benchmark === "SPY_QQQ_50_50") {
+    const spy = doc.benchmarks && doc.benchmarks.SPY && doc.benchmarks.SPY.equityFrom2020;
+    const qqq = doc.benchmarks && doc.benchmarks.QQQ && doc.benchmarks.QQQ.equityFrom2020;
+    if (!spy || !qqq) return { points: [], name: "50/50 SPY and QQQ buy-and-hold" };
+    return { points: blendHalf(spy.points, qqq.points, startDate, endDate), name: "50/50 SPY and QQQ buy-and-hold" };
+  }
+  const bench = doc.benchmarks && doc.benchmarks[rec.benchmark];
+  if (!bench || !bench.equityFrom2020) return { points: [], name: "Buy-and-hold" };
+  const points = bench.equityFrom2020.points || [];
+  if (shared2019) {
+    return { points: pointsInRange(points, startDate, endDate).map(([date, equity]) => ({ date, equity })), name: bench.name };
+  }
+  const slice = pointsInRange(points, startDate, endDate);
+  const prior = priorPoint(points, startDate);
+  const base = prior ? prior[1] : (slice[0] && slice[0][1]);
+  return { points: rebaseSlice(points, startDate, endDate, base), name: bench.name };
+}
+
+function uses2019Anchor(equity) {
+  if (!equity || !equity.points || !equity.points.length) return false;
+  return equity.startDate <= "2020-01-15" && Math.abs(equity.points[0][1] - (equity.start || 10000)) > 0.02;
+}
+
+function caveatsHtml(rec) {
+  const items = rec.caveats || [];
+  if (!items.length) return "";
+  return `<ul class="bt-caveats">${items.map((item) => `<li>${esc(item)}</li>`).join("")}</ul>`;
+}
+
+function sentence(label, value) {
+  if (!value) return "";
+  const text = String(value).trim();
+  return " " + label + ": " + text + (/[.!?]$/.test(text) ? "" : ".");
+}
+
+function tradeLabel(rec) {
+  return TRADE_COUNT_LABEL[rec.tradeCountMethod] || "trades";
+}
+
+function statsHtml(stats, rec) {
+  const gap = stats.benchReturnPct == null || stats.returnPct == null ? null : round1(stats.returnPct - stats.benchReturnPct);
+  return `<p class="bt-window">${esc(stats.window)}</p>
+    ${stats.note ? `<p class="bt-flag">${esc(stats.note)}</p>` : ""}
+    <dl class="facts bt-facts">
+      <div><dt>Return</dt><dd class="${toneClass(stats.returnPct)}">${btPct(stats.returnPct)}</dd></div>
+      <div><dt>Max drawdown</dt><dd class="${toneClass(stats.maxDdPct)}">${btPct(stats.maxDdPct)}</dd></div>
+      <div><dt>Trades</dt><dd>${stats.trades == null ? "—" : Number(stats.trades).toLocaleString("en-US")}<small>${esc(tradeLabel(rec))}</small></dd></div>
+      <div><dt>Benchmark</dt><dd class="${toneClass(stats.benchReturnPct)}">${btPct(stats.benchReturnPct)}</dd></div>
+      <div><dt>Vs benchmark</dt><dd class="${toneClass(gap)}">${btPoints(gap)}</dd></div>
+    </dl>`;
+}
+
+function viewForYear(rec, doc, yearKey) {
+  const year = rec.years && rec.years[yearKey];
+  if (!year) return { empty: "No backtest data for this year." };
+  const native = (rec.equity && rec.equity.points) || [];
+  const strat = rebaseSlice(native, year.startDate, year.endDate, year.startEquity);
+  const bench = benchSeriesFor(rec, doc, year.startDate, year.endDate, false);
+  const note = year.complete ? "" : (yearKey === "2026"
+    ? "2026 is year-to-date through the last backtest bar."
+    : "Partial year. This test does not cover the full calendar year.");
+  return {
+    strat,
+    bench: bench.points,
+    benchName: bench.name,
+    summary: yearKey + " backtest return " + btPct(year.returnPct) + ", max drawdown " + btPct(year.maxDdPct) + ".",
+    html: statsHtml({
+      window: yearKey + " · " + isoLong(year.startDate) + " – " + isoLong(year.endDate),
+      note,
+      returnPct: year.returnPct,
+      maxDdPct: year.maxDdPct,
+      trades: year.trades,
+      benchReturnPct: year.benchReturnPct
+    }, rec)
+  };
+}
+
+function viewForAll(rec, doc) {
+  const equity = rec.equityFrom2020;
+  if (!equity || !equity.points || !equity.points.length) return { empty: "No backtest data for this year." };
+  const shared = uses2019Anchor(equity);
+  const strat = equity.points.map(([date, value]) => ({ date, equity: value }));
+  const bench = benchSeriesFor(rec, doc, equity.startDate, equity.endDate, shared);
+  const start = equity.start || 10000;
+  const end = equity.points[equity.points.length - 1][1];
+  const returnPct = round1((end / start - 1) * 100);
+  const drawdown = maxDrawdownPct([start, ...equity.points.map((point) => point[1])]);
+  const maxDdPct = drawdown == null ? null : round1(drawdown);
+  const trades = BACKTEST_YEARS.reduce((sum, year) => sum + ((rec.years[year] && rec.years[year].trades) || 0), 0);
+  let benchReturnPct = null;
+  if (bench.points.length) {
+    const base = shared ? 10000 : bench.points[0].equity;
+    benchReturnPct = round1((bench.points[bench.points.length - 1].equity / base - 1) * 100);
+  }
+  let note = "Rebased to $10,000 at the close before this window, or at the first bar if the test starts later.";
+  if (String(equity.endDate).startsWith("2026")) note += " 2026 is year-to-date through the last backtest bar.";
+  if (equity.startDate > "2020-01-15") note += " No backtest before " + isoLong(equity.startDate) + ".";
+  const early = equity.startDate <= "2020-01-15" ? "2020–2026" : "First available date through the last bar";
+  return {
+    strat,
+    bench: bench.points,
+    benchName: bench.name,
+    summary: early + " backtest return " + btPct(returnPct) + ", max drawdown " + btPct(maxDdPct) + ".",
+    html: statsHtml({
+      window: early + " · " + isoLong(equity.startDate) + " – " + isoLong(equity.endDate),
+      note,
+      returnPct,
+      maxDdPct,
+      trades,
+      benchReturnPct
+    }, rec) + `<p class="meta">Trade count is the sum of the calendar-year counts inside this window.</p>`
+  };
+}
+
+function mountBacktest(strategy) {
+  const method = document.getElementById("backtest-method");
+  const body = document.getElementById("backtest-body");
+  if (!method || !body) return;
+  loadBacktestDoc().then((doc) => {
+    const rec = (doc.strategies || []).find((item) => item.n === strategy.n);
+    if (!rec) {
+      method.textContent = "No backtest record for this strategy.";
+      return;
+    }
+    const cost = sentence("Costs", rec.costs);
+    const fill = sentence("Fill", rec.fill);
+    method.textContent = "Signal on the close, fill at the next close, unless this strategy says otherwise." + cost + fill + " 2026 is year-to-date through the last backtest bar.";
+    if (!rec.hasBacktest) {
+      body.innerHTML = `<p class="bt-gap">${esc(rec.gapReason || "No backtest data for this strategy.")}</p>` + caveatsHtml(rec);
+      return;
+    }
+    const years = rec.years || {};
+    const hasAll = !!(rec.equityFrom2020 && rec.equityFrom2020.points && rec.equityFrom2020.points.length);
+    let selected = "all";
+    if (!hasAll) selected = [...BACKTEST_YEARS].reverse().find((year) => years[year]) || "all";
+    const buttons = [`<button type="button" role="tab" id="bt-tab-all" data-year="all" aria-selected="false" aria-controls="bt-panel"${hasAll ? "" : " disabled"}>All</button>`]
+      .concat(BACKTEST_YEARS.map((year) => {
+        const disabled = years[year] ? "" : " disabled";
+        const title = years[year] ? "" : " title=\"No backtest data for this year\"";
+        return `<button type="button" role="tab" id="bt-tab-${year}" data-year="${year}" aria-selected="false" aria-controls="bt-panel"${disabled}${title}>${year}</button>`;
+      })).join("");
+    body.innerHTML = `<div class="year-tabs" role="tablist" aria-label="Backtest year">${buttons}</div><div id="bt-panel" role="tabpanel"></div>${caveatsHtml(rec)}`;
+    const list = body.querySelector(".year-tabs");
+    const paint = () => {
+      list.querySelectorAll("button").forEach((button) => {
+        const on = button.dataset.year === selected;
+        button.setAttribute("aria-selected", on ? "true" : "false");
+        button.tabIndex = on ? 0 : -1;
+      });
+      const panel = document.getElementById("bt-panel");
+      const active = document.getElementById("bt-tab-" + selected);
+      if (active) panel.setAttribute("aria-labelledby", active.id);
+      const view = selected === "all" ? viewForAll(rec, doc) : viewForYear(rec, doc, selected);
+      if (view.empty || !view.strat || !view.strat.length) {
+        panel.innerHTML = `<p class="bt-gap">${esc(view.empty || "No backtest data for this year.")}</p>`;
+        return;
+      }
+      panel.innerHTML = `${view.html}<div class="bt-plot"></div><div class="legend"></div>`;
+      const legendRow = panel.querySelector(".legend");
+      const stratColor = strategy.color || "#3cba62";
+      const benchColor = (strategy.benchmark && strategy.benchmark.color) || "#3c7dff";
+      legendRow.innerHTML = `<span><i class="swatch" style="border-top-color:${stratColor}"></i>Backtest equity</span>` +
+        (view.bench && view.bench.length ? `<span><i class="swatch dash" style="border-top-color:${benchColor}"></i>${esc(view.benchName)}</span>` : "");
+      drawBacktestChart(panel.querySelector(".bt-plot"), view.strat, view.bench || [], {
+        stratColor,
+        benchColor,
+        label: strategy.name + ". " + view.summary + (view.benchName ? " Dashed line is " + view.benchName + ", also rebased to $10,000." : "")
+      });
+    };
+    list.addEventListener("click", (event) => {
+      const button = event.target.closest("button");
+      if (!button || button.disabled) return;
+      selected = button.dataset.year;
+      paint();
+    });
+    list.addEventListener("keydown", (event) => {
+      const order = ["ArrowRight", "ArrowLeft", "Home", "End"];
+      if (!order.includes(event.key)) return;
+      const tabs = [...list.querySelectorAll("button:not(:disabled)")];
+      const index = Math.max(0, tabs.findIndex((button) => button.dataset.year === selected));
+      let next = index;
+      if (event.key === "ArrowRight") next = (index + 1) % tabs.length;
+      else if (event.key === "ArrowLeft") next = (index - 1 + tabs.length) % tabs.length;
+      else if (event.key === "Home") next = 0;
+      else next = tabs.length - 1;
+      event.preventDefault();
+      selected = tabs[next].dataset.year;
+      tabs[next].focus();
+      paint();
+    });
+    paint();
+  }).catch((error) => {
+    method.textContent = error && error.message ? error.message : "Backtest data could not be loaded.";
+  });
+}
+
+function svgEl(name, attrs) {
+  const el = document.createElementNS("http://www.w3.org/2000/svg", name);
+  Object.entries(attrs || {}).forEach(([key, value]) => el.setAttribute(key, String(value)));
+  return el;
+}
+
+function axisMoney(value) {
+  const abs = Math.abs(value);
+  const sign = value < 0 ? "−" : "";
+  if (abs >= 1000000) {
+    const millions = abs / 1000000;
+    return sign + "$" + (millions >= 10 ? millions.toFixed(1) : millions.toFixed(2)) + "M";
+  }
+  return sign + "$" + Math.round(abs).toLocaleString("en-US");
+}
+
+function niceStep(span, count) {
+  if (!(span > 0) || !Number.isFinite(span)) return 1;
+  const rough = span / Math.max(1, count);
+  const pow = Math.pow(10, Math.floor(Math.log10(rough)));
+  const scaled = rough / pow;
+  const mult = scaled >= 7 ? 10 : scaled >= 3 ? 5 : scaled >= 1.5 ? 2 : 1;
+  return mult * pow;
+}
+
+function axisTicks(min, max) {
+  const step = niceStep(max - min, 4);
+  if (!Number.isFinite(step) || step <= 0) return [min, max];
+  const start = Math.ceil(min / step) * step;
+  const ticks = [];
+  for (let i = 0; i < 8; i++) {
+    const value = start + i * step;
+    if (value > max + step * 0.001) break;
+    if (value >= min - step * 0.001) ticks.push(value);
+  }
+  return ticks.length ? ticks : [min, max];
+}
+
+function dateTicks(dates) {
+  if (!dates.length) return [];
+  if (dates.length === 1) return [{ date: dates[0], label: shortDate(dates[0]), anchor: "middle" }];
+  const span = (Date.parse(dates[dates.length - 1] + "T00:00:00Z") - Date.parse(dates[0] + "T00:00:00Z")) / 86400000;
+  if (span > 400) {
+    const ticks = [];
+    const seen = new Set();
+    dates.forEach((date) => {
+      const year = date.slice(0, 4);
+      if (seen.has(year)) return;
+      seen.add(year);
+      ticks.push({ date, label: year, anchor: "middle" });
+    });
+    if (ticks.length) ticks[0].anchor = "start";
+    if (ticks.length > 1) ticks[ticks.length - 1].anchor = "end";
+    return ticks;
+  }
+  const count = Math.min(4, dates.length);
+  const ticks = [];
+  for (let k = 0; k < count; k++) {
+    const index = Math.round(k * (dates.length - 1) / (count - 1));
+    ticks.push({
+      date: dates[index],
+      label: shortDate(dates[index]),
+      anchor: k === 0 ? "start" : k === count - 1 ? "end" : "middle"
+    });
+  }
+  return ticks;
+}
+
+function drawBacktestChart(host, strat, bench, options) {
+  host.replaceChildren();
+  const width = 720;
+  const height = 380;
+  const pad = { l: 108, r: 16, t: 18, b: 36 };
+  const series = strat.filter((point) => Number.isFinite(point.equity));
+  const benchSeries = (bench || []).filter((point) => Number.isFinite(point.equity));
+  const values = series.concat(benchSeries).map((point) => point.equity);
+  const dataMin = Math.min(...values);
+  const dataMax = Math.max(...values);
+  if (!Number.isFinite(dataMin) || !Number.isFinite(dataMax)) return;
+  const span = Math.max(dataMax - dataMin, Math.abs(dataMax) * 0.04, 1);
+  let min = dataMin - span * 0.08;
+  let max = dataMax + span * 0.1;
+  if (dataMin > 0) min = Math.max(min, Math.min(dataMin * 0.92, dataMin - span * 0.02));
+  const dates = series.map((point) => point.date);
+  const t0 = Date.parse((benchSeries.length && benchSeries[0].date < dates[0] ? benchSeries[0].date : dates[0]) + "T00:00:00Z");
+  const lastDate = dates[dates.length - 1];
+  const benchLast = benchSeries.length ? benchSeries[benchSeries.length - 1].date : lastDate;
+  const t1 = Date.parse((benchLast > lastDate ? benchLast : lastDate) + "T00:00:00Z");
+  const xOf = (date) => {
+    const t = Date.parse(date + "T00:00:00Z");
+    if (!(t1 > t0)) return pad.l + (width - pad.l - pad.r) / 2;
+    return pad.l + ((t - t0) / (t1 - t0)) * (width - pad.l - pad.r);
+  };
+  const yOf = (value) => pad.t + (1 - (value - min) / (max - min)) * (height - pad.t - pad.b);
+  const svg = svgEl("svg", { viewBox: `0 0 ${width} ${height}`, role: "img", "aria-label": options.label });
+  const ticks = axisTicks(min, max);
+  ticks.forEach((tick) => {
+    const y = yOf(tick);
+    const capital = Math.abs(tick - 10000) < (max - min) * 0.015;
+    svg.append(svgEl("line", {
+      x1: pad.l, x2: width - pad.r, y1: y, y2: y,
+      stroke: capital ? "#5c4634" : "#241e19",
+      "stroke-width": capital ? "1.5" : "1"
+    }));
+    const text = svgEl("text", { x: 8, y: y + 5, "font-size": "15" });
+    text.textContent = axisMoney(tick);
+    svg.append(text);
+  });
+  if (min < 10000 && max > 10000 && !ticks.some((tick) => Math.abs(tick - 10000) < (max - min) * 0.015)) {
+    const y = yOf(10000);
+    svg.append(svgEl("line", {
+      x1: pad.l, x2: width - pad.r, y1: y, y2: y,
+      stroke: "#5c4634", "stroke-width": "1.5"
+    }));
+  }
+  dateTicks(dates).forEach((tick) => {
+    const text = svgEl("text", {
+      x: xOf(tick.date),
+      y: height - 12,
+      "text-anchor": tick.anchor,
+      "font-size": "15"
+    });
+    text.textContent = tick.label;
+    svg.append(text);
+  });
+  const line = (points, color, dash) => {
+    if (points.length < 2) return;
+    const poly = svgEl("polyline", {
+      fill: "none",
+      stroke: color,
+      "stroke-width": dash ? "2.25" : "3",
+      "stroke-linejoin": "round",
+      "stroke-linecap": "round",
+      points: points.map((point) => xOf(point.date) + "," + yOf(point.equity)).join(" ")
+    });
+    if (dash) poly.setAttribute("stroke-dasharray", dash);
+    svg.append(poly);
+  };
+  line(benchSeries, options.benchColor, "2 6");
+  line(series, options.stratColor, "");
+  const endDot = (points, color) => {
+    if (!points.length) return;
+    const point = points[points.length - 1];
+    svg.append(svgEl("circle", { cx: xOf(point.date), cy: yOf(point.equity), r: "4.5", fill: color }));
+  };
+  endDot(benchSeries, options.benchColor);
+  endDot(series, options.stratColor);
+  const guide = svgEl("line", { y1: pad.t, y2: height - pad.b, stroke: "#8a7560", "stroke-width": "1", visibility: "hidden" });
+  svg.append(guide);
+  host.append(svg);
+  const readout = document.createElement("p");
+  readout.className = "bt-readout";
+  readout.hidden = true;
+  host.append(readout);
+  const xs = series.map((point) => xOf(point.date));
+  const show = (clientX) => {
+    const rect = svg.getBoundingClientRect();
+    if (!rect.width) return;
+    const x = ((clientX - rect.left) / rect.width) * width;
+    let best = 0;
+    let bestDist = Infinity;
+    xs.forEach((px, index) => {
+      const dist = Math.abs(px - x);
+      if (dist < bestDist) {
+        bestDist = dist;
+        best = index;
+      }
+    });
+    const point = series[best];
+    let benchText = "";
+    if (benchSeries.length) {
+      let chosen = benchSeries[0];
+      benchSeries.forEach((item) => { if (item.date <= point.date) chosen = item; });
+      benchText = " · buy-and-hold " + money(chosen.equity);
+    }
+    readout.hidden = false;
+    readout.textContent = isoLong(point.date) + " · backtest " + money(point.equity) + benchText;
+    guide.setAttribute("visibility", "visible");
+    guide.setAttribute("x1", xs[best]);
+    guide.setAttribute("x2", xs[best]);
+  };
+  svg.addEventListener("pointerdown", (event) => show(event.clientX));
+  svg.addEventListener("pointermove", (event) => show(event.clientX));
+  svg.addEventListener("pointerleave", () => {
+    readout.hidden = true;
+    guide.setAttribute("visibility", "hidden");
+  });
 }

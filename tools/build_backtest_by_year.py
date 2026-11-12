@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Build backtest_by_year.json for the SIFT Cursor handoff.
+"""Build data/backtest_by_year.json for the SIFT backtest-by-year section.
 
-Paper / backtest only. Reads frozen lab and baseline outputs. Does not write
-into /workspace/sift_site and does not place trades.
+Paper / backtest only. Reads frozen lab and baseline outputs from the absolute
+paths below. Does not place trades and does not run publish.sh.
 """
 from __future__ import annotations
 
@@ -15,7 +15,8 @@ import numpy as np
 import pandas as pd
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-OUT = os.path.join(HERE, "backtest_by_year.json")
+ROOT = os.path.dirname(HERE) if os.path.basename(HERE) == "tools" else HERE
+OUT = os.path.join(ROOT, "data", "backtest_by_year.json")
 CAP = 10000.0
 YEARS = list(range(2020, 2027))
 ET = ZoneInfo("America/New_York")
@@ -814,6 +815,7 @@ def main():
     if size > 5 * 1024 * 1024:
         # Downsample equity points to every 5th day outside the selected year window... shouldn't happen
         raise SystemExit(f"JSON is {size} bytes; downsample needed")
+    os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, "w") as f:
         f.write(raw)
         f.write("\n")
