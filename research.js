@@ -67,8 +67,11 @@ function renderResearch() {
   R.strategies.forEach((s, i) => {
     const tone = VERDICT_TONE[s.verdict];
     const el = document.createElement("article");
-    el.className = "rcard card tone-" + tone; el.id = s.key;
+    el.className = "rcard card tone-" + tone + " drawer"; el.id = s.key;
+    el.setAttribute("data-drawer-group", "research");
     el.innerHTML = `
+      <button type="button" class="row-toggle" aria-expanded="false"><span class="row-name">${esc(s.name)}</span><span class="row-pnl">${rPct(s.full.strat.total_return_pct, 0)} · ${esc(s.verdict)}</span><span class="fold-chevron" aria-hidden="true"></span></button>
+      <div class="drawer-body">
       <div class="card-top"><span class="num">R${String(i + 1).padStart(2, "0")} · ${esc(s.category)}</span><span class="tag">${esc(s.market)}</span></div>
       <h2>${esc(s.name)}</h2>
       <p class="plain">${esc(s.plain)}</p>
@@ -79,7 +82,8 @@ function renderResearch() {
       <h3>Why we picked it</h3><p class="why">${esc(s.why)}</p>
       <h3>Rules used (frozen)</h3><ul class="rules">${s.rules.map((r) => `<li>${esc(r)}</li>`).join("")}</ul>
       <p class="meta"><b>Interpretation:</b> ${esc(s.interpretation)}</p>
-      <p class="meta"><b>Source:</b> ${s.sources.map((x) => `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.label)}</a>`).join(" · ")}</p>`;
+      <p class="meta"><b>Source:</b> ${s.sources.map((x) => `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.label)}</a>`).join(" · ")}</p>
+      </div>`;
     host.append(el);
   });
 }

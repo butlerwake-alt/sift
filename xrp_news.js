@@ -62,15 +62,26 @@
   }
 
   function renderItem(item) {
-    var li = el("li", "xrp-item " + statusClass(item.status));
-    var top = el("div", "xrp-item-top");
+    var li = el("li", "xrp-item drawer " + statusClass(item.status));
+    li.setAttribute("data-drawer-group", "news");
+    var toggle = el("button", "row-toggle");
+    toggle.type = "button";
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.appendChild(el("span", chipClass(item.status), item.status));
+    toggle.appendChild(el("span", "row-name", item.headline || "Item"));
+    toggle.appendChild(el("span", "row-pnl", formatDate(item.date)));
+    var chev = el("span", "fold-chevron");
+    chev.setAttribute("aria-hidden", "true");
+    toggle.appendChild(chev);
+    var body = el("div", "drawer-body");
+    var top = el("div", "xrp-item-top drawer-desk");
     var time = el("time", "", formatDate(item.date));
     if (item.date) time.setAttribute("datetime", item.date);
     top.appendChild(time);
     top.appendChild(el("span", chipClass(item.status), item.status));
-    li.appendChild(top);
-    li.appendChild(el("h2", "", item.headline || ""));
-    if (item.summary) li.appendChild(el("p", "", item.summary));
+    body.appendChild(top);
+    body.appendChild(el("h2", "drawer-desk", item.headline || ""));
+    if (item.summary) body.appendChild(el("p", "", item.summary));
     var sources = Array.isArray(item.sources) ? item.sources : [];
     if (sources.length) {
       var ul = el("ul", "xrp-sources");
@@ -85,8 +96,10 @@
         sli.appendChild(a);
         ul.appendChild(sli);
       });
-      li.appendChild(ul);
+      body.appendChild(ul);
     }
+    li.appendChild(toggle);
+    li.appendChild(body);
     li.setAttribute("data-status", item.status || "");
     return li;
   }

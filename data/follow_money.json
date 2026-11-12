@@ -1,0 +1,199 @@
+{
+  "schema": 1,
+  "preview": true,
+  "phase": "1-2",
+  "status": "Preview, coming soon",
+  "sample_only": true,
+  "disclaimer": "Not financial advice. Disclosures are delayed. Copying a holding is not the same as copying the result. This preview has no performance claims and no backtest numbers.",
+  "coverage": {
+    "retrieved_at": null,
+    "publication_label": "No live publication date. Sample rows are not filings.",
+    "freshness": "No source has been fetched. There is no processing timestamp and no usable clock yet.",
+    "gaps": [
+      "House and Senate trade feeds are not connected.",
+      "SEC EDGAR 13F and Form 4 feeds are not connected.",
+      "Crypto treasury pages and labeled-wallet sources are not connected.",
+      "No social account has been checked against a filing or a published wallet.",
+      "No backtest has been run. Phase 3 has not started."
+    ]
+  },
+  "sections": [
+    {
+      "id": "congress",
+      "title": "Congress",
+      "summary": "Sample only. Lag can be 45 days.",
+      "blurb": "STOCK Act periodic transaction reports from the House and the Senate. A real row would name the member, the asset, a buy or a sell, the amount range, the trade date, and the disclosure date. Amounts on those forms are ranges, not exact sizes. Nothing below is a filing.",
+      "source_name": "U.S. House Clerk and U.S. Senate eFD periodic transaction reports",
+      "source_url": "https://disclosures-clerk.house.gov/FinancialDisclosure",
+      "as_of_label": "Trade date",
+      "public_label": "Disclosure date",
+      "lag": "Members may disclose up to 45 days after the trade (and within 30 days of being notified). A research clock would add processing time after the filing is public. These sample rows have no dates.",
+      "cards": [
+        {
+          "id": "sample-congress-1",
+          "sample": true,
+          "entity": "Sample member",
+          "who": "Sample member",
+          "what": "SAMPLE",
+          "action": "buy",
+          "detail": "Amount range: sample. Not a real trade and not a midpoint.",
+          "trade_date": "sample",
+          "public_date": "sample",
+          "why": "Placeholder card. A real card would restate only what the periodic transaction report says.",
+          "confidence": "Not scored. Sample rows have no confidence.",
+          "caveats": "Not a disclosure. Do not trade from this card. The public date would be later than the trade date.",
+          "tickers": ["SAMPLE"],
+          "weights": []
+        },
+        {
+          "id": "sample-congress-2",
+          "sample": true,
+          "entity": "Sample member",
+          "who": "Sample member",
+          "what": "SAMPLE",
+          "action": "sell",
+          "detail": "Amount range: sample.",
+          "trade_date": "sample",
+          "public_date": "sample",
+          "why": "Second sample on the same entity so the page can group cards. Still not a filing.",
+          "confidence": "Not scored. Sample rows have no confidence.",
+          "caveats": "Not a disclosure. A sale range is not a price target.",
+          "tickers": ["SAMPLE"],
+          "weights": []
+        }
+      ]
+    },
+    {
+      "id": "funds",
+      "title": "13F funds",
+      "summary": "Sample only. Quarter-end snapshot, filed up to 45 days later.",
+      "blurb": "Form 13F is a quarter-end list of long U.S.-listed positions for a large manager, not a daily trade blotter and not a short book. A real row would name the fund, the ticker, the share of that filed portfolio, and the change versus the prior quarter’s filing. This preview does not include any manager’s actual book. The stream is meant for public filers such as large registered managers.",
+      "source_name": "SEC EDGAR Form 13F-HR",
+      "source_url": "https://www.sec.gov/edgar/search/",
+      "as_of_label": "Quarter-end",
+      "public_label": "Filing date",
+      "lag": "13F filings are due up to 45 days after quarter end. The change versus last quarter compares two delayed snapshots. These sample rows have no quarter and no weights.",
+      "cards": [
+        {
+          "id": "sample-fund-1",
+          "sample": true,
+          "entity": "Sample fund",
+          "who": "Sample fund",
+          "what": "SAMPLE",
+          "action": "holding",
+          "detail": "Share of filed portfolio: sample. Change vs last quarter: sample. Filing quarter: sample.",
+          "trade_date": "sample",
+          "public_date": "sample",
+          "why": "Placeholder for a 13F line. A real card would cite the accession number and the information table.",
+          "confidence": "Not scored. Sample rows have no confidence.",
+          "caveats": "Not a filing. A 13F holding is not a buy order and is not a performance result.",
+          "tickers": ["SAMPLE"],
+          "weights": []
+        }
+      ]
+    },
+    {
+      "id": "insiders",
+      "title": "Form 4 open-market buys",
+      "summary": "Sample only. Open-market code P. Grants and plans are excluded.",
+      "blurb": "SEC Form 4 open-market purchases only (transaction code P). Grants and awards, option exercises, and 10b5-1 plan transactions are a different bucket and are not listed here, even as samples. A real row would name the company, the insider, the role, the shares, the value, and the dates.",
+      "source_name": "SEC EDGAR Form 4, transaction code P",
+      "source_url": "https://www.sec.gov/edgar/search/",
+      "as_of_label": "Transaction date",
+      "public_label": "Filing date",
+      "lag": "Form 4 is due within two business days of the transaction, then a processing delay before any study could use it. Grants, exercises, and 10b5-1 plan trades are not in this list. These sample rows have no shares and no dollar value.",
+      "cards": [
+        {
+          "id": "sample-insider-1",
+          "sample": true,
+          "entity": "Sample insider",
+          "who": "Sample insider, sample role",
+          "what": "SAMPLE",
+          "action": "open-market buy",
+          "detail": "Shares: sample. Value: sample. Role: sample. Not a grant and not a 10b5-1 plan.",
+          "trade_date": "sample",
+          "public_date": "sample",
+          "why": "Placeholder for a code-P purchase. The card exists so the open-market bucket is visible without inventing a filing.",
+          "confidence": "Not scored. Sample rows have no confidence.",
+          "caveats": "Not a Form 4. Do not treat sample shares as a real purchase.",
+          "tickers": ["SAMPLE"],
+          "weights": []
+        }
+      ]
+    },
+    {
+      "id": "crypto",
+      "title": "Crypto treasuries and wallets",
+      "summary": "Sample only. Labeled public sources, not unlabeled addresses.",
+      "blurb": "Public company treasury disclosures and sponsor holdings reports, plus wallets a public document has already labeled. A real row would name the holder, the asset, the amount, and the recent change on that source. Unlabeled addresses are not assigned to anyone. Partnership announcements are not treasury demand. Nothing below is an on-chain balance.",
+      "source_name": "Issuer holdings pages, company filings, and already-labeled public wallets",
+      "source_url": "https://www.sec.gov/edgar/search/",
+      "as_of_label": "Reported date",
+      "public_label": "Publication date",
+      "lag": "Only as fresh as the cited page or filing, plus processing time. A wallet label counts only when a public document already published it. These sample rows have no coin amount.",
+      "cards": [
+        {
+          "id": "sample-crypto-1",
+          "sample": true,
+          "entity": "Sample treasury",
+          "who": "Sample treasury",
+          "what": "SAMPLE",
+          "action": "reported holding",
+          "detail": "Amount: sample. Recent change: sample. Not an on-chain read.",
+          "trade_date": "sample",
+          "public_date": "sample",
+          "why": "Placeholder for a company or fund disclosure. A real card would link the filing or the issuer holdings file.",
+          "confidence": "Not scored. Sample rows have no confidence.",
+          "caveats": "Not a balance. Copying the word SAMPLE is not a position.",
+          "tickers": ["SAMPLE"],
+          "weights": []
+        },
+        {
+          "id": "sample-crypto-2",
+          "sample": true,
+          "entity": "Sample labeled wallet",
+          "who": "Sample labeled wallet",
+          "what": "SAMPLE",
+          "action": "labeled balance",
+          "detail": "Amount: sample. The label would have to come from a public document, which this row does not have.",
+          "trade_date": "sample",
+          "public_date": "sample",
+          "why": "Placeholder so the wallet slot is visible. No address is shown, because none has been published here.",
+          "confidence": "Not scored. Sample rows have no confidence.",
+          "caveats": "Not a wallet. Unlabeled addresses are out of scope.",
+          "tickers": ["SAMPLE"],
+          "weights": []
+        }
+      ]
+    },
+    {
+      "id": "social",
+      "title": "Verified social accounts",
+      "summary": "Sample only. A top-10 list is not filled.",
+      "blurb": "A later list may hold up to ten accounts whose calls or holdings can be checked against a public filing, a published portfolio, or a wallet the account itself published. Follower counts and screenshots are not verification. This preview does not name a real account and does not rank anyone.",
+      "source_name": "Primary filings, published portfolios, or self-published wallets only",
+      "source_url": "https://www.sec.gov/edgar/search/",
+      "as_of_label": "Call or snapshot date",
+      "public_label": "Date the source was public",
+      "lag": "The call is usable only after the verifying source is public, plus processing time. An unverified post is not a row. These samples are not that list.",
+      "cards": [
+        {
+          "id": "sample-social-1",
+          "sample": true,
+          "entity": "@sample",
+          "who": "@sample",
+          "what": "SAMPLE",
+          "action": "sample call",
+          "detail": "Verification: none. A real row needs a public filing, a published portfolio, or a wallet the account itself published.",
+          "trade_date": "sample",
+          "public_date": "sample",
+          "why": "Placeholder for the verification fields. It is not a track record.",
+          "confidence": "Not scored. There is nothing to score.",
+          "caveats": "Not an account. No performance is stated because none has been checked.",
+          "tickers": ["SAMPLE"],
+          "weights": []
+        }
+      ]
+    }
+  ]
+}
