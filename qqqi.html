@@ -29,7 +29,7 @@
   <meta name="twitter:title" content="QQQ vs QQQI · SIFT">
   <meta name="twitter:description" content="How the ~14% monthly income in QQQI is made, what it costs in upside versus QQQ, and when borrowing did and did not beat buying gradually. Educational, not financial advice.">
   <meta name="twitter:image" content="https://butlerwake-alt.github.io/sift/og-image.png">
-  <link rel="stylesheet" href="styles.css?v=202611120300">
+  <link rel="stylesheet" href="styles.css?v=202611130320">
   <style>
     .site-nav a[aria-current="page"] { border-bottom-color: var(--yellow); }
     .essay { max-width: 46rem; }
@@ -98,35 +98,36 @@
     }
   </style>
 </head>
-<body>
-  <header class="sky">
-    <div class="sky-copy">
-      <p class="eyebrow">Educational research · figures as of early November 2026</p>
-      <div class="brand-lockup">
-        <a class="brand-mark-link" href="index.html" aria-label="Back to the paper board">
-          <img class="brand-mark" src="brand-mark.svg" width="72" height="72" alt="">
-        </a>
-        <h1>QQQ vs QQQI</h1>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="mast">
+    <nav class="site-nav" aria-label="Primary">
+      <div class="nav-bar">
+        <a class="nav-brand" href="index.html"><img src="favicon.svg" width="28" height="28" alt=""><span>SIFT</span></a>
+        <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-menu"><span class="nav-toggle-bars" aria-hidden="true"></span>Menu</button>
       </div>
-      <p class="lede">How the monthly income in a Nasdaq-100 covered-call ETF is made, what it costs in upside, and when borrowing to buy it did — and did not — beat buying gradually.</p>
-      <p class="byline">By SIFT · Data researched November 9, 2026 · Not financial advice</p>
-    </div>
-    <nav class="site-nav" aria-label="Sections">
-      <div class="nav-inner">
-        <a href="index.html#updates">Updates</a>
-        <a href="index.html#regime">Market regime</a>
+      <div class="nav-panel" id="site-menu">
         <a href="index.html#leaderboard">Leaderboard</a>
-        <a href="index.html#board">All strategies</a>
-        <a href="index.html#method">How it works</a>
-        <a href="index.html#glossary">Glossary</a>
-        <a href="research.html">Researched strategies</a>
+        <a href="index.html#board">Strategies</a>
+        <a href="research.html">Research</a>
+        <a href="follow_money.html">Follow the Money</a>
         <a href="qqqi.html" aria-current="page">QQQ vs QQQI</a>
         <a href="news.html">XRP news</a>
+        <a href="updates.html">Updates</a>
+        <a href="index.html#method">How it works</a>
       </div>
     </nav>
   </header>
+  <header class="sky page-sky">
+    <div class="sky-copy">
+      <p class="eyebrow">Educational research · figures as of early November 2026</p>
+      <h1>QQQ vs QQQI</h1>
+      <p class="lede">How the monthly income in a Nasdaq-100 covered-call ETF is made, what it costs in upside, and when borrowing to buy it did — and did not — beat buying gradually.</p>
+      <p class="byline">By SIFT · Data researched November 9, 2026 · Not financial advice</p>
+    </div>
+  </header>
 
-  <div class="wrap">
+  <main id="main" class="wrap qqqi-page">
     <p class="preview"><span>Educational</span><span>Not financial advice</span><span>No leverage recommended</span></p>
 
     <div class="callout advice">
@@ -140,7 +141,7 @@
       <div><dt>Expense ratio</dt><dd>0.68%<small> QQQ’s is 0.18%</small></dd></div>
     </dl>
 
-    <article class="essay">
+    <article class="essay" data-fold-title="What QQQI is" data-fold-sum="QQQ tracks the Nasdaq-100. QQQI also sells calls." data-fold-group="qqqi" data-fold-id="qqqi-what">
       <p>QQQ is Invesco’s Nasdaq-100 ETF. QQQI is the NEOS Nasdaq-100 High Income ETF, launched January 29, 2024. Both hold the same kind of large Nasdaq stocks. QQQI also sells call options on the Nasdaq-100 Index (NDX) and pays the option premium out as a monthly distribution. That payout is often described as a ~14% “dividend.” The cash is real, but a large share of it has been classified as return of capital, and the calls cap upside in strong rallies. What matters is total return — distributions plus any change in net asset value — not the headline yield.</p>
 
       <h2>What QQQI is, versus QQQ</h2>
@@ -152,12 +153,12 @@
       <p>The monthly payout has been fairly steady in dollars, between $0.53 and $0.66 a share (average $0.622). It is set each month and is not guaranteed. The latest payment, on October 23, 2026, was $0.6343 a share. Trailing 12-month distributions were $7.63 a share.</p>
     </article>
 
-    <figure class="chart-fig wide">
+    <figure class="chart-fig wide" data-fold-title="Monthly distributions" data-fold-sum="Payout per share, February 2024 through October 2026." data-fold-group="qqqi" data-fold-id="qqqi-dist">
       <img src="assets/qqqi-dist-history.png" alt="Bar chart of QQQI monthly distributions per share from February 2024 through October 2026, averaging $0.622, with a dip to $0.53 in April 2025." width="1840" height="630">
       <figcaption>QQQI monthly distribution per share, February 2024 through October 2026. The dollar payout has been steady; it is not guaranteed. Average $0.622. Source: NEOS.</figcaption>
     </figure>
 
-    <article class="essay">
+    <article class="essay" data-fold-title="Income, tradeoffs, and the record" data-fold-sum="Yield is not total return. The history is short." data-fold-group="qqqi" data-fold-id="qqqi-tradeoffs">
       <p>Why 14.1% versus 15.4%? NEOS annualizes the latest payout and divides by the ex-date NAV, which gave a 14.09% distribution rate as of October 31, 2026 (12-month trailing 14.13%). Dividing the same payout by the lower November 6 price of $49.48 gives about 15.4%. The model used 14.1% of NAV as the base case, which is more conservative than that 15.4% run-rate.</p>
 
       <div class="rtable">
@@ -217,8 +218,8 @@
       <p>Assumptions, all labeled as such: distributions move with NAV; a 5% tax drag on QQQI distributions (2025 payouts were about 99.6% ROC); 90% of each payout treated as ROC that lowers basis; QQQ dividends of 0.46% taxed at 15%; everything sold at year 20 with 20% tax on gains over adjusted basis; loan rates held constant; no forced margin liquidation. Implied QQQI total return is about 12% a year in the base case, 7% in the bear case, and 16.5% in the bull case. The base case is generous: since inception QQQI has trailed the Nasdaq-100 by about 3 points a year, while here it roughly matches QQQ.</p>
     </article>
 
-    <p class="table-hint">On a small screen this table shows net gain and payoff time. Turn the phone sideways or use a wider window to see ending values too. Every row puts in the same $352k.</p>
-    <div class="rtable wide">
+    <p class="table-hint" data-fold-title="Borrow, buy gradually, or buy QQQ" data-fold-sum="Same cash in every row. Scroll inside the card." data-fold-group="qqqi" data-fold-id="qqqi-compare">On a small screen this table shows net gain and payoff time. Turn the phone sideways or use a wider window to see ending values too. Every row puts in the same $352k.</p>
+    <div class="rtable wide fold-attach">
       <table class="cmp-table">
         <thead>
           <tr>
@@ -254,19 +255,19 @@
         </tbody>
       </table>
     </div>
-    <p class="scale-note">Net gain = after-tax ending value − any remaining loan − cash put in (not discounted). The leading strategy in each scenario is shown in green. Same $2,935/month budget for 10 years in every row.</p>
+    <p class="scale-note fold-attach">Net gain = after-tax ending value − any remaining loan − cash put in (not discounted). The leading strategy in each scenario is shown in green. Same $2,935/month budget for 10 years in every row.</p>
 
-    <figure class="chart-fig wide">
+    <figure class="chart-fig wide" data-fold-title="Net gain by scenario" data-fold-sum="Borrowing leads only when returns are strong." data-fold-group="qqqi" data-fold-id="qqqi-bars">
       <img src="assets/qqqi-net-bars.png" alt="Bar chart of 20-year after-tax net gain in four scenarios. Borrowing to buy QQQI leads in the base and bull cases, but buying QQQI gradually with no loan leads in the bear and stress cases." width="1840" height="720">
       <figcaption>Twenty-year after-tax net gain. Borrowing leads when returns are strong; buying gradually with no loan leads when they are not.</figcaption>
     </figure>
 
-    <figure class="chart-fig wide">
+    <figure class="chart-fig wide" data-fold-title="Equity paths" data-fold-sum="Leveraged paths go underwater in the stress case." data-fold-group="qqqi" data-fold-id="qqqi-paths">
       <img src="assets/qqqi-paths.png" alt="Four-panel line chart of pre-tax equity over 20 years for the four strategies in the base, bear, bull, and stress cases. In the stress case the leveraged lines go negative in year one." width="1880" height="1120">
       <figcaption>Pre-tax equity (value minus loan) over 20 years. In the stress case both leveraged strategies are underwater for about two years, by as much as $76,000.</figcaption>
     </figure>
 
-    <article class="essay">
+    <article class="essay" data-fold-title="What the scenarios say" data-fold-sum="Borrowing helped only when return beat the loan rate." data-fold-group="qqqi" data-fold-id="qqqi-scenarios">
       <p>In the <b>base case</b>, borrowing leads: about $1.63 million after tax versus $1.35 million for gradual QQQI and $1.12 million for gradual QQQ. In the <b>bear case</b> (yield 10%, NAV falling 3% a year), not borrowing wins: $476,000 versus $421,000. Add a 2022-style −33% drop in month 6, and the leveraged plan ends at $183,000 versus $462,000 without a loan.</p>
       <p>Distributions alone barely amortize a 10-year HELOC. The payment is $2,935 a month. At today’s run-rate the distribution covers it (about 103% after a small tax haircut). In the base case it falls a little short, so the budget adds about $52,000 over 10 years. In the bear case you would add about $150,000.</p>
 
@@ -275,12 +276,12 @@
       </div>
     </article>
 
-    <figure class="chart-fig wide">
+    <figure class="chart-fig wide" data-fold-title="When borrowing helped" data-fold-sum="Green starts about two points above the loan rate." data-fold-group="qqqi" data-fold-id="qqqi-heat">
       <img src="assets/qqqi-heatmap.png" alt="Heat map of the 20-year advantage of borrowing to buy QQQI versus buying it gradually, across loan rates from 5% to 14% and total returns from 2% to 14%. Green cells, where borrowing helps, sit only when total return exceeds the loan rate by about two points or more." width="1840" height="830">
       <figcaption>Borrowing advantage: strategy A’s 20-year net gain minus strategy B’s, with the same monthly budget. Green means borrowing helped; red means it hurt. The green cells start roughly two points above the loan rate.</figcaption>
     </figure>
 
-    <article class="essay">
+    <article class="essay" data-fold-title="Disclaimer and sources" data-fold-sum="Educational only. Not a recommendation to borrow." data-fold-group="qqqi" data-fold-id="qqqi-sources">
       <p>SIFT does not recommend leverage. This is an educational comparison of how financing would work and where it breaks, not a recommendation to borrow. The path with no loan — buying QQQI or QQQ gradually from savings, with distributions reinvested — has no margin-call or home risk, and it won in both the bear and the stress cases.</p>
 
       <h2>Disclaimer</h2>
@@ -299,14 +300,32 @@
     </article>
 
     <p><a class="back" href="index.html">Back to the paper board</a></p>
-
-    <footer class="site-footer">
-      <div class="footer-grid">
-        <div class="footer-brand"><img src="favicon.svg" width="28" height="28" alt=""><span>SIFT</span><p>Educational paper-trading research. Built to test ideas honestly, losses included.</p></div>
-        <div><h3>Disclaimer</h3><p>Educational only. Not financial, investment or tax advice, and not a recommendation to buy any security or to borrow money. Past and simulated results do not guarantee future results.</p></div>
-        <div><h3>Pages</h3><p><a href="index.html#leaderboard">Leaderboard</a> · <a href="index.html#method">How it works</a> · <a href="research.html">Researched strategies</a> · <a href="qqqi.html">QQQ vs QQQI</a> · <a href="news.html">XRP news</a></p></div>
-      </div>
-    </footer>
-  </div>
+  </main>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="footer-kicker">Paper trading, not financial advice.</p>
+      <p>Educational only. Not financial, investment or tax advice, and not a recommendation to buy any security or to borrow money. Past and simulated results do not guarantee future results.</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="index.html#leaderboard">Leaderboard</a>
+        <a href="index.html#board">Strategies</a>
+        <a href="research.html">Research</a>
+        <a href="follow_money.html">Follow the Money</a>
+        <a href="qqqi.html">QQQ vs QQQI</a>
+        <a href="news.html">XRP news</a>
+        <a href="updates.html">Updates</a>
+        <a href="index.html#method">How it works</a>
+      </nav>
+    </div>
+  </footer>
+  <nav class="tabbar" aria-label="Mobile">
+    <a href="index.html"><span>Home</span></a>
+    <a href="index.html#board"><span>Strategies</span></a>
+    <a href="follow_money.html" aria-label="Follow the Money"><span>Money</span></a>
+    <a href="news.html"><span>News</span></a>
+    <a href="qqqi.html" aria-current="page"><span>QQQI</span></a>
+    <a href="updates.html"><span>Updates</span></a>
+  </nav>
+  <a class="to-top" href="#top" aria-label="Back to top">↑</a>
+  <script src="site-chrome.js?v=202611130320"></script>
 </body>
 </html>

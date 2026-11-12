@@ -239,19 +239,35 @@ function maxDrawdownOf(strategy) {
   pts.forEach((p) => { peak = Math.max(peak, p.equity); worst = Math.min(worst, (p.equity / peak - 1) * 100); });
   return worst;
 }
+function setSum(id, text) {
+  const el = document.getElementById(id);
+  if (el && text) el.textContent = text;
+}
 function renderHero() {
   renderStamp();
   renderUpdates();
   const host = document.getElementById("hero-facts");
   if (!host) return;
   const live = SIFT.strategies.filter((s) => !s.planned).length;
+  const ranked = SIFT.strategies
+    .map((s) => ({ s, r: resultOf(s) }))
+    .filter((row) => row.r.pct != null)
+    .sort((a, b) => b.r.pct - a.r.pct || a.s.n - b.s.n);
+  const best = ranked[0];
+  const bestHtml = best
+    ? `<a href="strategy.html?n=${best.s.n}">${esc(best.s.name)}</a> <b class="tone-${best.r.tone}">${esc(best.r.figure)}</b>`
+    : "—";
   host.innerHTML = `
     <div><dt>Strategies</dt><dd>${SIFT.strategies.length} <small>(${live} running)</small></dd></div>
+    <div><dt>Best paper return</dt><dd>${bestHtml}</dd></div>
     <div><dt>Paper per strategy</dt><dd>${money(SIFT.capital).replace(".00", "")}</dd></div>
-    <div><dt>Latest mark</dt><dd>${SIFT.asOf}</dd></div>
-    <div><dt>Board built</dt><dd>${SIFT.builtAt || "—"}</dd></div>`;
-  const foot = document.getElementById("footer-updated");
-  if (foot) foot.textContent = `Last updated: latest mark ${SIFT.asOf}; board built ${SIFT.builtAt || "—"}${SIFT.regime ? "; market regime " + SIFT.regime.asOf : ""}.`;
+    <div><dt>Latest mark</dt><dd>${esc(SIFT.asOf)}</dd></div>`;
+  const counts = { up: 0, down: 0, flat: 0, wait: 0 };
+  SIFT.strategies.forEach((s) => { counts[resultOf(s).tone] += 1; });
+  const line = document.getElementById("score-line");
+  if (line) line.textContent = counts.up + " up · " + counts.down + " down · " + counts.flat + " flat · " + counts.wait + " not started";
+  const kicker = document.getElementById("hero-kicker");
+  if (kicker && SIFT.asOf) kicker.textContent = "Daily check-in · " + SIFT.asOf;
 }
 const LB_COLS = [
   { key: "rank", label: "#", num: true },
@@ -273,7 +289,7 @@ function leaderboardRows() {
   });
 }
 function renderLeaderboard() {
-  const host = document.getElementById("leaderboard");
+  const host = document.getElementById("leaderboard-mount");
   if (!host) return;
   const rows = leaderboardRows();
   rows.forEach((x) => { x.rank = x.s.rank == null ? null : x.s.rank; });
@@ -309,17 +325,27 @@ function renderLeaderboard() {
 }
 
 function renderBoard() {
-  const board = document.getElementById("board");
+  const board = document.getElementById("board-mount");
   const tally = document.getElementById("tally");
   const counts = { up: 0, down: 0, flat: 0, wait: 0 };
   SIFT.strategies.forEach((strategy) => {
     const result = resultOf(strategy);
     counts[result.tone] += 1;
+    const row = document.createElement("article");
+    row.className = "strategy-row drawer tone-" + result.tone;
+    row.dataset.drawerGroup = "board";
+    const toggle = document.createElement("button");
+    toggle.type = "button";
+    toggle.className = "row-toggle";
+    toggle.setAttribute("aria-expanded", "false");
+    const rankLabel = strategy.rank ? "#" + strategy.rank : "—";
+    toggle.innerHTML = `<span class="row-rank">${rankLabel}${rankMoveHtml(strategy)}</span><span class="row-name">${esc(strategy.name)}</span><span class="row-pnl tone-${result.tone}">${esc(result.figure)}</span><span class="fold-chevron" aria-hidden="true"></span>`;
     const link = document.createElement("a");
     link.className = "card tone-" + result.tone;
     link.href = "strategy.html?n=" + strategy.n;
     link.target = "sift-" + strategy.n;
     link.addEventListener("click", (event) => {
+      if (window.matchMedia("(max-width: 768px)").matches) return;
       event.preventDefault();
       window.open(link.href, link.target, "popup=yes,width=860,height=940,resizable=yes,scrollbars=yes");
     });
@@ -353,7 +379,8 @@ function renderBoard() {
     meta.className = "meta";
     meta.textContent = strategy.planned ? result.detail : strategy.asOfLabel;
     link.append(meta);
-    board.append(link);
+    row.append(toggle, link);
+    board.append(row);
   });
   if (tally) {
     const bits = [
@@ -370,8 +397,8 @@ function renderBoard() {
   renderTicker();
   renderHero();
   renderLeaderboard();
-  const book = document.getElementById("book");
-  const ladder = document.getElementById("ladder");
+  const book = document.getElementById("book-mount");
+  const ladder = document.getElementById("ladder-mount");
   const priced = SIFT.strategies.filter((item) => item.latest != null);
   const base = priced.length * SIFT.capital;
   const sum = priced.reduce((total, item) => total + item.latest, 0);
@@ -385,6 +412,7 @@ function renderBoard() {
     const bookPct = (sum / base - 1) * 100;
     const bookTone = toneOf(bookPct).tone;
     book.innerHTML = `
+      <h2 class="fold-dup">Paper balances</h2>
       <article class="tone-${bookTone}"><span>${priced.length} paper balances</span><strong>${money(sum)}</strong><p>${signedMoney(sum - base)} · ${signedPct(bookPct)} from ${money(base)}. SEASONS is not started. The day-trade line uses its primary account.</p></article>
       <article class="tone-${best.result.tone}"><span>Best recorded</span><strong>${best.result.figure}</strong><p>${best.item.name}. ${signedMoney(best.result.delta)}.</p></article>
       <article class="tone-${worst.result.tone}"><span>Worst recorded</span><strong>${worst.result.figure}</strong><p>${worst.item.name}. ${signedMoney(worst.result.delta)}.</p></article>`;
@@ -396,7 +424,7 @@ function renderBoard() {
       const left = result.pct >= 0 ? 50 : 50 - width;
       return `<li><span class="who">${String(item.n).padStart(2, "0")} ${item.name}</span><span class="track"><i style="left:${left}%;width:${width}%;background:${item.color}"></i></span><b class="tone-${result.tone}">${result.figure}</b></li>`;
     }).join("");
-    ladder.innerHTML = `<h2>Recorded change from the start</h2><ol>${rows}</ol>`;
+    ladder.innerHTML = `<h2 class="fold-dup">Recorded change from the start</h2><ol>${rows}</ol>`;
   }
   const maxN = Math.max(...SIFT.strategies.map((item) => item.n));
   const open = (3 - (SIFT.strategies.length % 3)) % 3;
@@ -406,6 +434,30 @@ function renderBoard() {
     cell.innerHTML = `<div class="slot-top"><span class="num">${slot}</span><span class="tag">Open</span></div><h2>Room for a later test</h2><div class="empty-plot">Empty on purpose. A new strategy can be added here.</div>`;
     board.append(cell);
   }
+  if (best) setSum("leaderboard-sum", "#" + (best.item.rank || "—") + " " + best.item.name + " " + best.result.figure);
+  setSum("board-sum", SIFT.strategies.length + " strategies");
+  if (SIFT.regime) {
+    const parts = [];
+    if (SIFT.regime.stock) parts.push("Stocks " + regimeName(SIFT.regime.stock.regime));
+    if (SIFT.regime.crypto) parts.push("Crypto " + regimeName(SIFT.regime.crypto.regime));
+    const label = parts.join(" · ");
+    setSum("mood-sum", label);
+    setSum("regime-sum", label);
+  }
+  let held = 0;
+  let cashN = 0;
+  SIFT.strategies.forEach((s) => {
+    const cells = positionCells(s);
+    if (cells.some((c) => c.kind === "symbol" || c.kind === "open")) held += 1;
+    else if (cells.some((c) => c.kind === "cash")) cashN += 1;
+  });
+  setSum("positions-sum", held + " holding · " + cashN + " in cash");
+  if (best && worst) {
+    setSum("book-sum", money(sum) + " combined");
+    setSum("ladder-sum", best.result.figure + " best · " + worst.result.figure + " worst");
+  }
+  const newest = (SIFT.updates || [])[0];
+  setSum("updates-sum", newest ? newest.title : "Daily log");
 }
 
 const REGIME_TEXT = {
@@ -434,7 +486,7 @@ function regimeFitToday(strategy) {
 }
 
 function renderRegime() {
-  const host = document.getElementById("regime");
+  const host = document.getElementById("regime-mount");
   if (!host || !SIFT.regime) return;
   const pill = (key, label, market) => {
     const r = SIFT.regime[key];
@@ -451,7 +503,7 @@ function renderRegime() {
   const best = rows.filter((s) => regimeFitToday(s) === "best");
   const sit = rows.filter((s) => regimeFitToday(s) === "sit");
   const list = (items) => items.length ? items.map((s) => `<a href="strategy.html?n=${s.n}">${String(s.n).padStart(2, "0")} ${s.name}</a>`).join(" · ") : "None";
-  host.innerHTML = `<h2>Current market regime</h2>
+  host.innerHTML = `<h2 class="fold-dup">Current market regime</h2>
     <p class="regime-intro">What kind of market are we in today? Each strategy works best in some conditions and steps aside in others. This label is worked out each day from closing prices for stocks (SPY) and crypto (BTC).</p>
     <div class="regime-grid">${pill("stock", "Stocks · SPY", "stocks")}${pill("crypto", "Crypto · BTC", "crypto")}</div>
     <p class="regime-fit"><b>In their best regime today:</b> ${list(best)}</p>
@@ -471,7 +523,7 @@ function regimeFitHtml(strategy) {
     const marks = [(r.bestList || []).includes(key) ? "best" : "", (r.sitOutList || []).includes(key) ? "sit out" : "", today && today.regime === key ? "today" : ""].filter(Boolean).join(" · ");
     return `<tr${today && today.regime === key ? ' class="is-today"' : ""}><th>${regimeName(key)}</th><td class="${tone}">${v == null ? "—" : signedPct(v)}</td><td>${marks}</td></tr>`;
   }).join("");
-  return `<h2>Market regime fit</h2>
+  return `<h2 class="fold-dup">Market regime fit</h2>
     <p>Best regime: ${r.best}. Sit out: ${r.sitOut}.${today ? ` Today (${today.asset}, ${shortDate(today.date)}): <b>${regimeName(today.regime)}</b>.` : ""}</p>
     <div class="rtable"><table><thead><tr><th>Regime</th><th>Backtest annualized return</th><th></th></tr></thead><tbody>${rowsHtml}</tbody></table></div>
     <p class="meta">Historical backtest by regime (new experiment, Nov 10, 2026). Separate from the forward paper result above.</p>`;
@@ -479,9 +531,178 @@ function regimeFitHtml(strategy) {
 
 function whyHtml(strategy) {
   const why = strategy.why;
-  if (!why || !why.text) return `<h2>Why we picked this</h2><p>No note recorded.</p>`;
+  if (!why || !why.text) return `<h2 class="fold-dup">Why we picked this</h2><p>No note recorded.</p>`;
   const flag = why.hasRecord ? "Original backtest on record" : "No original backtest record for these exact rules";
-  return `<h2>Why we picked this</h2><div class="why-box"><p class="preview"><span>${flag}</span></p><p>${why.text}</p>${why.records && why.records.length ? `<p class="meta">Records: ${why.records.join(" · ")}</p>` : ""}</div>`;
+  return `<h2 class="fold-dup">Why we picked this</h2><div class="why-box"><p class="preview"><span>${flag}</span></p><p>${why.text}</p>${why.records && why.records.length ? `<p class="meta">Records: ${why.records.join(" · ")}</p>` : ""}</div>`;
+}
+
+const COPY_DISCLAIMER = "Educational paper-trading rules, not financial advice or a recommendation to buy or sell. Past and backtested results don't guarantee future returns.";
+const NOT_STATED = "Not stated in the published rules.";
+const ENTRY_RE = /\b(buy|buys|enter|entry|long an|long while|hold when|hold while|hold the|hold 100|holds the|signal when|signal:|new buys|rank by|score =|owns bitcoin|own bitcoin)\b/i;
+const EXIT_RE = /\b(sell|sold|exit|exits|stop|goes to cash|hold cash|in cash|otherwise flat|otherwise cash|flat overnight|flat by the close|time stop|drop out|below it)\b/i;
+const SIZE_RE = /(\$[\d,]+|\bone third\b|\bone fifth\b|\bone tenth\b|\bone half\b|equal weight|full sleeve|all-in|\bslots\b|per position|per coin|per asset|\bweight\b|up to \d+|maximum \d+|\b100%\b|\d+%)/i;
+const TIME_RE = /\b(rebalance|month-end|every \d+|each (day|week|month)|weekly|daily check|fill at|filled at|signal at the close|last trading day|next (daily |trading |utc |bar))/i;
+
+function uniqueLines(lines) {
+  const out = [];
+  (lines || []).forEach((line) => {
+    const text = String(line || "").trim();
+    if (text && !out.includes(text)) out.push(text);
+  });
+  return out;
+}
+function matchingLines(lines, re) {
+  return lines.filter((line) => re.test(line));
+}
+function stepHtml(lines) {
+  const items = uniqueLines(lines);
+  if (!items.length) return `<p>${esc(NOT_STATED)}</p>`;
+  if (items.length === 1) return `<p>${esc(items[0])}</p>`;
+  return `<ul class="rules">${items.map((line) => `<li>${esc(line)}</li>`).join("")}</ul>`;
+}
+function stepText(label, lines) {
+  const items = uniqueLines(lines);
+  if (!items.length) return label + "\n" + NOT_STATED;
+  return label + "\n" + items.map((line) => "- " + line).join("\n");
+}
+function entryLines(strategy, lines) {
+  const hit = matchingLines(lines, ENTRY_RE);
+  if (hit.length) return hit;
+  if (strategy.plain) return ["Published summary: " + strategy.plain];
+  return [];
+}
+function sizingLines(strategy, lines) {
+  const hit = matchingLines(lines, SIZE_RE);
+  if (strategy.universe && SIZE_RE.test(strategy.universe)) hit.push(strategy.universe);
+  return uniqueLines(hit);
+}
+function timingLines(strategy, lines) {
+  const hit = matchingLines(lines, TIME_RE);
+  [strategy.universe, strategy.window].forEach((text) => {
+    if (text && /\b(rebalance|daily check|weekly|monthly|month-end|every \d+)/i.test(text)) hit.push(text);
+  });
+  return uniqueLines(hit);
+}
+function regimeLines(strategy, lines) {
+  const hit = [];
+  if (strategy.regime) {
+    if (strategy.regime.best) hit.push("Best regime, as published: " + strategy.regime.best);
+    if (strategy.regime.sitOut) hit.push("Sit out, as published: " + strategy.regime.sitOut);
+    if (strategy.regime.market) hit.push("Market: " + strategy.regime.market);
+  }
+  return uniqueLines(hit.concat(matchingLines(lines, /\bregime\b/i)));
+}
+function holdingsLines(strategy) {
+  const cells = positionCells(strategy);
+  const lines = [];
+  if (strategy.asOfLabel) lines.push("Published " + strategy.asOfLabel + ".");
+  else if (strategy.asOf) lines.push("As of " + strategy.asOf + ".");
+  const symbols = cells.filter((c) => c.kind === "symbol").map((c) => c.symbol);
+  if (symbols.length) lines.push("Held: " + symbols.join(", ") + ".");
+  cells.forEach((cell) => {
+    if (cell.kind === "cash") {
+      lines.push("Cash. Nothing is held at this mark.");
+      if (cell.queued && cell.queued.length) lines.push("Queued for the next close: " + cell.queued.join(", ") + ".");
+      if (cell.note) lines.push(cell.note);
+    } else if (cell.kind === "open") lines.push(cell.count + " positions open. The published note does not name the symbols.");
+    else if (cell.kind === "idle") lines.push("Not started. No paper account yet.");
+    else if (cell.kind === "unknown") lines.push("Holdings are not listed in the published forward note.");
+  });
+  if (strategy.forward) lines.push("Published forward note: " + strategy.forward);
+  return uniqueLines(lines);
+}
+function holdingsSummary(strategy) {
+  const cells = positionCells(strategy);
+  if (cells.some((c) => c.kind === "idle")) return "Not started";
+  const symbols = cells.filter((c) => c.kind === "symbol").map((c) => c.symbol);
+  if (symbols.length) return symbols.join(", ");
+  const open = cells.find((c) => c.kind === "open");
+  if (open) return open.label;
+  const cash = cells.find((c) => c.kind === "cash");
+  if (cash) return cash.queued && cash.queued.length ? "Cash, queued " + cash.queued.join(", ") : "Cash";
+  return "Holdings not listed";
+}
+function slugName(value) {
+  return String(value || "strategy").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 60) || "strategy";
+}
+function downloadText(filename, text) {
+  const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1500);
+}
+function foldBlock(id, group, title, sum, inner) {
+  return `<section class="fold" id="${id}" data-fold-group="${group}"><h2 class="fold-heading"><button type="button" class="fold-toggle" aria-expanded="false" aria-controls="${id}-panel"><span class="fold-name">${esc(title)}</span><span class="fold-sum">${esc(sum)}</span><span class="fold-chevron" aria-hidden="true"></span></button></h2><div class="fold-body" id="${id}-panel"><div class="fold-inner">${inner}</div></div></section>`;
+}
+function copyPack(strategy) {
+  const lines = uniqueLines(strategy.rules || []);
+  const trades = strategy.universe ? [strategy.universe] : [];
+  const entry = entryLines(strategy, lines);
+  const exit = matchingLines(lines, EXIT_RE);
+  const sizing = sizingLines(strategy, lines);
+  const timing = timingLines(strategy, lines);
+  const regime = regimeLines(strategy, lines);
+  const held = holdingsLines(strategy);
+  const how = "Use any broker's paper or simulated account, and start small. Follow only the rules printed here. A broker's simulator will not match these fills exactly. SIFT places no orders.";
+  const heldLine = held.find((line) => line.indexOf("Held: ") === 0);
+  const rest = held.filter((line) => line.indexOf("Held: ") !== 0);
+  const chips = heldLine
+    ? `<ul class="hold-list">${heldLine.replace(/^Held: /, "").replace(/\.$/, "").split(", ").map((sym) => `<li>${esc(sym)}</li>`).join("")}</ul>`
+    : "";
+  const html = `
+    <p class="block-kicker">Plain steps from the fields already published for this strategy. A missing detail stays missing. The full rules are listed underneath.</p>
+    <dl class="copy-steps">
+      <div><dt>What it trades</dt><dd>${stepHtml(trades)}</dd></div>
+      <div><dt>Entry signal</dt><dd>${stepHtml(entry)}</dd></div>
+      <div><dt>Exit signal</dt><dd>${stepHtml(exit)}</dd></div>
+      <div><dt>Position sizing</dt><dd>${stepHtml(sizing)}</dd></div>
+      <div><dt>Rebalance timing</dt><dd>${stepHtml(timing)}</dd></div>
+      <div><dt>Market-regime filter</dt><dd>${stepHtml(regime)}</dd></div>
+    </dl>
+    <h3 class="fold-dup">Published rules</h3>
+    ${lines.length ? `<ul class="rules">${lines.map((rule) => `<li>${esc(rule)}</li>`).join("")}</ul>` : `<p>${esc(NOT_STATED)}</p>`}
+    <h3>Current holdings</h3>
+    ${chips}
+    ${rest.length ? stepHtml(rest) : (chips ? "" : stepHtml([]))}
+    <div class="copy-actions">
+      <button type="button" id="copy-rules">Copy rules</button>
+      <button type="button" id="download-rules">Download rules (.txt)</button>
+      <p class="copy-status" id="copy-status" role="status"></p>
+    </div>
+    <div class="why-box"><p><b>How to paper-trade this yourself.</b> ${esc(how)}</p></div>
+    <p class="disclaimer-line">${esc(COPY_DISCLAIMER)}</p>`;
+  const text = [
+    "SIFT strategy " + String(strategy.n).padStart(2, "0") + " — " + strategy.name,
+    COPY_DISCLAIMER,
+    "",
+    stepText("What it trades", trades),
+    "",
+    stepText("Entry signal", entry),
+    "",
+    stepText("Exit signal", exit),
+    "",
+    stepText("Position sizing", sizing),
+    "",
+    stepText("Rebalance timing", timing),
+    "",
+    stepText("Market-regime filter", regime),
+    "",
+    "Published rules",
+    lines.length ? lines.map((rule, i) => (i + 1) + ". " + rule).join("\n") : NOT_STATED,
+    "",
+    stepText("Current holdings", held),
+    "",
+    "How to paper-trade this yourself",
+    how,
+    "",
+    COPY_DISCLAIMER
+  ].join("\n");
+  return { html, text };
 }
 
 function renderStrategy() {
@@ -496,39 +717,39 @@ function renderStrategy() {
   document.title = strategy.name + " · SIFT";
   const result = resultOf(strategy);
   const plot = strategy.planned ? `<div class="empty-plot">Not launched. No marks to plot.</div>` : `<div class="plot" id="detail-plot"></div>`;
+  const pack = copyPack(strategy);
+  const backtestTitle = strategy.label ? "Backtest, historical (separate from the forward paper)" : "Backtest, in-sample";
   root.innerHTML = `
-    <p class="eyebrow">Strategy ${String(strategy.n).padStart(2, "0")} · ${strategy.category}</p>
+    <p class="eyebrow">Strategy ${String(strategy.n).padStart(2, "0")} · ${esc(strategy.category)}</p>
     ${strategy.label ? `<p class="chip-row">${labelChip(strategy)}</p>` : ""}
-    <h1>${strategy.name}</h1>
-    <p class="lede">${strategy.plain}</p>
-    <section class="result-block forward-block" aria-labelledby="forward-heading">
-      <h2 id="forward-heading">Forward paper results</h2>
-      <p class="block-kicker">Simulated account from the daily paper test. Separate from the historical backtest below.</p>
-      <p class="result tone-${result.tone}"><span class="figure">${result.figure}</span><span class="status">${result.word}</span></p>
-      ${factsHtml(result)}
-      <p class="scale-note">${result.detail}. ${strategy.window} ${strategy.sleeveNote || "Each dot is one recorded daily mark from the paper-test records. Days without a mark are not drawn."}</p>
-      ${plot}
-    </section>
-    <section class="result-block backtest-block" id="backtest-panel" aria-labelledby="backtest-heading">
-      <h2 id="backtest-heading">Backtest performance</h2>
-      <p class="backtest-banner">Backtest (hypothetical, includes costs)</p>
-      <p class="block-kicker" id="backtest-method">Loading historical backtest…</p>
-      <div id="backtest-body"></div>
-    </section>
-    ${whyHtml(strategy)}
-    <h2>What it is testing</h2>
-    <p>${strategy.hypothesis}</p>
-    <h2>Rules</h2>
-    <ul class="rules">${strategy.rules.map((rule) => `<li>${rule}</li>`).join("")}</ul>
-    ${regimeFitHtml(strategy)}
-    <h2>${strategy.label ? "Backtest, historical (separate from the forward paper)" : "Backtest, in-sample"}</h2>
-    <p>${strategy.backtest}</p>
-    <h2>Forward paper</h2>
-    <p>${strategy.forward}</p>
-    <h2>Main risk</h2>
-    <p>${strategy.risk}</p>
-    ${strategy.label ? `<p class="fine">Backtest = new experiment dated ${strategy.n >= 18 ? "Nov 11, 2026" : "Nov 10, 2026"}.${strategy.riskLevel ? " Aggressive: expect very large drawdowns; 3x ETFs reset daily and lose value in choppy markets." : ""} Universe is today's list of large stocks/coins, so results carry survivorship bias. Halves are a stability check; parameters were not tuned. “Proven in backtest” means it passed the historical checks only; nothing is proven going forward. Forward paper only, not a forecast.</p>` : ""}
-    <p class="fine">Paper only. Simulated $10,000. No live orders. Not financial advice. None of these strategies is proven. Source: ${SIFT.source}, ${SIFT.asOf}.</p>
+    <h1>${esc(strategy.name)}</h1>
+    <p class="lede">${esc(strategy.plain)}</p>
+    ${foldBlock("forward", "strategy", "Forward paper results", result.figure + " · " + result.word, `
+      <section class="result-block forward-block" aria-labelledby="forward-heading">
+        <h2 id="forward-heading" class="fold-dup">Forward paper results</h2>
+        <p class="block-kicker">Simulated account from the daily paper test. Separate from the historical backtest below.</p>
+        <p class="result tone-${result.tone}"><span class="figure">${esc(result.figure)}</span><span class="status">${esc(result.word)}</span></p>
+        ${factsHtml(result)}
+        <p class="scale-note">${esc(result.detail)}. ${esc(strategy.window)} ${esc(strategy.sleeveNote || "Each dot is one recorded daily mark from the paper-test records. Days without a mark are not drawn.")}</p>
+        ${plot}
+      </section>`)}
+    ${foldBlock("copy-strategy", "strategy", "Copy this strategy", holdingsSummary(strategy), pack.html)}
+    ${foldBlock("backtest", "strategy", "Backtest by year", "Hypothetical, with costs", `
+      <section class="result-block backtest-block" id="backtest-panel" aria-labelledby="backtest-heading">
+        <h2 id="backtest-heading" class="fold-dup">Backtest performance</h2>
+        <p class="backtest-banner">Backtest (hypothetical, includes costs)</p>
+        <p class="block-kicker" id="backtest-method">Loading historical backtest…</p>
+        <div id="backtest-body"></div>
+      </section>`)}
+    ${foldBlock("why", "strategy", "Why we picked this", strategy.why && strategy.why.hasRecord ? "Original backtest on record" : "Note from the published record", whyHtml(strategy))}
+    ${foldBlock("hypothesis", "strategy", "What it is testing", "The idea behind the rules", `<h2 class="fold-dup">What it is testing</h2><p>${esc(strategy.hypothesis)}</p>`)}
+    ${foldBlock("rules", "strategy", "Rules", (strategy.rules || []).length + " published lines", `<h2 class="fold-dup">Rules</h2><ul class="rules">${(strategy.rules || []).map((rule) => `<li>${esc(rule)}</li>`).join("")}</ul>`)}
+    ${strategy.regime ? foldBlock("regime-fit", "strategy", "Market regime fit", "Best and sit-out regimes", regimeFitHtml(strategy)) : ""}
+    ${foldBlock("backtest-note", "strategy", "Historical backtest", "Separate from the forward paper", `<h2 class="fold-dup">${esc(backtestTitle)}</h2><p>${esc(strategy.backtest)}</p>`)}
+    ${foldBlock("forward-note", "strategy", "Forward paper", strategy.asOfLabel || "The running account", `<h2 class="fold-dup">Forward paper</h2><p>${esc(strategy.forward)}</p>`)}
+    ${foldBlock("risk", "strategy", "Main risk", "What can go wrong", `<h2 class="fold-dup">Main risk</h2><p>${esc(strategy.risk)}</p>
+      ${strategy.label ? `<p class="fine">Backtest = new experiment dated ${strategy.n >= 18 ? "Nov 11, 2026" : "Nov 10, 2026"}.${strategy.riskLevel ? " Aggressive: expect very large drawdowns; 3x ETFs reset daily and lose value in choppy markets." : ""} Universe is today's list of large stocks/coins, so results carry survivorship bias. Halves are a stability check; parameters were not tuned. “Proven in backtest” means it passed the historical checks only; nothing is proven going forward. Forward paper only, not a forecast.</p>` : ""}
+      <p class="fine">Paper only. Simulated $10,000. No live orders. Not financial advice. None of these strategies is proven. Source: ${esc(SIFT.source)}, ${esc(SIFT.asOf)}.</p>`)}
   `;
   const host = document.getElementById("detail-plot");
   if (host) {
@@ -536,6 +757,23 @@ function renderStrategy() {
     host.after(legend(strategy));
   }
   mountBacktest(strategy);
+  const status = document.getElementById("copy-status");
+  const copyBtn = document.getElementById("copy-rules");
+  const downloadBtn = document.getElementById("download-rules");
+  if (copyBtn) {
+    copyBtn.addEventListener("click", () => {
+      const done = () => { if (status) status.textContent = "Copied."; };
+      const fail = () => { if (status) status.textContent = "Could not copy. Use the download."; };
+      if (window.siftChrome && window.siftChrome.copyText) window.siftChrome.copyText(pack.text).then(done, fail);
+      else fail();
+    });
+  }
+  if (downloadBtn) {
+    downloadBtn.addEventListener("click", () => {
+      downloadText("sift-" + String(strategy.n).padStart(2, "0") + "-" + slugName(strategy.name) + ".txt", pack.text);
+      if (status) status.textContent = "Download started.";
+    });
+  }
 }
 
 
@@ -543,21 +781,26 @@ function renderStrategy() {
 function esc(t) { return String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
 function renderStamp() {
   const host = document.getElementById("updated-stamp");
-  if (!host || !SIFT.lastUpdatedISO) return;
-  const ageDays = (Date.now() - Date.parse(SIFT.lastUpdatedISO)) / 86400000;
-  const stale = ageDays > 2;
-  host.classList.toggle("stale", stale);
-  host.innerHTML = `<b id="stamp-when">Last updated: ${esc(SIFT.lastUpdatedET)}</b>` +
-    (stale ? `<span class="stamp-stale">Stale: no new data for ${Math.floor(ageDays)} days</span>` : "") +
-    `<span class="stamp-next">Next update: ${esc(SIFT.nextUpdate || "daily after the market close (about 8:30 PM ET)")}</span><a href="updates.html">All updates →</a>`;
+  if (host && SIFT.lastUpdatedISO) {
+    const ageDays = (Date.now() - Date.parse(SIFT.lastUpdatedISO)) / 86400000;
+    const stale = ageDays > 2;
+    host.classList.toggle("stale", stale);
+    host.innerHTML = `<b id="stamp-when">Last updated: ${esc(SIFT.lastUpdatedET)}</b>` +
+      (stale ? `<span class="stamp-stale">Stale: no new data for ${Math.floor(ageDays)} days</span>` : "") +
+      `<span class="stamp-next">Next update: ${esc(SIFT.nextUpdate || "daily after the market close (about 8:30 PM ET)")}</span><a href="updates.html">All updates →</a>`;
+  }
+  const foot = document.getElementById("footer-updated");
+  if (foot && SIFT.asOf) foot.textContent = "Latest mark " + SIFT.asOf + (SIFT.builtAt ? ". Board built " + SIFT.builtAt + "." : ".");
 }
 function updateEntryHtml(e) {
   const tag = e.kind === "milestone" ? `<span class="chip chip-milestone">Milestone</span>` : `<span class="chip chip-daily">Daily</span>`;
-  return `<article class="update-entry update-${e.kind}"><header><time datetime="${esc(e.date)}">${esc(e.title)}</time>${tag}</header>
-    <ul>${(e.items || []).map((i) => `<li>${esc(i)}</li>`).join("")}</ul>${e.updatedET ? `<p class="meta">Recorded ${esc(e.updatedET)}</p>` : ""}</article>`;
+  return `<article class="update-entry update-${e.kind} drawer" data-drawer-group="updates">
+    <button type="button" class="row-toggle" aria-expanded="false"><span class="row-name">${esc(e.title)}</span>${tag}<span class="fold-chevron" aria-hidden="true"></span></button>
+    <div class="drawer-body"><header class="drawer-desk"><time datetime="${esc(e.date)}">${esc(e.title)}</time>${tag}</header>
+    <ul>${(e.items || []).map((i) => `<li>${esc(i)}</li>`).join("")}</ul>${e.updatedET ? `<p class="meta">Recorded ${esc(e.updatedET)}</p>` : ""}</div></article>`;
 }
 function renderUpdates() {
-  const host = document.getElementById("updates");
+  const host = document.getElementById("updates-mount");
   if (!host || !SIFT.updates) return;
   host.innerHTML = `<div class="section-head"><h2>Latest updates</h2><p>The board refreshes once a day after the market close. Each day's trades, biggest movers and market regime are logged here, newest first.</p></div>
     <div class="updates-list">${SIFT.updates.slice(0, 3).map(updateEntryHtml).join("")}</div>
@@ -1170,7 +1413,7 @@ function moodDayCells(rows, market) {
   }).join("")}</div>`;
 }
 function renderMood() {
-  const host = document.getElementById("mood");
+  const host = document.getElementById("mood-mount");
   if (!host) return;
   const stock = SIFT.regime && SIFT.regime.stock;
   const crypto = SIFT.regime && SIFT.regime.crypto;
@@ -1200,7 +1443,7 @@ function renderMood() {
     return `<li class="${active.has(key) ? "is-on" : ""} reg-${key}"><b class="reg-word reg-${key}">${esc(regimeName(key))}</b><span>${esc(MOOD_BLURB[key])}</span>${marks.length ? `<em>${esc(marks.join(" · "))}</em>` : ""}</li>`;
   }).join("");
   const days = loggedRegimeDays();
-  host.innerHTML = `<div class="section-head"><h2>Market mood</h2><p>The dial is today’s regime, the same daily label as the box below. Left is shock, right is trend up. It describes the last close. It is not a forecast.</p></div>
+  host.innerHTML = `<div class="section-head"><h2>Market mood</h2><p>The dial is today’s regime, the same daily label as the market regime section. Left is shock, right is trend up. It describes the last close. It is not a forecast.</p></div>
     <div class="mood-grid">${card(stock, "stocks", "Stocks · SPY")}${card(crypto, "crypto", "Crypto · BTC")}</div>
     <ul class="mood-key">${keyList}</ul>
     <div class="mood-log">
@@ -1256,7 +1499,7 @@ function positionDetail(strategy, cell) {
   return strategy.name + " · Holdings not listed · " + pctText + mark + ".";
 }
 function renderPositions() {
-  const host = document.getElementById("positions");
+  const host = document.getElementById("positions-mount");
   if (!host) return;
   const rows = SIFT.strategies.map((strategy) => {
     const cells = positionCells(strategy);

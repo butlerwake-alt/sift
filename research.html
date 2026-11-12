@@ -29,32 +29,72 @@
   <meta name="twitter:title" content="Researched strategies · SIFT">
   <meta name="twitter:description" content="Ten strategies people share online, tested on past prices with fees. These are history, not live signals and not the paper accounts on the main board. Not financial advice.">
   <meta name="twitter:image" content="https://butlerwake-alt.github.io/sift/og-image.png">
-  <link rel="stylesheet" href="styles.css?v=202611120300">
+  <link rel="stylesheet" href="styles.css?v=202611130320">
 </head>
-<body>
-  <header class="sky">
+<body id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="mast">
+    <nav class="site-nav" aria-label="Primary">
+      <div class="nav-bar">
+        <a class="nav-brand" href="index.html"><img src="favicon.svg" width="28" height="28" alt=""><span>SIFT</span></a>
+        <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-menu"><span class="nav-toggle-bars" aria-hidden="true"></span>Menu</button>
+      </div>
+      <div class="nav-panel" id="site-menu">
+        <a href="index.html#leaderboard">Leaderboard</a>
+        <a href="index.html#board">Strategies</a>
+        <a href="research.html" aria-current="page">Research</a>
+        <a href="follow_money.html">Follow the Money</a>
+        <a href="qqqi.html">QQQ vs QQQI</a>
+        <a href="news.html">XRP news</a>
+        <a href="updates.html">Updates</a>
+        <a href="index.html#method">How it works</a>
+      </div>
+    </nav>
+  </header>
+  <header class="sky page-sky">
     <div class="sky-copy">
       <p class="eyebrow" id="rlabel">Historical backtests · new experiment dated 2026-11-10</p>
-      <div class="brand-lockup">
-        <a class="brand-mark-link" href="index.html" aria-label="Back to the paper board">
-          <img class="brand-mark" src="brand-mark.svg" width="72" height="72" alt="">
-        </a>
-        <h1>Researched strategies</h1>
-      </div>
+      <h1>Researched strategies</h1>
       <p class="lede">Ten strategies people share online, tested on past prices with fees. These are history, not live signals and not the paper accounts on the main board.</p>
-      <p class="lede"><a class="back" href="index.html">Back to the paper board</a></p>
     </div>
   </header>
-  <div class="wrap">
+  <main id="main" class="wrap">
+    <p><a class="back" href="index.html">Back to the paper board</a></p>
     <p class="preview"><span>Historical backtest</span><span>New experiment 2026-11-10</span><span>Not financial advice</span></p>
     <div class="tally" id="rtally"></div>
-    <section class="ladder" id="rsummary"></section>
-    <section class="ladder" id="rmethod"></section>
-    <div class="rgrid" id="rcards"></div>
-    <footer>Past results do not predict future results. Every number here comes from a simulated $10,000 on historical daily prices, with the costs and timing described above. A strategy can look good on history and still lose money from here. Nothing on this page is a recommendation, and SIFT places no real orders.</footer>
-  </div>
-  <script src="research_data.js?v=202611120300"></script>
-  <script src="research.js?v=202611120300"></script>
+    <section class="ladder" id="rsummary" data-fold-title="Ranked results" data-fold-sum="History, not live signals." data-fold-group="research" data-fold-id="research-table"></section>
+    <section class="ladder" id="rmethod" data-fold-title="How these were tested" data-fold-sum="Fees, windows, and the frozen run." data-fold-group="research" data-fold-id="research-method"></section>
+    <div class="rgrid" id="rcards" data-fold-title="The ten strategies" data-fold-sum="Open a row for the chart and the rules." data-fold-group="research" data-fold-id="research-cards"></div>
+  </main>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="footer-kicker">Paper trading, not financial advice.</p>
+      <p>Past results do not predict future results. Every number here comes from a simulated $10,000 on historical daily prices, with the costs and timing described above. A strategy can look good on history and still lose money from here. Nothing on this page is a recommendation, and SIFT places no real orders.</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="index.html#leaderboard">Leaderboard</a>
+        <a href="index.html#board">Strategies</a>
+        <a href="research.html">Research</a>
+        <a href="follow_money.html">Follow the Money</a>
+        <a href="qqqi.html">QQQ vs QQQI</a>
+        <a href="news.html">XRP news</a>
+        <a href="updates.html">Updates</a>
+        <a href="index.html#method">How it works</a>
+      </nav>
+      <p class="footer-updated">Simulated research. Not a live brokerage.</p>
+    </div>
+  </footer>
+  <nav class="tabbar" aria-label="Mobile">
+    <a href="index.html"><span>Home</span></a>
+    <a href="index.html#board"><span>Strategies</span></a>
+    <a href="follow_money.html" aria-label="Follow the Money"><span>Money</span></a>
+    <a href="news.html"><span>News</span></a>
+    <a href="qqqi.html"><span>QQQI</span></a>
+    <a href="updates.html"><span>Updates</span></a>
+  </nav>
+  <a class="to-top" href="#top" aria-label="Back to top">↑</a>
+  <script src="research_data.js?v=202611130320"></script>
+  <script src="research.js?v=202611130320"></script>
   <script>renderResearch();</script>
+  <script src="site-chrome.js?v=202611130320"></script>
 </body>
 </html>
