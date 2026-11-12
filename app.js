@@ -809,6 +809,9 @@ function mountBacktest(strategy) {
     const cost = sentence("Costs", rec.costs);
     const fill = sentence("Fill", rec.fill);
     method.textContent = "Signal on the close, fill at the next close, unless this strategy says otherwise." + cost + fill + " 2026 is year-to-date through the last backtest bar.";
+    if (rec.method) {
+      method.insertAdjacentHTML("afterend", `<p class="bt-method-note">${esc(rec.method)}</p>`);
+    }
     if (!rec.hasBacktest) {
       body.innerHTML = `<p class="bt-gap">${esc(rec.gapReason || "No backtest data for this strategy.")}</p>` + caveatsHtml(rec);
       return;

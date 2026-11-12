@@ -1,0 +1,199 @@
+{
+  "generated_at": "2026-11-11T21:15:29-05:00",
+  "lookback_days": 16,
+  "disclaimer": "Verification status as of last update; not financial advice.",
+  "items": [
+    {
+      "date": "2026-11-10",
+      "headline": "XRP Ledger Foundation quantum roadmap: post-quantum account keys",
+      "summary": "The XRP Ledger Foundation published a design that would let account owners add a quantum-resistant ML-DSA-44 signing key and retire the old one, with no change to the base fee and a targeted transition around 2028; it is still a proposal, not an activated upgrade.",
+      "status": "Confirmed",
+      "sources": [
+        {
+          "name": "XRP Ledger Foundation",
+          "url": "https://pages.xrpl.foundation/protocol-roadmap/research/quantum"
+        },
+        {
+          "name": "CoinDesk",
+          "url": "https://www.coindesk.com/tech/2026/11/10/xrp-ledger-maps-out-quantum-proof-accounts-with-no-extra-fees-for-users"
+        },
+        {
+          "name": "crypto.news",
+          "url": "https://crypto.news/xrp-ledger-quantum-resistant-accounts-2028/"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-09",
+      "headline": "Evernorth Holdings files final prospectus for resale of up to 73.7 million shares",
+      "summary": "A final SEC prospectus dated Nov. 9 lets existing holders of Evernorth (Nasdaq: XRPN), the XRP treasury company, resell up to 73.7 million Class A shares; Evernorth receives no proceeds from those sales.",
+      "status": "Confirmed",
+      "sources": [
+        {
+          "name": "SEC EDGAR",
+          "url": "https://www.sec.gov/Archives/edgar/data/2092592/000162828026072223/0001628280-26-072223-index.htm"
+        },
+        {
+          "name": "The Defiant",
+          "url": "https://thedefiant.io/converge/tradfi-and-fintech/evernorth-slides-24-after-73-7-million-share-filing"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-05",
+      "headline": "XRP Ledger fixes a disclosed bug that let creation of new tokens",
+      "summary": "CoinDesk reported that an XRP Ledger amendment took effect to close a loophole that could have let accounts authorized only to burn issued tokens also create new ones; the report said XRP’s own supply was not affected.",
+      "status": "Reported",
+      "sources": [
+        {
+          "name": "CoinDesk",
+          "url": "https://www.coindesk.com/markets/2026/11/05/xrp-ledger-closes-bug-that-let-approved-token-burners-create-new-tokens"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-30",
+      "headline": "XRPL developers tighten the rules for who can hold 'restricted' tokens",
+      "summary": "CoinDesk reported that XRP Ledger developers proposed rule changes so restricted tokens cannot remain with accounts the issuer has not approved, except to be returned to the issuer.",
+      "status": "Reported",
+      "sources": [
+        {
+          "name": "CoinDesk",
+          "url": "https://www.coindesk.com/tech/2026/10/30/xrp-ledger-developers-tighten-the-rules-for-who-can-hold-restricted-tokens"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-29",
+      "headline": "Ripple and Water.org Reach One Million People, Deepen Partnership to Drive Global Access to Safe Water",
+      "summary": "Ripple and Water.org said their partnership has reached one million people and will expand to use Ripple Payments, RLUSD and digital-asset custody.",
+      "status": "Confirmed",
+      "sources": [
+        {
+          "name": "Ripple",
+          "url": "https://ripple.com/ripple-press/ripple-and-waterorg-deepen-partnership-to-drive-global-access-to-safe-water/"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-28",
+      "headline": "Ripple Reports Banner Year Approaching $900M Annual Product Revenue Run Rate, Signs Multi-Solution Partnerships with BNY, Robinhood and more",
+      "summary": "At its Swell conference, Ripple said it is on track to finish 2026 with about $900 million in annualized product revenue and pointed to new institutional partnerships; the figure is the company’s own claim.",
+      "status": "Confirmed",
+      "sources": [
+        {
+          "name": "Ripple",
+          "url": "https://ripple.com/ripple-press/ripple-reports-banner-year-approaching-900m-product-revenue-run-rate-signs-multi-solution-partnerships/"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-28",
+      "headline": "Ripple and Coinbase Partner to Expand Access to Ripple USD",
+      "summary": "Ripple and Coinbase announced that RLUSD can be traded and managed on Coinbase’s prime, exchange and retail platforms, with transfers supported on the XRP Ledger, Base and Ethereum.",
+      "status": "Confirmed",
+      "sources": [
+        {
+          "name": "Ripple",
+          "url": "https://ripple.com/ripple-press/ripple-and-coinbase-partner-to-expand-access-to-rlusd/"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-27",
+      "headline": "C2FO and Ripple Partner to Modernize Trade Finance Using the XRP Ledger",
+      "summary": "C2FO and Ripple said financing and settlement activity for C2FO’s Instant Pay product will be brought onto the XRP Ledger.",
+      "status": "Confirmed",
+      "sources": [
+        {
+          "name": "Ripple",
+          "url": "https://ripple.com/ripple-press/c2fo-and-ripple-partner-to-modernize-trade-finance-using-the-xrp-ledger/"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-27",
+      "headline": "Ripple Expands Strategic Digital Assets Collaboration with BNY Across Custody and Tokenized Trade Finance",
+      "summary": "Ripple and BNY said they are broadening digital-asset custody work and exploring tokenized trade-finance uses, including support for assets issued on the XRP Ledger.",
+      "status": "Confirmed",
+      "sources": [
+        {
+          "name": "Ripple",
+          "url": "https://ripple.com/ripple-press/ripple-expands-collaboration-with-bny-across-custody-and-tokenized-trade-finance/"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-27",
+      "headline": "Ripple and Robinhood Partner to Power the Next Generation of Finance",
+      "summary": "Ripple and Robinhood said they will expand use of the RLUSD stablecoin across Robinhood’s retail and institutional businesses, and that Robinhood plans to use Ripple Treasury and Ripple Prime.",
+      "status": "Confirmed",
+      "sources": [
+        {
+          "name": "Ripple",
+          "url": "https://ripple.com/ripple-press/ripple-and-robinhood-partner-to-power-the-next-generation-of-finance/"
+        },
+        {
+          "name": "Cointelegraph",
+          "url": "https://cointelegraph.com/news/ripple-robinhood-expand-partnership-rlusd-retail-institutional-markets"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-26",
+      "headline": "Aviva Investors expands its tokenised offering with the launch of a Sterling Liquidity Fund tokenised share class",
+      "summary": "Aviva Investors launched a tokenized share class of its roughly £22 billion sterling liquidity fund on the XRP Ledger and invested £50 million of its own money in the new class.",
+      "status": "Confirmed",
+      "sources": [
+        {
+          "name": "Ripple",
+          "url": "https://ripple.com/ripple-press/aviva-investors-expands-its-tokenised-offering-with-the-launch-of-a-sterling-liquidity-fund-tokenised-share-class/"
+        },
+        {
+          "name": "Cointelegraph",
+          "url": "https://cointelegraph.com/news/aviva-investors-launches-tokenized-share-class-of-sterling-fund-on-xrp-ledger"
+        },
+        {
+          "name": "DL News",
+          "url": "https://www.dlnews.com/articles/markets/aviva-tokenized-liquidity-fund-explained/"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-26",
+      "headline": "Ripple Receives Final OCC Approval to Establish National Trust Bank",
+      "summary": "The Office of the Comptroller of the Currency gave final approval for Ripple National Trust Bank, a federally supervised trust bank that may manage RLUSD reserves and offer fiduciary digital-asset custody; RLUSD would still be issued by Ripple’s New York trust company.",
+      "status": "Confirmed",
+      "sources": [
+        {
+          "name": "Ripple",
+          "url": "https://ripple.com/ripple-press/ripple-receives-final-occ-approval-to-establish-national-trust-bank/"
+        },
+        {
+          "name": "Cointelegraph",
+          "url": "https://cointelegraph.com/news/ripple-wins-final-us-approval-for-national-trust-bank"
+        },
+        {
+          "name": "American Banker",
+          "url": "https://www.americanbanker.com/news/occ-gives-final-approval-to-ripples-national-trust-charter"
+        },
+        {
+          "name": "CoinDesk",
+          "url": "https://www.coindesk.com/markets/2026/10/27/ripple-gets-a-final-go-ahead-to-launch-its-own-u-s-national-trust-bank"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-26",
+      "headline": "Ripple Treasury Introduces Always-On Corporate Treasury Platform to Modernize Corporate Cash Management",
+      "summary": "Ripple announced an always-on corporate treasury platform that combines cash management, payments, liquidity, stablecoins and custody for business customers.",
+      "status": "Confirmed",
+      "sources": [
+        {
+          "name": "Ripple",
+          "url": "https://ripple.com/ripple-press/ripple-treasury-introduces-always-on-corporate-treasury-platform-to-modernize-corporate-cash-management/"
+        }
+      ]
+    }
+  ]
+}

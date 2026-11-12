@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-store">
+  <title>QQQ vs QQQI · SIFT</title>
+  <meta name="description" content="How the ~14% monthly income in the NEOS Nasdaq-100 High Income ETF (QQQI) is made, what it costs in upside versus QQQ, and when borrowing to buy it did and did not beat buying gradually. Educational research, figures as of early November 2026. Not financial advice.">
+  <meta name="theme-color" content="#0c4550">
+  <meta name="application-name" content="SIFT">
+  <meta name="apple-mobile-web-app-title" content="SIFT">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="favicon-16.png" type="image/png" sizes="16x16">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="canonical" href="https://butlerwake-alt.github.io/sift/qqqi.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="SIFT">
+  <meta property="og:title" content="QQQ vs QQQI · SIFT">
+  <meta property="og:description" content="How the ~14% monthly income in QQQI is made, what it costs in upside versus QQQ, and when borrowing to buy it did and did not beat buying gradually. Educational, not financial advice.">
+  <meta property="og:image" content="https://butlerwake-alt.github.io/sift/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="SIFT — Educational paper-trading research board">
+  <meta property="og:url" content="https://butlerwake-alt.github.io/sift/qqqi.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="QQQ vs QQQI · SIFT">
+  <meta name="twitter:description" content="How the ~14% monthly income in QQQI is made, what it costs in upside versus QQQ, and when borrowing did and did not beat buying gradually. Educational, not financial advice.">
+  <meta name="twitter:image" content="https://butlerwake-alt.github.io/sift/og-image.png">
+  <link rel="stylesheet" href="styles.css?v=202611120300">
+  <style>
+    .site-nav a[aria-current="page"] { border-bottom-color: var(--yellow); }
+    .essay { max-width: 46rem; }
+    .essay h2 { margin: 1.6rem 0 0.55rem; font-size: 1.45rem; }
+    .essay h3 { margin: 1.1rem 0 0.35rem; font: 600 1.05rem/1.3 var(--sans); color: var(--cream); }
+    .essay p, .essay li { font: 1.02rem/1.55 var(--serif); }
+    .essay p { margin: 0 0 0.85rem; }
+    .essay ul { margin: 0 0 0.9rem; padding-left: 1.2rem; }
+    .essay li { margin: 0.3rem 0; }
+    .essay .lede-more { margin: 0.9rem 0 0; max-width: 44rem; }
+    .byline { margin: 0.55rem 0 0; font: 0.88rem/1.4 var(--sans); color: rgba(246, 231, 200, 0.8); }
+    .callout {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--yellow);
+      padding: 0.8rem 1rem;
+      margin: 0 0 1.1rem;
+      font: 0.95rem/1.5 var(--sans);
+    }
+    .callout.caution { border-left-color: var(--yellow); }
+    .callout.rule { border-left-color: var(--teal); }
+    .callout.advice { border-left-color: var(--red); }
+    .callout p { margin: 0; }
+    .callout p + p { margin-top: 0.45rem; }
+    .callout b { font-weight: 650; }
+    .chart-fig { margin: 0.4rem 0 1.15rem; }
+    .chart-fig img {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #070605;
+      border: 1px solid #241e19;
+    }
+    .chart-fig figcaption {
+      margin: 0.4rem 0 0;
+      color: var(--muted);
+      font: 0.82rem/1.4 var(--sans);
+    }
+    .wide { max-width: 58rem; }
+    .qqqi-facts { margin: 0 0 1.15rem; }
+    .qqqi-facts small { display: block; margin-top: 0.15rem; font-weight: 400; }
+    .table-hint { display: none; margin: 0 0 0.35rem; color: var(--muted); font: 0.8rem/1.3 var(--sans); }
+    @media (max-width: 800px) {
+      .table-hint { display: block; }
+      .cmp-table { table-layout: fixed; width: 100%; }
+      .cmp-table .aux { display: none; }
+      .cmp-table th, .cmp-table td { white-space: normal; }
+      .cmp-table th:first-child, .cmp-table td:first-child { width: 54%; }
+      .perf-table { table-layout: fixed; width: 100%; }
+      .perf-table th, .perf-table td { white-space: normal; }
+      .perf-table th:nth-child(3), .perf-table td:nth-child(3) { display: none; }
+      .perf-table th:first-child, .perf-table td:first-child { width: 46%; }
+    }
+    .best td { color: var(--green); }
+    .grp th { background: #161310; color: var(--cream); font-weight: 600; text-align: left; letter-spacing: 0; text-transform: none; font-size: 0.82rem; }
+    .rtable td:first-child, .rtable th:first-child { text-align: left; }
+    .source-list { margin: 0 0 1rem; padding-left: 1.15rem; color: var(--muted); font: 0.84rem/1.45 var(--sans); }
+    .source-list li { margin: 0.25rem 0; overflow-wrap: anywhere; }
+    .visually-hidden {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+    @media (max-width: 560px) {
+      .essay h2 { font-size: 1.25rem; }
+      .essay p, .essay li { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="sky">
+    <div class="sky-copy">
+      <p class="eyebrow">Educational research · figures as of early November 2026</p>
+      <div class="brand-lockup">
+        <a class="brand-mark-link" href="index.html" aria-label="Back to the paper board">
+          <img class="brand-mark" src="brand-mark.svg" width="72" height="72" alt="">
+        </a>
+        <h1>QQQ vs QQQI</h1>
+      </div>
+      <p class="lede">How the monthly income in a Nasdaq-100 covered-call ETF is made, what it costs in upside, and when borrowing to buy it did — and did not — beat buying gradually.</p>
+      <p class="byline">By SIFT · Data researched November 9, 2026 · Not financial advice</p>
+    </div>
+    <nav class="site-nav" aria-label="Sections">
+      <div class="nav-inner">
+        <a href="index.html#updates">Updates</a>
+        <a href="index.html#regime">Market regime</a>
+        <a href="index.html#leaderboard">Leaderboard</a>
+        <a href="index.html#board">All strategies</a>
+        <a href="index.html#method">How it works</a>
+        <a href="index.html#glossary">Glossary</a>
+        <a href="research.html">Researched strategies</a>
+        <a href="qqqi.html" aria-current="page">QQQ vs QQQI</a>
+        <a href="news.html">XRP news</a>
+      </div>
+    </nav>
+  </header>
+
+  <div class="wrap">
+    <p class="preview"><span>Educational</span><span>Not financial advice</span><span>No leverage recommended</span></p>
+
+    <div class="callout advice">
+      <p><b>Educational only — not financial advice, and SIFT does not recommend leverage.</b> This page condenses a 20-year scenario model of financing 5,000 shares of QQQI. The figures are hypothetical, dated, and can be wrong. Nothing here is a recommendation to buy QQQ, QQQI, or any security, or to borrow money. Read the fund prospectus, and consult a licensed financial advisor and a tax professional before acting.</p>
+    </div>
+
+    <dl class="hero-facts qqqi-facts">
+      <div><dt>QQQI price / NAV</dt><dd>$49.48 / $49.50<small> Close, November 6, 2026</small></dd></div>
+      <div><dt>Distribution rate</dt><dd>14.1–15.4%<small> Sponsor on NAV vs. on that price</small></dd></div>
+      <div><dt>Latest monthly payout</dt><dd>$0.6343<small> Per share, paid October 23, 2026</small></dd></div>
+      <div><dt>Expense ratio</dt><dd>0.68%<small> QQQ’s is 0.18%</small></dd></div>
+    </dl>
+
+    <article class="essay">
+      <p>QQQ is Invesco’s Nasdaq-100 ETF. QQQI is the NEOS Nasdaq-100 High Income ETF, launched January 29, 2024. Both hold the same kind of large Nasdaq stocks. QQQI also sells call options on the Nasdaq-100 Index (NDX) and pays the option premium out as a monthly distribution. That payout is often described as a ~14% “dividend.” The cash is real, but a large share of it has been classified as return of capital, and the calls cap upside in strong rallies. What matters is total return — distributions plus any change in net asset value — not the headline yield.</p>
+
+      <h2>What QQQI is, versus QQQ</h2>
+      <p>QQQ tracks the Nasdaq-100 with a 0.18% expense ratio. Its calendar-year total returns were +25.6% in 2024, +20.8% in 2025, and −32.6% in 2022. QQQI is actively managed, with about $14.3 billion in net assets as of November 9, 2026, and top holdings such as Apple 8.4%, Nvidia 7.6%, Microsoft 6.7% and Amazon 4.7%. Its expense ratio is 0.68%.</p>
+
+      <h2>How the ~14% monthly income works</h2>
+      <p>The cash comes mainly from option premium, not from stock dividends. The 30-day SEC yield was −0.05% as of the data date, which shows how little of the payout is ordinary dividend income.</p>
+      <p>NDX index options are Section 1256 contracts. Their gains and losses are taxed 60% long-term and 40% short-term no matter how long they are held. The fund also tax-loss harvests inside the portfolio. That is why most of the distribution has been labeled return of capital (ROC). IRS Form 8937 shows 99.6% of each June–December 2025 distribution as nontaxable ROC. ROC is not taxed now, but it lowers your cost basis, so you typically pay more capital-gains tax when you sell.</p>
+      <p>The monthly payout has been fairly steady in dollars, between $0.53 and $0.66 a share (average $0.622). It is set each month and is not guaranteed. The latest payment, on October 23, 2026, was $0.6343 a share. Trailing 12-month distributions were $7.63 a share.</p>
+    </article>
+
+    <figure class="chart-fig wide">
+      <img src="assets/qqqi-dist-history.png" alt="Bar chart of QQQI monthly distributions per share from February 2024 through October 2026, averaging $0.622, with a dip to $0.53 in April 2025." width="1840" height="630">
+      <figcaption>QQQI monthly distribution per share, February 2024 through October 2026. The dollar payout has been steady; it is not guaranteed. Average $0.622. Source: NEOS.</figcaption>
+    </figure>
+
+    <article class="essay">
+      <p>Why 14.1% versus 15.4%? NEOS annualizes the latest payout and divides by the ex-date NAV, which gave a 14.09% distribution rate as of October 31, 2026 (12-month trailing 14.13%). Dividing the same payout by the lower November 6 price of $49.48 gives about 15.4%. The model used 14.1% of NAV as the base case, which is more conservative than that 15.4% run-rate.</p>
+
+      <div class="rtable">
+        <table>
+          <caption class="visually-hidden">Key facts for QQQI, early November 2026</caption>
+          <thead>
+            <tr><th>Item</th><th>Value</th><th>As of</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Market price / NAV</td><td>$49.48 / $49.50</td><td>November 6, 2026</td></tr>
+            <tr><td>Latest distribution</td><td>$0.6343 / share</td><td>Paid October 23, 2026</td></tr>
+            <tr><td>Trailing 12-month distributions</td><td>$7.63 / share</td><td>Through October 2026</td></tr>
+            <tr><td>Distribution rate (sponsor)</td><td>14.09% (12-mo trailing 14.13%)</td><td>October 31, 2026</td></tr>
+            <tr><td>Rate on November 6 price (latest × 12)</td><td>≈15.4%</td><td>November 6, 2026</td></tr>
+            <tr><td>30-day SEC yield</td><td>−0.05%</td><td>Data date</td></tr>
+            <tr><td>Expense ratio</td><td>0.68%</td><td>Sponsor</td></tr>
+            <tr><td>Next ex-date / pay date</td><td>November 18 / November 20, 2026</td><td>As published</td></tr>
+            <tr><td>Inception / net assets</td><td>January 29, 2024 / about $14.3B</td><td>November 9, 2026</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="scale-note">Figures as of early November 2026. Prices and rates were researched November 9, 2026.</p>
+
+      <h2>The key tradeoffs</h2>
+      <h3>Covered calls cap the upside</h3>
+      <p>When the fund sells a call, it gives up gains above the strike in return for premium. In strong rallies QQQI lags the index. As of October 31, 2026, QQQI had returned 16.63% a year since inception versus 19.81% for the Nasdaq-100 Index — about 3.2 points a year behind.</p>
+      <h3>Yield is not return</h3>
+      <p>A distribution rate above the fund’s real total return has to come out of net asset value. Part of the “income” can be your own capital coming back as ROC.</p>
+      <h3>NAV can erode both ways</h3>
+      <p>In a sharp drop the fund falls with the index; premium only cushions it a little. In a sharp rally the calls cap the rebound. Since inception the share price was roughly flat (about +2.4% total price change) even though the Nasdaq-100 Index returned about 65%. Almost all of the return has come from distributions.</p>
+      <h3>The track record is short</h3>
+      <p>QQQI has under three years of history and has never been through a full bear market like 2022. Every 20-year projection on this page is an assumption, not an extrapolation.</p>
+      <div class="rtable">
+        <table class="perf-table">
+          <thead>
+            <tr><th>October 31, 2026</th><th>1 year</th><th>Since inception (cum.)</th><th>Annualized</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>QQQI (NAV)</td><td>7.09%</td><td>52.82%</td><td>16.63%</td></tr>
+            <tr><td>QQQI (market)</td><td>7.13%</td><td>52.79%</td><td>16.63%</td></tr>
+            <tr><td>Nasdaq-100 Index</td><td>10.47%</td><td>64.55%</td><td>19.81%</td></tr>
+            <tr><td>Cboe NDX BuyWrite (BXN)</td><td>13.60%</td><td>42.92%</td><td>13.83%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="scale-note">Source: NEOS, as of October 31, 2026.</p>
+
+      <h2>Borrow, buy gradually, or buy QQQ</h2>
+      <p>A common pitch is to borrow to buy 5,000 shares of QQQI — about $247,400 at the November 6, 2026 close of $49.48 — send the monthly distributions to the lender, then reinvest after the loan is gone. At the October run-rate, 5,000 shares would pay about $3,172 a month, roughly twice the interest on a 7.49% HELOC ($1,544 a month). That cash spread looks wide, but it is not profit. Covered-call funds tend to lose NAV over time, and a large part of the payout has been return of capital. The real test is whether QQQI’s total return beats the borrowing rate.</p>
+      <p>The model compared four strategies, each spending the same $2,935 a month — a 10-year HELOC payment at the Bankrate average of 7.49% as of November 4, 2026 — for 10 years, or $352,000 of the investor’s own cash:</p>
+      <ul>
+        <li><b>A.</b> Buy 5,000 shares of QQQI with that HELOC. Distributions go to the loan, then are reinvested (DRIP).</li>
+        <li><b>B.</b> Buy QQQI gradually, with no loan.</li>
+        <li><b>C.</b> Buy QQQ in a lump sum on the same HELOC, paid from the same budget.</li>
+        <li><b>D.</b> Buy QQQ gradually, with no loan.</li>
+      </ul>
+      <p>Assumptions, all labeled as such: distributions move with NAV; a 5% tax drag on QQQI distributions (2025 payouts were about 99.6% ROC); 90% of each payout treated as ROC that lowers basis; QQQ dividends of 0.46% taxed at 15%; everything sold at year 20 with 20% tax on gains over adjusted basis; loan rates held constant; no forced margin liquidation. Implied QQQI total return is about 12% a year in the base case, 7% in the bear case, and 16.5% in the bull case. The base case is generous: since inception QQQI has trailed the Nasdaq-100 by about 3 points a year, while here it roughly matches QQQ.</p>
+    </article>
+
+    <p class="table-hint">On a small screen this table shows net gain and payoff time. Turn the phone sideways or use a wider window to see ending values too. Every row puts in the same $352k.</p>
+    <div class="rtable wide">
+      <table class="cmp-table">
+        <thead>
+          <tr>
+            <th>Strategy</th>
+            <th>Net gain</th>
+            <th>Loan paid off</th>
+            <th class="aux">Own cash in</th>
+            <th class="aux">Ending value (pre-tax)</th>
+            <th class="aux">After tax and loan</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="grp"><th colspan="3">Base — QQQI yield 14.1%, NAV −2.0%/yr, QQQ 11%/yr total</th><th class="aux" colspan="3"></th></tr>
+          <tr class="best"><td>A · QQQI 5,000 sh on HELOC, then DRIP</td><td>$1.63M</td><td>10.0 yrs</td><td class="aux">$352k</td><td class="aux">$2.37M</td><td class="aux">$1.98M</td></tr>
+          <tr><td>B · QQQI gradually, no loan</td><td>$1.35M</td><td>n/a</td><td class="aux">$352k</td><td class="aux">$2.01M</td><td class="aux">$1.70M</td></tr>
+          <tr><td>C · QQQ lump sum on HELOC</td><td>$1.28M</td><td>10.0 yrs</td><td class="aux">$352k</td><td class="aux">$1.97M</td><td class="aux">$1.64M</td></tr>
+          <tr><td>D · QQQ gradually, no loan</td><td>$1.12M</td><td>n/a</td><td class="aux">$352k</td><td class="aux">$1.74M</td><td class="aux">$1.47M</td></tr>
+          <tr class="grp"><th colspan="3">Bear — QQQI yield 10.0%, NAV −3.0%/yr, QQQ 5%/yr total</th><th class="aux" colspan="3"></th></tr>
+          <tr><td>A · QQQI 5,000 sh on HELOC, then DRIP</td><td>$421k</td><td>10.0 yrs</td><td class="aux">$352k</td><td class="aux">$893k</td><td class="aux">$774k</td></tr>
+          <tr class="best"><td>B · QQQI gradually, no loan</td><td>$476k</td><td>n/a</td><td class="aux">$352k</td><td class="aux">$936k</td><td class="aux">$828k</td></tr>
+          <tr><td>C · QQQ lump sum on HELOC</td><td>$222k</td><td>10.0 yrs</td><td class="aux">$352k</td><td class="aux">$647k</td><td class="aux">$574k</td></tr>
+          <tr><td>D · QQQ gradually, no loan</td><td>$309k</td><td>n/a</td><td class="aux">$352k</td><td class="aux">$730k</td><td class="aux">$661k</td></tr>
+          <tr class="grp"><th colspan="3">Bull — QQQI yield 15.4%, NAV +1.0%/yr, QQQ 15%/yr total</th><th class="aux" colspan="3"></th></tr>
+          <tr class="best"><td>A · QQQI 5,000 sh on HELOC, then DRIP</td><td>$4.13M</td><td>9.1 yrs</td><td class="aux">$352k</td><td class="aux">$5.45M</td><td class="aux">$4.48M</td></tr>
+          <tr><td>B · QQQI gradually, no loan</td><td>$2.93M</td><td>n/a</td><td class="aux">$352k</td><td class="aux">$3.97M</td><td class="aux">$3.28M</td></tr>
+          <tr><td>C · QQQ lump sum on HELOC</td><td>$2.91M</td><td>10.0 yrs</td><td class="aux">$352k</td><td class="aux">$3.99M</td><td class="aux">$3.27M</td></tr>
+          <tr><td>D · QQQ gradually, no loan</td><td>$2.18M</td><td>n/a</td><td class="aux">$352k</td><td class="aux">$3.05M</td><td class="aux">$2.53M</td></tr>
+          <tr class="grp"><th colspan="3">Stress — bear case, plus a 2022-style −33% drop in month 6</th><th class="aux" colspan="3"></th></tr>
+          <tr><td>A · QQQI 5,000 sh on HELOC, then DRIP</td><td>$183k</td><td>10.0 yrs</td><td class="aux">$352k</td><td class="aux">$598k</td><td class="aux">$535k</td></tr>
+          <tr class="best"><td>B · QQQI gradually, no loan</td><td>$462k</td><td>n/a</td><td class="aux">$352k</td><td class="aux">$918k</td><td class="aux">$814k</td></tr>
+          <tr><td>C · QQQ lump sum on HELOC</td><td>$49k</td><td>10.0 yrs</td><td class="aux">$352k</td><td class="aux">$434k</td><td class="aux">$401k</td></tr>
+          <tr><td>D · QQQ gradually, no loan</td><td>$298k</td><td>n/a</td><td class="aux">$352k</td><td class="aux">$718k</td><td class="aux">$651k</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="scale-note">Net gain = after-tax ending value − any remaining loan − cash put in (not discounted). The leading strategy in each scenario is shown in green. Same $2,935/month budget for 10 years in every row.</p>
+
+    <figure class="chart-fig wide">
+      <img src="assets/qqqi-net-bars.png" alt="Bar chart of 20-year after-tax net gain in four scenarios. Borrowing to buy QQQI leads in the base and bull cases, but buying QQQI gradually with no loan leads in the bear and stress cases." width="1840" height="720">
+      <figcaption>Twenty-year after-tax net gain. Borrowing leads when returns are strong; buying gradually with no loan leads when they are not.</figcaption>
+    </figure>
+
+    <figure class="chart-fig wide">
+      <img src="assets/qqqi-paths.png" alt="Four-panel line chart of pre-tax equity over 20 years for the four strategies in the base, bear, bull, and stress cases. In the stress case the leveraged lines go negative in year one." width="1880" height="1120">
+      <figcaption>Pre-tax equity (value minus loan) over 20 years. In the stress case both leveraged strategies are underwater for about two years, by as much as $76,000.</figcaption>
+    </figure>
+
+    <article class="essay">
+      <p>In the <b>base case</b>, borrowing leads: about $1.63 million after tax versus $1.35 million for gradual QQQI and $1.12 million for gradual QQQ. In the <b>bear case</b> (yield 10%, NAV falling 3% a year), not borrowing wins: $476,000 versus $421,000. Add a 2022-style −33% drop in month 6, and the leveraged plan ends at $183,000 versus $462,000 without a loan.</p>
+      <p>Distributions alone barely amortize a 10-year HELOC. The payment is $2,935 a month. At today’s run-rate the distribution covers it (about 103% after a small tax haircut). In the base case it falls a little short, so the budget adds about $52,000 over 10 years. In the bear case you would add about $150,000.</p>
+
+      <div class="callout rule">
+        <p><b>Rule of thumb from the model:</b> borrowing only helped when QQQI’s total return beat the loan rate by roughly <b>2 or more percentage points a year</b>. At 10–12% rates — Schwab/Fidelity margin at 10.575%, or a typical unsecured personal loan at 12.36% — it rarely pays. At an 8% total return, a 7.5% HELOC already loses. If the Nasdaq returns a more typical ~10% and QQQI trails by ~3 points, QQQI could land near 7–8%, which is below today’s HELOC and most broker margin rates.</p>
+      </div>
+    </article>
+
+    <figure class="chart-fig wide">
+      <img src="assets/qqqi-heatmap.png" alt="Heat map of the 20-year advantage of borrowing to buy QQQI versus buying it gradually, across loan rates from 5% to 14% and total returns from 2% to 14%. Green cells, where borrowing helps, sit only when total return exceeds the loan rate by about two points or more." width="1840" height="830">
+      <figcaption>Borrowing advantage: strategy A’s 20-year net gain minus strategy B’s, with the same monthly budget. Green means borrowing helped; red means it hurt. The green cells start roughly two points above the loan rate.</figcaption>
+    </figure>
+
+    <article class="essay">
+      <p>SIFT does not recommend leverage. This is an educational comparison of how financing would work and where it breaks, not a recommendation to borrow. The path with no loan — buying QQQI or QQQ gradually from savings, with distributions reinvested — has no margin-call or home risk, and it won in both the bear and the stress cases.</p>
+
+      <h2>Disclaimer</h2>
+      <div class="callout advice">
+        <p>This page is for educational purposes only. It is not financial, investment, tax or legal advice, and not a recommendation to buy QQQI or any security or to borrow money. Projections are hypothetical, depend on stated assumptions, and are not guarantees. Actual results will differ and can include loss of principal greater than the amount invested when leverage is used. Past performance does not guarantee future results. Read the fund prospectus, and consult a licensed financial advisor and a qualified tax professional before acting.</p>
+      </div>
+
+      <h2>Sources</h2>
+      <ul class="source-list">
+        <li>NEOS Investments, QQQI fund page (price and NAV on November 6, 2026; distribution rate, $0.6343 payout, 0.68% fee, inception, performance, holdings, ROC language): <a href="https://neosfunds.com/qqqi/">neosfunds.com/qqqi</a></li>
+        <li>NEOS, QQQI IRS Form 8937 (December 31, 2025): 99.597% return of capital for June–December 2025 distributions.</li>
+        <li>Bankrate average HELOC rate, November 4, 2026 (7.49%). Interactive Brokers, Schwab and Fidelity published margin schedules, early November 2026. Bankrate average unsecured personal-loan rate (12.36%).</li>
+        <li>ETFreplay and Invesco: QQQ calendar-year total returns and 0.18% expense ratio. WSJ / FedPrimeRate: prime rate 7.00%, effective September 17, 2026.</li>
+        <li>Full model, assumptions and loan-by-loan tables: SIFT, “QQQI Financing — 20-Year Educational Plan,” November 2026. Data researched November 9, 2026.</li>
+      </ul>
+    </article>
+
+    <p><a class="back" href="index.html">Back to the paper board</a></p>
+
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand"><img src="favicon.svg" width="28" height="28" alt=""><span>SIFT</span><p>Educational paper-trading research. Built to test ideas honestly, losses included.</p></div>
+        <div><h3>Disclaimer</h3><p>Educational only. Not financial, investment or tax advice, and not a recommendation to buy any security or to borrow money. Past and simulated results do not guarantee future results.</p></div>
+        <div><h3>Pages</h3><p><a href="index.html#leaderboard">Leaderboard</a> · <a href="index.html#method">How it works</a> · <a href="research.html">Researched strategies</a> · <a href="qqqi.html">QQQ vs QQQI</a> · <a href="news.html">XRP news</a></p></div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

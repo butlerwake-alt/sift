@@ -418,6 +418,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 4rem; }
 .year-tabs button:disabled { opacity: 0.38; cursor: not-allowed; }
 .bt-window { margin: 0 0 0.25rem; font: 600 0.95rem/1.4 var(--sans); color: var(--cream); }
 .bt-flag { margin: 0 0 0.65rem; color: var(--yellow); font: 0.88rem/1.4 var(--sans); }
+.bt-method-note { margin: -0.35rem 0 0.75rem; color: var(--muted); font: 0.88rem/1.45 var(--sans); }
 .bt-facts small {
   display: block;
   margin-top: 0.12rem;

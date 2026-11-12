@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-store">
+  <title>XRP news · SIFT</title>
+  <meta name="description" content="Recent XRP and Ripple news, labeled Confirmed, Reported, or Rumor — unconfirmed. Verification status as of last update. Not financial advice.">
+  <meta name="theme-color" content="#0c4550">
+  <meta name="application-name" content="SIFT">
+  <meta name="apple-mobile-web-app-title" content="SIFT">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="favicon-16.png" type="image/png" sizes="16x16">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="canonical" href="https://butlerwake-alt.github.io/sift/news.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="SIFT">
+  <meta property="og:title" content="XRP news · SIFT">
+  <meta property="og:description" content="Recent XRP and Ripple news, labeled Confirmed, Reported, or Rumor — unconfirmed. Not financial advice.">
+  <meta property="og:image" content="https://butlerwake-alt.github.io/sift/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="SIFT — Educational paper-trading research board">
+  <meta property="og:url" content="https://butlerwake-alt.github.io/sift/news.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="XRP news · SIFT">
+  <meta name="twitter:description" content="Recent XRP and Ripple news, labeled Confirmed, Reported, or Rumor — unconfirmed. Not financial advice.">
+  <meta name="twitter:image" content="https://butlerwake-alt.github.io/sift/og-image.png">
+  <link rel="stylesheet" href="styles.css?v=202611120300">
+  <link rel="stylesheet" href="xrp_news.css?v=202611120300">
+</head>
+<body>
+  <article class="page">
+    <p class="page-brand"><a href="index.html"><img class="brand-mark-sm" src="favicon.svg" width="32" height="32" alt="">SIFT</a></p>
+    <p class="preview"><span>Paper only · not financial advice</span></p>
+    <p class="updated-stamp" id="updated-stamp"><b id="stamp-when">Last updated: —</b><span class="stamp-next">News desk: last ~14 days of XRP and Ripple coverage</span><a href="updates.html">All board updates →</a></p>
+    <p><a class="back" href="index.html">Back to the board</a></p>
+
+    <header class="xrp-head">
+      <h1>XRP news</h1>
+      <p class="lede">A short, dated list of recent XRP and Ripple items, with a verification label on each one. Price-prediction posts and social-media-only claims are left out. Rumors appear only when a reputable outlet is reporting the rumor itself.</p>
+    </header>
+
+    <ul class="xrp-legend" aria-label="Verification labels">
+      <li><span class="chip chip-confirmed">Confirmed</span> Official source, or the same facts reported independently by two or more reputable outlets.</li>
+      <li><span class="chip chip-reported">Reported</span> One reputable outlet, not yet independently confirmed here.</li>
+      <li><span class="chip chip-rumor">Rumor — unconfirmed</span> A reputable outlet is covering a rumor or unverified claim.</li>
+    </ul>
+
+    <div class="xrp-filters" role="tablist" aria-label="Filter by verification status">
+      <button type="button" class="xrp-filter is-on" data-filter="all" aria-pressed="true">All</button>
+      <button type="button" class="xrp-filter" data-filter="Confirmed" aria-pressed="false">Confirmed</button>
+      <button type="button" class="xrp-filter" data-filter="Reported" aria-pressed="false">Reported</button>
+      <button type="button" class="xrp-filter" data-filter="Rumor — unconfirmed" aria-pressed="false">Rumors</button>
+    </div>
+
+    <div id="xrp-news-root">
+      <p class="xrp-loading">Loading news…</p>
+    </div>
+
+    <p class="xrp-note">Verification status as of last update; not financial advice. This page is educational coverage of public reports, not a recommendation to buy or sell anything.</p>
+
+    <footer class="page-footer">Educational paper-trading research. Simulated $10,000 accounts; no real money, no orders, not financial advice. Terms such as drawdown, Sharpe and profit factor are explained in the <a href="index.html#glossary">glossary</a>; fills, costs and backtest vs forward are in <a href="index.html#method">How it works</a>.</footer>
+  </article>
+  <script src="xrp_news.js?v=202611120300"></script>
+  <script>renderXrpNews();</script>
+</body>
+</html>

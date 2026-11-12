@@ -1,0 +1,137 @@
+/* Drop-in styles for the XRP news section / news.html page.
+   Relies on the site's styles.css variables and page chrome. */
+
+.xrp-head { margin: 0 0 1.1rem; }
+.xrp-head h1 {
+  margin: 0;
+  font-size: clamp(1.8rem, 3.6vw, 2.4rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+.xrp-head .lede {
+  margin: 0.7rem 0 0;
+  max-width: 40rem;
+  color: var(--muted);
+  font: 1.02rem/1.5 var(--sans);
+}
+
+.xrp-legend {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0.85rem 1rem;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  display: grid;
+  gap: 0.55rem;
+}
+.xrp-legend li {
+  display: grid;
+  grid-template-columns: 11.2rem 1fr;
+  gap: 0.7rem;
+  align-items: start;
+  font: 0.86rem/1.4 var(--sans);
+  color: var(--muted);
+}
+.xrp-legend .chip { justify-self: start; margin-top: 0.1rem; }
+
+.chip-confirmed { color: #0c2a1a; background: var(--green); }
+.chip-reported { color: #06263a; background: #9fd8ff; }
+.chip-rumor { color: #2a2205; background: var(--yellow); }
+
+.xrp-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0 0 1rem;
+}
+.xrp-filter {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--cream);
+  font: 600 0.72rem/1 var(--sans);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.42rem 0.7rem;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.xrp-filter:hover { border-color: var(--muted); }
+.xrp-filter.is-on {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: #f6e7c8;
+}
+
+.xrp-list { display: grid; gap: 0.75rem; margin: 0; padding: 0; list-style: none; }
+
+.xrp-item {
+  border: 1px solid rgba(255,255,255,0.12);
+  border-top: 3px solid var(--teal);
+  padding: 0.8rem 0.9rem 0.85rem;
+  background: rgba(255,255,255,0.02);
+}
+.xrp-item.is-confirmed { border-top-color: var(--green); }
+.xrp-item.is-reported { border-top-color: #5aa7d6; }
+.xrp-item.is-rumor { border-top-color: var(--yellow); }
+
+.xrp-item-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.75rem;
+  align-items: center;
+  margin: 0 0 0.4rem;
+  font: 0.78rem/1.3 var(--sans);
+  color: var(--muted);
+}
+.xrp-item-top time {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+.xrp-item h2 {
+  margin: 0;
+  font: 600 1.08rem/1.3 var(--sans);
+  letter-spacing: -0.02em;
+  color: var(--cream);
+}
+.xrp-item p {
+  margin: 0.45rem 0 0;
+  font: 0.92rem/1.45 var(--sans);
+  color: #d9cbb3;
+}
+.xrp-sources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.8rem;
+  margin: 0.65rem 0 0;
+  padding: 0;
+  list-style: none;
+  font: 0.8rem/1.3 var(--sans);
+}
+.xrp-sources a {
+  color: var(--yellow);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.xrp-sources a:hover { border-bottom-color: var(--yellow); }
+
+.xrp-note {
+  margin: 1.2rem 0 0;
+  padding: 0.7rem 0.85rem;
+  border-left: 3px solid var(--yellow);
+  background: rgba(240,197,58,0.08);
+  color: #e9d9b0;
+  font: 0.86rem/1.45 var(--sans);
+}
+.xrp-loading, .xrp-empty, .xrp-error {
+  margin: 0.4rem 0 0;
+  color: var(--muted);
+  font: 0.95rem/1.45 var(--sans);
+}
+.xrp-error { color: #f0a23a; }
+
+@media (max-width: 640px) {
+  .xrp-legend li { grid-template-columns: 1fr; gap: 0.25rem; }
+  .xrp-item h2 { font-size: 1rem; }
+  .xrp-head .lede { font-size: 0.95rem; }
+}
