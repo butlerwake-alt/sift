@@ -365,6 +365,9 @@ function renderBoard() {
     tally.innerHTML = bits.map(([tone, count, label]) => `<article class="tone-${tone}"><strong>${count}</strong><span>${label}</span></article>`).join("");
   }
   renderRegime();
+  renderMood();
+  renderPositions();
+  renderTicker();
   renderHero();
   renderLeaderboard();
   const book = document.getElementById("book");
@@ -1062,4 +1065,393 @@ function drawBacktestChart(host, strat, bench, options) {
     readout.hidden = true;
     guide.setAttribute("visibility", "hidden");
   });
+}
+
+/* ---------- Market mood gauge, positions heat map, live coin ticker (display only) ---------- */
+const MOOD_ORDER = ["shock", "trend_down", "risk_off", "range", "trend_up"];
+const MOOD_COLOR = {
+  shock: "#c43be0",
+  trend_down: "#e24632",
+  risk_off: "#e8913a",
+  range: "#f0c53a",
+  trend_up: "#3cba62"
+};
+const MOOD_BLURB = {
+  trend_up: "Prices are rising and sit above their long averages.",
+  trend_down: "Prices are falling and sit under their long averages.",
+  range: "Sideways. No clear trend either way.",
+  risk_off: "Under the 50-day average. For stocks, bonds and gold are leading. For crypto, stocks are weak too.",
+  shock: "A sharp drop from the recent high, and volatility has jumped."
+};
+function moodCaption(key, market) {
+  if (key === "risk_off" && market === "crypto") return "Under the 50-day average while stocks are weak.";
+  if (key === "risk_off") return "Under the 50-day average, with bonds and gold leading stocks.";
+  return MOOD_BLURB[key] || "No plain-language label for this regime.";
+}
+function moodArc(cx, cy, r, a0, a1) {
+  const x0 = cx + r * Math.cos(a0);
+  const y0 = cy - r * Math.sin(a0);
+  const x1 = cx + r * Math.cos(a1);
+  const y1 = cy - r * Math.sin(a1);
+  return "M " + x0.toFixed(2) + " " + y0.toFixed(2) + " A " + r + " " + r + " 0 0 0 " + x1.toFixed(2) + " " + y1.toFixed(2);
+}
+function moodDial(key, marketLabel) {
+  const cx = 150;
+  const cy = 118;
+  const r = 96;
+  const span = Math.PI / MOOD_ORDER.length;
+  const gap = 0.045;
+  const known = MOOD_ORDER.indexOf(key);
+  const arcs = MOOD_ORDER.map((name, i) => {
+    const a0 = Math.PI - i * span - gap;
+    const a1 = Math.PI - (i + 1) * span + gap;
+    const on = name === key;
+    return `<path d="${moodArc(cx, cy, r, a0, a1)}" fill="none" stroke="${MOOD_COLOR[name]}" stroke-width="${on ? 18 : 12}" stroke-linecap="butt" opacity="${on ? "1" : "0.38"}"/>`;
+  }).join("");
+  let needle = "";
+  if (known >= 0) {
+    const ang = Math.PI - (known + 0.5) * span;
+    const x2 = cx + 74 * Math.cos(ang);
+    const y2 = cy - 74 * Math.sin(ang);
+    const x1 = cx + 16 * Math.cos(ang);
+    const y1 = cy - 16 * Math.sin(ang);
+    needle = `<line x1="${x1.toFixed(2)}" y1="${y1.toFixed(2)}" x2="${x2.toFixed(2)}" y2="${y2.toFixed(2)}" stroke="#f3e2c4" stroke-width="3" stroke-linecap="round"/>`;
+  }
+  const title = marketLabel + ": " + regimeName(key);
+  return `<svg viewBox="0 0 300 142" role="img" aria-label="${esc(title)}">${arcs}${needle}<circle cx="${cx}" cy="${cy}" r="7" fill="#1c6d78" stroke="#f3e2c4" stroke-width="2"/></svg>`;
+}
+function moodStrip(last20) {
+  const counts = last20 || {};
+  const parts = MOOD_ORDER.filter((key) => counts[key] > 0).map((key) => ({ key, n: counts[key] }));
+  const total = parts.reduce((sum, part) => sum + part.n, 0);
+  if (!total) return `<p class="mood-strip-note">No last-20 regime counts in this build.</p>`;
+  const segs = parts.map((part) => {
+    const short = { shock: "Shock", trend_down: "Down", risk_off: "Off", range: "Range", trend_up: "Up" };
+    const label = (part.n >= 5 ? regimeName(part.key) : short[part.key]) + " " + part.n;
+    return `<span class="mood-seg" style="flex:${part.n};background:${MOOD_COLOR[part.key]}" title="${esc(regimeName(part.key))}: ${part.n} of ${total}"><span>${esc(label)}</span></span>`;
+  }).join("");
+  const legend = parts.map((part) => regimeName(part.key) + " " + part.n).join(" · ");
+  return `<div class="mood-strip" role="img" aria-label="Last ${total} closes by count, not in date order: ${esc(legend)}">${segs}</div>
+    <p class="mood-strip-note">${esc(legend)}. Counts of the last ${total} closes, not the order of those days.</p>`;
+}
+function loggedRegimeDays() {
+  const rows = [];
+  (SIFT.updates || []).forEach((entry) => {
+    if (!entry || entry.kind === "milestone") return;
+    const line = (entry.items || []).find((item) => /Market regime:/i.test(item));
+    if (!line) return;
+    const match = line.match(/stocks \(SPY\) ([a-z][a-z ]*), crypto \(BTC\) ([a-z][a-z ]*)/i);
+    if (!match) return;
+    rows.push({
+      date: entry.date,
+      stock: match[1].trim().replace(/\s+/g, "_"),
+      crypto: match[2].trim().replace(/\s+/g, "_")
+    });
+  });
+  rows.sort((a, b) => a.date < b.date ? -1 : a.date > b.date ? 1 : 0);
+  const seen = new Set(rows.map((row) => row.date));
+  const stock = SIFT.regime && SIFT.regime.stock;
+  const crypto = SIFT.regime && SIFT.regime.crypto;
+  const today = (stock && stock.date) || (crypto && crypto.date);
+  if (today && !seen.has(today) && stock && crypto) {
+    rows.push({ date: today, stock: stock.regime, crypto: crypto.regime });
+  }
+  return rows;
+}
+function moodDayCells(rows, market) {
+  if (!rows.length) return `<p class="mood-strip-note">No day-by-day regime lines in the updates log yet.</p>`;
+  return `<div class="mood-days">${rows.map((row) => {
+    const key = row[market];
+    const color = MOOD_COLOR[key] || "#b7a48a";
+    return `<span class="mood-day" title="${esc(shortDate(row.date) + " · " + regimeName(key))}"><i style="background:${color}"></i>${esc(shortDate(row.date))}</span>`;
+  }).join("")}</div>`;
+}
+function renderMood() {
+  const host = document.getElementById("mood");
+  if (!host) return;
+  const stock = SIFT.regime && SIFT.regime.stock;
+  const crypto = SIFT.regime && SIFT.regime.crypto;
+  if (!stock && !crypto) {
+    host.innerHTML = `<div class="section-head"><h2>Market mood</h2><p>No regime data in this build.</p></div>`;
+    return;
+  }
+  const card = (block, market, label) => {
+    if (!block) return "";
+    const key = block.regime;
+    const close = Number.isFinite(block.close) ? block.close.toLocaleString("en-US") : "—";
+    return `<article class="mood-card reg-${esc(key)}">
+      <h3>${esc(label)}</h3>
+      <div class="mood-dial">${moodDial(key, label)}</div>
+      <p class="mood-name reg-word reg-${esc(key)}">${esc(regimeName(key))}</p>
+      <p class="mood-caption">${esc(moodCaption(key, market))}</p>
+      <p class="mood-meta">${esc(block.asset || label)} close ${esc(close)} on ${esc(block.date ? shortDate(block.date) : "—")}</p>
+      <h4>Last 20 closes</h4>
+      ${moodStrip(block.last20)}
+    </article>`;
+  };
+  const active = new Set([stock && stock.regime, crypto && crypto.regime].filter(Boolean));
+  const keyList = MOOD_ORDER.map((key) => {
+    const marks = [];
+    if (stock && stock.regime === key) marks.push("Stocks");
+    if (crypto && crypto.regime === key) marks.push("Crypto");
+    return `<li class="${active.has(key) ? "is-on" : ""} reg-${key}"><b class="reg-word reg-${key}">${esc(regimeName(key))}</b><span>${esc(MOOD_BLURB[key])}</span>${marks.length ? `<em>${esc(marks.join(" · "))}</em>` : ""}</li>`;
+  }).join("");
+  const days = loggedRegimeDays();
+  host.innerHTML = `<div class="section-head"><h2>Market mood</h2><p>The dial is today’s regime, the same daily label as the box below. Left is shock, right is trend up. It describes the last close. It is not a forecast.</p></div>
+    <div class="mood-grid">${card(stock, "stocks", "Stocks · SPY")}${card(crypto, "crypto", "Crypto · BTC")}</div>
+    <ul class="mood-key">${keyList}</ul>
+    <div class="mood-log">
+      <h3>Regime by day</h3>
+      <p class="mood-strip-note">Oldest first, from the updates log. This is the ordered history. The bars above are only how many of the last 20 closes fell in each regime.</p>
+      <div class="mood-log-grid">
+        <div><span>Stocks</span>${moodDayCells(days, "stock")}</div>
+        <div><span>Crypto</span>${moodDayCells(days, "crypto")}</div>
+      </div>
+    </div>`;
+}
+
+function positionCells(strategy) {
+  if (strategy.planned) return [{ kind: "idle", label: "Not started" }];
+  const text = strategy.forward || "";
+  const held = text.match(/holds ([A-Z0-9][A-Z0-9.-]*(?:\s*,\s*[A-Z0-9][A-Z0-9.-]*)*)\s+as of/);
+  if (held) {
+    return held[1].split(",").map((symbol) => symbol.trim()).filter(Boolean).map((symbol) => ({ kind: "symbol", symbol, label: symbol }));
+  }
+  const open = text.match(/(\d+)\s+positions open/);
+  if (open && Number(open[1]) > 0) return [{ kind: "open", count: Number(open[1]), label: open[1] + " open" }];
+  const queuedMatch = text.match(/First buys queued for the next close:\s*([^.]+)/);
+  const queued = queuedMatch ? queuedMatch[1].split(",").map((symbol) => symbol.trim()).filter(Boolean) : [];
+  const flat = /flat by the close/i.test(strategy.plain || "");
+  if (/100%\s*cash|\bin cash\b|waiting in cash|No buy signal/i.test(text) || queued.length || flat || (open && Number(open[1]) === 0)) {
+    return [{ kind: "cash", label: "Cash", queued, note: flat ? "Flat by the close" : "" }];
+  }
+  return [{ kind: "unknown", label: "Unlisted" }];
+}
+function heatBackground(pct) {
+  if (pct == null || !Number.isFinite(pct) || toneOf(pct).tone === "flat") return "#2c261c";
+  const mag = Math.max(0, Math.min(1, Math.abs(pct) / 8));
+  const alpha = (0.32 + mag * 0.68).toFixed(3);
+  return pct > 0 ? "rgba(60, 186, 98, " + alpha + ")" : "rgba(226, 70, 50, " + alpha + ")";
+}
+function positionDetail(strategy, cell) {
+  const pct = strategy.fwdPct;
+  const pctText = pct == null || !Number.isFinite(pct) ? "no paper return yet" : signedPct(pct);
+  const mark = strategy.asOfLabel ? " · " + strategy.asOfLabel : "";
+  if (cell.kind === "cash") {
+    const extra = [];
+    if (cell.note) extra.push(cell.note);
+    if (cell.queued && cell.queued.length) extra.push("queued for the next close: " + cell.queued.join(", "));
+    return strategy.name + " · Cash · " + pctText + mark + (extra.length ? " · " + extra.join(" · ") : "") + ". Nothing is held at this mark. The percent is the account, not an open position.";
+  }
+  if (cell.kind === "symbol") {
+    return strategy.name + " · " + cell.symbol + " · " + pctText + mark + ". That percent is the whole account’s paper return. Each position’s own unrealized change is not in the published data.";
+  }
+  if (cell.kind === "open") {
+    return strategy.name + " · " + cell.count + " positions open · " + pctText + mark + ". The published note does not name the symbols or each position’s percent.";
+  }
+  if (cell.kind === "idle") return strategy.name + " · Not started. No paper account yet.";
+  return strategy.name + " · Holdings not listed · " + pctText + mark + ".";
+}
+function renderPositions() {
+  const host = document.getElementById("positions");
+  if (!host) return;
+  const rows = SIFT.strategies.map((strategy) => {
+    const cells = positionCells(strategy);
+    const pct = strategy.fwdPct;
+    const tone = pct == null ? "wait" : toneOf(pct).tone;
+    const buttons = cells.map((cell) => {
+      const detail = positionDetail(strategy, cell);
+      const cashLike = cell.kind === "cash" || cell.kind === "idle";
+      const style = cashLike ? "" : ` style="background:${heatBackground(pct)}"`;
+      const cls = "heat-cell" + (cell.kind === "cash" ? " is-cash" : cell.kind === "idle" ? " is-idle" : cell.kind === "unknown" ? " is-idle" : "");
+      return `<button type="button" class="${cls}"${style} data-detail="${esc(detail)}" aria-label="${esc(detail)}">${esc(cell.label)}</button>`;
+    }).join("");
+    const figure = strategy.planned || pct == null ? "—" : signedPct(pct);
+    return `<div class="heat-row">
+      <a class="heat-who" href="strategy.html?n=${strategy.n}"><span class="num">${String(strategy.n).padStart(2, "0")}</span><span class="heat-name">${esc(strategy.name)}</span><b class="tone-${tone}">${figure}</b></a>
+      <div class="heat-cells">${buttons}</div>
+    </div>`;
+  }).join("");
+  host.innerHTML = `<div class="section-head"><h2>Positions</h2><p>Each cell is a holding from that strategy’s latest forward note. Cash means nothing is held right now (a buy queued for the next close has not filled). Color is the account’s paper return since its own start — full color is about ±8% — because the published data does not include each position’s own unrealized percent. “9 open” means the note gives a count and no ticker.</p></div>
+    <div class="heat-scale" aria-hidden="true"><span>−8%</span><i></i><span>+8%</span><span class="heat-cash-key">Cash</span></div>
+    <p class="heat-readout" id="heat-readout" role="status">Hover or tap a cell for the strategy, the symbol, and the account’s percent change.</p>
+    <div class="heat-grid">${rows}</div>`;
+  const readout = host.querySelector("#heat-readout");
+  host.querySelectorAll(".heat-cell").forEach((btn) => {
+    const show = () => {
+      host.querySelectorAll(".heat-cell.is-on").forEach((el) => el.classList.remove("is-on"));
+      btn.classList.add("is-on");
+      if (readout) readout.textContent = btn.getAttribute("data-detail") || "";
+    };
+    btn.addEventListener("pointerenter", show);
+    btn.addEventListener("focus", show);
+    btn.addEventListener("click", show);
+  });
+}
+
+const TICKER_COINS = [
+  { id: "bitcoin", sym: "BTC" },
+  { id: "ethereum", sym: "ETH" },
+  { id: "ripple", sym: "XRP" },
+  { id: "binancecoin", sym: "BNB" },
+  { id: "solana", sym: "SOL" },
+  { id: "dogecoin", sym: "DOGE" },
+  { id: "cardano", sym: "ADA" },
+  { id: "tron", sym: "TRX" },
+  { id: "chainlink", sym: "LINK" },
+  { id: "avalanche-2", sym: "AVAX" }
+];
+const TICKER_URL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids="
+  + TICKER_COINS.map((coin) => coin.id).join(",")
+  + "&sparkline=true&price_change_percentage=24h";
+let tickerStarted = false;
+let tickerAt = 0;
+let tickerRows = null;
+function formatCoin(n) {
+  if (n == null || !Number.isFinite(Number(n))) return "—";
+  const v = Number(n);
+  if (v >= 1000) return "$" + v.toLocaleString("en-US", { maximumFractionDigits: 0 });
+  if (v >= 1) return "$" + v.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  if (v >= 0.01) return "$" + v.toLocaleString("en-US", { minimumFractionDigits: 4, maximumFractionDigits: 4 });
+  return "$" + v.toLocaleString("en-US", { minimumFractionDigits: 4, maximumFractionDigits: 6 });
+}
+function downsample(values, count) {
+  if (values.length <= count) return values;
+  const out = [];
+  for (let i = 0; i < count; i += 1) out.push(values[Math.round(i * (values.length - 1) / (count - 1))]);
+  return out;
+}
+function sparkSvg(prices, tone) {
+  const samples = downsample(prices.filter((n) => Number.isFinite(n)), 32);
+  if (samples.length < 2) return null;
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svg.setAttribute("class", "spark");
+  svg.setAttribute("viewBox", "0 0 72 18");
+  svg.setAttribute("width", "72");
+  svg.setAttribute("height", "18");
+  svg.setAttribute("aria-hidden", "true");
+  const min = Math.min.apply(null, samples);
+  const max = Math.max.apply(null, samples);
+  const span = max - min || 1;
+  const pts = samples.map((p, i) => {
+    const x = (i / (samples.length - 1)) * 72;
+    const y = 16 - ((p - min) / span) * 14;
+    return x.toFixed(1) + "," + y.toFixed(1);
+  }).join(" ");
+  const line = document.createElementNS("http://www.w3.org/2000/svg", "polyline");
+  line.setAttribute("fill", "none");
+  line.setAttribute("stroke", tone === "up" ? "#3cba62" : tone === "down" ? "#e24632" : "#f0c53a");
+  line.setAttribute("stroke-width", "1.5");
+  line.setAttribute("stroke-linejoin", "round");
+  line.setAttribute("stroke-linecap", "round");
+  line.setAttribute("points", pts);
+  svg.append(line);
+  return svg;
+}
+function tickerTone(pct) {
+  if (pct == null || !Number.isFinite(pct) || Math.abs(pct) < 0.05) return "flat";
+  return pct > 0 ? "up" : "down";
+}
+function paintTicker(rows) {
+  const host = document.getElementById("crypto-ticker");
+  if (!host) return;
+  tickerRows = rows;
+  const symbols = {};
+  TICKER_COINS.forEach((coin) => { symbols[coin.id] = coin.sym; });
+  const ordered = rows.filter((row) => symbols[row.id]).slice().sort((a, b) => (b.market_cap || 0) - (a.market_cap || 0));
+  if (!ordered.length) {
+    tickerFail();
+    return;
+  }
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  host.classList.toggle("is-reduced", reduced);
+  host.classList.remove("is-fallback");
+  host.dataset.live = "1";
+  host.title = "Market prices from CoinGecko. 24-hour change and a 7-day sparkline. Not paper-account results.";
+  host.textContent = "";
+  const label = document.createElement("div");
+  label.className = "ticker-label";
+  const strong = document.createElement("b");
+  strong.textContent = "Coins";
+  const sub = document.createElement("span");
+  sub.textContent = "24h · 7d";
+  label.append(strong, sub);
+  const windowEl = document.createElement("div");
+  windowEl.className = "ticker-window";
+  const track = document.createElement("div");
+  track.className = "ticker-track" + (reduced ? "" : " is-animated");
+  const makeGroup = (clone) => {
+    const group = document.createElement("div");
+    group.className = "ticker-group";
+    if (clone) group.setAttribute("aria-hidden", "true");
+    ordered.forEach((row) => {
+      const pct = row.price_change_percentage_24h;
+      const tone = tickerTone(pct);
+      const item = document.createElement("span");
+      item.className = "tick";
+      const sym = document.createElement("b");
+      sym.textContent = symbols[row.id];
+      const px = document.createElement("span");
+      px.className = "tick-px";
+      px.textContent = formatCoin(row.current_price);
+      const chg = document.createElement("span");
+      chg.className = "tick-chg tone-" + tone;
+      chg.textContent = pct == null || !Number.isFinite(pct) ? "—" : signedPct(pct);
+      item.append(sym, px, chg);
+      const series = row.sparkline_in_7d && row.sparkline_in_7d.price;
+      const spark = series ? sparkSvg(series, tone) : null;
+      if (spark) item.append(spark);
+      item.title = (row.name || symbols[row.id]) + " · " + px.textContent + " · 24h " + chg.textContent + " · 7-day line";
+      group.append(item);
+    });
+    return group;
+  };
+  track.append(makeGroup(false));
+  if (!reduced) track.append(makeGroup(true));
+  windowEl.append(track);
+  host.append(label, windowEl);
+}
+function tickerFail() {
+  const host = document.getElementById("crypto-ticker");
+  if (!host) return;
+  if (host.dataset.live === "1") {
+    host.title = "The last price refresh failed. Showing the previous quotes.";
+    return;
+  }
+  host.classList.add("is-fallback");
+  host.textContent = "";
+  const note = document.createElement("p");
+  note.className = "ticker-fallback";
+  note.textContent = "Crypto prices unavailable";
+  host.append(note);
+}
+async function loadTicker() {
+  const now = Date.now();
+  if (now - tickerAt < 50000) return;
+  tickerAt = now;
+  const ctrl = typeof AbortController === "function" ? new AbortController() : null;
+  const timer = ctrl ? setTimeout(() => ctrl.abort(), 12000) : null;
+  try {
+    const res = await fetch(TICKER_URL, { signal: ctrl ? ctrl.signal : undefined, headers: { accept: "application/json" } });
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const data = await res.json();
+    if (!Array.isArray(data) || !data.length) throw new Error("empty");
+    paintTicker(data);
+  } catch (err) {
+    tickerFail();
+  } finally {
+    if (timer) clearTimeout(timer);
+  }
+}
+function renderTicker() {
+  const host = document.getElementById("crypto-ticker");
+  if (!host || tickerStarted) return;
+  tickerStarted = true;
+  loadTicker();
+  setInterval(loadTicker, 60000);
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) loadTicker();
+  });
+  const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  if (motion.addEventListener) motion.addEventListener("change", () => { if (tickerRows) paintTicker(tickerRows); });
 }

@@ -475,3 +475,263 @@ html { scroll-behavior: smooth; scroll-padding-top: 4rem; }
   .page .bt-facts { grid-template-columns: 1fr 1fr; }
   .result-block { padding: 0.85rem 0.75rem 0.95rem; }
 }
+
+/* Live coin ticker */
+.crypto-ticker {
+  display: flex;
+  align-items: stretch;
+  min-height: 2.55rem;
+  background: #070605;
+  color: var(--cream);
+  border-bottom: 1px solid #1c6d78;
+}
+.ticker-label {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 0.45rem;
+  padding: 0.25rem 0.75rem;
+  background: #0c4550;
+  color: #f6e7c8;
+  font: 0.62rem/1.15 var(--sans);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.ticker-label b { font-size: 0.72rem; letter-spacing: 0.14em; font-weight: 700; }
+.ticker-label span { color: rgba(246, 231, 200, 0.75); }
+.ticker-window {
+  flex: 1 1 auto;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  mask-image: linear-gradient(90deg, transparent, #000 0.8rem, #000 calc(100% - 1.2rem), transparent);
+}
+.ticker-track { display: flex; width: max-content; }
+.ticker-track.is-animated { animation: ticker-marquee 80s linear infinite; }
+.crypto-ticker:hover .ticker-track.is-animated { animation-play-state: paused; }
+.ticker-group { display: flex; }
+.tick {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.85rem;
+  border-right: 1px solid #241e19;
+  font: 0.78rem/1 var(--sans);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.tick b { letter-spacing: 0.05em; color: var(--cream); }
+.tick-px { color: #f6e7c8; }
+.tick-chg.tone-up { color: var(--green); }
+.tick-chg.tone-down { color: var(--red); }
+.tick-chg.tone-flat { color: var(--yellow); }
+.spark { display: block; flex: 0 0 auto; }
+.ticker-fallback {
+  margin: 0;
+  padding: 0.45rem 0.9rem;
+  font: 0.82rem/1.3 var(--sans);
+  color: var(--muted);
+}
+@keyframes ticker-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Market mood gauge */
+.mood-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+.mood-card {
+  background: #0b0a08;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--muted);
+  padding: 0.85rem 0.9rem 0.95rem;
+  min-width: 0;
+}
+.mood-card.reg-trend_up { border-top-color: var(--green); }
+.mood-card.reg-range { border-top-color: var(--yellow); }
+.mood-card.reg-risk_off { border-top-color: #e8913a; }
+.mood-card.reg-trend_down { border-top-color: var(--red); }
+.mood-card.reg-shock { border-top-color: #c43be0; }
+.mood-card h3, .mood-log h3, .mood-card h4 {
+  margin: 0 0 0.35rem;
+  font: 0.72rem/1.3 var(--sans);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.mood-card h4 { margin-top: 0.85rem; }
+.mood-dial svg { width: min(100%, 340px); height: auto; display: block; margin: 0 auto; }
+.mood-name {
+  margin: 0.15rem 0 0.15rem;
+  text-align: center;
+  font: 600 1.55rem/1.1 var(--sans);
+  letter-spacing: -0.02em;
+}
+.mood-caption { margin: 0.2rem 0 0; text-align: center; font: 0.92rem/1.4 var(--sans); color: var(--cream); }
+.mood-meta, .mood-strip-note { margin: 0.35rem 0 0; text-align: center; font: 0.78rem/1.4 var(--sans); color: var(--muted); }
+.mood-strip { display: flex; gap: 3px; height: 1.7rem; margin-top: 0.35rem; }
+.mood-seg {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: #140e09;
+  font: 600 0.68rem/1 var(--sans);
+  letter-spacing: 0.02em;
+}
+.mood-seg span { padding: 0 0.3rem; white-space: nowrap; }
+.mood-key {
+  list-style: none;
+  margin: 0.85rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.45rem;
+}
+.mood-key li {
+  margin: 0;
+  padding: 0.5rem 0.55rem 0.55rem;
+  background: #0b0a08;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--muted);
+  min-width: 0;
+}
+.mood-key li.is-on { background: #16130f; }
+.mood-key li.reg-trend_up { border-top-color: var(--green); }
+.mood-key li.reg-range { border-top-color: var(--yellow); }
+.mood-key li.reg-risk_off { border-top-color: #e8913a; }
+.mood-key li.reg-trend_down { border-top-color: var(--red); }
+.mood-key li.reg-shock { border-top-color: #c43be0; }
+.mood-key b { display: block; font: 600 0.78rem/1.2 var(--sans); }
+.mood-key span { display: block; margin-top: 0.2rem; font: 0.75rem/1.35 var(--sans); color: #d9c7ae; }
+.mood-key em { display: block; margin-top: 0.3rem; font: 600 0.66rem/1.2 var(--sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--yellow); }
+.mood-log { margin-top: 0.9rem; }
+.mood-log .mood-strip-note { text-align: left; }
+.mood-log-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; margin-top: 0.45rem; }
+.mood-log-grid > div > span {
+  display: block;
+  margin-bottom: 0.3rem;
+  font: 0.68rem/1.2 var(--sans);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.mood-days { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.mood-day {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.28rem 0.5rem;
+  background: #0b0a08;
+  border: 1px solid var(--line);
+  font: 0.75rem/1 var(--sans);
+  color: var(--cream);
+}
+.mood-day i { width: 0.7rem; height: 0.7rem; border-radius: 2px; display: block; }
+
+/* Positions heat map */
+.heat-scale {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  max-width: 28rem;
+  margin: 0 0 0.75rem;
+  font: 0.72rem/1 var(--sans);
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.heat-scale i {
+  flex: 1 1 auto;
+  height: 0.55rem;
+  border-radius: 99px;
+  background: linear-gradient(90deg, rgba(226, 70, 50, 0.95), #2c261c 50%, rgba(60, 186, 98, 0.95));
+}
+.heat-cash-key {
+  margin-left: 0.35rem;
+  padding: 0.15rem 0.4rem;
+  border: 1px dashed #6a5744;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #d9c7ae;
+}
+.heat-grid { display: grid; gap: 0.35rem; }
+.heat-row {
+  display: grid;
+  grid-template-columns: minmax(12rem, 17rem) minmax(0, 1fr);
+  gap: 0.45rem 0.7rem;
+  align-items: center;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid #241e19;
+}
+.heat-who {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 0.12rem 0.45rem;
+  align-items: baseline;
+  min-width: 0;
+  text-decoration: none;
+}
+.heat-who .num { color: var(--teal); }
+.heat-name { font: 0.86rem/1.3 var(--sans); color: var(--cream); }
+.heat-who b { font: 600 0.82rem/1 var(--sans); font-variant-numeric: tabular-nums; }
+.heat-who b.tone-up { color: var(--green); }
+.heat-who b.tone-down { color: var(--red); }
+.heat-who b.tone-flat { color: var(--yellow); }
+.heat-who b.tone-wait { color: var(--muted); }
+.heat-cells { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.heat-cell {
+  min-width: 2.8rem;
+  min-height: 2.75rem;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid rgba(243, 226, 196, 0.16);
+  border-radius: 3px;
+  background: #1a1613;
+  color: var(--cream);
+  font: 600 0.75rem/1.15 var(--sans);
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+.heat-cell.is-cash {
+  background: #14110e;
+  color: #d9c7ae;
+  border: 1px dashed #6a5744;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.heat-cell.is-idle {
+  background: transparent;
+  border-style: dashed;
+  color: var(--muted);
+  text-transform: none;
+  letter-spacing: 0.02em;
+  cursor: default;
+}
+.heat-cell.is-on { outline: 2px solid var(--yellow); outline-offset: 1px; }
+.heat-readout {
+  position: sticky;
+  top: 2.75rem;
+  z-index: 4;
+  margin: 0 0 0.55rem;
+  min-height: 2.6rem;
+  padding: 0.55rem 0.7rem;
+  background: #16130f;
+  border: 1px solid var(--line);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.45);
+  font: 0.86rem/1.4 var(--sans);
+  color: #d9c7ae;
+}
+@media (max-width: 900px) {
+  .mood-key { grid-template-columns: 1fr 1fr; }
+  .mood-key li:last-child { grid-column: 1 / -1; }
+}
+@media (max-width: 700px) {
+  .mood-grid, .mood-log-grid { grid-template-columns: 1fr; }
+  .heat-row { grid-template-columns: 1fr; align-items: start; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track, .ticker-track.is-animated { animation: none; transform: none; }
+  .ticker-group[aria-hidden="true"] { display: none; }
+  .ticker-window { overflow-x: auto; mask-image: none; }
+}
