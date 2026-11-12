@@ -280,8 +280,53 @@
     }
   }
 
+  function currentTheme() {
+    return document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
+  }
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute("data-theme", theme);
+    try { localStorage.setItem("sift.theme", theme); } catch (err) {}
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute("content", theme === "light" ? "#eef2f6" : "#0a1018");
+  }
+
+  function mountTheme() {
+    var bar = document.querySelector(".nav-bar");
+    if (!bar || bar.querySelector(".theme-toggle")) return;
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "theme-toggle";
+    function paint() {
+      var light = currentTheme() === "light";
+      btn.textContent = light ? "Dark" : "Light";
+      btn.setAttribute("aria-label", light ? "Switch to dark theme" : "Switch to light theme");
+    }
+    if (!document.documentElement.getAttribute("data-theme")) applyTheme("dark");
+    paint();
+    btn.addEventListener("click", function () {
+      applyTheme(currentTheme() === "light" ? "dark" : "light");
+      paint();
+    });
+    var toggle = bar.querySelector(".nav-toggle");
+    bar.insertBefore(btn, toggle || null);
+  }
+
+  function gateVideos() {
+    var on = !!(window.SIFT_CONFIG && window.SIFT_CONFIG.SHOW_VIDEOS === true);
+    document.querySelectorAll("[data-videos-nav], .videos-gate").forEach(function (node) {
+      if (on) node.removeAttribute("hidden");
+      else node.setAttribute("hidden", "");
+    });
+    var offNote = document.getElementById("videos-off");
+    if (offNote) offNote.hidden = on;
+    if (on && window.renderVideos) window.renderVideos();
+  }
+
   function init() {
     wrapFoldTitles();
+    mountTheme();
+    gateVideos();
     if (!bound) {
       bind();
       bound = true;

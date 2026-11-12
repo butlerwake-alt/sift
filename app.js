@@ -79,7 +79,7 @@ function drawChart(host, strategy, options = {}) {
     line.setAttribute("x2", width - pad.r);
     line.setAttribute("y1", y(tick));
     line.setAttribute("y2", y(tick));
-    line.setAttribute("stroke", tick === 10000 || tick === 5000 ? "#5c4634" : "#241e19");
+    line.setAttribute("class", tick === 10000 || tick === 5000 ? "grid-zero" : "grid-line");
     line.setAttribute("stroke-width", tick === 10000 || tick === 5000 ? "1.5" : "1");
     grid.append(line);
     const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
@@ -270,15 +270,37 @@ function renderHero() {
   if (kicker && SIFT.asOf) kicker.textContent = "Daily check-in · " + SIFT.asOf;
 }
 const LB_COLS = [
-  { key: "rank", label: "#", num: true },
-  { key: "name", label: "Strategy" },
-  { key: "market", label: "Market" },
-  { key: "pct", label: "Forward return", num: true },
-  { key: "delta", label: "Dollars", num: true },
-  { key: "dd", label: "Max drawdown", num: true },
-  { key: "days", label: "Days live", num: true },
-  { key: "gap", label: "Versus hold", num: true }
+  { key: "rank", label: "#", num: true, cls: "col-rank" },
+  { key: "name", label: "Strategy", cls: "col-name" },
+  { key: "pct", label: "Forward return", num: true, cls: "col-ret" },
+  { key: "spark", label: "Path", cls: "col-spark", nosort: true },
+  { key: "market", label: "Market", cls: "col-mkt" },
+  { key: "delta", label: "Dollars", num: true, cls: "col-dollars" },
+  { key: "dd", label: "Max drawdown", num: true, cls: "col-dd" },
+  { key: "days", label: "Days live", num: true, cls: "col-days" },
+  { key: "gap", label: "Versus hold", num: true, cls: "col-gap" }
 ];
+function earlyFlag(days) {
+  if (days == null || days >= 90) return "";
+  return `<span class="early-flag">Too early to tell</span>`;
+}
+function pathSpark(points, tone) {
+  const values = (points || []).map((point) => point.equity).filter((n) => Number.isFinite(n));
+  if (values.length < 2) return `<span class="spark-empty">—</span>`;
+  const samples = downsample(values, 24);
+  const min = Math.min.apply(null, samples);
+  const max = Math.max.apply(null, samples);
+  const span = max - min || 1;
+  const width = 88;
+  const height = 28;
+  const pts = samples.map((value, index) => {
+    const x = (index / (samples.length - 1)) * width;
+    const y = (height - 3) - ((value - min) / span) * (height - 6);
+    return x.toFixed(1) + "," + y.toFixed(1);
+  }).join(" ");
+  const name = tone === "up" || tone === "down" || tone === "flat" ? tone : "flat";
+  return `<svg class="path-spark tone-${name}" viewBox="0 0 ${width} ${height}" width="${width}" height="${height}" aria-hidden="true"><polyline fill="none" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round" stroke-linecap="round" points="${pts}"/></svg>`;
+}
 let LB_SORT = { key: "rank", dir: 1 };
 function leaderboardRows() {
   return SIFT.strategies.map((s) => {
@@ -303,25 +325,75 @@ function renderLeaderboard() {
     return dir * (av - bv) || a.s.n - b.s.n;
   });
   const tone = (v) => v == null ? "" : v > 0.005 ? "tone-up" : v < -0.005 ? "tone-down" : "tone-flat";
+  const sparkTone = (v) => v == null ? "flat" : v > 0.005 ? "up" : v < -0.005 ? "down" : "flat";
   const pts = (v) => v == null ? "—" : (Math.abs(v) < 0.005 ? "even" : (v > 0 ? "+" : "−") + Math.abs(v).toFixed(2) + " pts");
-  const head = LB_COLS.map((c) => `<th scope="col" class="${c.num ? "num-col" : ""}"><button type="button" data-key="${c.key}" aria-label="Sort by ${c.label}">${c.label}${LB_SORT.key === c.key ? (LB_SORT.dir < 0 ? " ▼" : " ▲") : ""}</button></th>`).join("");
+  const head = LB_COLS.map((c) => {
+    const arrow = LB_SORT.key === c.key ? (LB_SORT.dir < 0 ? " ▼" : " ▲") : "";
+    const inner = c.nosort ? c.label : `<button type="button" data-key="${c.key}" aria-label="Sort by ${c.label}">${c.label}${arrow}</button>`;
+    return `<th scope="col" class="${c.cls || ""} ${c.num ? "num-col" : ""}">${inner}</th>`;
+  }).join("");
   const body = rows.map((x) => `<tr class="${x.s.stale ? "is-stale" : ""}">
-      <td class="num-col rank-col">${x.rank || "—"}${rankMoveHtml(x.s)}</td>
-      <th scope="row"><a href="strategy.html?n=${x.s.n}"><span class="lb-n">${String(x.s.n).padStart(2, "0")}</span> ${x.s.name}</a>${x.s.label ? " " + labelChip(x.s) : ""}${x.s.isNew ? ' <span class="chip chip-new">New</span>' : ""}<span class="lb-sub">${x.s.category} · started ${x.s.start ? shortDate(x.s.start) : "—"}${x.s.stale ? " · stale" : ""}</span></th>
-      <td>${x.market}</td>
-      <td class="num-col ${tone(x.pct)}">${x.pct == null ? "Not started" : signedPct(x.pct)}</td>
-      <td class="num-col ${tone(x.delta)}">${x.delta == null ? "—" : signedMoney(x.delta)}</td>
-      <td class="num-col">${x.dd == null ? "—" : (x.dd > -0.005 ? "0.00%" : signedPct(x.dd))}</td>
-      <td class="num-col">${x.days == null ? "—" : x.days}</td>
-      <td class="num-col ${tone(x.gap)}">${pts(x.gap)}</td>
+      <td class="num-col col-rank rank-col">${x.rank || "—"}${rankMoveHtml(x.s)}</td>
+      <th scope="row" class="col-name"><a href="strategy.html?n=${x.s.n}"><span class="lb-n">${String(x.s.n).padStart(2, "0")}</span> ${esc(x.s.name)}</a>${x.s.label ? " " + labelChip(x.s) : ""}${x.s.isNew ? ' <span class="chip chip-new">New</span>' : ""}<span class="lb-sub">${esc(x.s.category)} · started ${x.s.start ? shortDate(x.s.start) : "—"}${x.s.stale ? " · stale" : ""}</span></th>
+      <td class="num-col col-ret ${tone(x.pct)}">${x.pct == null ? "Not started" : `<span class="ret-num">${signedPct(x.pct)}</span>`}${earlyFlag(x.days)}</td>
+      <td class="col-spark">${x.s.planned ? `<span class="spark-empty">—</span>` : pathSpark(x.s.points, sparkTone(x.pct))}</td>
+      <td class="col-mkt">${esc(x.market)}</td>
+      <td class="num-col col-dollars ${tone(x.delta)}">${x.delta == null ? "—" : signedMoney(x.delta)}</td>
+      <td class="num-col col-dd">${x.dd == null ? "—" : (x.dd > -0.005 ? "0.00%" : signedPct(x.dd))}</td>
+      <td class="num-col col-days">${x.days == null ? "—" : x.days}</td>
+      <td class="num-col col-gap ${tone(x.gap)}">${pts(x.gap)}</td>
     </tr>`).join("");
-  host.innerHTML = `<div class="section-head"><h2>Leaderboard</h2><p>Every strategy ranked best to worst by its forward paper return since its own start date, as of ${SIFT.asOf}, and re-ranked after every daily update. Arrows show the move versus the previous day's rank${SIFT.rankPrevDay ? " (" + shortDate(SIFT.rankPrevDay) + ")" : ""}; “New” means fewer than 5 days live. Ties go to the lower strategy number; not-started strategies sit at the bottom. Click a column to sort. Max drawdown is the worst drop between recorded daily marks. Strategies that started recently have little history, so early ranks mean little.</p></div>
-    <div class="rtable lb-table"><table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div>`;
+  const tracked = rows.filter((x) => x.days != null);
+  const earlyN = tracked.filter((x) => x.days < 90).length;
+  const banner = document.getElementById("early-banner");
+  if (banner) {
+    if (tracked.length && earlyN === tracked.length) banner.textContent = "Forward results: too early to tell. Every running strategy has fewer than 90 days of marks, so this rank is a diary, not a verdict.";
+    else if (earlyN) banner.textContent = earlyN + " of " + tracked.length + " forward tests have fewer than 90 days of marks: too early to tell.";
+    else banner.textContent = "";
+  }
+  host.innerHTML = `<div class="section-head lb-head"><div><p class="desk-label">Forward paper</p><h2 id="lb-title">Leaderboard</h2></div><p class="lb-asof">As of ${esc(SIFT.asOf)}</p></div>
+    <details class="lb-help"><summary>How this rank works</summary><p>Every strategy ranked best to worst by its forward paper return since its own start date, as of ${esc(SIFT.asOf)}, and re-ranked after every daily update. Arrows show the move versus the previous day's rank${SIFT.rankPrevDay ? " (" + shortDate(SIFT.rankPrevDay) + ")" : ""}; “New” means fewer than 5 days live. Ties go to the lower strategy number; not-started strategies sit at the bottom. Click a column to sort. Max drawdown is the worst drop between recorded daily marks. A forward test under 90 days is marked too early to tell.</p></details>
+    <div class="rtable lb-table lb-scroll"><table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div>`;
   host.querySelectorAll("thead button").forEach((btn) => btn.addEventListener("click", () => {
     const key = btn.dataset.key;
     LB_SORT = LB_SORT.key === key ? { key, dir: -LB_SORT.dir } : { key, dir: key === "name" || key === "market" || key === "rank" ? 1 : -1 };
     renderLeaderboard();
   }));
+}
+
+function renderBacktestBoard() {
+  const host = document.getElementById("backtest-board-mount");
+  if (!host) return;
+  loadBacktestDoc().then((doc) => {
+    const partial = new Set((doc.coverage && doc.coverage.partial) || []);
+    const ranked = (doc.strategies || []).map((rec) => {
+      const view = viewForAll(rec, doc);
+      if (!view || view.empty || view.returnPct == null || !Number.isFinite(view.returnPct)) return null;
+      return { rec, view };
+    }).filter(Boolean).sort((a, b) => b.view.returnPct - a.view.returnPct || a.rec.n - b.rec.n);
+    const top = ranked.slice(0, 5);
+    if (!top.length) {
+      host.innerHTML = `<p class="bt-banner">BACKTEST</p><h2 id="bt-side-title">Top backtested paths</h2><p class="meta">No backtest curve is in this build.</p>`;
+      return;
+    }
+    const cards = top.map(({ rec, view }) => {
+      const gap = view.benchReturnPct == null || !Number.isFinite(view.benchReturnPct) ? null : round1(view.returnPct - view.benchReturnPct);
+      const toneName = view.returnPct > 0.05 ? "up" : view.returnPct < -0.05 ? "down" : "flat";
+      const windowText = (view.startDate && view.endDate) ? isoLong(view.startDate) + " – " + isoLong(view.endDate) : "Window recorded on the curve";
+      return `<a class="bt-mini" href="strategy.html?n=${rec.n}#backtest">
+        <span class="bt-banner">BACKTEST</span>
+        <strong>${esc(rec.name)}</strong>
+        <span class="figure ${toneClass(view.returnPct)}">${btPct(view.returnPct)}</span>
+        ${pathSpark(view.strat, toneName)}
+        <span class="meta">${esc(windowText)}${partial.has(rec.n) ? " · partial window" : ""}</span>
+        <span class="meta">Max drawdown ${btPct(view.maxDdPct)}${gap == null ? "" : " · versus " + esc(view.benchName || "benchmark") + " " + btPoints(gap)}</span>
+      </a>`;
+    }).join("");
+    const asOf = doc.meta && (doc.meta.v2generatedET || doc.meta.generatedET);
+    host.innerHTML = `<p class="bt-banner">BACKTEST</p><h2 id="bt-side-title">Top backtested paths</h2><p class="meta">Hypothetical, includes costs. Not the forward paper result.${asOf ? " Built " + esc(asOf) + "." : ""}</p><div class="bt-list">${cards}</div>`;
+  }).catch(() => {
+    host.innerHTML = `<p class="bt-banner">BACKTEST</p><h2 id="bt-side-title">Top backtested paths</h2><p class="meta">Backtests could not be loaded.</p>`;
+  });
 }
 
 function renderBoard() {
@@ -360,7 +432,8 @@ function renderBoard() {
     plain.textContent = strategy.plain;
     const resultRow = document.createElement("div");
     resultRow.className = "result";
-    resultRow.innerHTML = `<span class="figure">${result.figure}</span><span class="status">${result.word}</span>`;
+    const daysLive = strategy.planned ? null : dayCount(strategy.start, strategy.asOf);
+    resultRow.innerHTML = `<span class="figure">${result.figure}</span><span class="status">${result.word}</span>${earlyFlag(daysLive)}`;
     const facts = document.createElement("div");
     facts.innerHTML = factsHtml(result);
     link.append(top, title, plain, resultRow, facts.firstElementChild);
@@ -397,6 +470,7 @@ function renderBoard() {
   renderTicker();
   renderHero();
   renderLeaderboard();
+  renderBacktestBoard();
   const book = document.getElementById("book-mount");
   const ladder = document.getElementById("ladder-mount");
   const priced = SIFT.strategies.filter((item) => item.latest != null);
@@ -716,6 +790,7 @@ function renderStrategy() {
   renderStamp();
   document.title = strategy.name + " · SIFT";
   const result = resultOf(strategy);
+  const daysLive = strategy.planned ? null : dayCount(strategy.start, strategy.asOf);
   const plot = strategy.planned ? `<div class="empty-plot">Not launched. No marks to plot.</div>` : `<div class="plot" id="detail-plot"></div>`;
   const pack = copyPack(strategy);
   const backtestTitle = strategy.label ? "Backtest, historical (separate from the forward paper)" : "Backtest, in-sample";
@@ -724,11 +799,11 @@ function renderStrategy() {
     ${strategy.label ? `<p class="chip-row">${labelChip(strategy)}</p>` : ""}
     <h1>${esc(strategy.name)}</h1>
     <p class="lede">${esc(strategy.plain)}</p>
-    ${foldBlock("forward", "strategy", "Forward paper results", result.figure + " · " + result.word, `
+    ${foldBlock("forward", "strategy", "Forward paper results", result.figure + " · " + result.word + (daysLive != null && daysLive < 90 ? " · too early to tell" : ""), `
       <section class="result-block forward-block" aria-labelledby="forward-heading">
         <h2 id="forward-heading" class="fold-dup">Forward paper results</h2>
         <p class="block-kicker">Simulated account from the daily paper test. Separate from the historical backtest below.</p>
-        <p class="result tone-${result.tone}"><span class="figure">${esc(result.figure)}</span><span class="status">${esc(result.word)}</span></p>
+        <p class="result tone-${result.tone}"><span class="figure">${esc(result.figure)}</span><span class="status">${esc(result.word)}</span>${earlyFlag(daysLive)}</p>
         ${factsHtml(result)}
         <p class="scale-note">${esc(result.detail)}. ${esc(strategy.window)} ${esc(strategy.sleeveNote || "Each dot is one recorded daily mark from the paper-test records. Days without a mark are not drawn.")}</p>
         ${plot}
@@ -1027,6 +1102,11 @@ function viewForAll(rec, doc) {
     strat,
     bench: bench.points,
     benchName: bench.name,
+    returnPct,
+    maxDdPct,
+    benchReturnPct,
+    startDate: equity.startDate,
+    endDate: equity.endDate,
     summary: early + " backtest return " + btPct(returnPct) + ", max drawdown " + btPct(maxDdPct) + ".",
     html: statsHtml({
       window: early + " · " + isoLong(equity.startDate) + " – " + isoLong(equity.endDate),
@@ -1225,7 +1305,7 @@ function drawBacktestChart(host, strat, bench, options) {
     const capital = Math.abs(tick - 10000) < (max - min) * 0.015;
     svg.append(svgEl("line", {
       x1: pad.l, x2: width - pad.r, y1: y, y2: y,
-      stroke: capital ? "#5c4634" : "#241e19",
+      class: capital ? "grid-zero" : "grid-line",
       "stroke-width": capital ? "1.5" : "1"
     }));
     const text = svgEl("text", { x: 8, y: y + 5, "font-size": "15" });
@@ -1236,7 +1316,7 @@ function drawBacktestChart(host, strat, bench, options) {
     const y = yOf(10000);
     svg.append(svgEl("line", {
       x1: pad.l, x2: width - pad.r, y1: y, y2: y,
-      stroke: "#5c4634", "stroke-width": "1.5"
+      class: "grid-zero", "stroke-width": "1.5"
     }));
   }
   dateTicks(dates).forEach((tick) => {
@@ -1271,7 +1351,7 @@ function drawBacktestChart(host, strat, bench, options) {
   };
   endDot(benchSeries, options.benchColor);
   endDot(series, options.stratColor);
-  const guide = svgEl("line", { y1: pad.t, y2: height - pad.b, stroke: "#8a7560", "stroke-width": "1", visibility: "hidden" });
+  const guide = svgEl("line", { y1: pad.t, y2: height - pad.b, class: "grid-line", "stroke-width": "1", visibility: "hidden" });
   svg.append(guide);
   host.append(svg);
   const readout = document.createElement("p");
@@ -1412,6 +1492,20 @@ function moodDayCells(rows, market) {
     return `<span class="mood-day" title="${esc(shortDate(row.date) + " · " + regimeName(key))}"><i style="background:${color}"></i>${esc(shortDate(row.date))}</span>`;
   }).join("")}</div>`;
 }
+function renderMoodCompact(stock, crypto) {
+  const host = document.getElementById("mood-compact");
+  if (!host) return;
+  if (!stock && !crypto) {
+    host.innerHTML = `<p class="desk-label">Market mood</p><p class="meta">No regime in this build.</p>`;
+    return;
+  }
+  const bit = (block, label) => {
+    if (!block) return "";
+    const close = Number.isFinite(block.close) ? block.close.toLocaleString("en-US") : "—";
+    return `<a class="mood-pill reg-${esc(block.regime)}" href="#mood-detail"><span>${esc(label)}</span><strong class="reg-word reg-${esc(block.regime)}">${esc(regimeName(block.regime))}</strong><em>${esc(block.asset || label)} ${esc(close)} · ${esc(block.date ? shortDate(block.date) : "—")}</em></a>`;
+  };
+  host.innerHTML = `<p class="desk-label">Market mood</p><div class="mood-pills">${bit(stock, "Stocks")}${bit(crypto, "Crypto")}</div>`;
+}
 function renderMood() {
   const host = document.getElementById("mood-mount");
   if (!host) return;
@@ -1419,6 +1513,7 @@ function renderMood() {
   const crypto = SIFT.regime && SIFT.regime.crypto;
   if (!stock && !crypto) {
     host.innerHTML = `<div class="section-head"><h2>Market mood</h2><p>No regime data in this build.</p></div>`;
+    renderMoodCompact(null, null);
     return;
   }
   const card = (block, market, label) => {
@@ -1443,6 +1538,7 @@ function renderMood() {
     return `<li class="${active.has(key) ? "is-on" : ""} reg-${key}"><b class="reg-word reg-${key}">${esc(regimeName(key))}</b><span>${esc(MOOD_BLURB[key])}</span>${marks.length ? `<em>${esc(marks.join(" · "))}</em>` : ""}</li>`;
   }).join("");
   const days = loggedRegimeDays();
+  renderMoodCompact(stock, crypto);
   host.innerHTML = `<div class="section-head"><h2>Market mood</h2><p>The dial is today’s regime, the same daily label as the market regime section. Left is shock, right is trend up. It describes the last close. It is not a forecast.</p></div>
     <div class="mood-grid">${card(stock, "stocks", "Stocks · SPY")}${card(crypto, "crypto", "Crypto · BTC")}</div>
     <ul class="mood-key">${keyList}</ul>
@@ -1571,7 +1667,7 @@ function sparkSvg(prices, tone) {
   const samples = downsample(prices.filter((n) => Number.isFinite(n)), 32);
   if (samples.length < 2) return null;
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  svg.setAttribute("class", "spark");
+  svg.setAttribute("class", "spark tone-" + (tone || "flat"));
   svg.setAttribute("viewBox", "0 0 72 18");
   svg.setAttribute("width", "72");
   svg.setAttribute("height", "18");
@@ -1586,7 +1682,7 @@ function sparkSvg(prices, tone) {
   }).join(" ");
   const line = document.createElementNS("http://www.w3.org/2000/svg", "polyline");
   line.setAttribute("fill", "none");
-  line.setAttribute("stroke", tone === "up" ? "#3cba62" : tone === "down" ? "#e24632" : "#f0c53a");
+  line.setAttribute("stroke", "currentColor");
   line.setAttribute("stroke-width", "1.5");
   line.setAttribute("stroke-linejoin", "round");
   line.setAttribute("stroke-linecap", "round");

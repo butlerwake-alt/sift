@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8">
+  <script>(function(){try{var t=localStorage.getItem("sift.theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Cache-Control" content="no-store">
   <title>SIFT</title>
   <meta name="description" content="Your everyday resource for backtested, forward-tested trading strategies: what's working, what isn't, and why. Paper results from real closing prices, not financial advice.">
-  <meta name="theme-color" content="#0c4550">
+  <meta name="theme-color" content="#0a1018">
   <meta name="application-name" content="SIFT">
   <meta name="apple-mobile-web-app-title" content="SIFT">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -29,46 +30,69 @@
   <meta name="twitter:title" content="SIFT">
   <meta name="twitter:description" content="Your everyday resource for backtested, forward-tested trading strategies: what's working, what isn't, and why. Paper results from real closing prices, not financial advice.">
   <meta name="twitter:image" content="https://butlerwake-alt.github.io/sift/og-image.png">
-  <link rel="stylesheet" href="styles.css?v=202611130320">
+  <link rel="stylesheet" href="styles.css?v=202611120520">
 </head>
 <body id="top">
   <a class="skip-link" href="#main">Skip to content</a>
-  <div id="crypto-ticker" class="crypto-ticker" role="region" aria-label="Live crypto prices">
-    <p class="ticker-fallback">Loading coin prices…</p>
+  <div class="top-stack">
+    <div id="crypto-ticker" class="crypto-ticker" role="region" aria-label="Live crypto prices">
+      <p class="ticker-fallback">Loading coin prices…</p>
+    </div>
+    <div class="rates-slot" id="rates" role="note">
+      <span class="slot-kicker">Rates</span>
+      <p>Fed funds, 2-year, 5-year, 10-year, and the yield curve. <b>Coming soon.</b> No yields are shown until a source is connected.</p>
+    </div>
+    <header class="mast">
+      <nav class="site-nav" aria-label="Primary">
+        <div class="nav-bar">
+          <a class="nav-brand" href="index.html" aria-current="page"><img src="favicon.svg" width="28" height="28" alt=""><span>SIFT</span></a>
+          <div class="nav-panel" id="site-menu">
+            <a href="#leaderboard">Leaderboard</a>
+            <a href="#board">Strategies</a>
+            <a href="research.html">Research</a>
+            <a href="follow_money.html">Follow the Money</a>
+            <a href="qqqi.html">QQQ vs QQQI</a>
+            <a href="news.html">XRP news</a>
+            <a href="updates.html">Updates</a>
+            <a href="#method">How it works</a>
+            <a href="videos.html" data-videos-nav hidden>Videos</a>
+          </div>
+          <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-menu"><span class="nav-toggle-bars" aria-hidden="true"></span>Menu</button>
+        </div>
+      </nav>
+    </header>
   </div>
-  <header class="mast">
-    <nav class="site-nav" aria-label="Primary">
-      <div class="nav-bar">
-        <a class="nav-brand" href="index.html" aria-current="page"><img src="favicon.svg" width="28" height="28" alt=""><span>SIFT</span></a>
-        <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-menu"><span class="nav-toggle-bars" aria-hidden="true"></span>Menu</button>
+  <main id="main" class="wrap">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="updated-stamp" id="updated-stamp"><b id="stamp-when">Last updated: Nov 11, 2026, 5:38 PM ET</b><span class="stamp-next">Next update: daily after the market close (about 8:30 PM ET)</span><a href="updates.html">All updates →</a></p>
+        <p class="eyebrow" id="hero-kicker">Daily check-in · November 11, 2026</p>
+        <div class="brand-lockup">
+          <img class="brand-mark" src="brand-mark.svg" width="48" height="48" alt="">
+          <h1>SIFT</h1>
+        </div>
+        <p class="lede">Your everyday resource for backtested, forward-tested trading strategies: what's working, what isn't, and why.</p>
+        <p class="hero-note">Paper results from real closing prices, not financial advice.</p>
       </div>
-      <div class="nav-panel" id="site-menu">
-        <a href="#leaderboard">Leaderboard</a>
-        <a href="#board">Strategies</a>
-        <a href="research.html">Research</a>
-        <a href="follow_money.html">Follow the Money</a>
-        <a href="qqqi.html">QQQ vs QQQI</a>
-        <a href="news.html">XRP news</a>
-        <a href="updates.html">Updates</a>
-        <a href="#method">How it works</a>
-      </div>
-    </nav>
-  </header>
-  <header class="sky">
-    <div class="sky-copy">
-      <p class="updated-stamp" id="updated-stamp"><b id="stamp-when">Last updated: Nov 11, 2026, 5:38 PM ET</b><span class="stamp-next">Next update: daily after the market close (about 8:30 PM ET)</span><a href="updates.html">All updates →</a></p>
-      <p class="eyebrow" id="hero-kicker">Daily check-in · November 11, 2026</p>
-      <div class="brand-lockup">
-        <img class="brand-mark" src="brand-mark.svg" width="72" height="72" alt="">
-        <h1>SIFT</h1>
-      </div>
-      <p class="lede">Your everyday resource for backtested, forward-tested trading strategies: what's working, what isn't, and why.</p>
-      <p class="hero-note">Paper results from real closing prices, not financial advice.</p>
       <dl class="hero-facts" id="hero-facts"></dl>
       <p class="score-line" id="score-line"></p>
-    </div>
-  </header>
-  <main id="main" class="wrap">
+    </section>
+
+    <section class="desk" id="leaderboard" aria-labelledby="lb-title">
+      <div class="mood-compact" id="mood" aria-label="Market mood">
+        <div id="mood-compact"></div>
+      </div>
+      <p class="early-banner" id="early-banner"></p>
+      <div class="desk-grid">
+        <div class="desk-main">
+          <div id="leaderboard-mount"></div>
+        </div>
+        <aside class="desk-side" id="backtests" aria-labelledby="bt-side-title">
+          <div id="backtest-board-mount"><p class="meta">Loading backtests…</p></div>
+        </aside>
+      </div>
+    </section>
+
     <div class="callout-row">
       <a class="home-callout" href="#leaderboard">
         <p class="kicker">Copy a strategy</p>
@@ -82,17 +106,65 @@
       </a>
     </div>
 
-    <section class="fold" id="mood" data-fold-group="home">
-      <h2 class="fold-heading"><button type="button" class="fold-toggle" aria-expanded="false" aria-controls="mood-panel"><span class="fold-name">Market mood</span><span class="fold-sum" id="mood-sum">Today's regime</span><span class="fold-chevron" aria-hidden="true"></span></button></h2>
-      <div class="fold-body" id="mood-panel"><div class="fold-inner"><section class="panel mood" id="mood-mount"></section></div></div>
+    <section class="fold" id="coming" data-fold-group="home">
+      <h2 class="fold-heading"><button type="button" class="fold-toggle" aria-expanded="false" aria-controls="coming-panel"><span class="fold-name">Coming next</span><span class="fold-sum">Slots only. No numbers.</span><span class="fold-chevron" aria-hidden="true"></span></button></h2>
+      <div class="fold-body" id="coming-panel"><div class="fold-inner">
+        <div class="section-head">
+          <h2>Coming next</h2>
+          <p>These modules are reserved. They say coming soon until a real source is connected. None of them shows a figure.</p>
+        </div>
+        <div class="soon-grid">
+          <article class="soon-card" id="ai-picks">
+            <span class="slot-kicker">Coming soon</span>
+            <strong>AI picks</strong>
+            <p>An autonomous paper portfolio on the same paper stake as the rest of the board. No picks and no balance until it is running.</p>
+          </article>
+          <article class="soon-card" id="crowd">
+            <span class="slot-kicker">Coming soon</span>
+            <strong>What the crowd is betting</strong>
+            <p>Prediction markets, the VIX, and the Fear &amp; Greed index. No reading is shown until a feed is connected.</p>
+          </article>
+          <article class="soon-card" id="analogs">
+            <span class="slot-kicker">Coming soon</span>
+            <strong>Market-climate analog finder</strong>
+            <p>A search for past markets that resembled this one. No matches until the finder is built.</p>
+          </article>
+          <article class="soon-card" id="sectors">
+            <span class="slot-kicker">Coming soon</span>
+            <strong>Sectors and commodities</strong>
+            <p>Sector and commodity leadership. No prices or ranks until a source is connected.</p>
+          </article>
+          <article class="soon-card" id="hall">
+            <span class="slot-kicker">Coming soon</span>
+            <strong>Hall of Fame</strong>
+            <p>Strategies that earned a long forward record. Empty until a name qualifies on recorded marks.</p>
+          </article>
+          <article class="soon-card" id="grow">
+            <span class="slot-kicker">Coming soon</span>
+            <strong>Grow $10,000</strong>
+            <p>A chart of how a paper stake would have compounded. No path is drawn until the series exists in the data files.</p>
+          </article>
+          <article class="soon-card" id="calendar">
+            <span class="slot-kicker">Coming soon</span>
+            <strong>Earnings and econ calendar</strong>
+            <p>Scheduled reports and releases. No dates are listed until a calendar source is connected.</p>
+          </article>
+        </div>
+      </div></div>
     </section>
-    <section class="fold" id="leaderboard" data-fold-group="home">
-      <h2 class="fold-heading"><button type="button" class="fold-toggle" aria-expanded="false" aria-controls="leaderboard-panel"><span class="fold-name">Leaderboard</span><span class="fold-sum" id="leaderboard-sum">Ranked by forward return</span><span class="fold-chevron" aria-hidden="true"></span></button></h2>
-      <div class="fold-body" id="leaderboard-panel"><div class="fold-inner"><section class="panel leaderboard" id="leaderboard-mount"></section></div></div>
+
+    <section class="fold videos-gate" id="videos" data-fold-group="home" hidden>
+      <h2 class="fold-heading"><button type="button" class="fold-toggle" aria-expanded="false" aria-controls="videos-panel"><span class="fold-name">Videos</span><span class="fold-sum">Latest from the channel</span><span class="fold-chevron" aria-hidden="true"></span></button></h2>
+      <div class="fold-body" id="videos-panel"><div class="fold-inner"><div id="videos-root"></div></div></div>
     </section>
+
     <section class="fold" id="positions" data-fold-group="home">
       <h2 class="fold-heading"><button type="button" class="fold-toggle" aria-expanded="false" aria-controls="positions-panel"><span class="fold-name">Positions</span><span class="fold-sum" id="positions-sum">Holdings heat map</span><span class="fold-chevron" aria-hidden="true"></span></button></h2>
       <div class="fold-body" id="positions-panel"><div class="fold-inner"><section class="panel positions" id="positions-mount"></section></div></div>
+    </section>
+    <section class="fold" id="mood-detail" data-fold-group="home">
+      <h2 class="fold-heading"><button type="button" class="fold-toggle" aria-expanded="false" aria-controls="mood-panel"><span class="fold-name">Market mood</span><span class="fold-sum" id="mood-sum">Today's regime</span><span class="fold-chevron" aria-hidden="true"></span></button></h2>
+      <div class="fold-body" id="mood-panel"><div class="fold-inner"><section class="panel mood" id="mood-mount"></section></div></div>
     </section>
     <section class="fold" id="regime" data-fold-group="home">
       <h2 class="fold-heading"><button type="button" class="fold-toggle" aria-expanded="false" aria-controls="regime-panel"><span class="fold-name">Market regime</span><span class="fold-sum" id="regime-sum">Stocks and crypto</span><span class="fold-chevron" aria-hidden="true"></span></button></h2>
@@ -100,9 +172,11 @@
     </section>
     <section class="fold" id="balances" data-fold-group="home">
       <h2 class="fold-heading"><button type="button" class="fold-toggle" aria-expanded="false" aria-controls="balances-panel"><span class="fold-name">Paper balances</span><span class="fold-sum" id="book-sum">Combined paper accounts</span><span class="fold-chevron" aria-hidden="true"></span></button></h2>
-      <div class="fold-body" id="balances-panel"><div class="fold-inner"><div class="book" id="book-mount"></div></div></div>
+      <div class="fold-body" id="balances-panel"><div class="fold-inner">
+        <div class="tally" id="tally"></div>
+        <div class="book" id="book-mount"></div>
+      </div></div>
     </section>
-    <div class="tally" id="tally"></div>
     <section class="fold" id="ladder" data-fold-group="home">
       <h2 class="fold-heading"><button type="button" class="fold-toggle" aria-expanded="false" aria-controls="ladder-panel"><span class="fold-name">Change from the start</span><span class="fold-sum" id="ladder-sum">Best to worst</span><span class="fold-chevron" aria-hidden="true"></span></button></h2>
       <div class="fold-body" id="ladder-panel"><div class="fold-inner"><section class="ladder" id="ladder-mount"></section></div></div>
@@ -118,8 +192,8 @@
         <div class="grid" id="board-mount"></div>
       </div></div>
     </section>
-    <a class="research-link" href="research.html"><b>New: Researched strategies →</b> Ten strategies shared online and on social media, backtested on past prices with fees (historical backtests, new experiment dated 2026-11-10). Not live signals.</a>
-    <a class="research-link" href="qqqi.html"><b>New: QQQ vs QQQI →</b> How the ~14% monthly income in the NEOS Nasdaq-100 High Income ETF is made, what it costs in upside, and when borrowing to buy it did — and did not — beat buying gradually. Educational, not advice. Figures as of early November 2026.</a>
+    <a class="research-link" href="research.html"><b>Researched strategies →</b> Ten strategies shared online and on social media, backtested on past prices with fees (historical backtests, new experiment dated 2026-11-10). Not live signals.</a>
+    <a class="research-link" href="qqqi.html"><b>QQQ vs QQQI →</b> How the ~14% monthly income in the NEOS Nasdaq-100 High Income ETF is made, what it costs in upside, and when borrowing to buy it did — and did not — beat buying gradually. Educational, not advice. Figures as of early November 2026.</a>
     <section class="fold" id="updates" data-fold-group="home">
       <h2 class="fold-heading"><button type="button" class="fold-toggle" aria-expanded="false" aria-controls="updates-panel"><span class="fold-name">Updates</span><span class="fold-sum" id="updates-sum">Daily log</span><span class="fold-chevron" aria-hidden="true"></span></button></h2>
       <div class="fold-body" id="updates-panel"><div class="fold-inner"><section class="panel updates" id="updates-mount"></section></div></div>
@@ -200,6 +274,7 @@
         <a href="news.html">XRP news</a>
         <a href="updates.html">Updates</a>
         <a href="#method">How it works</a>
+        <a href="videos.html" data-videos-nav hidden>Videos</a>
       </nav>
       <p class="footer-updated" id="footer-updated">Source: daily paper-test records. Latest mark November 11, 2026.</p>
     </div>
@@ -211,11 +286,14 @@
     <a href="news.html"><span>News</span></a>
     <a href="qqqi.html"><span>QQQI</span></a>
     <a href="updates.html"><span>Updates</span></a>
+    <a href="videos.html" data-videos-nav hidden><span>Videos</span></a>
   </nav>
   <a class="to-top" href="#top" aria-label="Back to top">↑</a>
-  <script src="data.js?v=202611130320"></script>
-  <script src="app.js?v=202611130320"></script>
+  <script src="site-config.js?v=202611120520"></script>
+  <script src="data.js?v=202611120520"></script>
+  <script src="app.js?v=202611120520"></script>
   <script>renderBoard();</script>
-  <script src="site-chrome.js?v=202611130320"></script>
+  <script src="videos.js?v=202611120520"></script>
+  <script src="site-chrome.js?v=202611120520"></script>
 </body>
 </html>
