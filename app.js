@@ -266,6 +266,8 @@ function renderHero() {
   SIFT.strategies.forEach((s) => { counts[resultOf(s).tone] += 1; });
   const line = document.getElementById("score-line");
   if (line) line.textContent = counts.up + " up · " + counts.down + " down · " + counts.flat + " flat · " + counts.wait + " not started";
+  const kicker = document.getElementById("hero-kicker");
+  if (kicker && SIFT.asOf) kicker.textContent = "Daily check-in · " + SIFT.asOf;
 }
 const LB_COLS = [
   { key: "rank", label: "#", num: true },

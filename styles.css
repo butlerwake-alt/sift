@@ -751,6 +751,12 @@ html { scroll-padding-top: 4.25rem; }
   font: 600 1.2rem/1.35 var(--sans);
   color: #f7edd8;
 }
+.hero-note {
+  margin: 0.4rem 0 0;
+  max-width: 40rem;
+  color: #d4c4ac;
+  font: 0.88rem/1.4 var(--sans);
+}
 .skip-link {
   position: absolute;
   left: 0.75rem;
@@ -923,14 +929,8 @@ html { scroll-padding-top: 4.25rem; }
   .brand-lockup { font-size: 1.9rem; }
   .sky-copy { padding: 0.65rem 0 0.7rem; }
   .one-line { font-size: 1rem; }
-  .sky .lede {
-    font-size: 0.92rem;
-    margin-top: 0.3rem;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
+  .sky .lede { font-size: 1rem; margin-top: 0.35rem; }
+  .hero-note { font-size: 0.82rem; }
   .updated-stamp { margin-bottom: 0.4rem; }
   .footer-inner > p:not(.footer-kicker):not(.footer-updated),
   .footer-nav { display: none; }
