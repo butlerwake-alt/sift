@@ -1,8 +1,20 @@
 {
-  "generated_at": "2026-11-11T21:15:29-05:00",
+  "generated_at": "2026-11-12T20:42:03-05:00",
   "lookback_days": 16,
   "disclaimer": "Verification status as of last update; not financial advice.",
   "items": [
+    {
+      "date": "2026-11-12",
+      "headline": "Ripple's bank-lending system moves closer to launch on the XRP Ledger",
+      "summary": "Lending support among the ledger’s 35 validators has climbed from 19 to 22 since mid-October, and no public tracker shows which validators switched.",
+      "status": "Reported",
+      "sources": [
+        {
+          "name": "CoinDesk",
+          "url": "https://www.coindesk.com/tech/2026/11/12/ripple-s-bank-lending-system-moves-closer-to-launch-on-the-xrp-ledger"
+        }
+      ]
+    },
     {
       "date": "2026-11-10",
       "headline": "XRP Ledger Foundation quantum roadmap: post-quantum account keys",
@@ -77,6 +89,18 @@
     },
     {
       "date": "2026-10-28",
+      "headline": "Aviva's £50m tokenized fund: What changes for investors",
+      "summary": "Aviva Investors launched a tokenized share class of its roughly £22 billion sterling liquidity fund on the XRP Ledger and invested £50 million of its own money in the new class.",
+      "status": "Reported",
+      "sources": [
+        {
+          "name": "DL News",
+          "url": "https://www.dlnews.com/articles/markets/aviva-tokenized-liquidity-fund-explained/"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-28",
       "headline": "Ripple Reports Banner Year Approaching $900M Annual Product Revenue Run Rate, Signs Multi-Solution Partnerships with BNY, Robinhood and more",
       "summary": "At its Swell conference, Ripple said it is on track to finish 2026 with about $900 million in annualized product revenue and pointed to new institutional partnerships; the figure is the company’s own claim.",
       "status": "Confirmed",
@@ -96,6 +120,22 @@
         {
           "name": "Ripple",
           "url": "https://ripple.com/ripple-press/ripple-and-coinbase-partner-to-expand-access-to-rlusd/"
+        }
+      ]
+    },
+    {
+      "date": "2026-10-27",
+      "headline": "OCC gives final approval to Ripple's national trust charter",
+      "summary": "The Office of the Comptroller of the Currency gave final approval for Ripple National Trust Bank, a federally supervised trust bank that may manage RLUSD reserves and offer fiduciary digital-asset custody; RLUSD would still be issued by Ripple’s New York trust company.",
+      "status": "Confirmed",
+      "sources": [
+        {
+          "name": "American Banker",
+          "url": "https://www.americanbanker.com/news/occ-gives-final-approval-to-ripples-national-trust-charter"
+        },
+        {
+          "name": "CoinDesk",
+          "url": "https://www.coindesk.com/markets/2026/10/27/ripple-gets-a-final-go-ahead-to-launch-its-own-u-s-national-trust-bank"
         }
       ]
     },
@@ -136,62 +176,6 @@
         {
           "name": "Cointelegraph",
           "url": "https://cointelegraph.com/news/ripple-robinhood-expand-partnership-rlusd-retail-institutional-markets"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-26",
-      "headline": "Aviva Investors expands its tokenised offering with the launch of a Sterling Liquidity Fund tokenised share class",
-      "summary": "Aviva Investors launched a tokenized share class of its roughly £22 billion sterling liquidity fund on the XRP Ledger and invested £50 million of its own money in the new class.",
-      "status": "Confirmed",
-      "sources": [
-        {
-          "name": "Ripple",
-          "url": "https://ripple.com/ripple-press/aviva-investors-expands-its-tokenised-offering-with-the-launch-of-a-sterling-liquidity-fund-tokenised-share-class/"
-        },
-        {
-          "name": "Cointelegraph",
-          "url": "https://cointelegraph.com/news/aviva-investors-launches-tokenized-share-class-of-sterling-fund-on-xrp-ledger"
-        },
-        {
-          "name": "DL News",
-          "url": "https://www.dlnews.com/articles/markets/aviva-tokenized-liquidity-fund-explained/"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-26",
-      "headline": "Ripple Receives Final OCC Approval to Establish National Trust Bank",
-      "summary": "The Office of the Comptroller of the Currency gave final approval for Ripple National Trust Bank, a federally supervised trust bank that may manage RLUSD reserves and offer fiduciary digital-asset custody; RLUSD would still be issued by Ripple’s New York trust company.",
-      "status": "Confirmed",
-      "sources": [
-        {
-          "name": "Ripple",
-          "url": "https://ripple.com/ripple-press/ripple-receives-final-occ-approval-to-establish-national-trust-bank/"
-        },
-        {
-          "name": "Cointelegraph",
-          "url": "https://cointelegraph.com/news/ripple-wins-final-us-approval-for-national-trust-bank"
-        },
-        {
-          "name": "American Banker",
-          "url": "https://www.americanbanker.com/news/occ-gives-final-approval-to-ripples-national-trust-charter"
-        },
-        {
-          "name": "CoinDesk",
-          "url": "https://www.coindesk.com/markets/2026/10/27/ripple-gets-a-final-go-ahead-to-launch-its-own-u-s-national-trust-bank"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-26",
-      "headline": "Ripple Treasury Introduces Always-On Corporate Treasury Platform to Modernize Corporate Cash Management",
-      "summary": "Ripple announced an always-on corporate treasury platform that combines cash management, payments, liquidity, stablecoins and custody for business customers.",
-      "status": "Confirmed",
-      "sources": [
-        {
-          "name": "Ripple",
-          "url": "https://ripple.com/ripple-press/ripple-treasury-introduces-always-on-corporate-treasury-platform-to-modernize-corporate-cash-management/"
         }
       ]
     }
