@@ -1,4 +1,4 @@
-/* Renders follow_money.html from data/follow_money.json. Sample rows only. No returns. */
+/* Renders follow_money.html from data/follow_money.json (public disclosures, refreshed daily). Research only. No returns. */
 (function () {
   "use strict";
 
@@ -42,6 +42,51 @@
     return (src.match(/[?&]v=([^&]+)/) || [])[1] || "1";
   }
 
+  var NFA = "Research only, not financial advice. Place any trade yourself at your own broker.";
+
+  function copyWithStatus(btn, text, statusNode) {
+    var chrome = window.siftChrome;
+    var label = btn.textContent;
+    var done = function () {
+      btn.textContent = "Copied ✓";
+      btn.classList.add("is-copied");
+      if (statusNode) statusNode.textContent = "Copied ✓ Research only.";
+      setTimeout(function () { btn.textContent = label; btn.classList.remove("is-copied"); }, 1800);
+    };
+    var fail = function () { if (statusNode) statusNode.textContent = "Could not copy. Select the text on the card instead."; else btn.textContent = "Copy failed"; };
+    if (chrome && chrome.copyText) chrome.copyText(text).then(done, fail);
+    else fail();
+  }
+
+  function copyButton(text, label, statusNode) {
+    var btn = el("button", "text-btn copy-btn", label || "Copy");
+    btn.type = "button";
+    btn.addEventListener("click", function (event) {
+      event.stopPropagation();
+      copyWithStatus(btn, text, statusNode);
+    });
+    return btn;
+  }
+
+  function linesFor(cards) {
+    return cards.filter(function (c) { return c.copy_line; }).map(function (c) { return c.copy_line; });
+  }
+
+  function csvFor(section) {
+    var rows = (section.cards || []).filter(function (c) { return c.csv && Object.keys(c.csv).length; });
+    if (!rows.length) return "";
+    var cols = Object.keys(rows[0].csv);
+    var esc = function (v) {
+      var t = v == null ? "" : String(v);
+      return /[",\n]/.test(t) ? '"' + t.replace(/"/g, '""') + '"' : t;
+    };
+    var out = [cols.join(",")];
+    rows.forEach(function (c) { out.push(cols.map(function (k) { return esc(c.csv[k]); }).join(",")); });
+    out.push("");
+    out.push(esc(NFA));
+    return out.join("\n");
+  }
+
   function cardNode(section, card, rows) {
     var article = el("article", "signal-card drawer");
     article.setAttribute("data-drawer-group", "fm-" + section.id);
@@ -49,15 +94,18 @@
     var toggle = el("button", "row-toggle");
     toggle.type = "button";
     toggle.setAttribute("aria-expanded", "false");
-    toggle.append(el("span", "chip chip-sample", "Sample"));
-    toggle.append(el("span", "row-name", card.who));
-    toggle.append(el("span", "row-pnl", card.what + " · " + card.action));
+    var weight = (card.weights || []).length ? " · " + card.weights.join(", ") : "";
+    if (card.sample) toggle.append(el("span", "chip chip-sample", "Sample"));
+    else if (card.sector) toggle.append(el("span", "chip chip-sector", card.sector));
+    toggle.append(el("span", "row-name", section.id === "funds" || section.id === "insiders" || section.id === "crypto" ? card.what + " · " + card.action + weight : card.what + " · " + card.action));
+    toggle.append(el("span", "row-pnl", card.public_date && card.public_date !== "—" ? (section.public_label || "Public") + " " + card.public_date : ""));
     toggle.append(el("span", "fold-chevron"));
     toggle.lastChild.setAttribute("aria-hidden", "true");
 
     var body = el("div", "drawer-body");
     var desk = el("div", "drawer-desk signal-desk");
-    desk.append(el("span", "chip chip-sample", "Sample"));
+    if (card.sample) desk.append(el("span", "chip chip-sample", "Sample"));
+    else if (card.sector) desk.append(el("span", "chip chip-sector", card.sector));
     desk.append(el("strong", "", card.who));
     body.append(desk);
 
@@ -72,12 +120,31 @@
       ["Confidence", card.confidence],
       ["Caveats", card.caveats]
     ].forEach(function (pair) {
+      if (pair[1] == null || pair[1] === "") return;
       var wrap = el("div");
       wrap.append(el("dt", "", pair[0]));
       wrap.append(el("dd", "", pair[1]));
       dl.append(wrap);
     });
+    if (card.source_url && !card.sample) {
+      var wrap = el("div");
+      wrap.append(el("dt", "", "Source"));
+      var dd = el("dd");
+      var a = el("a", "", "Open the original filing");
+      a.href = card.source_url;
+      a.rel = "noopener noreferrer";
+      a.target = "_blank";
+      dd.append(a);
+      wrap.append(dd);
+      dl.append(wrap);
+    }
     body.append(dl);
+    if (card.copy_line) {
+      var row = el("div", "copy-actions");
+      row.append(el("code", "copy-line", card.copy_line));
+      row.append(copyButton(card.copy_line + "\n" + NFA, "Copy"));
+      body.append(row);
+    }
     article.append(toggle, body);
     return article;
   }
@@ -94,18 +161,11 @@
     return btn;
   }
 
-  function listText(section) {
-    var lines = [
-      "Research only. Not a trade list. Not financial advice.",
-      "Disclosure lag: " + section.lag,
-      "Preview sample rows. These are not filings, holdings, or results.",
-      ""
-    ];
-    (section.cards || []).forEach(function (card) {
-      var tickers = (card.tickers || []).join(", ");
-      var weight = (card.weights || []).length ? " " + card.weights.join(", ") : "";
-      lines.push(tickers + weight + " — sample row, not a filing (" + card.action + ")");
-    });
+  function listText(section, cards, title) {
+    var lines = [title || ("SIFT Follow the Money: " + section.title), NFA, "Disclosure lag: " + section.lag, ""];
+    linesFor(cards || section.cards || []).forEach(function (line) { lines.push(line); });
+    lines.push("");
+    lines.push("Source: " + section.source_url);
     return lines.join("\n");
   }
 
@@ -184,6 +244,14 @@
       source.append(sourceLink);
       inner.append(source);
       inner.append(el("p", "stream-lag", "Disclosure lag: " + section.lag));
+      var asOf = el("p", "stream-asof");
+      if (section.stale) asOf.append(el("span", "chip chip-stale", "Stale"));
+      var stamp = section.retrieved_at ? "Retrieved " + String(section.retrieved_at).slice(0, 10) : "";
+      var newest = section.as_of ? "Newest record " + section.as_of : "";
+      asOf.append(document.createTextNode([newest, stamp, section.stale_note || ""].filter(Boolean).join(" · ")));
+      if (asOf.textContent) inner.append(asOf);
+      if (section.note) inner.append(el("p", "stream-lag", section.note));
+      inner.append(el("p", "fm-nfa", "Not financial advice. Research only. If you act on anything here, place the trade yourself at your own broker."));
 
       var groups = new Map();
       (section.cards || []).forEach(function (card) {
@@ -195,7 +263,10 @@
         var group = el("div", "entity");
         var head = el("div", "entity-head");
         head.append(el("h3", "", entity));
-        head.append(followButton(section, entity, rows));
+        var tools = el("div", "entity-tools");
+        if (linesFor(cards).length) tools.append(copyButton(listText(section, cards, entity + " (" + section.title + ")"), section.id === "funds" ? "Copy all + weights" : "Copy all"));
+        tools.append(followButton(section, entity, rows));
+        head.append(tools);
         group.append(head);
         cards.forEach(function (card) {
           group.append(cardNode(section, card, rows));
@@ -204,21 +275,19 @@
       });
 
       var actions = el("div", "copy-actions");
-      var copyBtn = el("button", "text-btn", "Copy the list (research only)");
-      copyBtn.type = "button";
       var status = el("p", "copy-status");
       status.setAttribute("role", "status");
-      copyBtn.addEventListener("click", function () {
-        var text = listText(section);
-        var chrome = window.siftChrome;
-        var done = function () { status.textContent = "Copied. Research only."; };
-        var fail = function () { status.textContent = "Could not copy. The lag is on this card if you need to retype the tickers."; };
-        if (chrome && chrome.copyText) chrome.copyText(text).then(done, fail);
-        else fail();
-      });
-      actions.append(copyBtn, status);
+      if (linesFor(section.cards || []).length) actions.append(copyButton(listText(section), "Copy the whole list", status));
+      var csv = csvFor(section);
+      if (csv) {
+        var dl = el("a", "text-btn", "Download CSV");
+        dl.href = "data:text/csv;charset=utf-8," + encodeURIComponent(csv);
+        dl.download = "sift_follow_money_" + section.id + ".csv";
+        actions.append(dl);
+      }
+      actions.append(status);
       inner.append(actions);
-      inner.append(el("p", "how-note", "How to look at this yourself: use any broker’s paper or simulated account and start small. The lag above is part of the list. Copying a disclosed name is not the same as copying a result, and this preview has no results."));
+      inner.append(el("p", "how-note", "Not financial advice. Copy buttons give you plain text to research or paper-trade; SIFT places no orders. If you trade, do it yourself at your own broker and start small. The lag above is part of the list, and copying a disclosed name is not the same as copying a result."));
       body.append(inner);
       block.append(body);
       root.append(block);
@@ -288,7 +357,7 @@
       .then(paint)
       .catch(function () {
         clear(root);
-        root.append(el("p", "fm-error", "The sample feed could not be loaded."));
+        root.append(el("p", "fm-error", "The feed could not be loaded. Try again in a minute."));
       });
   }
 

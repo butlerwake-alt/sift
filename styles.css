@@ -1088,3 +1088,22 @@ html[data-theme="light"] .bt-banner { background: #123056; color: #d6e6ff; }
   .fold-body, .fold-chevron { transition: none; }
   html { scroll-behavior: auto; }
 }
+/* Follow the Money live feed: copy lines, sector and stale chips */
+.chip-sector { color: #06263a; background: #9fd8ff; }
+.chip-stale { color: #2a0a05; background: #f0a23a; margin-right: 0.4rem; }
+.entity-tools { display: flex; flex-wrap: wrap; gap: 0.4rem; justify-content: flex-end; }
+.stream-asof { color: var(--muted); font: 0.85rem/1.4 var(--sans); }
+.fm-nfa { color: var(--yellow); font: 600 0.82rem/1.4 var(--sans); margin: 0.3rem 0 0.6rem; }
+.copy-line {
+  flex: 1 1 12rem;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--cream);
+  font: 0.8rem/1.45 var(--mono);
+}
+.copy-btn.is-copied { background: #123056; border-color: #3d6cb5; color: #f4f7fb; }
+.entity-tools .text-btn, .entity-tools .follow-btn, .copy-actions .text-btn { min-height: 44px; }
