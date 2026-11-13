@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
+  <script>(function(){try{var t=localStorage.getItem("sift.theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Cache-Control" content="no-store">
   <title>QQQ vs QQQI · SIFT</title>
   <meta name="description" content="How the ~14% monthly income in the NEOS Nasdaq-100 High Income ETF (QQQI) is made, what it costs in upside versus QQQ, and when borrowing to buy it did and did not beat buying gradually. Educational research, figures as of early November 2026. Not financial advice.">
-  <meta name="theme-color" content="#0c4550">
+  <meta name="theme-color" content="#0a1018">
   <meta name="application-name" content="SIFT">
   <meta name="apple-mobile-web-app-title" content="SIFT">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -29,7 +30,7 @@
   <meta name="twitter:title" content="QQQ vs QQQI · SIFT">
   <meta name="twitter:description" content="How the ~14% monthly income in QQQI is made, what it costs in upside versus QQQ, and when borrowing did and did not beat buying gradually. Educational, not financial advice.">
   <meta name="twitter:image" content="https://butlerwake-alt.github.io/sift/og-image.png">
-  <link rel="stylesheet" href="styles.css?v=202611130320">
+  <link rel="stylesheet" href="styles.css?v=202611130140">
   <style>
     .site-nav a[aria-current="page"] { border-bottom-color: var(--yellow); }
     .essay { max-width: 46rem; }
@@ -40,7 +41,7 @@
     .essay ul { margin: 0 0 0.9rem; padding-left: 1.2rem; }
     .essay li { margin: 0.3rem 0; }
     .essay .lede-more { margin: 0.9rem 0 0; max-width: 44rem; }
-    .byline { margin: 0.55rem 0 0; font: 0.88rem/1.4 var(--sans); color: rgba(246, 231, 200, 0.8); }
+    .byline { margin: 0.55rem 0 0; font: 0.88rem/1.4 var(--sans); color: var(--muted); }
     .callout {
       background: var(--panel);
       border: 1px solid var(--line);
@@ -60,8 +61,8 @@
       display: block;
       width: 100%;
       height: auto;
-      background: #070605;
-      border: 1px solid #241e19;
+      background: var(--bg);
+      border: 1px solid var(--line);
     }
     .chart-fig figcaption {
       margin: 0.4rem 0 0;
@@ -84,7 +85,7 @@
       .perf-table th:first-child, .perf-table td:first-child { width: 46%; }
     }
     .best td { color: var(--green); }
-    .grp th { background: #161310; color: var(--cream); font-weight: 600; text-align: left; letter-spacing: 0; text-transform: none; font-size: 0.82rem; }
+    .grp th { background: var(--panel-2); color: var(--cream); font-weight: 600; text-align: left; letter-spacing: 0; text-transform: none; font-size: 0.82rem; }
     .rtable td:first-child, .rtable th:first-child { text-align: left; }
     .source-list { margin: 0 0 1rem; padding-left: 1.15rem; color: var(--muted); font: 0.84rem/1.45 var(--sans); }
     .source-list li { margin: 0.25rem 0; overflow-wrap: anywhere; }
@@ -104,9 +105,7 @@
     <nav class="site-nav" aria-label="Primary">
       <div class="nav-bar">
         <a class="nav-brand" href="index.html"><img src="favicon.svg" width="28" height="28" alt=""><span>SIFT</span></a>
-        <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-menu"><span class="nav-toggle-bars" aria-hidden="true"></span>Menu</button>
-      </div>
-      <div class="nav-panel" id="site-menu">
+        <div class="nav-panel" id="site-menu">
         <a href="index.html#leaderboard">Leaderboard</a>
         <a href="index.html#board">Strategies</a>
         <a href="research.html">Research</a>
@@ -115,6 +114,9 @@
         <a href="news.html">XRP news</a>
         <a href="updates.html">Updates</a>
         <a href="index.html#method">How it works</a>
+        <a href="videos.html" data-videos-nav hidden>Videos</a>
+        </div>
+        <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-menu"><span class="nav-toggle-bars" aria-hidden="true"></span>Menu</button>
       </div>
     </nav>
   </header>
@@ -314,6 +316,7 @@
         <a href="news.html">XRP news</a>
         <a href="updates.html">Updates</a>
         <a href="index.html#method">How it works</a>
+      <a href="videos.html" data-videos-nav hidden>Videos</a>
       </nav>
     </div>
   </footer>
@@ -324,8 +327,10 @@
     <a href="news.html"><span>News</span></a>
     <a href="qqqi.html" aria-current="page"><span>QQQI</span></a>
     <a href="updates.html"><span>Updates</span></a>
+  <a href="videos.html" data-videos-nav hidden><span>Videos</span></a>
   </nav>
   <a class="to-top" href="#top" aria-label="Back to top">↑</a>
-  <script src="site-chrome.js?v=202611130320"></script>
+  <script src="site-config.js?v=202611130140"></script>
+  <script src="site-chrome.js?v=202611130140"></script>
 </body>
 </html>

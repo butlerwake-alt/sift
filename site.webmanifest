@@ -5,8 +5,8 @@
   "start_url": "/sift/",
   "scope": "/sift/",
   "display": "standalone",
-  "background_color": "#070605",
-  "theme_color": "#0c4550",
+  "background_color": "#070b12",
+  "theme_color": "#0a1018",
   "icons": [
     {
       "src": "icon-192.png",

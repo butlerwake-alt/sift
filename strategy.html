@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
+  <script>(function(){try{var t=localStorage.getItem("sift.theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Cache-Control" content="no-store">
   <title>Strategy · SIFT</title>
   <meta name="description" content="Paper-only strategy detail. Simulated $10,000. No live orders. Not financial advice.">
-  <meta name="theme-color" content="#0c4550">
+  <meta name="theme-color" content="#0a1018">
   <meta name="application-name" content="SIFT">
   <meta name="apple-mobile-web-app-title" content="SIFT">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -29,7 +30,7 @@
   <meta name="twitter:title" content="Strategy · SIFT">
   <meta name="twitter:description" content="Paper-only strategy detail. Simulated $10,000. No live orders. Not financial advice.">
   <meta name="twitter:image" content="https://butlerwake-alt.github.io/sift/og-image.png">
-  <link rel="stylesheet" href="styles.css?v=202611121719">
+  <link rel="stylesheet" href="styles.css?v=202611130140">
 </head>
 <body id="top">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -37,9 +38,7 @@
     <nav class="site-nav" aria-label="Primary">
       <div class="nav-bar">
         <a class="nav-brand" href="index.html"><img src="favicon.svg" width="28" height="28" alt=""><span>SIFT</span></a>
-        <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-menu"><span class="nav-toggle-bars" aria-hidden="true"></span>Menu</button>
-      </div>
-      <div class="nav-panel" id="site-menu">
+        <div class="nav-panel" id="site-menu">
         <a href="index.html#leaderboard">Leaderboard</a>
         <a href="index.html#board" aria-current="page">Strategies</a>
         <a href="research.html">Research</a>
@@ -48,6 +47,9 @@
         <a href="news.html">XRP news</a>
         <a href="updates.html">Updates</a>
         <a href="index.html#method">How it works</a>
+        <a href="videos.html" data-videos-nav hidden>Videos</a>
+        </div>
+        <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-menu"><span class="nav-toggle-bars" aria-hidden="true"></span>Menu</button>
       </div>
     </nav>
   </header>
@@ -70,6 +72,7 @@
         <a href="news.html">XRP news</a>
         <a href="updates.html">Updates</a>
         <a href="index.html#method">How it works</a>
+      <a href="videos.html" data-videos-nav hidden>Videos</a>
       </nav>
       <p class="footer-updated" id="footer-updated">Simulated research. Not a live brokerage.</p>
     </div>
@@ -81,11 +84,13 @@
     <a href="news.html"><span>News</span></a>
     <a href="qqqi.html"><span>QQQI</span></a>
     <a href="updates.html"><span>Updates</span></a>
+  <a href="videos.html" data-videos-nav hidden><span>Videos</span></a>
   </nav>
   <a class="to-top" href="#top" aria-label="Back to top">↑</a>
-  <script src="data.js?v=202611121719"></script>
-  <script src="app.js?v=202611121719"></script>
+  <script src="data.js?v=202611130140"></script>
+  <script src="app.js?v=202611130140"></script>
   <script>renderStrategy();</script>
-  <script src="site-chrome.js?v=202611121719"></script>
+  <script src="site-config.js?v=202611130140"></script>
+  <script src="site-chrome.js?v=202611130140"></script>
 </body>
 </html>
