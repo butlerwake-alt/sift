@@ -1,8 +1,8 @@
 {
  "meta": {
-  "fingerprint": "711b5b83d8e8e13e",
-  "lastUpdatedISO": "2026-11-13T16:45:54-05:00",
-  "lastUpdatedET": "Nov 13, 2026, 4:45 PM ET",
+  "fingerprint": "b894c688bd5dba0b",
+  "lastUpdatedISO": "2026-11-13T20:31:18-05:00",
+  "lastUpdatedET": "Nov 13, 2026, 8:31 PM ET",
   "dataDay": "2026-11-13"
  },
  "entries": [
@@ -10,10 +10,11 @@
    "date": "2026-11-13",
    "kind": "daily",
    "title": "Daily update · Fri Nov 13",
-   "updatedET": "Nov 13, 2026, 4:45 PM ET",
+   "updatedET": "Nov 13, 2026, 8:31 PM ET",
    "items": [
+    "#13 Bitcoin 200-day trend: sold BTC.",
     "Biggest gains since the previous mark: #3 Crypto Bollinger band reversion +1.11%; #2 Crypto z-score mean reversion +0.40%.",
-    "Biggest drops: #8 S&P 500 dip-buy −3.05%; #10 9 EMA + VWAP intraday −0.17%.",
+    "Biggest drops: #13 Bitcoin 200-day trend −4.63%; #8 S&P 500 dip-buy −3.05%; #10 9 EMA + VWAP intraday −0.17%.",
     "Market regime: stocks (SPY) range, crypto (BTC) range."
    ]
   },

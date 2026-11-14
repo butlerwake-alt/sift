@@ -1,17 +1,17 @@
 {
-  "generated_at": "2026-11-12T20:42:03-05:00",
+  "generated_at": "2026-11-13T20:32:53-05:00",
   "lookback_days": 16,
   "disclaimer": "Verification status as of last update; not financial advice.",
   "items": [
     {
-      "date": "2026-11-12",
-      "headline": "Ripple's bank-lending system moves closer to launch on the XRP Ledger",
-      "summary": "Lending support among the ledger’s 35 validators has climbed from 19 to 22 since mid-October, and no public tracker shows which validators switched.",
+      "date": "2026-11-13",
+      "headline": "Bitcoin Breaks Below $69,000 as Selloff Sets New Lows",
+      "summary": "Ether, XRP and SOL also hit four-week lows on Coinbase, while bullish bets accounted for most tracked liquidations.",
       "status": "Reported",
       "sources": [
         {
-          "name": "CoinDesk",
-          "url": "https://www.coindesk.com/tech/2026/11/12/ripple-s-bank-lending-system-moves-closer-to-launch-on-the-xrp-ledger"
+          "name": "The Defiant",
+          "url": "https://thedefiant.io/news/markets/bitcoin-breaks-below-69-000-as-selloff-sets-new-lows"
         }
       ]
     },
@@ -120,62 +120,6 @@
         {
           "name": "Ripple",
           "url": "https://ripple.com/ripple-press/ripple-and-coinbase-partner-to-expand-access-to-rlusd/"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-27",
-      "headline": "OCC gives final approval to Ripple's national trust charter",
-      "summary": "The Office of the Comptroller of the Currency gave final approval for Ripple National Trust Bank, a federally supervised trust bank that may manage RLUSD reserves and offer fiduciary digital-asset custody; RLUSD would still be issued by Ripple’s New York trust company.",
-      "status": "Confirmed",
-      "sources": [
-        {
-          "name": "American Banker",
-          "url": "https://www.americanbanker.com/news/occ-gives-final-approval-to-ripples-national-trust-charter"
-        },
-        {
-          "name": "CoinDesk",
-          "url": "https://www.coindesk.com/markets/2026/10/27/ripple-gets-a-final-go-ahead-to-launch-its-own-u-s-national-trust-bank"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-27",
-      "headline": "C2FO and Ripple Partner to Modernize Trade Finance Using the XRP Ledger",
-      "summary": "C2FO and Ripple said financing and settlement activity for C2FO’s Instant Pay product will be brought onto the XRP Ledger.",
-      "status": "Confirmed",
-      "sources": [
-        {
-          "name": "Ripple",
-          "url": "https://ripple.com/ripple-press/c2fo-and-ripple-partner-to-modernize-trade-finance-using-the-xrp-ledger/"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-27",
-      "headline": "Ripple Expands Strategic Digital Assets Collaboration with BNY Across Custody and Tokenized Trade Finance",
-      "summary": "Ripple and BNY said they are broadening digital-asset custody work and exploring tokenized trade-finance uses, including support for assets issued on the XRP Ledger.",
-      "status": "Confirmed",
-      "sources": [
-        {
-          "name": "Ripple",
-          "url": "https://ripple.com/ripple-press/ripple-expands-collaboration-with-bny-across-custody-and-tokenized-trade-finance/"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-27",
-      "headline": "Ripple and Robinhood Partner to Power the Next Generation of Finance",
-      "summary": "Ripple and Robinhood said they will expand use of the RLUSD stablecoin across Robinhood’s retail and institutional businesses, and that Robinhood plans to use Ripple Treasury and Ripple Prime.",
-      "status": "Confirmed",
-      "sources": [
-        {
-          "name": "Ripple",
-          "url": "https://ripple.com/ripple-press/ripple-and-robinhood-partner-to-power-the-next-generation-of-finance/"
-        },
-        {
-          "name": "Cointelegraph",
-          "url": "https://cointelegraph.com/news/ripple-robinhood-expand-partnership-rlusd-retail-institutional-markets"
         }
       ]
     }
