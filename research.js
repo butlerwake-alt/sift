@@ -62,7 +62,7 @@ function renderResearch() {
     ${R.strategies.map((s) => `<tr><th><a href="#${s.key}">${esc(s.name)}</a></th><td>${esc(s.market)}</td><td>${rPct(s.full.strat.total_return_pct, 0)}</td><td>${rPct(s.full.strat.max_dd_pct)}</td><td>${rPct(s.full.hold.total_return_pct, 0)}</td><td>${rPct(s.full.hold.max_dd_pct)}</td><td>${rPct(s.recent.strat.total_return_pct)}</td><td>${rPct(s.recent.hold.total_return_pct)}</td><td class="tone-${VERDICT_TONE[s.verdict]}">${s.verdict}</td><td class="${s.ddLimit === "PASS" ? "tone-up" : "tone-down"}">${s.ddLimit}</td></tr>`).join("")}
     </tbody></table></div>`;
   document.getElementById("rmethod").innerHTML = `<h2>How these were tested</h2><ul class="rules">${R.method.map((m) => `<li>${esc(m)}</li>`).join("")}</ul>
-    <p class="meta">Data snapshot retrieved ${esc(R.dataManifest.retrieved_et.trim())} ET. Code and results: <a href="research/run_20261110/backtest.py">backtest.py</a> · <a href="research/run_20261110/results.json">results.json</a> · <a href="research/run_20261110/manifest.json">data hashes</a>.</p>`;
+    <p class="meta">Data snapshot retrieved ${esc((R.dataManifest.retrieved_et || R.dataManifest.retrieved_utc || "").toString().trim())} ET. Code and results: <a href="research/run_20261113_cursor/backtest.py">backtest.py</a> · <a href="research/run_20261113_cursor/results.json">results.json</a> · <a href="research/run_20261113_cursor/manifest.json">data hashes</a>.</p>`;
   const host = document.getElementById("rcards");
   R.strategies.forEach((s, i) => {
     const tone = VERDICT_TONE[s.verdict];

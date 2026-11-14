@@ -20,11 +20,12 @@ for s in R["strategies"]:
     s["full"] = {"from": fo["first"], "to": fo["last"], "strat": fo, "hold": fb, "closeFill": f["close"], "doubleFeeReturn": f["open_double_fee_total_return_pct"]}
     s["recent"] = {"from": no["first"], "to": no["last"], "strat": no, "hold": nb}
     s["curve"] = monthly(curves[k]); s["holdCurve"] = monthly(curves[k + "__bh"])
-    s["why"] = ("Picked for testing because it is widely shared online with fixed, checkable rules (source linked). "
-                "New backtest, Nov 10, 2026, next-open fills, fees included: {} to {}: {} (max drawdown {}%) vs buy-and-hold {} ({}%). "
-                "Recent window {} to {}: {} vs buy-and-hold {}. Verdict by the pre-written rule: {}. 10% drawdown limit: {}.").format(
-                fo["first"], fo["last"], pct(fo["total_return_pct"]), fo["max_dd_pct"], pct(fb["total_return_pct"]), fb["max_dd_pct"],
-                no["first"], no["last"], pct(no["total_return_pct"]), pct(nb["total_return_pct"]), r["verdict"], r["dd_limit_10pct"])
+    if not s.get("why"):
+        s["why"] = ("Picked for testing because it is widely shared online with fixed, checkable rules (source linked). "
+                    "New backtest, next-open fills, fees included: {} to {}: {} (max drawdown {}%) vs buy-and-hold {} ({}%). "
+                    "Recent window {} to {}: {} vs buy-and-hold {}. Verdict by the pre-written rule: {}. 10% drawdown limit: {}.").format(
+                    fo["first"], fo["last"], pct(fo["total_return_pct"]), fo["max_dd_pct"], pct(fb["total_return_pct"]), fb["max_dd_pct"],
+                    no["first"], no["last"], pct(no["total_return_pct"]), pct(nb["total_return_pct"]), r["verdict"], r["dd_limit_10pct"])
     for req in ("name", "plain", "sources", "rules", "why", "verdict"):
         assert s.get(req), f"{k}: missing required field {req}"
     out.append(s)
@@ -36,5 +37,11 @@ open(f"{HERE}/research_data.js", "w").write(js)
 # public copy of the code and outputs (not the raw price files) so anyone can check the numbers
 dst = f"{HERE}/research/{os.path.basename(RUN)}"; os.makedirs(dst, exist_ok=True)
 for rel in ["fetch.py", "backtest.py", "crosscheck_vbt.py", "README.md", "data/manifest.json", "results/results.json", "results/crosscheck_vbt.txt"]:
-    if os.path.exists(f"{RUN}/{rel}"): shutil.copy(f"{RUN}/{rel}", f"{dst}/{os.path.basename(rel)}")
+    src = f"{RUN}/{rel}"
+    if not os.path.exists(src):
+        continue
+    target = f"{dst}/{os.path.basename(rel)}"
+    if os.path.abspath(src) == os.path.abspath(target):
+        continue  # run already lives under research/
+    shutil.copy(src, target)
 print("research_data.js:", len(out), "strategies,", len(js), "bytes")

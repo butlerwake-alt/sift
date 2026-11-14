@@ -1,0 +1,832 @@
+{
+ "rsi_adx_btc": {
+  "market": "BTC",
+  "fee_per_side_pct": 0.1,
+  "windows": {
+   "full": {
+    "open": {
+     "total_return_pct": 15104.04,
+     "cagr_pct": 52.73,
+     "max_dd_pct": -27.61,
+     "sharpe": 1.42,
+     "final": 1520404.27,
+     "trades": 402,
+     "open_trades": 0,
+     "win_rate_pct": 39.6,
+     "avg_trade_pct": 1.49,
+     "exposure_pct": 27.9,
+     "first": "2015-01-01",
+     "last": "2026-11-12"
+    },
+    "close": {
+     "total_return_pct": 15610.36,
+     "cagr_pct": 53.15,
+     "max_dd_pct": -27.82,
+     "sharpe": 1.42,
+     "final": 1571035.5,
+     "trades": 402,
+     "open_trades": 0,
+     "win_rate_pct": 39.8,
+     "avg_trade_pct": 1.5,
+     "exposure_pct": 27.9,
+     "first": "2015-01-01",
+     "last": "2026-11-12"
+    },
+    "buy_hold": {
+     "total_return_pct": 22142.15,
+     "cagr_pct": 57.71,
+     "max_dd_pct": -83.4,
+     "sharpe": 1.03,
+     "final": 2224214.78
+    },
+    "open_double_fee_total_return_pct": 6696.13
+   },
+   "recent": {
+    "open": {
+     "total_return_pct": 74.15,
+     "cagr_pct": 11.66,
+     "max_dd_pct": -22.04,
+     "sharpe": 0.59,
+     "final": 17415.17,
+     "trades": 165,
+     "open_trades": 0,
+     "win_rate_pct": 36.4,
+     "avg_trade_pct": 0.45,
+     "exposure_pct": 24.6,
+     "first": "2021-11-01",
+     "last": "2026-11-12"
+    },
+    "close": {
+     "total_return_pct": 77.16,
+     "cagr_pct": 12.04,
+     "max_dd_pct": -22.4,
+     "sharpe": 0.6,
+     "final": 17716.45,
+     "trades": 165,
+     "open_trades": 0,
+     "win_rate_pct": 36.4,
+     "avg_trade_pct": 0.46,
+     "exposure_pct": 24.6,
+     "first": "2021-11-01",
+     "last": "2026-11-12"
+    },
+    "buy_hold": {
+     "total_return_pct": 16.23,
+     "cagr_pct": 3.04,
+     "max_dd_pct": -76.63,
+     "sharpe": 0.32,
+     "final": 11622.82
+    }
+   }
+  },
+  "verdict": "Promising",
+  "dd_limit_10pct": "BREACH"
+ },
+ "double7_btc": {
+  "market": "BTC",
+  "fee_per_side_pct": 0.1,
+  "windows": {
+   "full": {
+    "open": {
+     "total_return_pct": 227.24,
+     "cagr_pct": 10.51,
+     "max_dd_pct": -47.62,
+     "sharpe": 0.46,
+     "final": 32723.84,
+     "trades": 122,
+     "open_trades": 1,
+     "win_rate_pct": 68.9,
+     "avg_trade_pct": 1.25,
+     "exposure_pct": 26.1,
+     "first": "2015-01-01",
+     "last": "2026-11-12"
+    },
+    "close": {
+     "total_return_pct": 231.75,
+     "cagr_pct": 10.64,
+     "max_dd_pct": -47.74,
+     "sharpe": 0.46,
+     "final": 33175.36,
+     "trades": 122,
+     "open_trades": 1,
+     "win_rate_pct": 67.2,
+     "avg_trade_pct": 1.26,
+     "exposure_pct": 26.1,
+     "first": "2015-01-01",
+     "last": "2026-11-12"
+    },
+    "buy_hold": {
+     "total_return_pct": 22142.15,
+     "cagr_pct": 57.71,
+     "max_dd_pct": -83.4,
+     "sharpe": 1.03,
+     "final": 2224214.78
+    },
+    "open_double_fee_total_return_pct": 156.04
+   },
+   "recent": {
+    "open": {
+     "total_return_pct": 77.05,
+     "cagr_pct": 12.03,
+     "max_dd_pct": -26.13,
+     "sharpe": 0.58,
+     "final": 17704.92,
+     "trades": 53,
+     "open_trades": 1,
+     "win_rate_pct": 62.3,
+     "avg_trade_pct": 1.3,
+     "exposure_pct": 24.7,
+     "first": "2021-11-01",
+     "last": "2026-11-12"
+    },
+    "close": {
+     "total_return_pct": 76.67,
+     "cagr_pct": 11.98,
+     "max_dd_pct": -25.76,
+     "sharpe": 0.58,
+     "final": 17667.34,
+     "trades": 53,
+     "open_trades": 1,
+     "win_rate_pct": 62.3,
+     "avg_trade_pct": 1.3,
+     "exposure_pct": 24.8,
+     "first": "2021-11-01",
+     "last": "2026-11-12"
+    },
+    "buy_hold": {
+     "total_return_pct": 16.23,
+     "cagr_pct": 3.04,
+     "max_dd_pct": -76.63,
+     "sharpe": 0.32,
+     "final": 11622.82
+    }
+   }
+  },
+  "verdict": "Mixed",
+  "dd_limit_10pct": "BREACH"
+ },
+ "keltner_trio": {
+  "market": "BTC/ETH/SOL",
+  "fee_per_side_pct": 0.1,
+  "windows": {
+   "full": {
+    "open": {
+     "total_return_pct": 2377.58,
+     "cagr_pct": 62.76,
+     "max_dd_pct": -27.42,
+     "sharpe": 1.6,
+     "final": 247758.0,
+     "trades": 96,
+     "open_trades": 0,
+     "win_rate_pct": 51.0,
+     "avg_trade_pct": 14.79,
+     "exposure_pct": 41.3,
+     "first": "2020-04-10",
+     "last": "2026-11-12"
+    },
+    "close": {
+     "total_return_pct": 2381.67,
+     "cagr_pct": 62.8,
+     "max_dd_pct": -27.51,
+     "sharpe": 1.6,
+     "final": 248167.13,
+     "trades": 96,
+     "open_trades": 0,
+     "win_rate_pct": 51.0,
+     "avg_trade_pct": 14.78,
+     "exposure_pct": 41.3,
+     "first": "2020-04-10",
+     "last": "2026-11-12"
+    },
+    "buy_hold": {
+     "total_return_pct": 3886.79,
+     "cagr_pct": 74.94,
+     "max_dd_pct": -93.96,
+     "sharpe": 1.07,
+     "final": 398678.72
+    },
+    "open_double_fee_total_return_pct": 2223.87
+   },
+   "recent": {
+    "open": {
+     "total_return_pct": 161.51,
+     "cagr_pct": 21.06,
+     "max_dd_pct": -27.42,
+     "sharpe": 0.88,
+     "final": 26150.52,
+     "trades": 67,
+     "open_trades": 0,
+     "win_rate_pct": 44.8,
+     "avg_trade_pct": 6.74,
+     "exposure_pct": 34.2,
+     "first": "2021-11-01",
+     "last": "2026-11-12"
+    },
+    "close": {
+     "total_return_pct": 161.97,
+     "cagr_pct": 21.1,
+     "max_dd_pct": -27.51,
+     "sharpe": 0.88,
+     "final": 26197.15,
+     "trades": 67,
+     "open_trades": 0,
+     "win_rate_pct": 44.8,
+     "avg_trade_pct": 6.76,
+     "exposure_pct": 34.2,
+     "first": "2021-11-01",
+     "last": "2026-11-12"
+    },
+    "buy_hold": {
+     "total_return_pct": -32.18,
+     "cagr_pct": -7.43,
+     "max_dd_pct": -83.35,
+     "sharpe": 0.17,
+     "final": 6782.44
+    }
+   }
+  },
+  "verdict": "Promising",
+  "dd_limit_10pct": "BREACH"
+ },
+ "weekly_rsi_accum_btc": {
+  "market": "BTC",
+  "fee_per_side_pct": 0.1,
+  "windows": {
+   "full": {
+    "open": {
+     "total_return_pct": 148.91,
+     "cagr_pct": 7.99,
+     "max_dd_pct": -43.47,
+     "sharpe": 0.43,
+     "final": 24890.6,
+     "trades": 4,
+     "open_trades": 0,
+     "win_rate_pct": 75.0,
+     "avg_trade_pct": 29.53,
+     "exposure_pct": 21.2,
+     "first": "2015-01-01",
+     "last": "2026-11-12"
+    },
+    "close": {
+     "total_return_pct": 148.91,
+     "cagr_pct": 7.99,
+     "max_dd_pct": -43.47,
+     "sharpe": 0.43,
+     "final": 24891.32,
+     "trades": 4,
+     "open_trades": 0,
+     "win_rate_pct": 75.0,
+     "avg_trade_pct": 29.55,
+     "exposure_pct": 21.2,
+     "first": "2015-01-01",
+     "last": "2026-11-12"
+    },
+    "buy_hold": {
+     "total_return_pct": 22142.15,
+     "cagr_pct": 57.71,
+     "max_dd_pct": -83.4,
+     "sharpe": 1.03,
+     "final": 2224214.78
+    },
+    "open_double_fee_total_return_pct": 146.92
+   },
+   "recent": {
+    "open": {
+     "total_return_pct": 55.44,
+     "cagr_pct": 9.17,
+     "max_dd_pct": -35.36,
+     "sharpe": 0.47,
+     "final": 15543.83,
+     "trades": 2,
+     "open_trades": 0,
+     "win_rate_pct": 100.0,
+     "avg_trade_pct": 25.16,
+     "exposure_pct": 26.3,
+     "first": "2021-11-01",
+     "last": "2026-11-12"
+    },
+    "close": {
+     "total_return_pct": 55.38,
+     "cagr_pct": 9.16,
+     "max_dd_pct": -35.36,
+     "sharpe": 0.47,
+     "final": 15537.72,
+     "trades": 2,
+     "open_trades": 0,
+     "win_rate_pct": 100.0,
+     "avg_trade_pct": 25.14,
+     "exposure_pct": 26.3,
+     "first": "2021-11-01",
+     "last": "2026-11-12"
+    },
+    "buy_hold": {
+     "total_return_pct": 16.23,
+     "cagr_pct": 3.04,
+     "max_dd_pct": -76.63,
+     "sharpe": 0.32,
+     "final": 11622.82
+    }
+   }
+  },
+  "verdict": "Mixed",
+  "dd_limit_10pct": "BREACH"
+ },
+ "rsi30_50_eth": {
+  "market": "ETH",
+  "fee_per_side_pct": 0.1,
+  "windows": {
+   "full": {
+    "open": {
+     "total_return_pct": -77.72,
+     "cagr_pct": -15.58,
+     "max_dd_pct": -79.78,
+     "sharpe": -0.25,
+     "final": 2228.41,
+     "trades": 16,
+     "open_trades": 1,
+     "win_rate_pct": 31.2,
+     "avg_trade_pct": -6.04,
+     "exposure_pct": 16.5,
+     "first": "2018-01-01",
+     "last": "2026-11-12"
+    },
+    "close": {
+     "total_return_pct": -77.63,
+     "cagr_pct": -15.55,
+     "max_dd_pct": -79.7,
+     "sharpe": -0.25,
+     "final": 2237.25,
+     "trades": 16,
+     "open_trades": 1,
+     "win_rate_pct": 31.2,
+     "avg_trade_pct": -6.01,
+     "exposure_pct": 16.5,
+     "first": "2018-01-01",
+     "last": "2026-11-12"
+    },
+    "buy_hold": {
+     "total_return_pct": 166.6,
+     "cagr_pct": 11.7,
+     "max_dd_pct": -93.96,
+     "sharpe": 0.55,
+     "final": 26659.53
+    },
+    "open_double_fee_total_return_pct": -78.44
+   },
+   "recent": {
+    "open": {
+     "total_return_pct": -57.9,
+     "cagr_pct": -15.8,
+     "max_dd_pct": -63.79,
+     "sharpe": -0.28,
+     "final": 4210.32,
+     "trades": 10,
+     "open_trades": 1,
+     "win_rate_pct": 30.0,
+     "avg_trade_pct": -6.34,
+     "exposure_pct": 18.3,
+     "first": "2021-11-01",
+     "last": "2026-11-12"
+    },
+    "close": {
+     "total_return_pct": -57.9,
+     "cagr_pct": -15.8,
+     "max_dd_pct": -63.79,
+     "sharpe": -0.28,
+     "final": 4209.58,
+     "trades": 10,
+     "open_trades": 1,
+     "win_rate_pct": 30.0,
+     "avg_trade_pct": -6.33,
+     "exposure_pct": 18.3,
+     "first": "2021-11-01",
+     "last": "2026-11-12"
+    },
+    "buy_hold": {
+     "total_return_pct": -53.02,
+     "cagr_pct": -13.95,
+     "max_dd_pct": -79.35,
+     "sharpe": 0.12,
+     "final": 4698.49
+    }
+   }
+  },
+  "verdict": "Failed",
+  "dd_limit_10pct": "BREACH"
+ },
+ "fear_greed_btc": {
+  "market": "BTC",
+  "fee_per_side_pct": 0.1,
+  "windows": {
+   "full": {
+    "open": {
+     "total_return_pct": -14.85,
+     "cagr_pct": -1.82,
+     "max_dd_pct": -77.57,
+     "sharpe": 0.23,
+     "final": 8514.75,
+     "trades": 10,
+     "open_trades": 1,
+     "win_rate_pct": 50.0,
+     "avg_trade_pct": 0.27,
+     "exposure_pct": 69.5,
+     "first": "2018-02-01",
+     "last": "2026-11-12"
+    },
+    "close": {
+     "total_return_pct": -14.5,
+     "cagr_pct": -1.77,
+     "max_dd_pct": -77.51,
+     "sharpe": 0.23,
+     "final": 8550.2,
+     "trades": 10,
+     "open_trades": 1,
+     "win_rate_pct": 50.0,
+     "avg_trade_pct": 0.3,
+     "exposure_pct": 69.5,
+     "first": "2018-02-01",
+     "last": "2026-11-12"
+    },
+    "buy_hold": {
+     "total_return_pct": 596.2,
+     "cagr_pct": 24.74,
+     "max_dd_pct": -76.63,
+     "sharpe": 0.69,
+     "final": 69619.56
+    },
+    "open_double_fee_total_return_pct": -16.62
+   },
+   "recent": {
+    "open": {
+     "total_return_pct": -16.37,
+     "cagr_pct": -3.49,
+     "max_dd_pct": -72.69,
+     "sharpe": 0.14,
+     "final": 8362.73,
+     "trades": 5,
+     "open_trades": 1,
+     "win_rate_pct": 60.0,
+     "avg_trade_pct": -0.5,
+     "exposure_pct": 69.9,
+     "first": "2021-11-01",
+     "last": "2026-11-12"
+    },
+    "close": {
+     "total_return_pct": -16.47,
+     "cagr_pct": -3.51,
+     "max_dd_pct": -72.69,
+     "sharpe": 0.14,
+     "final": 8353.02,
+     "trades": 5,
+     "open_trades": 1,
+     "win_rate_pct": 60.0,
+     "avg_trade_pct": -0.52,
+     "exposure_pct": 69.9,
+     "first": "2021-11-01",
+     "last": "2026-11-12"
+    },
+    "buy_hold": {
+     "total_return_pct": 16.23,
+     "cagr_pct": 3.04,
+     "max_dd_pct": -76.63,
+     "sharpe": 0.32,
+     "final": 11622.82
+    }
+   }
+  },
+  "verdict": "Failed",
+  "dd_limit_10pct": "BREACH"
+ },
+ "dual_mom_4w": {
+  "market": "BTC/ETH/SOL",
+  "fee_per_side_pct": 0.1,
+  "windows": {
+   "full": {
+    "open": {
+     "total_return_pct": 96.82,
+     "cagr_pct": 10.82,
+     "max_dd_pct": -49.65,
+     "sharpe": 0.47,
+     "final": 19682.45,
+     "trades": 228,
+     "open_trades": 0,
+     "win_rate_pct": 47.8,
+     "avg_trade_pct": 0.46,
+     "exposure_pct": 9.5,
+     "first": "2020-04-10",
+     "last": "2026-11-12"
+    },
+    "close": {
+     "total_return_pct": 98.82,
+     "cagr_pct": 10.99,
+     "max_dd_pct": -49.42,
+     "sharpe": 0.47,
+     "final": 19881.53,
+     "trades": 228,
+     "open_trades": 0,
+     "win_rate_pct": 47.4,
+     "avg_trade_pct": 0.46,
+     "exposure_pct": 9.5,
+     "first": "2020-04-10",
+     "last": "2026-11-12"
+    },
+    "buy_hold": {
+     "total_return_pct": 3886.79,
+     "cagr_pct": 74.94,
+     "max_dd_pct": -93.96,
+     "sharpe": 1.07,
+     "final": 398678.72
+    },
+    "open_double_fee_total_return_pct": 24.66
+   },
+   "recent": {
+    "open": {
+     "total_return_pct": -34.16,
+     "cagr_pct": -7.97,
+     "max_dd_pct": -46.78,
+     "sharpe": -0.22,
+     "final": 6583.85,
+     "trades": 159,
+     "open_trades": 0,
+     "win_rate_pct": 42.1,
+     "avg_trade_pct": -0.17,
+     "exposure_pct": 8.7,
+     "first": "2021-11-01",
+     "last": "2026-11-12"
+    },
+    "close": {
+     "total_return_pct": -33.83,
+     "cagr_pct": -7.88,
+     "max_dd_pct": -46.32,
+     "sharpe": -0.22,
+     "final": 6616.64,
+     "trades": 159,
+     "open_trades": 0,
+     "win_rate_pct": 41.5,
+     "avg_trade_pct": -0.17,
+     "exposure_pct": 8.7,
+     "first": "2021-11-01",
+     "last": "2026-11-12"
+    },
+    "buy_hold": {
+     "total_return_pct": -32.18,
+     "cagr_pct": -7.43,
+     "max_dd_pct": -83.35,
+     "sharpe": 0.17,
+     "final": 6782.44
+    }
+   }
+  },
+  "verdict": "Failed",
+  "dd_limit_10pct": "BREACH"
+ },
+ "funding_contrarian_btc": {
+  "market": "BTC",
+  "fee_per_side_pct": 0.1,
+  "windows": {
+   "full": {
+    "open": {
+     "total_return_pct": -9.16,
+     "cagr_pct": -1.39,
+     "max_dd_pct": -68.25,
+     "sharpe": 0.16,
+     "final": 9083.9,
+     "trades": 135,
+     "open_trades": 1,
+     "win_rate_pct": 50.4,
+     "avg_trade_pct": 0.45,
+     "exposure_pct": 50.7,
+     "first": "2020-01-01",
+     "last": "2026-11-12"
+    },
+    "close": {
+     "total_return_pct": -7.28,
+     "cagr_pct": -1.09,
+     "max_dd_pct": -67.98,
+     "sharpe": 0.17,
+     "final": 9272.46,
+     "trades": 135,
+     "open_trades": 1,
+     "win_rate_pct": 50.4,
+     "avg_trade_pct": 0.47,
+     "exposure_pct": 50.8,
+     "first": "2020-01-01",
+     "last": "2026-11-12"
+    },
+    "buy_hold": {
+     "total_return_pct": 890.59,
+     "cagr_pct": 39.67,
+     "max_dd_pct": -76.63,
+     "sharpe": 0.87,
+     "final": 99058.64
+    },
+    "open_double_fee_total_return_pct": -30.75
+   },
+   "recent": {
+    "open": {
+     "total_return_pct": -39.81,
+     "cagr_pct": -9.6,
+     "max_dd_pct": -64.03,
+     "sharpe": -0.09,
+     "final": 6018.58,
+     "trades": 89,
+     "open_trades": 1,
+     "win_rate_pct": 49.4,
+     "avg_trade_pct": -0.11,
+     "exposure_pct": 55.9,
+     "first": "2021-11-01",
+     "last": "2026-11-12"
+    },
+    "close": {
+     "total_return_pct": -39.28,
+     "cagr_pct": -9.44,
+     "max_dd_pct": -63.98,
+     "sharpe": -0.08,
+     "final": 6071.97,
+     "trades": 89,
+     "open_trades": 1,
+     "win_rate_pct": 49.4,
+     "avg_trade_pct": -0.1,
+     "exposure_pct": 56.0,
+     "first": "2021-11-01",
+     "last": "2026-11-12"
+    },
+    "buy_hold": {
+     "total_return_pct": 16.23,
+     "cagr_pct": 3.04,
+     "max_dd_pct": -76.63,
+     "sharpe": 0.32,
+     "final": 11622.82
+    }
+   }
+  },
+  "verdict": "Failed",
+  "dd_limit_10pct": "BREACH"
+ },
+ "mayer_lt_2p4_btc": {
+  "market": "BTC",
+  "fee_per_side_pct": 0.1,
+  "windows": {
+   "full": {
+    "open": {
+     "total_return_pct": 27377.14,
+     "cagr_pct": 60.54,
+     "max_dd_pct": -78.81,
+     "sharpe": 1.07,
+     "final": 2747714.01,
+     "trades": 10,
+     "open_trades": 1,
+     "win_rate_pct": 90.0,
+     "avg_trade_pct": 156.3,
+     "exposure_pct": 96.4,
+     "first": "2015-01-01",
+     "last": "2026-11-12"
+    },
+    "close": {
+     "total_return_pct": 27248.87,
+     "cagr_pct": 60.48,
+     "max_dd_pct": -78.68,
+     "sharpe": 1.07,
+     "final": 2734886.99,
+     "trades": 10,
+     "open_trades": 1,
+     "win_rate_pct": 90.0,
+     "avg_trade_pct": 155.9,
+     "exposure_pct": 96.4,
+     "first": "2015-01-01",
+     "last": "2026-11-12"
+    },
+    "buy_hold": {
+     "total_return_pct": 22142.15,
+     "cagr_pct": 57.71,
+     "max_dd_pct": -83.4,
+     "sharpe": 1.03,
+     "final": 2224214.78
+    },
+    "open_double_fee_total_return_pct": 26805.29
+   },
+   "recent": {
+    "open": {
+     "total_return_pct": 16.91,
+     "cagr_pct": 3.16,
+     "max_dd_pct": -76.63,
+     "sharpe": 0.32,
+     "final": 11690.92,
+     "trades": 0,
+     "open_trades": 1,
+     "win_rate_pct": null,
+     "avg_trade_pct": null,
+     "exposure_pct": 99.9,
+     "first": "2021-11-01",
+     "last": "2026-11-12"
+    },
+    "close": {
+     "total_return_pct": 16.83,
+     "cagr_pct": 3.14,
+     "max_dd_pct": -76.63,
+     "sharpe": 0.31,
+     "final": 11683.03,
+     "trades": 0,
+     "open_trades": 1,
+     "win_rate_pct": null,
+     "avg_trade_pct": null,
+     "exposure_pct": 100.0,
+     "first": "2021-11-01",
+     "last": "2026-11-12"
+    },
+    "buy_hold": {
+     "total_return_pct": 16.23,
+     "cagr_pct": 3.04,
+     "max_dd_pct": -76.63,
+     "sharpe": 0.32,
+     "final": 11622.82
+    }
+   }
+  },
+  "verdict": "Mixed",
+  "dd_limit_10pct": "BREACH"
+ },
+ "abs_dual_mom_monthly": {
+  "market": "BTC/ETH/SOL",
+  "fee_per_side_pct": 0.1,
+  "windows": {
+   "full": {
+    "open": {
+     "total_return_pct": 31.34,
+     "cagr_pct": 4.22,
+     "max_dd_pct": -28.1,
+     "sharpe": 0.35,
+     "final": 13133.56,
+     "trades": 51,
+     "open_trades": 0,
+     "win_rate_pct": 49.0,
+     "avg_trade_pct": 0.67,
+     "exposure_pct": 2.1,
+     "first": "2020-04-10",
+     "last": "2026-11-12"
+    },
+    "close": {
+     "total_return_pct": 28.42,
+     "cagr_pct": 3.87,
+     "max_dd_pct": -28.15,
+     "sharpe": 0.33,
+     "final": 12842.17,
+     "trades": 51,
+     "open_trades": 1,
+     "win_rate_pct": 49.0,
+     "avg_trade_pct": 0.62,
+     "exposure_pct": 2.2,
+     "first": "2020-04-10",
+     "last": "2026-11-12"
+    },
+    "buy_hold": {
+     "total_return_pct": 3886.79,
+     "cagr_pct": 74.94,
+     "max_dd_pct": -93.96,
+     "sharpe": 1.07,
+     "final": 398678.72
+    },
+    "open_double_fee_total_return_pct": 18.58
+   },
+   "recent": {
+    "open": {
+     "total_return_pct": 10.25,
+     "cagr_pct": 1.96,
+     "max_dd_pct": -28.1,
+     "sharpe": 0.23,
+     "final": 11025.14,
+     "trades": 36,
+     "open_trades": 0,
+     "win_rate_pct": 50.0,
+     "avg_trade_pct": 0.35,
+     "exposure_pct": 2.0,
+     "first": "2021-11-01",
+     "last": "2026-11-12"
+    },
+    "close": {
+     "total_return_pct": 9.27,
+     "cagr_pct": 1.78,
+     "max_dd_pct": -28.15,
+     "sharpe": 0.22,
+     "final": 10926.73,
+     "trades": 36,
+     "open_trades": 1,
+     "win_rate_pct": 50.0,
+     "avg_trade_pct": 0.33,
+     "exposure_pct": 2.0,
+     "first": "2021-11-01",
+     "last": "2026-11-12"
+    },
+    "buy_hold": {
+     "total_return_pct": -32.18,
+     "cagr_pct": -7.43,
+     "max_dd_pct": -83.35,
+     "sharpe": 0.17,
+     "final": 6782.44
+    }
+   }
+  },
+  "verdict": "Mixed",
+  "dd_limit_10pct": "BREACH"
+ }
+}
