@@ -555,6 +555,23 @@ html[data-theme="light"] .bt-banner { background: #123056; color: #d6e6ff; }
 .soon-card p, .method-grid p { margin: 0; color: var(--muted); font: 0.88rem/1.45 var(--sans); }
 .soon-card .slot-kicker { color: var(--yellow); }
 
+.research-run {
+  margin: 1.4rem 0 2rem;
+  padding-top: 0.4rem;
+  border-top: 1px solid var(--line);
+}
+.research-run .run-head { margin: 0 0 0.9rem; }
+.research-run .run-head h2 {
+  margin: 0.15rem 0 0.35rem;
+  font: 700 clamp(1.35rem, 2.2vw, 1.85rem)/1.15 var(--sans);
+  letter-spacing: -0.03em;
+  color: var(--cream);
+}
+.research-run .run-head .eyebrow { margin: 0; }
+.research-run .run-head code, #rruns code {
+  font: 0.82rem/1.3 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color: var(--teal);
+}
 .tally { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.6rem; margin: 0 0 0.8rem; }
 .tally article, .book article {
   background: var(--bg-elev);

@@ -1,4 +1,4 @@
-/* Renders research.html from RESEARCH (research_data.js). Historical backtests only. */
+/* Renders research.html from RESEARCH (research_data.js). Supports multiple frozen experiments. Historical backtests only. */
 function rPct(v, d = 1) {
   if (v == null || !Number.isFinite(v)) return "—";
   const s = v > 0 ? "+" : v < 0 ? "−" : "";
@@ -49,30 +49,66 @@ function table(s) {
     <p class="meta">Sensitivity, long window: filled at the signal close ${rPct(f.closeFill.total_return_pct)}; doubled fees ${rPct(f.doubleFeeReturn)}. Fees ${s.feePct.toFixed(2)}% per side. $10,000 start.</p>`;
 }
 
-function renderResearch() {
-  const R = RESEARCH;
-  document.getElementById("rlabel").textContent = R.label;
+function experimentList(R) {
+  if (Array.isArray(R.experiments) && R.experiments.length) return R.experiments;
+  return [{
+    id: "legacy",
+    date: "",
+    label: R.label || "Historical backtests",
+    folder: "",
+    method: R.method || [],
+    dataManifest: R.dataManifest || {},
+    strategies: R.strategies || [],
+  }];
+}
+
+function renderExperiment(exp, host) {
+  const section = document.createElement("section");
+  section.className = "research-run";
+  section.id = exp.id;
+  const dateLabel = exp.date ? `Run date ${esc(exp.date)}` : "Frozen run";
   const counts = { Promising: 0, Mixed: 0, Failed: 0 }; let pass = 0;
-  R.strategies.forEach((s) => { counts[s.verdict]++; if (s.ddLimit === "PASS") pass++; });
-  document.getElementById("rtally").innerHTML =
-    [["up", counts.Promising, "Promising"], ["flat", counts.Mixed, "Mixed"], ["down", counts.Failed, "Failed"], [pass ? "up" : "down", pass + " of " + R.strategies.length, "Pass 10% drawdown limit"]]
-      .map(([t, c, l]) => `<article class="tone-${t}"><strong>${c}</strong><span>${l}</span></article>`).join("");
-  document.getElementById("rsummary").innerHTML = `<h2>Ranked by the pre-written verdict rule, then Sharpe versus buy-and-hold</h2><div class="rtable"><table>
-    <thead><tr><th>Strategy</th><th>Market</th><th>Return</th><th>Max DD</th><th>Hold return</th><th>Hold DD</th><th>Recent</th><th>Hold recent</th><th>Verdict</th><th>10% limit</th></tr></thead><tbody>
-    ${R.strategies.map((s) => `<tr><th><a href="#${s.key}">${esc(s.name)}</a></th><td>${esc(s.market)}</td><td>${rPct(s.full.strat.total_return_pct, 0)}</td><td>${rPct(s.full.strat.max_dd_pct)}</td><td>${rPct(s.full.hold.total_return_pct, 0)}</td><td>${rPct(s.full.hold.max_dd_pct)}</td><td>${rPct(s.recent.strat.total_return_pct)}</td><td>${rPct(s.recent.hold.total_return_pct)}</td><td class="tone-${VERDICT_TONE[s.verdict]}">${s.verdict}</td><td class="${s.ddLimit === "PASS" ? "tone-up" : "tone-down"}">${s.ddLimit}</td></tr>`).join("")}
-    </tbody></table></div>`;
-  document.getElementById("rmethod").innerHTML = `<h2>How these were tested</h2><ul class="rules">${R.method.map((m) => `<li>${esc(m)}</li>`).join("")}</ul>
-    <p class="meta">Data snapshot retrieved ${esc((R.dataManifest.retrieved_et || R.dataManifest.retrieved_utc || "").toString().trim())} ET. Code and results: <a href="research/run_20261113_cursor/backtest.py">backtest.py</a> · <a href="research/run_20261113_cursor/results.json">results.json</a> · <a href="research/run_20261113_cursor/manifest.json">data hashes</a>.</p>`;
-  const host = document.getElementById("rcards");
-  R.strategies.forEach((s, i) => {
+  exp.strategies.forEach((s) => { counts[s.verdict]++; if (s.ddLimit === "PASS") pass++; });
+  const folder = exp.folder || "";
+  const man = exp.dataManifest || {};
+  const retrieved = (man.retrieved_et || man.retrieved_utc || "").toString().trim();
+
+  section.innerHTML = `
+    <header class="run-head">
+      <p class="eyebrow">${esc(exp.label)}</p>
+      <h2>${dateLabel}</h2>
+      <p class="meta">Frozen folder <code>${esc(folder || exp.id)}</code>. Results files in that run were not recalculated for this page.</p>
+    </header>
+    <div class="tally">${[["up", counts.Promising, "Promising"], ["flat", counts.Mixed, "Mixed"], ["down", counts.Failed, "Failed"], [pass ? "up" : "down", pass + " of " + exp.strategies.length, "Pass 10% drawdown limit"]]
+      .map(([t, c, l]) => `<article class="tone-${t}"><strong>${c}</strong><span>${l}</span></article>`).join("")}</div>
+    <section class="ladder" data-fold-title="Ranked results · ${esc(exp.date || exp.id)}" data-fold-sum="History, not live signals." data-fold-group="research" data-fold-id="${esc(exp.id)}-table">
+      <h2>Ranked by the pre-written verdict rule, then Sharpe versus buy-and-hold</h2>
+      <div class="rtable"><table>
+        <thead><tr><th>Strategy</th><th>Market</th><th>Return</th><th>Max DD</th><th>Hold return</th><th>Hold DD</th><th>Recent</th><th>Hold recent</th><th>Verdict</th><th>10% limit</th></tr></thead>
+        <tbody>
+        ${exp.strategies.map((s) => `<tr><th><a href="#${esc(exp.id)}-${esc(s.key)}">${esc(s.name)}</a></th><td>${esc(s.market)}</td><td>${rPct(s.full.strat.total_return_pct, 0)}</td><td>${rPct(s.full.strat.max_dd_pct)}</td><td>${rPct(s.full.hold.total_return_pct, 0)}</td><td>${rPct(s.full.hold.max_dd_pct)}</td><td>${rPct(s.recent.strat.total_return_pct)}</td><td>${rPct(s.recent.hold.total_return_pct)}</td><td class="tone-${VERDICT_TONE[s.verdict]}">${s.verdict}</td><td class="${s.ddLimit === "PASS" ? "tone-up" : "tone-down"}">${s.ddLimit}</td></tr>`).join("")}
+        </tbody>
+      </table></div>
+    </section>
+    <section class="ladder" data-fold-title="How this run was tested · ${esc(exp.date || exp.id)}" data-fold-sum="Fees, windows, and the frozen run." data-fold-group="research" data-fold-id="${esc(exp.id)}-method">
+      <h2>How this run was tested</h2>
+      <ul class="rules">${(exp.method || []).map((m) => `<li>${esc(m)}</li>`).join("")}</ul>
+      <p class="meta">Data snapshot retrieved ${esc(retrieved)} ET. Code and results: <a href="${esc(folder)}/backtest.py">backtest.py</a> · <a href="${esc(folder)}/results.json">results.json</a> · <a href="${esc(folder)}/manifest.json">data hashes</a>.</p>
+    </section>
+    <div class="rgrid" data-fold-title="Strategies · ${esc(exp.date || exp.id)}" data-fold-sum="Open a row for the chart and the rules." data-fold-group="research" data-fold-id="${esc(exp.id)}-cards"></div>
+  `;
+  host.append(section);
+  const cards = section.querySelector(".rgrid");
+  exp.strategies.forEach((s, i) => {
     const tone = VERDICT_TONE[s.verdict];
     const el = document.createElement("article");
-    el.className = "rcard card tone-" + tone + " drawer"; el.id = s.key;
+    el.className = "rcard card tone-" + tone + " drawer";
+    el.id = `${exp.id}-${s.key}`;
     el.setAttribute("data-drawer-group", "research");
     el.innerHTML = `
       <button type="button" class="row-toggle" aria-expanded="false"><span class="row-name">${esc(s.name)}</span><span class="row-pnl">${rPct(s.full.strat.total_return_pct, 0)} · ${esc(s.verdict)}</span><span class="fold-chevron" aria-hidden="true"></span></button>
       <div class="drawer-body">
-      <div class="card-top"><span class="num">R${String(i + 1).padStart(2, "0")} · ${esc(s.category)}</span><span class="tag">${esc(s.market)}</span></div>
+      <div class="card-top"><span class="num">R${String(i + 1).padStart(2, "0")} · ${esc(s.category)}</span><span class="tag">${esc(exp.date || exp.id)} · ${esc(s.market)}</span></div>
       <h2>${esc(s.name)}</h2>
       <p class="plain">${esc(s.plain)}</p>
       <div class="result"><span class="figure">${rPct(s.full.strat.total_return_pct, 0)}</span><span class="status">${s.verdict} · drawdown limit ${s.ddLimit}</span></div>
@@ -84,6 +120,30 @@ function renderResearch() {
       <p class="meta"><b>Interpretation:</b> ${esc(s.interpretation)}</p>
       <p class="meta"><b>Source:</b> ${s.sources.map((x) => `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.label)}</a>`).join(" · ")}</p>
       </div>`;
-    host.append(el);
+    cards.append(el);
   });
+}
+
+function renderResearch() {
+  const R = RESEARCH;
+  const experiments = experimentList(R);
+  document.getElementById("rlabel").textContent = R.label;
+  const dates = experiments.map((e) => e.date).filter(Boolean);
+  const preview = document.getElementById("rpreview");
+  if (preview) {
+    preview.innerHTML = [
+      "<span>Historical backtest</span>",
+      ...dates.map((d) => `<span>Run ${esc(d)}</span>`),
+      "<span>Not financial advice</span>",
+    ].join("");
+  }
+  const nav = document.getElementById("rruns");
+  if (nav) {
+    nav.innerHTML = `<p class="meta">Experiments on this page:</p><ul class="rules">${experiments.map((e) =>
+      `<li><a href="#${esc(e.id)}">${esc(e.label)}</a> — run date <b>${esc(e.date || "—")}</b>, folder <code>${esc(e.folder || e.id)}</code></li>`
+    ).join("")}</ul>`;
+  }
+  const host = document.getElementById("rexperiments");
+  host.innerHTML = "";
+  experiments.forEach((exp) => renderExperiment(exp, host));
 }

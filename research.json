@@ -1,261 +1,503 @@
 {
  "title": "Researched strategies",
- "label": "Historical backtests · new experiment dated 2026-11-13 (cursor)",
- "run": "/agent/repos/sift/research/run_20261113_cursor",
- "method": [
-  "Every result here is a NEW historical backtest experiment dated Nov 13, 2026 (America/New_York). It does not reproduce or replace the Nov 10, 2026 research run archived under research/run_20261110/. None of it is forward paper, and none of it is a live signal.",
-  "Candidates came from Reddit, X, TradingView/script blogs, and trading blogs. Strategies already on the SIFT paper board or the Nov 10 research page were skipped (scale-in momentum, z-score mean reversion, Bollinger bounce, EMA 13/80, 30-day breakout, Halving 500, SEASONS, MACD, Bull Market Support Band, Supertrend, golden cross, Turtle 55/20).",
-  "Data: Yahoo Finance daily bars (split-adjusted) for BTC-USD, ETH-USD, SOL-USD; alternative.me Fear & Greed; public perpetual funding histories (see data/manifest.json). The still-forming UTC day is dropped; last bar used is 2026-11-12.",
-  "Windows: full available history per strategy (after its own lookback), and a separate fresh $10,000 run from Nov 1, 2021 to 2026-11-12. Both windows are history everyone has seen; neither is a clean holdout.",
-  "Fills: a signal from the close of day t is filled at the OPEN of day t+1 (headline). Many sources assume a fill at the signal close; that version is shown as a sensitivity number.",
-  "Costs: 0.10% per side on every traded dollar. A doubled-fee run is shown too. Idle cash earns nothing. Long only. No leverage. No shorts. No volatility sizing.",
-  "Sharpe: raw daily return × √365. Maximum drawdown is measured on daily closes, so intraday drops could be deeper.",
-  "Verdict rule, written before the run: Promising = higher Sharpe than buy-and-hold in BOTH windows AND a shallower maximum drawdown over the long window. Failed = lower Sharpe than buy-and-hold in BOTH windows. Mixed = anything else.",
-  "10% drawdown limit: PASS only if the long-window maximum drawdown is no worse than −10%."
- ],
- "strategies": [
+ "label": "Historical backtests · experiments 2026-11-13 and 2026-11-10",
+ "experiments": [
   {
-   "key": "rsi_adx_btc",
-   "name": "RSI(2) vs ADX(2) trend filter",
-   "category": "Trend / momentum",
-   "market": "Bitcoin (BTC-USD)",
-   "color": "#e24632",
-   "plain": "Own Bitcoin only while it sits above its short and medium averages and a 2-day RSI beats a 2-day ADX; cash when RSI falls back under ADX.",
-   "sources": [
-    {
-     "label": "Reddit r/algotrading — u/draderdim (2025-06-28), claimed beat HODL on BTC/ETH",
-     "url": "https://www.reddit.com/r/algotrading/comments/1lmu1qp/bitcoin_strategy_that_outperformed_buy_hold/"
-    }
+   "id": "run_20261113_cursor",
+   "date": "2026-11-13",
+   "label": "Experiment · 2026-11-13 (cursor)",
+   "folder": "research/run_20261113_cursor",
+   "method": [
+    "Every result here is a NEW historical backtest experiment dated Nov 13, 2026 (America/New_York). It does not reproduce or replace the Nov 10, 2026 research run archived under research/run_20261110/. None of it is forward paper, and none of it is a live signal.",
+    "Candidates came from Reddit, X, TradingView/script blogs, and trading blogs. Strategies already on the SIFT paper board or the Nov 10 research page were skipped (scale-in momentum, z-score mean reversion, Bollinger bounce, EMA 13/80, 30-day breakout, Halving 500, SEASONS, MACD, Bull Market Support Band, Supertrend, golden cross, Turtle 55/20).",
+    "Data: Yahoo Finance daily bars (split-adjusted) for BTC-USD, ETH-USD, SOL-USD; alternative.me Fear & Greed; public perpetual funding histories (see data/manifest.json). The still-forming UTC day is dropped; last bar used is 2026-11-12.",
+    "Windows: full available history per strategy (after its own lookback), and a separate fresh $10,000 run from Nov 1, 2021 to 2026-11-12. Both windows are history everyone has seen; neither is a clean holdout.",
+    "Fills: a signal from the close of day t is filled at the OPEN of day t+1 (headline). Many sources assume a fill at the signal close; that version is shown as a sensitivity number.",
+    "Costs: 0.10% per side on every traded dollar. A doubled-fee run is shown too. Idle cash earns nothing. Long only. No leverage. No shorts. No volatility sizing.",
+    "Sharpe: raw daily return × √365. Maximum drawdown is measured on daily closes, so intraday drops could be deeper.",
+    "Verdict rule, written before the run: Promising = higher Sharpe than buy-and-hold in BOTH windows AND a shallower maximum drawdown over the long window. Failed = lower Sharpe than buy-and-hold in BOTH windows. Mixed = anything else.",
+    "10% drawdown limit: PASS only if the long-window maximum drawdown is no worse than −10%."
    ],
-   "rules": [
-    "Trend filter: daily close above the 50-day SMA and above the 7-day EMA.",
-    "Buy when RSI(2) is above ADX(2) (Wilder smoothing) while the trend filter is on.",
-    "Sell when RSI(2) falls below ADX(2).",
-    "One position, all-in, long only. No stop."
-   ],
-   "interpretation": "Source posted equity curves without fees or slippage; our headline adds 0.10% per side and next-open fills. Short side skipped.",
-   "why": "Promising on Sharpe and drawdown versus buy-and-hold in both windows, but the −28% worst drop still blows through the 10% risk limit. Worth a small forward paper sleeve only as a risk-reduced trend filter, not as a full allocation."
-  },
-  {
-   "key": "double7_btc",
-   "name": "Connors Double 7s",
-   "category": "Mean reversion",
-   "market": "Bitcoin (BTC-USD)",
-   "color": "#3c7dff",
-   "plain": "In a long-term uptrend, buy a 7-day closing low and sell a 7-day closing high.",
-   "sources": [
+   "strategies": [
     {
-     "label": "Larry Connors Double 7s (Alvarez Quant / StrategyQuant rules)",
-     "url": "https://alvarezquanttrading.com/blog/double-7s-strategy/"
+     "key": "rsi_adx_btc",
+     "name": "RSI(2) vs ADX(2) trend filter",
+     "category": "Trend / momentum",
+     "market": "Bitcoin (BTC-USD)",
+     "color": "#e24632",
+     "plain": "Own Bitcoin only while it sits above its short and medium averages and a 2-day RSI beats a 2-day ADX; cash when RSI falls back under ADX.",
+     "sources": [
+      {
+       "label": "Reddit r/algotrading — u/draderdim (2025-06-28), claimed beat HODL on BTC/ETH",
+       "url": "https://www.reddit.com/r/algotrading/comments/1lmu1qp/bitcoin_strategy_that_outperformed_buy_hold/"
+      }
+     ],
+     "rules": [
+      "Trend filter: daily close above the 50-day SMA and above the 7-day EMA.",
+      "Buy when RSI(2) is above ADX(2) (Wilder smoothing) while the trend filter is on.",
+      "Sell when RSI(2) falls below ADX(2).",
+      "One position, all-in, long only. No stop."
+     ],
+     "interpretation": "Source posted equity curves without fees or slippage; our headline adds 0.10% per side and next-open fills. Short side skipped.",
+     "why": "Promising on Sharpe and drawdown versus buy-and-hold in both windows, but the −28% worst drop still blows through the 10% risk limit. Worth a small forward paper sleeve only as a risk-reduced trend filter, not as a full allocation."
     },
     {
-     "label": "QuantifiedStrategies posting the Double Seven on X",
-     "url": "https://x.com/QuantifiedStrat/status/2119399548938567688"
-    }
-   ],
-   "rules": [
-    "Trend filter: daily close above the 200-day SMA.",
-    "Buy when today's close is the lowest close of the last 7 days (including today).",
-    "Sell when today's close is the highest close of the last 7 days.",
-    "No stop, as in the classic long-only version."
-   ],
-   "interpretation": "Published for liquid ETFs; crypto tests online reuse the same rules. We keep them frozen and apply them to BTC daily.",
-   "why": "Mixed: it cut the long crash versus holding Bitcoin, yet full-history Sharpe lagged buy-and-hold badly. Not worth promoting to a forward paper account unless the goal is purely studying mean-reversion pullbacks."
-  },
-  {
-   "key": "keltner_trio",
-   "name": "Keltner channel breakout",
-   "category": "Breakout",
-   "market": "BTC / ETH / SOL (equal sleeves)",
-   "color": "#f0c53a",
-   "plain": "On each coin, buy strength that closes above a Keltner upper band; exit when price falls back to the middle EMA.",
-   "sources": [
-    {
-     "label": "Keel: Keltner Channel strategy backtest (exact entry/exit)",
-     "url": "https://usekeel.io/strategies/backtested/keltner-channel"
+     "key": "double7_btc",
+     "name": "Connors Double 7s",
+     "category": "Mean reversion",
+     "market": "Bitcoin (BTC-USD)",
+     "color": "#3c7dff",
+     "plain": "In a long-term uptrend, buy a 7-day closing low and sell a 7-day closing high.",
+     "sources": [
+      {
+       "label": "Larry Connors Double 7s (Alvarez Quant / StrategyQuant rules)",
+       "url": "https://alvarezquanttrading.com/blog/double-7s-strategy/"
+      },
+      {
+       "label": "QuantifiedStrategies posting the Double Seven on X",
+       "url": "https://x.com/QuantifiedStrat/status/2119399548938567688"
+      }
+     ],
+     "rules": [
+      "Trend filter: daily close above the 200-day SMA.",
+      "Buy when today's close is the lowest close of the last 7 days (including today).",
+      "Sell when today's close is the highest close of the last 7 days.",
+      "No stop, as in the classic long-only version."
+     ],
+     "interpretation": "Published for liquid ETFs; crypto tests online reuse the same rules. We keep them frozen and apply them to BTC daily.",
+     "why": "Mixed: it cut the long crash versus holding Bitcoin, yet full-history Sharpe lagged buy-and-hold badly. Not worth promoting to a forward paper account unless the goal is purely studying mean-reversion pullbacks."
     },
     {
-     "label": "CoinQuant: BTC Keltner channel breakout description",
-     "url": "https://www.coinquant.ai/strategies/btc-keltner-channel-4h-backtest"
-    }
-   ],
-   "rules": [
-    "Channel: 20-day EMA centre, bands at ±2 × ATR(20) (Wilder).",
-    "Buy when the daily close is above the upper band.",
-    "Sell when the daily close is at or below the centre EMA.",
-    "BTC, ETH and SOL each get up to one-third of capital when their own signal is long; flat sleeve stays cash."
-   ],
-   "interpretation": "Sources also show shorts; SIFT is long-only, so short rules are skipped. Keel's portfolio uses 10 coins; this is the same rule on the three SIFT majors.",
-   "why": "Promising versus equal-weight BTC/ETH/SOL on Sharpe and drawdown in both windows, with a much shallower crash than buy-and-hold. Still a −27% drawdown (fails the 10% limit), so only a small paper sleeve is reasonable."
-  },
-  {
-   "key": "weekly_rsi_accum_btc",
-   "name": "Weekly RSI accumulation window",
-   "category": "Mean reversion / DCA window",
-   "market": "Bitcoin (BTC-USD)",
-   "color": "#3cba62",
-   "plain": "Turn Bitcoin exposure on when the weekly RSI is washed out, and turn it off after a weekly close reclaims the 50-week average.",
-   "sources": [
-    {
-     "label": "24crypto.news: weekly RSI < 30 buy window, exit above 50 SMA",
-     "url": "https://24crypto.news/bitcoin-weekly-strategy-historic-bottom-buying-window-defined-by-rsi-and-50-sma-110348"
-    }
-   ],
-   "rules": [
-    "Build weekly bars that close Sunday (UTC).",
-    "Enter long when weekly RSI(14) closes below 30.",
-    "Exit when the weekly close is above the weekly 50-period SMA.",
-    "Fill on the next daily open after the weekly signal."
-   ],
-   "interpretation": "The article describes an accumulation window, not a day-trading system; we encode it as a full on/off switch for a fair $10,000 comparison.",
-   "why": "Mixed and trade-starved (only a handful of weekly flips). It avoided some bear damage but left most of Bitcoin's bull market on the table. Skip as a primary paper strategy."
-  },
-  {
-   "key": "rsi30_50_eth",
-   "name": "RSI(14) 30/50 mean reversion",
-   "category": "Mean reversion",
-   "market": "Ethereum (ETH-USD)",
-   "color": "#b07cff",
-   "plain": "Buy Ethereum when daily RSI is oversold below 30; sell when RSI recovers to 50.",
-   "sources": [
-    {
-     "label": "altrady on X: “RSI Below 30 Means BUY?” BTC 4h test claiming the classic 30/50 rule",
-     "url": "https://x.com/altradyapp/status/2119746824575840716"
+     "key": "keltner_trio",
+     "name": "Keltner channel breakout",
+     "category": "Breakout",
+     "market": "BTC / ETH / SOL (equal sleeves)",
+     "color": "#f0c53a",
+     "plain": "On each coin, buy strength that closes above a Keltner upper band; exit when price falls back to the middle EMA.",
+     "sources": [
+      {
+       "label": "Keel: Keltner Channel strategy backtest (exact entry/exit)",
+       "url": "https://usekeel.io/strategies/backtested/keltner-channel"
+      },
+      {
+       "label": "CoinQuant: BTC Keltner channel breakout description",
+       "url": "https://www.coinquant.ai/strategies/btc-keltner-channel-4h-backtest"
+      }
+     ],
+     "rules": [
+      "Channel: 20-day EMA centre, bands at ±2 × ATR(20) (Wilder).",
+      "Buy when the daily close is above the upper band.",
+      "Sell when the daily close is at or below the centre EMA.",
+      "BTC, ETH and SOL each get up to one-third of capital when their own signal is long; flat sleeve stays cash."
+     ],
+     "interpretation": "Sources also show shorts; SIFT is long-only, so short rules are skipped. Keel's portfolio uses 10 coins; this is the same rule on the three SIFT majors.",
+     "why": "Promising versus equal-weight BTC/ETH/SOL on Sharpe and drawdown in both windows, with a much shallower crash than buy-and-hold. Still a −27% drawdown (fails the 10% limit), so only a small paper sleeve is reasonable."
     },
     {
-     "label": "Coinrule academy: RSI below 30 buy-zone framing",
-     "url": "https://learn.coinrule.com/knowledgebase/how-to-trade-with-the-rsi/"
-    }
-   ],
-   "rules": [
-    "Buy when daily RSI(14) closes below 30.",
-    "Sell when daily RSI(14) closes at or above 50.",
-    "One position, all-in, long only. No stop."
-   ],
-   "interpretation": "The viral claim is usually shown on BTC 4h; we freeze the same thresholds on ETH daily so the idea is tested on a major the SIFT board already watches.",
-   "why": "Failed in both windows with large losses and a deep drawdown. The classic RSI 30/50 claim does not survive fees and next-open fills on ETH daily — do not paper-trade it."
-  },
-  {
-   "key": "fear_greed_btc",
-   "name": "Fear & Greed extremes",
-   "category": "Sentiment",
-   "market": "Bitcoin (BTC-USD)",
-   "color": "#ff9f40",
-   "plain": "Buy Bitcoin in Extreme Fear and sell it in Extreme Greed, holding through the middle.",
-   "sources": [
-    {
-     "label": "Bitcoin Magazine — Matt Crosby Fear & Greed timing article",
-     "url": "https://bitcoinmagazine.com/markets/how-a-bitcoin-fear-and-greed-index-trading-strategy-beats-buy-and-hold-investing"
+     "key": "weekly_rsi_accum_btc",
+     "name": "Weekly RSI accumulation window",
+     "category": "Mean reversion / DCA window",
+     "market": "Bitcoin (BTC-USD)",
+     "color": "#3cba62",
+     "plain": "Turn Bitcoin exposure on when the weekly RSI is washed out, and turn it off after a weekly close reclaims the 50-week average.",
+     "sources": [
+      {
+       "label": "24crypto.news: weekly RSI < 30 buy window, exit above 50 SMA",
+       "url": "https://24crypto.news/bitcoin-weekly-strategy-historic-bottom-buying-window-defined-by-rsi-and-50-sma-110348"
+      }
+     ],
+     "rules": [
+      "Build weekly bars that close Sunday (UTC).",
+      "Enter long when weekly RSI(14) closes below 30.",
+      "Exit when the weekly close is above the weekly 50-period SMA.",
+      "Fill on the next daily open after the weekly signal."
+     ],
+     "interpretation": "The article describes an accumulation window, not a day-trading system; we encode it as a full on/off switch for a fair $10,000 comparison.",
+     "why": "Mixed and trade-starved (only a handful of weekly flips). It avoided some bear damage but left most of Bitcoin's bull market on the table. Skip as a primary paper strategy."
     },
     {
-     "label": "Bitcoin Fear & Greed backtest calculator (threshold form)",
-     "url": "https://bitcoinx.com/bitcoin-fear-greed-backtest-calculator/"
-    }
-   ],
-   "rules": [
-    "Enter long when the alternative.me Fear & Greed Index closes at 25 or below.",
-    "Exit when the index closes at 75 or above.",
-    "Between those extremes, keep the current position.",
-    "All-in, long only."
-   ],
-   "interpretation": "The Magazine piece scaled 1% of capital per extreme day. Calculators often use hard thresholds. We freeze the hard 25/75 switch so the comparison matches the rest of this page.",
-   "why": "Failed as an all-in/out switch: Extreme Fear/Greed timing underperformed Bitcoin buy-and-hold on Sharpe in both windows. The Magazine's 1% scaling story is a different strategy; this frozen binary form is not worth paper capital."
-  },
-  {
-   "key": "dual_mom_4w",
-   "name": "4-week dual momentum",
-   "category": "Momentum rotation",
-   "market": "BTC / ETH / SOL",
-   "color": "#3cd6c8",
-   "plain": "Each week, hold whichever of BTC, ETH or SOL rose most over four weeks — or sit in cash if that leader is still negative.",
-   "sources": [
-    {
-     "label": "FinzData: Bitcoin vs Ether dual momentum · 4-week · cash when both fall",
-     "url": "https://data.finzdata.com/s/bitcoin-vs-ether-dual-momentum-4-week-cash-when-both-fall-32cfb7"
-    }
-   ],
-   "rules": [
-    "Once per ISO week (last daily bar of the week), compute 28-day total return for BTC, ETH and SOL.",
-    "Hold 100% the asset with the highest 28-day return if that return is positive.",
-    "If the leader's 28-day return is ≤ 0, hold cash.",
-    "SOL is added to the FinzData BTC/ETH pair so the SIFT universe is covered."
-   ],
-   "interpretation": "FinzData's published pair is BTC/ETH; adding SOL is a frozen universe choice, not a tuned parameter.",
-   "why": "Failed: weekly rotation plus cash filter trailed equal-weight buy-and-hold on Sharpe in both windows after fees. Do not add as a forward paper test."
-  },
-  {
-   "key": "funding_contrarian_btc",
-   "name": "Funding-rate contrarian filter",
-   "category": "Funding / positioning",
-   "market": "Bitcoin (BTC-USD)",
-   "color": "#ff6fa8",
-   "plain": "Own spot Bitcoin when perpetual funding is negative (crowded shorts); step aside when funding is clearly positive.",
-   "sources": [
-    {
-     "label": "Earnflow: Funding Rate crypto strategy (accumulate on negative funding, pause when longs crowded)",
-     "url": "https://earnflow.io/learn-more/funding-rate"
-    }
-   ],
-   "rules": [
-    "Build a 3-day average of public BTC perpetual funding prints.",
-    "Enter long when that average is ≤ 0.",
-    "Exit to cash when that average rises above +0.01% per funding interval (0.0001).",
-    "Spot only: funding is a signal, not a funding-arbitrage PnL."
-   ],
-   "interpretation": "Earnflow also scales DCA size and can distribute; we freeze a binary long/cash switch so the test matches the other all-in strategies on this page.",
-   "why": "Failed: using funding only as a spot on/off switch lost to Bitcoin buy-and-hold in both windows. Interesting as a research overlay, not as a standalone paper account."
-  },
-  {
-   "key": "mayer_lt_2p4_btc",
-   "name": "Mayer Multiple < 2.4",
-   "category": "Trend / valuation proxy",
-   "market": "Bitcoin (BTC-USD)",
-   "color": "#9ad14b",
-   "plain": "Own Bitcoin while its price is less than 2.4× its 200-day average; cash when the Mayer Multiple is stretched.",
-   "sources": [
-    {
-     "label": "CoinDesk: Mayer Multiples bubble/bottom framing (2.4 threshold)",
-     "url": "https://www.coindesk.com/markets/2019/02/17/mayer-multiples-the-metric-that-helps-call-bitcoin-bubbles-and-bottoms"
+     "key": "rsi30_50_eth",
+     "name": "RSI(14) 30/50 mean reversion",
+     "category": "Mean reversion",
+     "market": "Ethereum (ETH-USD)",
+     "color": "#b07cff",
+     "plain": "Buy Ethereum when daily RSI is oversold below 30; sell when RSI recovers to 50.",
+     "sources": [
+      {
+       "label": "altrady on X: “RSI Below 30 Means BUY?” BTC 4h test claiming the classic 30/50 rule",
+       "url": "https://x.com/altradyapp/status/2119746824575840716"
+      },
+      {
+       "label": "Coinrule academy: RSI below 30 buy-zone framing",
+       "url": "https://learn.coinrule.com/knowledgebase/how-to-trade-with-the-rsi/"
+      }
+     ],
+     "rules": [
+      "Buy when daily RSI(14) closes below 30.",
+      "Sell when daily RSI(14) closes at or above 50.",
+      "One position, all-in, long only. No stop."
+     ],
+     "interpretation": "The viral claim is usually shown on BTC 4h; we freeze the same thresholds on ETH daily so the idea is tested on a major the SIFT board already watches.",
+     "why": "Failed in both windows with large losses and a deep drawdown. The classic RSI 30/50 claim does not survive fees and next-open fills on ETH daily — do not paper-trade it."
     },
     {
-     "label": "Alpha Finance Mayer Multiple history (0.8 / 2.4 convention)",
-     "url": "https://alphafinance.io/mayer-multiple/"
-    }
-   ],
-   "rules": [
-    "Mayer Multiple = daily close ÷ 200-day SMA.",
-    "Long while the multiple is below 2.4.",
-    "Cash while the multiple is at or above 2.4.",
-    "No 0.8 buy-only filter in this encoding — Trace Mayer's published long-term simulation bought whenever the multiple was under 2.4."
-   ],
-   "interpretation": "This is a price/SMA valuation proxy, not an on-chain MVRV feed. On-chain series were skipped when a free, frozen, full-history public dump was not available for this run.",
-   "why": "Mixed: the <2.4 filter kept almost all of Bitcoin's long-run return with a slightly better Sharpe and a bit less drawdown, but recent Sharpe only matched buy-and-hold and the −79% crash still fails the 10% limit. Low priority for paper — it is nearly always invested."
-  },
-  {
-   "key": "abs_dual_mom_monthly",
-   "name": "Monthly absolute dual momentum",
-   "category": "Momentum rotation",
-   "market": "BTC / ETH / SOL",
-   "color": "#d9c7ae",
-   "plain": "Once a month, hold the strongest of BTC, ETH or SOL over 90 days — but only if that return is still positive; otherwise cash.",
-   "sources": [
-    {
-     "label": "Becoming Crypto Whale: dual momentum BTC/ETH monthly absolute filter",
-     "url": "https://www.becomingcryptowhale.com/en/trading/strategy/dual-momentum"
+     "key": "fear_greed_btc",
+     "name": "Fear & Greed extremes",
+     "category": "Sentiment",
+     "market": "Bitcoin (BTC-USD)",
+     "color": "#ff9f40",
+     "plain": "Buy Bitcoin in Extreme Fear and sell it in Extreme Greed, holding through the middle.",
+     "sources": [
+      {
+       "label": "Bitcoin Magazine — Matt Crosby Fear & Greed timing article",
+       "url": "https://bitcoinmagazine.com/markets/how-a-bitcoin-fear-and-greed-index-trading-strategy-beats-buy-and-hold-investing"
+      },
+      {
+       "label": "Bitcoin Fear & Greed backtest calculator (threshold form)",
+       "url": "https://bitcoinx.com/bitcoin-fear-greed-backtest-calculator/"
+      }
+     ],
+     "rules": [
+      "Enter long when the alternative.me Fear & Greed Index closes at 25 or below.",
+      "Exit when the index closes at 75 or above.",
+      "Between those extremes, keep the current position.",
+      "All-in, long only."
+     ],
+     "interpretation": "The Magazine piece scaled 1% of capital per extreme day. Calculators often use hard thresholds. We freeze the hard 25/75 switch so the comparison matches the rest of this page.",
+     "why": "Failed as an all-in/out switch: Extreme Fear/Greed timing underperformed Bitcoin buy-and-hold on Sharpe in both windows. The Magazine's 1% scaling story is a different strategy; this frozen binary form is not worth paper capital."
     },
     {
-     "label": "Saral: Crypto Dual Momentum (BTC/ETH) absolute-momentum template",
-     "url": "https://saral.money/strategies/crypto-dual-momentum-btc-eth/"
+     "key": "dual_mom_4w",
+     "name": "4-week dual momentum",
+     "category": "Momentum rotation",
+     "market": "BTC / ETH / SOL",
+     "color": "#3cd6c8",
+     "plain": "Each week, hold whichever of BTC, ETH or SOL rose most over four weeks — or sit in cash if that leader is still negative.",
+     "sources": [
+      {
+       "label": "FinzData: Bitcoin vs Ether dual momentum · 4-week · cash when both fall",
+       "url": "https://data.finzdata.com/s/bitcoin-vs-ether-dual-momentum-4-week-cash-when-both-fall-32cfb7"
+      }
+     ],
+     "rules": [
+      "Once per ISO week (last daily bar of the week), compute 28-day total return for BTC, ETH and SOL.",
+      "Hold 100% the asset with the highest 28-day return if that return is positive.",
+      "If the leader's 28-day return is ≤ 0, hold cash.",
+      "SOL is added to the FinzData BTC/ETH pair so the SIFT universe is covered."
+     ],
+     "interpretation": "FinzData's published pair is BTC/ETH; adding SOL is a frozen universe choice, not a tuned parameter.",
+     "why": "Failed: weekly rotation plus cash filter trailed equal-weight buy-and-hold on Sharpe in both windows after fees. Do not add as a forward paper test."
+    },
+    {
+     "key": "funding_contrarian_btc",
+     "name": "Funding-rate contrarian filter",
+     "category": "Funding / positioning",
+     "market": "Bitcoin (BTC-USD)",
+     "color": "#ff6fa8",
+     "plain": "Own spot Bitcoin when perpetual funding is negative (crowded shorts); step aside when funding is clearly positive.",
+     "sources": [
+      {
+       "label": "Earnflow: Funding Rate crypto strategy (accumulate on negative funding, pause when longs crowded)",
+       "url": "https://earnflow.io/learn-more/funding-rate"
+      }
+     ],
+     "rules": [
+      "Build a 3-day average of public BTC perpetual funding prints.",
+      "Enter long when that average is ≤ 0.",
+      "Exit to cash when that average rises above +0.01% per funding interval (0.0001).",
+      "Spot only: funding is a signal, not a funding-arbitrage PnL."
+     ],
+     "interpretation": "Earnflow also scales DCA size and can distribute; we freeze a binary long/cash switch so the test matches the other all-in strategies on this page.",
+     "why": "Failed: using funding only as a spot on/off switch lost to Bitcoin buy-and-hold in both windows. Interesting as a research overlay, not as a standalone paper account."
+    },
+    {
+     "key": "mayer_lt_2p4_btc",
+     "name": "Mayer Multiple < 2.4",
+     "category": "Trend / valuation proxy",
+     "market": "Bitcoin (BTC-USD)",
+     "color": "#9ad14b",
+     "plain": "Own Bitcoin while its price is less than 2.4× its 200-day average; cash when the Mayer Multiple is stretched.",
+     "sources": [
+      {
+       "label": "CoinDesk: Mayer Multiples bubble/bottom framing (2.4 threshold)",
+       "url": "https://www.coindesk.com/markets/2019/02/17/mayer-multiples-the-metric-that-helps-call-bitcoin-bubbles-and-bottoms"
+      },
+      {
+       "label": "Alpha Finance Mayer Multiple history (0.8 / 2.4 convention)",
+       "url": "https://alphafinance.io/mayer-multiple/"
+      }
+     ],
+     "rules": [
+      "Mayer Multiple = daily close ÷ 200-day SMA.",
+      "Long while the multiple is below 2.4.",
+      "Cash while the multiple is at or above 2.4.",
+      "No 0.8 buy-only filter in this encoding — Trace Mayer's published long-term simulation bought whenever the multiple was under 2.4."
+     ],
+     "interpretation": "This is a price/SMA valuation proxy, not an on-chain MVRV feed. On-chain series were skipped when a free, frozen, full-history public dump was not available for this run.",
+     "why": "Mixed: the <2.4 filter kept almost all of Bitcoin's long-run return with a slightly better Sharpe and a bit less drawdown, but recent Sharpe only matched buy-and-hold and the −79% crash still fails the 10% limit. Low priority for paper — it is nearly always invested."
+    },
+    {
+     "key": "abs_dual_mom_monthly",
+     "name": "Monthly absolute dual momentum",
+     "category": "Momentum rotation",
+     "market": "BTC / ETH / SOL",
+     "color": "#d9c7ae",
+     "plain": "Once a month, hold the strongest of BTC, ETH or SOL over 90 days — but only if that return is still positive; otherwise cash.",
+     "sources": [
+      {
+       "label": "Becoming Crypto Whale: dual momentum BTC/ETH monthly absolute filter",
+       "url": "https://www.becomingcryptowhale.com/en/trading/strategy/dual-momentum"
+      },
+      {
+       "label": "Saral: Crypto Dual Momentum (BTC/ETH) absolute-momentum template",
+       "url": "https://saral.money/strategies/crypto-dual-momentum-btc-eth/"
+      }
+     ],
+     "rules": [
+      "At each month-end, measure 90-day total return for BTC, ETH and SOL.",
+      "Hold 100% the asset with the highest 90-day return if that return is > 0.",
+      "Otherwise hold cash.",
+      "No inverse-vol sizing (banned family)."
+     ],
+     "interpretation": "Sources often use BTC/ETH only and sometimes a 100-day SMA gate; we freeze the absolute 90-day / monthly form on the three-coin SIFT universe.",
+     "why": "Mixed: monthly absolute momentum cut the trio's crash sharply and beat buy-and-hold Sharpe in the Nov 2021 window, but lagged badly over the full sample. A cautious paper candidate only if the goal is drawdown control, not return chasing."
     }
+   ]
+  },
+  {
+   "id": "run_20261110",
+   "date": "2026-11-10",
+   "label": "Experiment · 2026-11-10",
+   "folder": "research/run_20261110",
+   "method": [
+    "Every result here is a NEW historical backtest run on Nov 10, 2026. None of it is forward paper, and none of it is a live signal.",
+    "Data: Yahoo Finance daily bars (split- and dividend-adjusted) for SPY, EFA, AGG, 13-week T-bill yield (^IRX) and BTC-USD, saved with SHA-256 hashes. The still-forming Nov 10 bar is dropped; the last bar used is Nov 9, 2026.",
+    "Windows: US ETFs Jan 3, 2000 to Nov 9, 2026 (dual momentum starts Oct 1, 2004 because its bond fund needs 12 months of history). Bitcoin Jan 1, 2016 to Nov 9, 2026. The recent window is a separate fresh $10,000 run from Nov 11, 2024. Published strategies with fixed settings are tested as published, but the long window is still history everyone has seen; the recent window is not a clean holdout either.",
+    "Fills: a signal from the close of day t is filled at the OPEN of day t+1 (headline numbers). Many sources assume a fill at the signal close; that version is shown as a sensitivity number.",
+    "Costs: 0.05% per side on ETFs, 0.10% per side on Bitcoin, on every traded dollar. A doubled-fee run is shown too. Idle cash in the ETF tests earns the T-bill rate; idle Bitcoin cash earns nothing.",
+    "Long only. No leverage. No shorts. No volatility sizing (so the Turtle test uses only its entry and exit channels, not its N-based position sizing).",
+    "Sharpe ratio: ETF tests use daily return above T-bills, times √252. Bitcoin tests use raw daily return, times √365. Maximum drawdown is measured on daily closes, so intraday drops could be deeper.",
+    "Verdict rule, written before the run: Promising = higher Sharpe than buy-and-hold in BOTH windows AND a shallower maximum drawdown over the long window. Failed = lower Sharpe than buy-and-hold in BOTH windows. Mixed = anything else.",
+    "10% drawdown limit: PASS only if the long-window maximum drawdown is no worse than −10%."
    ],
-   "rules": [
-    "At each month-end, measure 90-day total return for BTC, ETH and SOL.",
-    "Hold 100% the asset with the highest 90-day return if that return is > 0.",
-    "Otherwise hold cash.",
-    "No inverse-vol sizing (banned family)."
-   ],
-   "interpretation": "Sources often use BTC/ETH only and sometimes a 100-day SMA gate; we freeze the absolute 90-day / monthly form on the three-coin SIFT universe.",
-   "why": "Mixed: monthly absolute momentum cut the trio's crash sharply and beat buy-and-hold Sharpe in the Nov 2021 window, but lagged badly over the full sample. A cautious paper candidate only if the goal is drawdown control, not return chasing."
+   "strategies": [
+    {
+     "key": "rsi2_connors",
+     "name": "Connors RSI(2) pullback",
+     "category": "Mean reversion",
+     "market": "SPY (S&P 500 ETF)",
+     "color": "#e24632",
+     "plain": "Buy the S&P 500 after a sharp two-day dip, but only while it is in a long-term uptrend; sell on the first bounce.",
+     "sources": [
+      {
+       "label": "StockCharts ChartSchool: RSI(2) (Larry Connors)",
+       "url": "https://chartschool.stockcharts.com/table-of-contents/trading-strategies-and-models/trading-strategies/rsi-2"
+      }
+     ],
+     "rules": [
+      "Trend filter: close above its 200-day simple average.",
+      "Buy when the 2-day RSI (Wilder smoothing) closes below 5.",
+      "Sell when the close is above its 5-day simple average.",
+      "No stop, as the source describes. One position, all-in, long only."
+     ],
+     "interpretation": "Source allows RSI below 5 or below 10; we used 5, the level the article says Connors found stronger. The short side is skipped (no shorts).",
+     "why": "Picked for testing because it is widely shared online with fixed, checkable rules (source linked). New backtest, Nov 10, 2026, next-open fills, fees included: 2000-01-03 to 2026-11-09: +151.4% (max drawdown -15.71%) vs buy-and-hold +711.9% (-55.19%). Recent window 2024-11-11 to 2026-11-09: +18.4% vs buy-and-hold +28.3%. Verdict by the pre-written rule: Mixed. 10% drawdown limit: BREACH."
+    },
+    {
+     "key": "faber_10m_sma",
+     "name": "Faber 10-month trend filter",
+     "category": "Trend",
+     "market": "SPY (S&P 500 ETF)",
+     "color": "#3c7dff",
+     "plain": "Own the S&P 500 only while its month-end price is above its 10-month average; otherwise sit in T-bills.",
+     "sources": [
+      {
+       "label": "Meb Faber, QTAA paper update (rules)",
+       "url": "https://mebfaber.com/2013/06/07/qtaa-paper-update-manage-your-risk-4/"
+      },
+      {
+       "label": "Chartegy summary of Faber (2007), SSRN 962461",
+       "url": "https://chartegy.com/methods/strategy/faber-tactical-asset-allocation"
+      }
+     ],
+     "rules": [
+      "On the last trading day of each month, compare the month-end close with the average of the last 10 month-end closes.",
+      "Above: hold SPY. Below: hold cash earning the T-bill rate.",
+      "Ignore everything between month-ends."
+     ],
+     "interpretation": "Faber tested a five-asset portfolio; this is his single-asset S&P 500 example, using SPY's adjusted price as the total-return series.",
+     "why": "Picked for testing because it is widely shared online with fixed, checkable rules (source linked). New backtest, Nov 10, 2026, next-open fills, fees included: 2000-01-03 to 2026-11-09: +641.9% (max drawdown -24.43%) vs buy-and-hold +711.9% (-55.19%). Recent window 2024-11-11 to 2026-11-09: +11.4% vs buy-and-hold +28.3%. Verdict by the pre-written rule: Mixed. 10% drawdown limit: BREACH."
+    },
+    {
+     "key": "ibs_reversion",
+     "name": "IBS mean reversion",
+     "category": "Mean reversion",
+     "market": "SPY (S&P 500 ETF)",
+     "color": "#f0c53a",
+     "plain": "Buy the S&P 500 when it closes near the bottom of the day's range, sell when it closes near the top.",
+     "sources": [
+      {
+       "label": "QuantifiedStrategies: Internal Bar Strength rules and backtests",
+       "url": "https://www.quantifiedstrategies.com/ibs-internal-bar-strength-indicator-strategies/"
+      }
+     ],
+     "rules": [
+      "IBS = (close − low) ÷ (high − low).",
+      "Buy when IBS is below 0.2.",
+      "Sell when IBS is above 0.8.",
+      "One position, all-in, long only."
+     ],
+     "interpretation": "The source buys and sells AT the signal close. Our headline waits for the next open, which is much stricter for this strategy; the at-close number is shown as the sensitivity.",
+     "why": "Picked for testing because it is widely shared online with fixed, checkable rules (source linked). New backtest, Nov 10, 2026, next-open fills, fees included: 2000-01-03 to 2026-11-09: +693.2% (max drawdown -27.24%) vs buy-and-hold +711.9% (-55.19%). Recent window 2024-11-11 to 2026-11-09: +19.6% vs buy-and-hold +28.3%. Verdict by the pre-written rule: Mixed. 10% drawdown limit: BREACH."
+    },
+    {
+     "key": "turn_of_month",
+     "name": "Turn of the month",
+     "category": "Calendar",
+     "market": "SPY (S&P 500 ETF)",
+     "color": "#3cba62",
+     "plain": "Hold the S&P 500 only for the last trading day of each month and the first three of the next.",
+     "sources": [
+      {
+       "label": "Quantpedia: Turn of the Month in Equity Indexes (Lakonishok & Smidt 1988)",
+       "url": "https://quantpedia.com/strategies/turn-of-the-month-in-equity-indexes"
+      }
+     ],
+     "rules": [
+      "Buy so the position is held through the last trading day of the month.",
+      "Sell after the third trading day of the next month.",
+      "T-bill rate on the cash the rest of the time."
+     ],
+     "interpretation": "Calendar dates are known in advance, so the source's close-to-close timing is realistic here; the headline still uses next-open fills for consistency.",
+     "why": "Picked for testing because it is widely shared online with fixed, checkable rules (source linked). New backtest, Nov 10, 2026, next-open fills, fees included: 2000-01-03 to 2026-11-09: +136.6% (max drawdown -22.78%) vs buy-and-hold +711.9% (-55.19%). Recent window 2024-11-11 to 2026-11-09: +16.5% vs buy-and-hold +28.3%. Verdict by the pre-written rule: Failed. 10% drawdown limit: BREACH."
+    },
+    {
+     "key": "gem_dual_momentum",
+     "name": "Dual momentum (GEM)",
+     "category": "Momentum rotation",
+     "market": "SPY / EFA / AGG",
+     "color": "#b07cff",
+     "plain": "Each month, hold US stocks or foreign stocks, whichever rose more over 12 months, unless stocks are losing to T-bills, then hold bonds.",
+     "sources": [
+      {
+       "label": "Gary Antonacci, Optimal Momentum: Global Equities Momentum",
+       "url": "https://www.optimalmomentum.com/global-equities-momentum/"
+      }
+     ],
+     "rules": [
+      "At each month-end, measure 12-month total return of SPY, EFA and T-bills.",
+      "If SPY beats T-bills, hold whichever of SPY or EFA has the higher 12-month return.",
+      "If SPY does not beat T-bills, hold AGG (US aggregate bonds).",
+      "Always fully invested in one fund."
+     ],
+     "interpretation": "Antonacci uses MSCI ACWI ex-US; EFA (developed ex-US) is used because it has longer ETF history. Exact rules are in his book; this follows the published summary.",
+     "why": "Picked for testing because it is widely shared online with fixed, checkable rules (source linked). New backtest, Nov 10, 2026, next-open fills, fees included: 2004-10-01 to 2026-11-09: +550.5% (max drawdown -33.72%) vs buy-and-hold +903.3% (-55.19%). Recent window 2024-11-11 to 2026-11-09: +24.7% vs buy-and-hold +28.3%. Verdict by the pre-written rule: Failed. 10% drawdown limit: BREACH."
+    },
+    {
+     "key": "golden_cross_btc",
+     "name": "Golden cross 50/200",
+     "category": "Trend",
+     "market": "Bitcoin (BTC-USD)",
+     "color": "#ff9f40",
+     "plain": "Own Bitcoin while its 50-day average is above its 200-day average; cash after the death cross.",
+     "sources": [
+      {
+       "label": "Investopedia: Golden Cross",
+       "url": "https://www.investopedia.com/terms/g/goldencross.asp"
+      }
+     ],
+     "rules": [
+      "Long when the 50-day simple average of closes is above the 200-day.",
+      "Cash when it is below.",
+      "Signals checked on each daily (UTC) close."
+     ],
+     "interpretation": "No extra confirmation filters. Popular on crypto social media, where it is usually shown on a chart after the fact.",
+     "why": "Picked for testing because it is widely shared online with fixed, checkable rules (source linked). New backtest, Nov 10, 2026, next-open fills, fees included: 2016-01-01 to 2026-11-09: +11,392.5% (max drawdown -69.27%) vs buy-and-hold +17,347.0% (-83.4%). Recent window 2024-11-11 to 2026-11-09: −28.1% vs buy-and-hold −6.6%. Verdict by the pre-written rule: Mixed. 10% drawdown limit: BREACH."
+    },
+    {
+     "key": "turtle_55_20_btc",
+     "name": "Turtle channel breakout 55/20",
+     "category": "Breakout",
+     "market": "Bitcoin (BTC-USD)",
+     "color": "#3cd6c8",
+     "plain": "Buy Bitcoin when it closes above its highest price of the past 55 days; sell when it closes below its 20-day low.",
+     "sources": [
+      {
+       "label": "Investopedia: Turtle Trading",
+       "url": "https://www.investopedia.com/articles/trading/08/turtle-trading.asp"
+      }
+     ],
+     "rules": [
+      "Buy when the close is above the highest high of the prior 55 days.",
+      "Sell when the close is below the lowest low of the prior 20 days.",
+      "All-in, long only."
+     ],
+     "interpretation": "Original Turtles bought intraday breakouts, sized by volatility (N), added units and used 2N stops. Volatility sizing is excluded by SIFT rules, so only the channels are tested. Related to, but different from, SIFT's 30-day breakout test.",
+     "why": "Picked for testing because it is widely shared online with fixed, checkable rules (source linked). New backtest, Nov 10, 2026, next-open fills, fees included: 2016-01-01 to 2026-11-09: +5,098.4% (max drawdown -57.34%) vs buy-and-hold +17,347.0% (-83.4%). Recent window 2024-11-11 to 2026-11-09: −18.9% vs buy-and-hold −6.6%. Verdict by the pre-written rule: Mixed. 10% drawdown limit: BREACH."
+    },
+    {
+     "key": "macd_12_26_9_btc",
+     "name": "MACD 12/26/9 crossover",
+     "category": "Trend / momentum",
+     "market": "Bitcoin (BTC-USD)",
+     "color": "#ff6fa8",
+     "plain": "Own Bitcoin while the MACD line is above its signal line.",
+     "sources": [
+      {
+       "label": "Investopedia: MACD",
+       "url": "https://www.investopedia.com/terms/m/macd.asp"
+      }
+     ],
+     "rules": [
+      "MACD = 12-day EMA minus 26-day EMA of closes; signal = 9-day EMA of MACD.",
+      "Long when MACD is above the signal line, cash when below."
+     ],
+     "interpretation": "Default settings, no zero-line or trend filter.",
+     "why": "Picked for testing because it is widely shared online with fixed, checkable rules (source linked). New backtest, Nov 10, 2026, next-open fills, fees included: 2016-01-01 to 2026-11-09: +17,367.7% (max drawdown -50.67%) vs buy-and-hold +17,347.0% (-83.4%). Recent window 2024-11-11 to 2026-11-09: −13.6% vs buy-and-hold −6.6%. Verdict by the pre-written rule: Mixed. 10% drawdown limit: BREACH."
+    },
+    {
+     "key": "supertrend_10_3_btc",
+     "name": "Supertrend (10, 3)",
+     "category": "Trend",
+     "market": "Bitcoin (BTC-USD)",
+     "color": "#9ad14b",
+     "plain": "Own Bitcoin while the popular TradingView Supertrend line is green (price above an ATR-based trailing band).",
+     "sources": [
+      {
+       "label": "TradingView Help: Supertrend formula",
+       "url": "https://www.tradingview.com/support/solutions/43000634738-supertrend/"
+      }
+     ],
+     "rules": [
+      "ATR period 10 (Wilder smoothing), multiplier 3, bands built from (high + low) ÷ 2 as in TradingView's formula.",
+      "Long while the trend is up, cash while it is down."
+     ],
+     "interpretation": "TradingView default settings.",
+     "why": "Picked for testing because it is widely shared online with fixed, checkable rules (source linked). New backtest, Nov 10, 2026, next-open fills, fees included: 2016-01-01 to 2026-11-09: +6,992.9% (max drawdown -52.19%) vs buy-and-hold +17,347.0% (-83.4%). Recent window 2024-11-11 to 2026-11-09: −26.2% vs buy-and-hold −6.6%. Verdict by the pre-written rule: Mixed. 10% drawdown limit: BREACH."
+    },
+    {
+     "key": "bmsb_btc",
+     "name": "Bull Market Support Band",
+     "category": "Trend (crypto social)",
+     "market": "Bitcoin (BTC-USD)",
+     "color": "#d9c7ae",
+     "plain": "The crypto-Twitter favorite: own Bitcoin while the weekly close is above both the 20-week SMA and the 21-week EMA.",
+     "sources": [
+      {
+       "label": "TradingView script: Bull Market Support Band (20w SMA, 21w EMA)",
+       "url": "https://www.tradingview.com/script/uSBR7cFa-Bull-Market-Support-Band-20w-SMA-21w-EMA/"
+      }
+     ],
+     "rules": [
+      "Weekly bars close Sunday (UTC).",
+      "Buy when the weekly close is above both the 20-week SMA and 21-week EMA.",
+      "Sell when the weekly close is below both. Inside the band: keep the current state.",
+      "Fill on Monday's open."
+     ],
+     "interpretation": "The script is an indicator, not a trading system; the buy-above / sell-below-both rule is our interpretation of how it is described.",
+     "why": "Picked for testing because it is widely shared online with fixed, checkable rules (source linked). New backtest, Nov 10, 2026, next-open fills, fees included: 2016-01-01 to 2026-11-09: +18,885.7% (max drawdown -73.14%) vs buy-and-hold +17,347.0% (-83.4%). Recent window 2024-11-11 to 2026-11-09: −8.7% vs buy-and-hold −6.6%. Verdict by the pre-written rule: Mixed. 10% drawdown limit: BREACH."
+    }
+   ]
   }
  ]
 }
