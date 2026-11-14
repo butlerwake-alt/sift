@@ -38,6 +38,10 @@
     {
      "date": "2026-11-12",
      "equity": 10000.0
+    },
+    {
+     "date": "2026-11-13",
+     "equity": 10000.0
     }
    ],
    "bench": [
@@ -76,6 +80,10 @@
     {
      "date": "2026-11-12",
      "equity": 8872.92
+    },
+    {
+     "date": "2026-11-13",
+     "equity": 8488.16
     }
    ]
   },
@@ -116,6 +124,10 @@
     {
      "date": "2026-11-13",
      "equity": 9433.28
+    },
+    {
+     "date": "2026-11-14",
+     "equity": 8933.95
     }
    ],
    "bench": [
@@ -154,6 +166,10 @@
     {
      "date": "2026-11-13",
      "equity": 8638.12
+    },
+    {
+     "date": "2026-11-14",
+     "equity": 8257.43
     }
    ]
   },
@@ -194,6 +210,10 @@
     {
      "date": "2026-11-13",
      "equity": 9044.12
+    },
+    {
+     "date": "2026-11-14",
+     "equity": 8444.57
     }
    ],
    "bench": [
@@ -232,6 +252,10 @@
     {
      "date": "2026-11-13",
      "equity": 8610.36
+    },
+    {
+     "date": "2026-11-14",
+     "equity": 8229.7
     }
    ]
   },
@@ -268,6 +292,10 @@
     {
      "date": "2026-11-12",
      "equity": 9987.7
+    },
+    {
+     "date": "2026-11-13",
+     "equity": 9987.7
     }
    ],
    "bench": [
@@ -302,6 +330,10 @@
     {
      "date": "2026-11-12",
      "equity": 9391.76
+    },
+    {
+     "date": "2026-11-13",
+     "equity": 8978.29
     }
    ]
   },
@@ -338,6 +370,10 @@
     {
      "date": "2026-11-12",
      "equity": 10000.0
+    },
+    {
+     "date": "2026-11-13",
+     "equity": 10000.0
     }
    ],
    "bench": [
@@ -372,6 +408,10 @@
     {
      "date": "2026-11-12",
      "equity": 9391.76
+    },
+    {
+     "date": "2026-11-13",
+     "equity": 8978.29
     }
    ]
   },
@@ -412,6 +452,10 @@
     {
      "date": "2026-11-12",
      "equity": 10000.0
+    },
+    {
+     "date": "2026-11-13",
+     "equity": 10000.0
     }
    ],
    "bench": [
@@ -450,6 +494,10 @@
     {
      "date": "2026-11-12",
      "equity": 8872.92
+    },
+    {
+     "date": "2026-11-13",
+     "equity": 8488.16
     }
    ]
   },
@@ -560,6 +608,10 @@
     {
      "date": "2026-11-12",
      "equity": 10613.68
+    },
+    {
+     "date": "2026-11-13",
+     "equity": 10452.55
     }
    ],
    "bench": [
@@ -590,6 +642,10 @@
     {
      "date": "2026-11-12",
      "equity": 9945.37
+    },
+    {
+     "date": "2026-11-13",
+     "equity": 9825.71
     }
    ]
   },
@@ -1215,8 +1271,8 @@
    "universe": "Forward basket: BTC, ETH, XRP, BNB, SOL. Daily bars.",
    "window": "Nov 5\u201325, 2026. First report Nov 26.",
    "start": "2026-11-04",
-   "asOf": "2026-11-12",
-   "asOfLabel": "mark of Nov 12",
+   "asOf": "2026-11-13",
+   "asOfLabel": "mark of Nov 13",
    "points": [
     {
      "date": "2026-11-04",
@@ -1252,6 +1308,10 @@
     },
     {
      "date": "2026-11-12",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-13",
      "equity": 10000.0
     }
    ],
@@ -1296,6 +1356,10 @@
      {
       "date": "2026-11-12",
       "equity": 8872.92
+     },
+     {
+      "date": "2026-11-13",
+      "equity": 8488.16
      }
     ]
    },
@@ -1307,7 +1371,7 @@
     "Cost on the research note: 0.10% per side. A doubled-fee check was also run on the backtest."
    ],
    "backtest": "In-sample BTC backtest, Nov 1, 2021 to Nov 4, 2026: +203.4%, maximum drawdown \u221221.7%, against buy-and-hold +31.7% and \u221276.6%. Doubled fees: +189.8%. The 2025\u201326 window had already been looked at, so it is not a clean holdout. That path is not drawn here.",
-   "forward": "$10,000.00 (0.00%), 100% cash through the Nov 12 close. Max drawdown 0.00%. BTC buy-and-hold $8,872.92 (\u221211.27%). Equal-weight basket hold $8,567.88. The forward test has not proven anything yet.",
+   "forward": "$10,000.00 (0.00%), 100% cash through the Nov 13 close. Max drawdown 0.00%. BTC buy-and-hold $8,488.16 (\u221215.12%). Equal-weight basket hold $8,221.86. The forward test has not proven anything yet.",
    "risk": "Whipsaw around the 50-day line, and a three-week window that is too short to judge.",
    "why": {
     "text": "The first BTC runs that led to this pick (Nov 4, 2026) printed +223% with a \u221220% worst drop for scale-in + 50-day exit, but they saved only console output, so that figure was withdrawn as unverifiable. The saved re-run (new experiment, Nov 5, next-day fills, 0.10% fees): Nov 1, 2021 to Nov 4, 2026, +203.4% with a \u221221.7% maximum drawdown, against BTC buy-and-hold +31.7% and \u221276.6%; doubled fees +189.8%. Same re-run, five-coin basket with the 50-day exit: +128.2% (\u221236.1%), and +16.1% (\u221212.3%) for Jan 2025 to Nov 4, 2026. Separate Nov 5 comparison, three coins (BTC/ETH/SOL), Jan 1, 2025 to Nov 4, 2026, next-open fills: +21.05%, maximum drawdown \u221214.53%, 16 trades. All in-sample; the 2025\u201326 window had already been looked at.",
@@ -1319,12 +1383,12 @@
    },
    "stale": false,
    "fwdPct": 0.0,
-   "marks": 9,
-   "daysLive": 8,
+   "marks": 10,
+   "daysLive": 9,
    "isNew": false,
    "rank": 3,
-   "prevRank": 2,
-   "rankMove": -1
+   "prevRank": 3,
+   "rankMove": 0
   },
   "2": {
    "n": 2,
@@ -1336,8 +1400,8 @@
    "universe": "Ten large-cap coins, daily: BTC, ETH, SOL, XRP, BNB, DOGE, ADA, AVAX, LINK, LTC.",
    "window": "Nov 5, 2026 \u2013 Feb 2, 2027.",
    "start": "2026-11-05",
-   "asOf": "2026-11-13",
-   "asOfLabel": "mark of Nov 13",
+   "asOf": "2026-11-14",
+   "asOfLabel": "mark of Nov 14",
    "points": [
     {
      "date": "2026-11-05",
@@ -1374,10 +1438,14 @@
     {
      "date": "2026-11-13",
      "equity": 9433.28
+    },
+    {
+     "date": "2026-11-14",
+     "equity": 8933.95
     }
    ],
-   "latest": 9433.28,
-   "change": "\u22125.67%",
+   "latest": 8933.95,
+   "change": "\u221210.66%",
    "benchmark": {
     "name": "BTC buy-and-hold",
     "color": "#3c7dff",
@@ -1417,6 +1485,10 @@
      {
       "date": "2026-11-13",
       "equity": 8638.12
+     },
+     {
+      "date": "2026-11-14",
+      "equity": 8257.43
      }
     ]
    },
@@ -1428,7 +1500,7 @@
     "$1,000 per position including the fee, maximum 10 positions. Cost 0.10% per side."
    ],
    "backtest": "No backtest of these exact rules. A different 20-day / \u22121.5\u03c3 variant is context only and is not drawn here.",
-   "forward": "$9,433.28 (\u22125.67%). 9 positions open, 0 closed. BTC buy-and-hold $8,638.12 (\u221213.62%).",
+   "forward": "$8,933.95 (\u221210.66%). 8 positions open, 0 closed. BTC buy-and-hold $8,257.43 (\u221217.43%).",
    "risk": "In a trending selloff the signals cluster, so ten positions can act like one large long-crypto bet. A close-only stop can lose more than 15% on a gap.",
    "why": {
     "text": "No saved backtest of these exact rules (30-day z-score, enter below \u22121, $1,000 slots, \u221215% stop, 20-day max hold) exists in the records. The closest record is a different variant (20-day z-score, enter below \u22121.5, 200-day filter) in the Nov 5 comparison: BTC, Mar 1, 2021 to Nov 4, 2026, +20.22% with a \u221211.78% maximum drawdown, 28 trades, 78.6% winners; BTC/ETH/SOL +29.39% (\u221210.50%). That is context only, not a test of this account's rules.",
@@ -1439,13 +1511,13 @@
     "hasRecord": false
    },
    "stale": false,
-   "fwdPct": -5.6672,
-   "marks": 9,
-   "daysLive": 8,
+   "fwdPct": -10.6605,
+   "marks": 10,
+   "daysLive": 9,
    "isNew": false,
-   "rank": 22,
-   "prevRank": 24,
-   "rankMove": 2
+   "rank": 24,
+   "prevRank": 22,
+   "rankMove": -2
   },
   "3": {
    "n": 3,
@@ -1457,8 +1529,8 @@
    "universe": "The same ten coins as the z-score book, daily. Run as its own account.",
    "window": "Nov 5, 2026 \u2013 Feb 2, 2027.",
    "start": "2026-11-05",
-   "asOf": "2026-11-13",
-   "asOfLabel": "mark of Nov 13",
+   "asOf": "2026-11-14",
+   "asOfLabel": "mark of Nov 14",
    "points": [
     {
      "date": "2026-11-05",
@@ -1495,10 +1567,14 @@
     {
      "date": "2026-11-13",
      "equity": 9044.12
+    },
+    {
+     "date": "2026-11-14",
+     "equity": 8444.57
     }
    ],
-   "latest": 9044.12,
-   "change": "\u22129.56%",
+   "latest": 8444.57,
+   "change": "\u221215.55%",
    "benchmark": {
     "name": "BTC buy-and-hold",
     "color": "#f0c53a",
@@ -1538,6 +1614,10 @@
      {
       "date": "2026-11-13",
       "equity": 8610.36
+     },
+     {
+      "date": "2026-11-14",
+      "equity": 8229.7
      }
     ]
    },
@@ -1549,7 +1629,7 @@
     "$1,000 per position including the fee, maximum 10. Cost 0.10% per side."
    ],
    "backtest": "None. This one is forward-only.",
-   "forward": "$9,044.12 (\u22129.56%). 10 positions open, 0 closed. BTC buy-and-hold $8,610.36 (\u221213.90%).",
+   "forward": "$8,444.57 (\u221215.55%). 9 positions open, 0 closed. BTC buy-and-hold $8,229.70 (\u221217.70%).",
    "risk": "The low-touch trigger fills the book faster in a selloff, so the same correlated drawdown shows up sooner.",
    "why": {
     "text": "No original backtest record exists for this strategy. It was launched as a forward-only paper test, run next to the z-score test so the two dip-buying rules can be compared on the same dates.",
@@ -1559,9 +1639,9 @@
     "hasRecord": false
    },
    "stale": false,
-   "fwdPct": -9.5588,
-   "marks": 9,
-   "daysLive": 8,
+   "fwdPct": -15.5543,
+   "marks": 10,
+   "daysLive": 9,
    "isNew": false,
    "rank": 25,
    "prevRank": 25,
@@ -1577,8 +1657,8 @@
    "universe": "BTC, ETH, SOL. Forward test on daily bars. A 4-hour backtest was also run.",
    "window": "Ongoing since Nov 5, 2026.",
    "start": "2026-11-05",
-   "asOf": "2026-11-12",
-   "asOfLabel": "mark of Nov 12",
+   "asOf": "2026-11-13",
+   "asOfLabel": "mark of Nov 13",
    "points": [
     {
      "date": "2026-11-05",
@@ -1610,6 +1690,10 @@
     },
     {
      "date": "2026-11-12",
+     "equity": 9987.7
+    },
+    {
+     "date": "2026-11-13",
      "equity": 9987.7
     }
    ],
@@ -1650,6 +1734,10 @@
      {
       "date": "2026-11-12",
       "equity": 9391.76
+     },
+     {
+      "date": "2026-11-13",
+      "equity": 8978.29
      }
     ]
    },
@@ -1661,7 +1749,7 @@
     "0.10% fee plus 0.10% slippage per side."
    ],
    "backtest": "In-sample daily test, Nov 1, 2021 to Nov 5, 2026: +45.12%, maximum drawdown \u221255.19%, against BTC buy-and-hold +24.92%. The 2025\u201326 slice was \u22121.07%. That path is not drawn here.",
-   "forward": "$9,987.70 (\u22120.12%), in cash as of the Nov 12 close. 2 fills logged, 1 sells. BTC buy-and-hold $9,391.76 (\u22126.08%).",
+   "forward": "$9,987.70 (\u22120.12%), in cash as of the Nov 13 close. 2 fills logged, 1 sells. BTC buy-and-hold $8,978.29 (\u221210.22%).",
    "risk": "The backtest drawdown, about \u221255%, is deeper than most people would sit through. The average lags turns.",
    "why": {
     "text": "Taken from a Reddit post (r/CryptoTradingBot). Saved baseline, Nov 1, 2021 to Nov 5, 2026, BTC/ETH/SOL daily, next-close fills, 0.10% fee plus 0.10% slippage per side: +45.12% with a \u221255.19% maximum drawdown, 198 trades, against BTC buy-and-hold +24.92%. Jan 2025 onward: \u22121.07% against \u221219.56%. In-sample, and the drawdown is far past the 10% limit.",
@@ -1672,12 +1760,12 @@
    },
    "stale": false,
    "fwdPct": -0.123,
-   "marks": 8,
-   "daysLive": 7,
+   "marks": 9,
+   "daysLive": 8,
    "isNew": false,
    "rank": 17,
-   "prevRank": 20,
-   "rankMove": 3
+   "prevRank": 17,
+   "rankMove": 0
   },
   "5": {
    "n": 5,
@@ -1689,8 +1777,8 @@
    "universe": "BTC, ETH, SOL, XRP, DOGE. Daily.",
    "window": "Ongoing since Nov 5, 2026.",
    "start": "2026-11-05",
-   "asOf": "2026-11-12",
-   "asOfLabel": "mark of Nov 12",
+   "asOf": "2026-11-13",
+   "asOfLabel": "mark of Nov 13",
    "points": [
     {
      "date": "2026-11-05",
@@ -1722,6 +1810,10 @@
     },
     {
      "date": "2026-11-12",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-13",
      "equity": 10000.0
     }
    ],
@@ -1762,6 +1854,10 @@
      {
       "date": "2026-11-12",
       "equity": 9391.76
+     },
+     {
+      "date": "2026-11-13",
+      "equity": 8978.29
      }
     ]
    },
@@ -1773,7 +1869,7 @@
     "0.10% fee plus 0.10% slippage per side. Signal at the close, filled at the next close."
    ],
    "backtest": "In-sample, Nov 1, 2021 to Nov 5, 2026: +118.77%, maximum drawdown \u221247.8%, about $5,055 in fees. 2025\u201326: +2.67%. That path is not drawn here.",
-   "forward": "$10,000.00 (0.00%), in cash as of the Nov 12 close. 0 fills logged, 0 sells. BTC buy-and-hold $9,391.76 (\u22126.08%).",
+   "forward": "$10,000.00 (0.00%), in cash as of the Nov 13 close. 0 fills logged, 0 sells. BTC buy-and-hold $8,978.29 (\u221210.22%).",
    "risk": "High turnover. In the five-year backtest, fees were about half the starting capital. Ranges produce many false breakouts.",
    "why": {
     "text": "Taken from an X post (@ainotesus, \"Bot Wars\"). Saved baseline, Nov 1, 2021 to Nov 5, 2026, five coins: +118.77% with a \u221247.8% maximum drawdown, 530 trades and about $5,055 in fees, against BTC buy-and-hold +24.92%. Jan 2025 onward: +2.67% against \u221219.56%. In-sample.",
@@ -1784,12 +1880,12 @@
    },
    "stale": false,
    "fwdPct": 0.0,
-   "marks": 8,
-   "daysLive": 7,
+   "marks": 9,
+   "daysLive": 8,
    "isNew": false,
    "rank": 4,
-   "prevRank": 3,
-   "rankMove": -1
+   "prevRank": 4,
+   "rankMove": 0
   },
   "6": {
    "n": 6,
@@ -1801,8 +1897,8 @@
    "universe": "BTC only, daily.",
    "window": "Waiting for a frozen buy on Dec 14, 2026. Hold would run toward Sep 9, 2029.",
    "start": "2026-11-04",
-   "asOf": "2026-11-12",
-   "asOfLabel": "mark of Nov 12",
+   "asOf": "2026-11-13",
+   "asOfLabel": "mark of Nov 13",
    "points": [
     {
      "date": "2026-11-04",
@@ -1838,6 +1934,10 @@
     },
     {
      "date": "2026-11-12",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-13",
      "equity": 10000.0
     }
    ],
@@ -1882,6 +1982,10 @@
      {
       "date": "2026-11-12",
       "equity": 8872.92
+     },
+     {
+      "date": "2026-11-13",
+      "equity": 8488.16
      }
     ]
    },
@@ -1892,7 +1996,7 @@
     "Fill at the next daily close. 0.10% fee plus 0.10% slippage per side."
    ],
    "backtest": "Three testable cycles versus buy-and-hold, all in-sample: 2015\u201317 +3,377% vs +3,285%; 2018\u201321 +1,017% (drawdown \u221261.8%) vs +989%; 2022\u201325 +546% vs +557%. Those paths are not drawn here. Only about three cycles can be tested.",
-   "forward": "$10,000.00 (0.00%), in cash as of the Nov 12 close. 0 fills logged, 0 sells. BTC buy-and-hold $8,872.92 (\u221211.27%). Next frozen buy date: Dec 14, 2026.",
+   "forward": "$10,000.00 (0.00%), in cash as of the Nov 13 close. 0 fills logged, 0 sells. BTC buy-and-hold $8,488.16 (\u221215.12%). Next frozen buy date: Dec 14, 2026.",
    "risk": "A tiny sample, a chart that was drawn with hindsight, and an edge over buy-and-hold that was small in two of the three cycles.",
    "why": {
     "text": "Taken from a viral X chart (hold BTC from 500 days before each halving to 500 days after). Saved baseline, per cycle versus buy-and-hold: 2015\u201317 +3,377% vs +3,285%; 2018\u201321 +1,017% (drawdown \u221261.8%) vs +989%; 2022\u201325 +546% (\u221228.1%) vs +557%. A fresh $10,000 from Nov 1, 2021: +545.7% with a \u221228.14% maximum drawdown vs BTC +31.8%. Only about three cycles, and the chart was drawn in hindsight.",
@@ -1903,12 +2007,12 @@
    },
    "stale": false,
    "fwdPct": 0.0,
-   "marks": 9,
-   "daysLive": 8,
+   "marks": 10,
+   "daysLive": 9,
    "isNew": false,
    "rank": 5,
-   "prevRank": 4,
-   "rankMove": -1
+   "prevRank": 5,
+   "rankMove": 0
   },
   "8": {
    "n": 8,
@@ -2027,9 +2131,9 @@
    "marks": 9,
    "daysLive": 10,
    "isNew": false,
-   "rank": 23,
+   "rank": 22,
    "prevRank": 23,
-   "rankMove": 0
+   "rankMove": 1
   },
   "9": {
    "n": 9,
@@ -2041,8 +2145,8 @@
    "universe": "Current Nasdaq-100 members with enough history. Monthly rebalance.",
    "window": "Ongoing since Nov 4, 2026.",
    "start": "2026-11-04",
-   "asOf": "2026-11-12",
-   "asOfLabel": "mark of Nov 12",
+   "asOf": "2026-11-13",
+   "asOfLabel": "mark of Nov 13",
    "points": [
     {
      "date": "2026-11-04",
@@ -2071,10 +2175,14 @@
     {
      "date": "2026-11-12",
      "equity": 10613.68
+    },
+    {
+     "date": "2026-11-13",
+     "equity": 10452.55
     }
    ],
-   "latest": 10613.68,
-   "change": "+6.14%",
+   "latest": 10452.55,
+   "change": "+4.53%",
    "benchmark": {
     "name": "QQQ buy-and-hold",
     "color": "#3c7dff",
@@ -2106,6 +2214,10 @@
      {
       "date": "2026-11-12",
       "equity": 9945.37
+     },
+     {
+      "date": "2026-11-13",
+      "equity": 9825.71
      }
     ]
    },
@@ -2117,7 +2229,7 @@
     "Cost 0.10% per side. Benchmark is QQQ. No forward QQQ dollar figure was stated."
    ],
    "backtest": "In-sample, Nov 2021 to Nov 4, 2026: +749.13%, maximum drawdown \u221238.67%, against QQQ +84.02%. The note says not to trust that number: today's index members are used, so removed losers are missing. That path is not drawn here.",
-   "forward": "$10,613.68 (+6.14%), holds PANW, MU, CRWD, DDOG, MRNA as of the Nov 12 close. 27 fills logged, 15 sells. QQQ buy-and-hold $9,945.37 (\u22120.55%).",
+   "forward": "$10,452.55 (+4.53%), holds PANW, MU, CRWD, DDOG, MRNA as of the Nov 13 close. 32 fills logged, 18 sells. QQQ buy-and-hold $9,825.71 (\u22121.74%).",
    "risk": "Five concentrated, mostly high-beta names. Momentum can reverse hard at a turn. The backtest is inflated by survivorship bias.",
    "why": {
     "text": "Taken from an X post (@QuantifiedStrat). Saved baseline, Nov 2021 to Nov 4, 2026: +749.13% with a \u221238.67% maximum drawdown, 345 trades, against QQQ +84.02%; Jan 2025 onward +274.85% vs +36.77%. Do not trust that number: it uses today's Nasdaq-100 members, so companies that fell out of the index are missing (survivorship bias), and the 126-day lookback is our assumption because the post did not say.",
@@ -2127,9 +2239,9 @@
     "hasRecord": true
    },
    "stale": false,
-   "fwdPct": 6.1368,
-   "marks": 7,
-   "daysLive": 8,
+   "fwdPct": 4.5255,
+   "marks": 8,
+   "daysLive": 9,
    "isNew": false,
    "rank": 1,
    "prevRank": 1,
@@ -2371,8 +2483,8 @@
    "daysLive": 2,
    "isNew": true,
    "rank": 18,
-   "prevRank": 17,
-   "rankMove": -1
+   "prevRank": 18,
+   "rankMove": 0
   },
   "12": {
    "n": 12,
@@ -2464,8 +2576,8 @@
    "daysLive": 2,
    "isNew": true,
    "rank": 20,
-   "prevRank": 18,
-   "rankMove": -2
+   "prevRank": 20,
+   "rankMove": 0
   },
   "13": {
    "n": 13,
@@ -2565,9 +2677,9 @@
    "marks": 4,
    "daysLive": 3,
    "isNew": true,
-   "rank": 24,
-   "prevRank": 22,
-   "rankMove": -2
+   "rank": 23,
+   "prevRank": 24,
+   "rankMove": 1
   },
   "14": {
    "n": 14,
@@ -2662,8 +2774,8 @@
    "daysLive": 2,
    "isNew": true,
    "rank": 2,
-   "prevRank": 16,
-   "rankMove": 14
+   "prevRank": 2,
+   "rankMove": 0
   },
   "15": {
    "n": 15,
@@ -2765,8 +2877,8 @@
    "daysLive": 3,
    "isNew": true,
    "rank": 6,
-   "prevRank": 5,
-   "rankMove": -1
+   "prevRank": 6,
+   "rankMove": 0
   },
   "16": {
    "n": 16,
@@ -2869,8 +2981,8 @@
    "daysLive": 3,
    "isNew": true,
    "rank": 7,
-   "prevRank": 6,
-   "rankMove": -1
+   "prevRank": 7,
+   "rankMove": 0
   },
   "17": {
    "n": 17,
@@ -3048,8 +3160,8 @@
    "daysLive": 1,
    "isNew": true,
    "rank": 15,
-   "prevRank": 7,
-   "rankMove": -8
+   "prevRank": 15,
+   "rankMove": 0
   },
   "19": {
    "n": 19,
@@ -3222,8 +3334,8 @@
    "daysLive": 1,
    "isNew": true,
    "rank": 16,
-   "prevRank": 9,
-   "rankMove": -7
+   "prevRank": 16,
+   "rankMove": 0
   },
   "21": {
    "n": 21,
@@ -3310,8 +3422,8 @@
    "daysLive": 1,
    "isNew": true,
    "rank": 9,
-   "prevRank": 10,
-   "rankMove": 1
+   "prevRank": 9,
+   "rankMove": 0
   },
   "22": {
    "n": 22,
@@ -3416,8 +3528,8 @@
    "daysLive": 3,
    "isNew": true,
    "rank": 10,
-   "prevRank": 11,
-   "rankMove": 1
+   "prevRank": 10,
+   "rankMove": 0
   },
   "23": {
    "n": 23,
@@ -3522,8 +3634,8 @@
    "daysLive": 3,
    "isNew": true,
    "rank": 11,
-   "prevRank": 12,
-   "rankMove": 1
+   "prevRank": 11,
+   "rankMove": 0
   },
   "24": {
    "n": 24,
@@ -3627,8 +3739,8 @@
    "daysLive": 3,
    "isNew": true,
    "rank": 12,
-   "prevRank": 13,
-   "rankMove": 1
+   "prevRank": 12,
+   "rankMove": 0
   },
   "25": {
    "n": 25,
@@ -3732,8 +3844,8 @@
    "daysLive": 3,
    "isNew": true,
    "rank": 13,
-   "prevRank": 14,
-   "rankMove": 1
+   "prevRank": 13,
+   "rankMove": 0
   },
   "26": {
    "n": 26,
@@ -3838,8 +3950,8 @@
    "daysLive": 3,
    "isNew": true,
    "rank": 14,
-   "prevRank": 15,
-   "rankMove": 1
+   "prevRank": 14,
+   "rankMove": 0
   }
  }
 }
