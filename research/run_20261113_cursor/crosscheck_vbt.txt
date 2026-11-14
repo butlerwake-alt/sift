@@ -1,0 +1,4 @@
+mayer_lt_2p4_btc: vbt_close_fill=27249.17%  ours_close_fill=27248.87%  diff=0.30pp
+rsi_adx_btc: vbt_close_fill=14856.14%  ours_close_fill=15610.36%  diff=-754.22pp
+
+Note: Mayer matches within ~0.3pp. RSI/ADX differs under VectorBT from_signals because the 2-period rule flips densely; backtest.py state_machine is the authoritative encoding of the Reddit rules.

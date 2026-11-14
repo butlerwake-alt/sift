@@ -1,0 +1,56 @@
+{
+  "retrieved_utc": "2026-11-14T01:09:01.026523+00:00",
+  "source": "Yahoo Finance via yfinance",
+  "tickers": {
+    "BTC-USD": {
+      "rows": 4440,
+      "first": "2014-09-17",
+      "last": "2026-11-12",
+      "sha256": "c3b9787ef5c1ba095c6d24d4bb3f9cd8076fc15d99de76f63f6dc37b6703b6fb",
+      "source": "Yahoo Finance via yfinance"
+    },
+    "ETH-USD": {
+      "rows": 3291,
+      "first": "2017-11-09",
+      "last": "2026-11-12",
+      "sha256": "7218e803f6139e4e76d8f05f296bf95908bf25afa9a06c693b4a4aa594ce5009",
+      "source": "Yahoo Finance via yfinance"
+    },
+    "SOL-USD": {
+      "rows": 2408,
+      "first": "2020-04-10",
+      "last": "2026-11-12",
+      "sha256": "070e5b6be3a768fa846f1cbe10be64c4dc8bbdbee614fbff8e2895d7a7721158",
+      "source": "Yahoo Finance via yfinance"
+    },
+    "funding_BTCUSDT": {
+      "rows": 9829,
+      "first": "2020-01-01 00:00:00.000+00:00",
+      "last": "2026-11-14 00:00:00.000+00:00",
+      "sha256": "099a3e5d08cc45c4ac485b9fedcfee397db3531d81e677f4101025b842dc4e51",
+      "source": "merged: Adeline117 Strategy-project + HuggingFace Torch-Trade Binance + MEXC tip"
+    },
+    "funding_ETHUSDT": {
+      "rows": 11481,
+      "first": "2020-01-01 00:00:00.000+00:00",
+      "last": "2026-11-14 00:00:00.000+00:00",
+      "sha256": "b5e52c6d3636ab9968313b332c7b1ce237f80d22857ed77ee60788dfd337a017",
+      "source": "merged: Adeline117 + supervik Binance CSV + MEXC tip"
+    },
+    "funding_SOLUSDT": {
+      "rows": 1619,
+      "first": "2025-05-23 16:00:00+00:00",
+      "last": "2026-11-14 00:00:00+00:00",
+      "sha256": "3b53af3479f3827ce55eda4fabf5b9de2935ff781492d71074886b3d357b729a",
+      "source": "MEXC public funding history (shorter; SOL funding strategy not used as primary)"
+    },
+    "fear_greed": {
+      "rows": 3203,
+      "first": "2018-02-01",
+      "last": "2026-11-12",
+      "sha256": "3d53c988fb82a6c770d90e37d2e9f0461221f59c91a0561eb66c52f76f3b0bee",
+      "source": "alternative.me Fear and Greed Index"
+    }
+  },
+  "retrieved_et": "2026-11-13 20:09"
+}
