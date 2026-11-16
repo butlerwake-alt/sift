@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-14T20:35:52-05:00",
+  "generated_at": "2026-11-15T20:42:59-05:00",
   "lookback_days": 16,
   "disclaimer": "Verification status as of last update; not financial advice.",
   "items": [
@@ -68,18 +68,6 @@
         {
           "name": "CoinDesk",
           "url": "https://www.coindesk.com/tech/2026/10/30/xrp-ledger-developers-tighten-the-rules-for-who-can-hold-restricted-tokens"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-29",
-      "headline": "Ripple and Water.org Reach One Million People, Deepen Partnership to Drive Global Access to Safe Water",
-      "summary": "Ripple and Water.org said their partnership has reached one million people and will expand to use Ripple Payments, RLUSD and digital-asset custody.",
-      "status": "Confirmed",
-      "sources": [
-        {
-          "name": "Ripple",
-          "url": "https://ripple.com/ripple-press/ripple-and-waterorg-deepen-partnership-to-drive-global-access-to-safe-water/"
         }
       ]
     }
