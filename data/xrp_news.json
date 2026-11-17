@@ -1,20 +1,8 @@
 {
-  "generated_at": "2026-11-15T20:42:59-05:00",
+  "generated_at": "2026-11-16T20:45:35-05:00",
   "lookback_days": 16,
   "disclaimer": "Verification status as of last update; not financial advice.",
   "items": [
-    {
-      "date": "2026-11-13",
-      "headline": "Bitcoin Breaks Below $69,000 as Selloff Sets New Lows",
-      "summary": "Ether, XRP and SOL also hit four-week lows on Coinbase, while bullish bets accounted for most tracked liquidations.",
-      "status": "Reported",
-      "sources": [
-        {
-          "name": "The Defiant",
-          "url": "https://thedefiant.io/news/markets/bitcoin-breaks-below-69-000-as-selloff-sets-new-lows"
-        }
-      ]
-    },
     {
       "date": "2026-11-10",
       "headline": "XRP Ledger Foundation quantum roadmap: post-quantum account keys",
@@ -56,18 +44,6 @@
         {
           "name": "CoinDesk",
           "url": "https://www.coindesk.com/markets/2026/11/05/xrp-ledger-closes-bug-that-let-approved-token-burners-create-new-tokens"
-        }
-      ]
-    },
-    {
-      "date": "2026-10-30",
-      "headline": "XRPL developers tighten the rules for who can hold 'restricted' tokens",
-      "summary": "CoinDesk reported that XRP Ledger developers proposed rule changes so restricted tokens cannot remain with accounts the issuer has not approved, except to be returned to the issuer.",
-      "status": "Reported",
-      "sources": [
-        {
-          "name": "CoinDesk",
-          "url": "https://www.coindesk.com/tech/2026/10/30/xrp-ledger-developers-tighten-the-rules-for-who-can-hold-restricted-tokens"
         }
       ]
     }
