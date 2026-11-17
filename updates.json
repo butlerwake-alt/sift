@@ -1,8 +1,8 @@
 {
  "meta": {
-  "fingerprint": "77552f05c5474a59",
-  "lastUpdatedISO": "2026-11-17T16:46:23-05:00",
-  "lastUpdatedET": "Nov 17, 2026, 4:46 PM ET",
+  "fingerprint": "6ef6b3281f53722b",
+  "lastUpdatedISO": "2026-11-17T17:33:29-05:00",
+  "lastUpdatedET": "Nov 17, 2026, 5:33 PM ET",
   "dataDay": "2026-11-17"
  },
  "entries": [
@@ -10,10 +10,13 @@
    "date": "2026-11-17",
    "kind": "daily",
    "title": "Daily update · Tue Nov 17",
-   "updatedET": "Nov 17, 2026, 4:46 PM ET",
+   "updatedET": "Nov 17, 2026, 5:33 PM ET",
    "items": [
+    "#12 Large-cap squeeze breakout: bought PGR.",
+    "#14 Leader pullback + regime gate: bought DE.",
+    "#21 3x Nasdaq IBS dip-buy: bought TQQQ.",
     "Biggest gains since the previous mark: #3 Crypto Bollinger band reversion +1.11%; #2 Crypto z-score mean reversion +0.43%; #8 S&P 500 dip-buy +0.11%.",
-    "Biggest drops: #10 9 EMA + VWAP intraday −0.30%.",
+    "Biggest drops: #11 Large-cap 55/20 breakout −1.23%; #17 Regime rotator (walk-forward) −1.23%; #12 Large-cap squeeze breakout −1.17%.",
     "Market regime: stocks (SPY) range, crypto (BTC) range."
    ]
   },
