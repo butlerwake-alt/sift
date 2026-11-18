@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-16T20:45:35-05:00",
+  "generated_at": "2026-11-17T20:49:54-05:00",
   "lookback_days": 16,
   "disclaimer": "Verification status as of last update; not financial advice.",
   "items": [
@@ -32,6 +32,10 @@
         {
           "name": "SEC EDGAR",
           "url": "https://www.sec.gov/Archives/edgar/data/2092592/000162828026072223/0001628280-26-072223-index.htm"
+        },
+        {
+          "name": "CoinDesk",
+          "url": "https://www.coindesk.com/markets/2026/11/17/ripple-backed-evernorth-has-written-down-its-pre-listing-xrp-holdings-by-60"
         }
       ]
     },
