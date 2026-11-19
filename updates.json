@@ -1,8 +1,8 @@
 {
  "meta": {
-  "fingerprint": "e380557c40387640",
-  "lastUpdatedISO": "2026-11-18T16:43:27-05:00",
-  "lastUpdatedET": "Nov 18, 2026, 4:43 PM ET",
+  "fingerprint": "d205b82f28a580f9",
+  "lastUpdatedISO": "2026-11-18T20:48:04-05:00",
+  "lastUpdatedET": "Nov 18, 2026, 8:48 PM ET",
   "dataDay": "2026-11-18"
  },
  "entries": [
@@ -10,7 +10,7 @@
    "date": "2026-11-18",
    "kind": "daily",
    "title": "Daily update · Wed Nov 18",
-   "updatedET": "Nov 18, 2026, 4:43 PM ET",
+   "updatedET": "Nov 18, 2026, 8:48 PM ET",
    "items": [
     "Biggest gains since the previous mark: #8 S&P 500 dip-buy +0.40%.",
     "Biggest drops: #3 Crypto Bollinger band reversion −0.86%; #10 9 EMA + VWAP intraday −0.45%; #2 Crypto z-score mean reversion −0.44%.",

@@ -1,8 +1,20 @@
 {
-  "generated_at": "2026-11-17T20:49:54-05:00",
+  "generated_at": "2026-11-18T20:49:51-05:00",
   "lookback_days": 16,
   "disclaimer": "Verification status as of last update; not financial advice.",
   "items": [
+    {
+      "date": "2026-11-17",
+      "headline": "XRP whales moved $270 million during the selloff. The coins didn't go to exchanges",
+      "summary": "A holder whose wallets trace back to a 2020 Bitstamp withdrawal has moved 281 million XRP into two vaults three weeks apart, a behavior indicative of custody rather than a large investor heading for the exit.",
+      "status": "Reported",
+      "sources": [
+        {
+          "name": "CoinDesk",
+          "url": "https://www.coindesk.com/markets/2026/11/18/xrp-whales-moved-usd270-million-during-the-selloff-the-coins-didn-t-go-to-exchanges"
+        }
+      ]
+    },
     {
       "date": "2026-11-10",
       "headline": "XRP Ledger Foundation quantum roadmap: post-quantum account keys",
@@ -32,10 +44,6 @@
         {
           "name": "SEC EDGAR",
           "url": "https://www.sec.gov/Archives/edgar/data/2092592/000162828026072223/0001628280-26-072223-index.htm"
-        },
-        {
-          "name": "CoinDesk",
-          "url": "https://www.coindesk.com/markets/2026/11/17/ripple-backed-evernorth-has-written-down-its-pre-listing-xrp-holdings-by-60"
         }
       ]
     },
