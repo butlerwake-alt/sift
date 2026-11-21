@@ -1211,6 +1211,10 @@
     {
      "date": "2026-11-18",
      "equity": 9739.13
+    },
+    {
+     "date": "2026-11-19",
+     "equity": 9570.58
     }
    ],
    "bench": [
@@ -1241,6 +1245,10 @@
     {
      "date": "2026-11-18",
      "equity": 9737.04
+    },
+    {
+     "date": "2026-11-19",
+     "equity": 9545.95
     }
    ]
   },
@@ -1273,6 +1281,10 @@
     {
      "date": "2026-11-18",
      "equity": 9841.86
+    },
+    {
+     "date": "2026-11-19",
+     "equity": 9720.76
     }
    ],
    "bench": [
@@ -1303,6 +1315,10 @@
     {
      "date": "2026-11-18",
      "equity": 9737.04
+    },
+    {
+     "date": "2026-11-19",
+     "equity": 9545.95
     }
    ]
   },
@@ -1347,6 +1363,10 @@
     {
      "date": "2026-11-19",
      "equity": 9179.57
+    },
+    {
+     "date": "2026-11-20",
+     "equity": 9179.57
     }
    ],
    "bench": [
@@ -1389,6 +1409,10 @@
     {
      "date": "2026-11-19",
      "equity": 8400.95
+    },
+    {
+     "date": "2026-11-20",
+     "equity": 7980.55
     }
    ]
   },
@@ -1421,6 +1445,10 @@
     {
      "date": "2026-11-18",
      "equity": 10012.82
+    },
+    {
+     "date": "2026-11-19",
+     "equity": 10034.91
     }
    ],
    "bench": [
@@ -1451,6 +1479,10 @@
     {
      "date": "2026-11-18",
      "equity": 9737.04
+    },
+    {
+     "date": "2026-11-19",
+     "equity": 9545.95
     }
    ]
   },
@@ -1495,6 +1527,10 @@
     {
      "date": "2026-11-19",
      "equity": 10000.0
+    },
+    {
+     "date": "2026-11-20",
+     "equity": 10000.0
     }
    ],
    "bench": [
@@ -1537,6 +1573,10 @@
     {
      "date": "2026-11-19",
      "equity": 8400.95
+    },
+    {
+     "date": "2026-11-20",
+     "equity": 7980.55
     }
    ]
   },
@@ -1581,6 +1621,10 @@
     {
      "date": "2026-11-19",
      "equity": 10000.0
+    },
+    {
+     "date": "2026-11-20",
+     "equity": 10000.0
     }
    ],
    "bench": [
@@ -1623,6 +1667,10 @@
     {
      "date": "2026-11-19",
      "equity": 8400.95
+    },
+    {
+     "date": "2026-11-20",
+     "equity": 7980.55
     }
    ]
   },
@@ -1655,6 +1703,10 @@
     {
      "date": "2026-11-18",
      "equity": 9739.13
+    },
+    {
+     "date": "2026-11-19",
+     "equity": 9570.58
     }
    ],
    "bench": [
@@ -1685,6 +1737,10 @@
     {
      "date": "2026-11-18",
      "equity": 9737.04
+    },
+    {
+     "date": "2026-11-19",
+     "equity": 9545.95
     }
    ]
   },
@@ -1713,6 +1769,10 @@
     {
      "date": "2026-11-18",
      "equity": 8847.19
+    },
+    {
+     "date": "2026-11-19",
+     "equity": 8847.19
     }
    ],
    "bench": [
@@ -1739,6 +1799,10 @@
     {
      "date": "2026-11-18",
      "equity": 9552.86
+    },
+    {
+     "date": "2026-11-19",
+     "equity": 9343.26
     }
    ]
   },
@@ -1767,6 +1831,10 @@
     {
      "date": "2026-11-18",
      "equity": 10000.0
+    },
+    {
+     "date": "2026-11-19",
+     "equity": 10000.0
     }
    ],
    "bench": [
@@ -1793,6 +1861,10 @@
     {
      "date": "2026-11-18",
      "equity": 9128.06
+    },
+    {
+     "date": "2026-11-19",
+     "equity": 8877.09
     }
    ]
   },
@@ -1821,6 +1893,10 @@
     {
      "date": "2026-11-18",
      "equity": 9747.56
+    },
+    {
+     "date": "2026-11-19",
+     "equity": 9710.3
     }
    ],
    "bench": [
@@ -1847,6 +1923,10 @@
     {
      "date": "2026-11-18",
      "equity": 9610.3
+    },
+    {
+     "date": "2026-11-19",
+     "equity": 9421.7
     }
    ]
   },
@@ -1875,6 +1955,10 @@
     {
      "date": "2026-11-18",
      "equity": 10116.54
+    },
+    {
+     "date": "2026-11-19",
+     "equity": 9454.84
     }
    ],
    "bench": [
@@ -1901,6 +1985,10 @@
     {
      "date": "2026-11-18",
      "equity": 9552.86
+    },
+    {
+     "date": "2026-11-19",
+     "equity": 9343.26
     }
    ]
   },
@@ -1945,6 +2033,10 @@
     {
      "date": "2026-11-19",
      "equity": 10000.0
+    },
+    {
+     "date": "2026-11-20",
+     "equity": 10000.0
     }
    ],
    "bench": [
@@ -1987,6 +2079,10 @@
     {
      "date": "2026-11-19",
      "equity": 8398.42
+    },
+    {
+     "date": "2026-11-20",
+     "equity": 7978.15
     }
    ]
   },
@@ -2031,6 +2127,10 @@
     {
      "date": "2026-11-19",
      "equity": 10000.0
+    },
+    {
+     "date": "2026-11-20",
+     "equity": 10000.0
     }
    ],
    "bench": [
@@ -2073,6 +2173,10 @@
     {
      "date": "2026-11-19",
      "equity": 8398.42
+    },
+    {
+     "date": "2026-11-20",
+     "equity": 7978.15
     }
    ]
   },
@@ -2117,6 +2221,10 @@
     {
      "date": "2026-11-19",
      "equity": 10000.0
+    },
+    {
+     "date": "2026-11-20",
+     "equity": 10000.0
     }
    ],
    "bench": [
@@ -2159,6 +2267,10 @@
     {
      "date": "2026-11-19",
      "equity": 8398.42
+    },
+    {
+     "date": "2026-11-20",
+     "equity": 7978.15
     }
    ]
   },
@@ -2203,6 +2315,10 @@
     {
      "date": "2026-11-19",
      "equity": 10000.0
+    },
+    {
+     "date": "2026-11-20",
+     "equity": 10000.0
     }
    ],
    "bench": [
@@ -2245,6 +2361,10 @@
     {
      "date": "2026-11-19",
      "equity": 8398.42
+    },
+    {
+     "date": "2026-11-20",
+     "equity": 7978.15
     }
    ]
   },
@@ -2289,6 +2409,10 @@
     {
      "date": "2026-11-19",
      "equity": 10000.0
+    },
+    {
+     "date": "2026-11-20",
+     "equity": 10000.0
     }
    ],
    "bench": [
@@ -2331,6 +2455,10 @@
     {
      "date": "2026-11-19",
      "equity": 8398.42
+    },
+    {
+     "date": "2026-11-20",
+     "equity": 7978.15
     }
    ]
   }
@@ -2509,9 +2637,9 @@
    "marks": 16,
    "daysLive": 15,
    "isNew": false,
-   "rank": 4,
+   "rank": 3,
    "prevRank": 4,
-   "rankMove": 0
+   "rankMove": 1
   },
   "2": {
    "n": 2,
@@ -3030,9 +3158,9 @@
    "marks": 15,
    "daysLive": 14,
    "isNew": false,
-   "rank": 15,
+   "rank": 14,
    "prevRank": 15,
-   "rankMove": 0
+   "rankMove": 1
   },
   "5": {
    "n": 5,
@@ -3198,9 +3326,9 @@
    "marks": 15,
    "daysLive": 14,
    "isNew": false,
-   "rank": 5,
+   "rank": 4,
    "prevRank": 5,
-   "rankMove": 0
+   "rankMove": 1
   },
   "6": {
    "n": 6,
@@ -3373,9 +3501,9 @@
    "marks": 16,
    "daysLive": 15,
    "isNew": false,
-   "rank": 6,
+   "rank": 5,
    "prevRank": 6,
-   "rankMove": 0
+   "rankMove": 1
   },
   "8": {
    "n": 8,
@@ -3899,9 +4027,9 @@
    "marks": 10,
    "daysLive": 11,
    "isNew": false,
-   "rank": 17,
+   "rank": 15,
    "prevRank": 17,
-   "rankMove": 0
+   "rankMove": 2
   },
   "11": {
    "n": 11,
@@ -3913,8 +4041,8 @@
    "universe": "About 100 of the largest US stocks (today's list). Daily. Up to 10 positions, $1,000 each.",
    "window": "Forward paper from the Nov 10, 2026 close. First review after 30 trading days.",
    "start": "2026-11-10",
-   "asOf": "2026-11-18",
-   "asOfLabel": "mark of Nov 18",
+   "asOf": "2026-11-19",
+   "asOfLabel": "mark of Nov 19",
    "points": [
     {
      "date": "2026-11-10",
@@ -3943,10 +4071,14 @@
     {
      "date": "2026-11-18",
      "equity": 9739.13
+    },
+    {
+     "date": "2026-11-19",
+     "equity": 9570.58
     }
    ],
-   "latest": 9739.13,
-   "change": "\u22122.61%",
+   "latest": 9570.58,
+   "change": "\u22124.29%",
    "benchmark": {
     "name": "SPY buy-and-hold",
     "color": "#f0c53a",
@@ -3978,6 +4110,10 @@
      {
       "date": "2026-11-18",
       "equity": 9737.04
+     },
+     {
+      "date": "2026-11-19",
+      "equity": 9545.95
      }
     ]
    },
@@ -3990,7 +4126,7 @@
     "This is the classic Turtle-style channel breakout, applied to a stock basket."
    ],
    "backtest": "Backtest Jan 2015 to Nov 10, 2026, $10,000, signal on the close and fill at the next close, costs 0.05% per side: CAGR +18.3%, maximum drawdown \u221223.2%, Sharpe 1.03, 746 closed trades, win rate 47%, profit factor 2.04. First half 2015\u20132020: CAGR +23.2%, Sharpe 1.38. Second half 2021\u20132026: CAGR +13.5%, drawdown \u221223.2%, Sharpe 0.74. SPY buy-and-hold, same second half: CAGR +14.2%, drawdown \u221224.5%, Sharpe 0.88. Up in 92% of calendar years. Cash earning 0%: second-half CAGR +13.4%.",
-   "forward": "$9,739.13 (\u22122.61%), holds AAPL, ABBV, ACN, ADP, COST, JNJ, KO, LLY, TMO, V as of the Nov 18 close. 10 fills logged, 0 sells. SPY buy-and-hold $9,737.04 (\u22122.63%). Regime that day: range.",
+   "forward": "$9,570.58 (\u22124.29%), holds AAPL, ABBV, ADP, COST, DIS, JNJ, KO, LLY, TMO, V as of the Nov 19 close. 12 fills logged, 1 sells. SPY buy-and-hold $9,545.95 (\u22124.54%). Regime that day: shock.",
    "risk": "Long stretches of small losing trades in choppy markets, and a 2022-style drawdown of about \u221223%.",
    "regime": {
     "best": "trend_up",
@@ -4020,13 +4156,13 @@
     "hasRecord": true
    },
    "stale": false,
-   "fwdPct": -2.6087,
-   "marks": 7,
-   "daysLive": 8,
+   "fwdPct": -4.2942,
+   "marks": 8,
+   "daysLive": 9,
    "isNew": false,
-   "rank": 19,
+   "rank": 18,
    "prevRank": 19,
-   "rankMove": 0
+   "rankMove": 1
   },
   "12": {
    "n": 12,
@@ -4038,8 +4174,8 @@
    "universe": "About 100 of the largest US stocks (today's list). Daily. Up to 10 positions, $1,000 each.",
    "window": "Forward paper from the Nov 10, 2026 close. First review after 30 trading days.",
    "start": "2026-11-10",
-   "asOf": "2026-11-18",
-   "asOfLabel": "mark of Nov 18",
+   "asOf": "2026-11-19",
+   "asOfLabel": "mark of Nov 19",
    "points": [
     {
      "date": "2026-11-10",
@@ -4068,10 +4204,14 @@
     {
      "date": "2026-11-18",
      "equity": 9841.86
+    },
+    {
+     "date": "2026-11-19",
+     "equity": 9720.76
     }
    ],
-   "latest": 9841.86,
-   "change": "\u22121.58%",
+   "latest": 9720.76,
+   "change": "\u22122.79%",
    "benchmark": {
     "name": "SPY buy-and-hold",
     "color": "#f0c53a",
@@ -4103,6 +4243,10 @@
      {
       "date": "2026-11-18",
       "equity": 9737.04
+     },
+     {
+      "date": "2026-11-19",
+      "equity": 9545.95
      }
     ]
    },
@@ -4114,7 +4258,7 @@
     "Ten slots of one tenth of equity. Fill at the next daily close. Cost 0.05% per side."
    ],
    "backtest": "Backtest Jan 2015 to Nov 10, 2026, $10,000, signal on the close and fill at the next close, costs 0.05% per side: CAGR +10.3%, maximum drawdown \u221221.0%, Sharpe 0.83, 1727 closed trades, win rate 40%, profit factor 1.38. First half 2015\u20132020: CAGR +11.0%, Sharpe 0.98. Second half 2021\u20132026: CAGR +9.5%, drawdown \u221221.0%, Sharpe 0.71. SPY buy-and-hold, same second half: CAGR +14.2%, drawdown \u221224.5%, Sharpe 0.88. Up in 83% of calendar years. Cash earning 0%: second-half CAGR +9.0%.",
-   "forward": "$9,841.86 (\u22121.58%), holds AAPL, ABBV, COST, DIS, KO, MA, PGR, SBUX as of the Nov 18 close. 14 fills logged, 3 sells. SPY buy-and-hold $9,737.04 (\u22122.63%). Regime that day: range.",
+   "forward": "$9,720.76 (\u22122.79%), holds AAPL, COST, DIS, KO, SBUX as of the Nov 19 close. 17 fills logged, 6 sells. SPY buy-and-hold $9,545.95 (\u22124.54%). Regime that day: shock.",
    "risk": "Win rate under 40%: it lives on a few big winners. False breakouts cluster in sell-offs.",
    "regime": {
     "best": "trend_up and range",
@@ -4145,9 +4289,9 @@
     "hasRecord": true
    },
    "stale": false,
-   "fwdPct": -1.5814,
-   "marks": 7,
-   "daysLive": 8,
+   "fwdPct": -2.7924,
+   "marks": 8,
+   "daysLive": 9,
    "isNew": false,
    "rank": 16,
    "prevRank": 16,
@@ -4163,8 +4307,8 @@
    "universe": "BTC only, daily closes.",
    "window": "Forward paper from the Nov 10, 2026 close. First review after 30 trading days.",
    "start": "2026-11-10",
-   "asOf": "2026-11-19",
-   "asOfLabel": "mark of Nov 19",
+   "asOf": "2026-11-20",
+   "asOfLabel": "mark of Nov 20",
    "points": [
     {
      "date": "2026-11-10",
@@ -4204,6 +4348,10 @@
     },
     {
      "date": "2026-11-19",
+     "equity": 9179.57
+    },
+    {
+     "date": "2026-11-20",
      "equity": 9179.57
     }
    ],
@@ -4252,6 +4400,10 @@
      {
       "date": "2026-11-19",
       "equity": 8400.95
+     },
+     {
+      "date": "2026-11-20",
+      "equity": 7980.55
      }
     ]
    },
@@ -4262,7 +4414,7 @@
     "Fill at the next daily close. Cost 0.25% per side."
    ],
    "backtest": "Backtest Nov 2018 to Nov 9, 2026, $10,000, signal on the close and fill at the next close, costs 0.25% per side: CAGR +32.2%, maximum drawdown \u221256.1%, Sharpe 0.85, 30 closed trades, win rate 37%, profit factor 5.44. First half Nov 2018\u20132021: CAGR +57.4%, Sharpe 1.09. Second half 2022\u20132026: CAGR +17.9%, drawdown \u221236.6%, Sharpe 0.66. BTC buy-and-hold, same second half: CAGR +10.5%, drawdown \u221266.9%, Sharpe 0.45. Up in 75% of calendar years.",
-   "forward": "$9,179.57 (\u22128.20%), 100% cash as of the Nov 19 close. 2 fills logged, 1 sells. BTC buy-and-hold $8,400.95 (\u221215.99%). Regime that day: range.",
+   "forward": "$9,179.57 (\u22128.20%), 100% cash as of the Nov 20 close. 2 fills logged, 1 sells. BTC buy-and-hold $7,980.55 (\u221220.19%). Regime that day: risk_off.",
    "risk": "Whipsaws around the line, and a \u221236.6% drawdown even in the second half. It is the simple bitcoin control for the hybrids below.",
    "regime": {
     "best": "trend_up",
@@ -4296,8 +4448,8 @@
    },
    "stale": false,
    "fwdPct": -8.2043,
-   "marks": 10,
-   "daysLive": 9,
+   "marks": 11,
+   "daysLive": 10,
    "isNew": false,
    "rank": 21,
    "prevRank": 21,
@@ -4313,8 +4465,8 @@
    "universe": "The 20 strongest of about 100 large US stocks by 12-month momentum. Daily. Up to 10 positions, $1,000 each.",
    "window": "Forward paper from the Nov 10, 2026 close. First review after 30 trading days.",
    "start": "2026-11-10",
-   "asOf": "2026-11-18",
-   "asOfLabel": "mark of Nov 18",
+   "asOf": "2026-11-19",
+   "asOfLabel": "mark of Nov 19",
    "points": [
     {
      "date": "2026-11-10",
@@ -4343,10 +4495,14 @@
     {
      "date": "2026-11-18",
      "equity": 10012.82
+    },
+    {
+     "date": "2026-11-19",
+     "equity": 10034.91
     }
    ],
-   "latest": 10012.82,
-   "change": "+0.13%",
+   "latest": 10034.91,
+   "change": "+0.35%",
    "benchmark": {
     "name": "SPY buy-and-hold",
     "color": "#f0c53a",
@@ -4378,6 +4534,10 @@
      {
       "date": "2026-11-18",
       "equity": 9737.04
+     },
+     {
+      "date": "2026-11-19",
+      "equity": 9545.95
      }
     ]
    },
@@ -4389,7 +4549,7 @@
     "New buys only when the SPY regime is trend_up or range. Ten slots of one tenth of equity. Fill at the next close. Cost 0.05% per side."
    ],
    "backtest": "Backtest Jan 2015 to Nov 10, 2026, $10,000, signal on the close and fill at the next close, costs 0.05% per side: CAGR +11.8%, maximum drawdown \u221213.3%, Sharpe 1.13, 1848 closed trades, win rate 61%, profit factor 1.65. First half 2015\u20132020: CAGR +6.1%, Sharpe 0.78. Second half 2021\u20132026: CAGR +18.0%, drawdown \u221213.3%, Sharpe 1.41. SPY buy-and-hold, same second half: CAGR +14.2%, drawdown \u221224.5%, Sharpe 0.88. Up in 83% of calendar years. Cash earning 0%: second-half CAGR +15.3%.",
-   "forward": "$10,012.82 (+0.13%), holds CRWD, DE, MRK, PANW as of the Nov 18 close. 14 fills logged, 5 sells. SPY buy-and-hold $9,737.04 (\u22122.63%). Regime that day: range.",
+   "forward": "$10,034.91 (+0.35%), holds COP, CVX, DE, MRK, XOM as of the Nov 19 close. 19 fills logged, 7 sells. SPY buy-and-hold $9,545.95 (\u22124.54%). Regime that day: shock.",
    "risk": "It is in cash about three quarters of the time, so forward results may take weeks to show anything. A short sharp crash can still hit open positions.",
    "regime": {
     "best": "trend_up and range",
@@ -4423,13 +4583,13 @@
     "hasRecord": true
    },
    "stale": false,
-   "fwdPct": 0.1282,
-   "marks": 7,
-   "daysLive": 8,
+   "fwdPct": 0.3491,
+   "marks": 8,
+   "daysLive": 9,
    "isNew": false,
-   "rank": 3,
+   "rank": 2,
    "prevRank": 2,
-   "rankMove": -1
+   "rankMove": 0
   },
   "15": {
    "n": 15,
@@ -4441,8 +4601,8 @@
    "universe": "Top 10 coins excluding stablecoins: BTC, ETH, XRP, BNB, SOL, DOGE, ADA, TRX, LINK, AVAX. Daily. Up to 5 positions, $2,000 each.",
    "window": "Forward paper from the Nov 10, 2026 close. First review after 30 trading days.",
    "start": "2026-11-10",
-   "asOf": "2026-11-19",
-   "asOfLabel": "mark of Nov 19",
+   "asOf": "2026-11-20",
+   "asOfLabel": "mark of Nov 20",
    "points": [
     {
      "date": "2026-11-10",
@@ -4482,6 +4642,10 @@
     },
     {
      "date": "2026-11-19",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-20",
      "equity": 10000.0
     }
    ],
@@ -4530,6 +4694,10 @@
      {
       "date": "2026-11-19",
       "equity": 8400.95
+     },
+     {
+      "date": "2026-11-20",
+      "equity": 7980.55
      }
     ]
    },
@@ -4540,7 +4708,7 @@
     "New buys only when the BTC regime is trend_up or range. Five slots of one fifth of equity. Fill at the next daily close. Cost 0.25% per side."
    ],
    "backtest": "Backtest Nov 2018 to Nov 9, 2026, $10,000, signal on the close and fill at the next close, costs 0.25% per side: CAGR +83.0%, maximum drawdown \u221232.5%, Sharpe 1.59, 301 closed trades, win rate 50%, profit factor 3.61. First half Nov 2018\u20132021: CAGR +219.0%, Sharpe 2.25. Second half 2022\u20132026: CAGR +27.4%, drawdown \u221232.5%, Sharpe 0.96. BTC buy-and-hold, same second half: CAGR +10.5%, drawdown \u221266.9%, Sharpe 0.45. Up in 100% of calendar years.",
-   "forward": "$10,000.00 (0.00%), 100% cash as of the Nov 19 close. 0 fills logged, 0 sells. BTC buy-and-hold $8,400.95 (\u221215.99%). Regime that day: range.",
+   "forward": "$10,000.00 (0.00%), 100% cash as of the Nov 20 close. 0 fills logged, 0 sells. BTC buy-and-hold $7,980.55 (\u221220.19%). Regime that day: risk_off.",
    "risk": "The 2021 alt-coin boom dominates the full-sample figure. The second half is the more honest number.",
    "regime": {
     "best": "trend_up",
@@ -4575,12 +4743,12 @@
    },
    "stale": false,
    "fwdPct": 0.0,
-   "marks": 10,
-   "daysLive": 9,
+   "marks": 11,
+   "daysLive": 10,
    "isNew": false,
-   "rank": 7,
+   "rank": 6,
    "prevRank": 7,
-   "rankMove": 0
+   "rankMove": 1
   },
   "16": {
    "n": 16,
@@ -4592,8 +4760,8 @@
    "universe": "Top 10 coins excluding stablecoins. Weekly rebalance. Three positions, one third each.",
    "window": "Forward paper from the Nov 10, 2026 close. First review after 30 trading days.",
    "start": "2026-11-10",
-   "asOf": "2026-11-19",
-   "asOfLabel": "mark of Nov 19",
+   "asOf": "2026-11-20",
+   "asOfLabel": "mark of Nov 20",
    "points": [
     {
      "date": "2026-11-10",
@@ -4633,6 +4801,10 @@
     },
     {
      "date": "2026-11-19",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-20",
      "equity": 10000.0
     }
    ],
@@ -4681,6 +4853,10 @@
      {
       "date": "2026-11-19",
       "equity": 8400.95
+     },
+     {
+      "date": "2026-11-20",
+      "equity": 7980.55
      }
     ]
    },
@@ -4692,7 +4868,7 @@
     "Fill at the next daily close. Cost 0.25% per side."
    ],
    "backtest": "Backtest Nov 2018 to Nov 9, 2026, $10,000, signal on the close and fill at the next close, costs 0.25% per side: CAGR +99.8%, maximum drawdown \u221260.0%, Sharpe 1.38, 209 closed trades, win rate 50%, profit factor 3.39. First half Nov 2018\u20132021: CAGR +319.6%, Sharpe 2.08. Second half 2022\u20132026: CAGR +23.1%, drawdown \u221252.4%, Sharpe 0.68. BTC buy-and-hold, same second half: CAGR +10.5%, drawdown \u221266.9%, Sharpe 0.45. Up in 75% of calendar years.",
-   "forward": "$10,000.00 (0.00%), 100% cash as of the Nov 19 close. 0 fills logged, 0 sells. BTC buy-and-hold $8,400.95 (\u221215.99%). Regime that day: range.",
+   "forward": "$10,000.00 (0.00%), 100% cash as of the Nov 20 close. 0 fills logged, 0 sells. BTC buy-and-hold $7,980.55 (\u221220.19%). Regime that day: risk_off.",
    "risk": "The deepest drawdown of the set: \u221252.4% in the second half. Weekly checks mean it can sit through a fast crash for days.",
    "regime": {
     "best": "trend_up and range",
@@ -4727,12 +4903,12 @@
    },
    "stale": false,
    "fwdPct": 0.0,
-   "marks": 10,
-   "daysLive": 9,
+   "marks": 11,
+   "daysLive": 10,
    "isNew": false,
-   "rank": 8,
+   "rank": 7,
    "prevRank": 8,
-   "rankMove": 0
+   "rankMove": 1
   },
   "17": {
    "n": 17,
@@ -4744,8 +4920,8 @@
    "universe": "The stock and ETF strategies above plus SPY, GLD/IEF and cash. Daily regime check. The table is re-picked once a year.",
    "window": "Forward paper from the Nov 10, 2026 close. First review after 30 trading days.",
    "start": "2026-11-10",
-   "asOf": "2026-11-18",
-   "asOfLabel": "mark of Nov 18",
+   "asOf": "2026-11-19",
+   "asOfLabel": "mark of Nov 19",
    "points": [
     {
      "date": "2026-11-10",
@@ -4774,10 +4950,14 @@
     {
      "date": "2026-11-18",
      "equity": 9739.13
+    },
+    {
+     "date": "2026-11-19",
+     "equity": 9570.58
     }
    ],
-   "latest": 9739.13,
-   "change": "\u22122.61%",
+   "latest": 9570.58,
+   "change": "\u22124.29%",
    "benchmark": {
     "name": "SPY buy-and-hold",
     "color": "#f0c53a",
@@ -4809,6 +4989,10 @@
      {
       "date": "2026-11-18",
       "equity": 9737.04
+     },
+     {
+      "date": "2026-11-19",
+      "equity": 9545.95
      }
     ]
    },
@@ -4821,7 +5005,7 @@
     "Each day, hold whatever the chosen sleeve holds. Fill at the next close. Cost 0.05% per side."
    ],
    "backtest": "Backtest Jan 2017 to Nov 10, 2026 (walk-forward), $10,000, signal on the close and fill at the next close, costs 0.05% per side: CAGR +16.8%, maximum drawdown \u221239.4%, Sharpe 0.8, 1042 closed trades, win rate 51%, profit factor 1.75. First half 2017\u20132020: CAGR +29.0%, Sharpe 1.26. Second half 2021\u20132026: CAGR +9.0%, drawdown \u221239.4%, Sharpe 0.49. SPY buy-and-hold, same second half: CAGR +14.2%, drawdown \u221224.5%, Sharpe 0.88. Up in 80% of calendar years.",
-   "forward": "$9,739.13 (\u22122.61%), holds AAPL, ABBV, ACN, ADP, COST, JNJ, KO, LLY, TMO, V as of the Nov 18 close. 10 fills logged, 0 sells. SPY buy-and-hold $9,737.04 (\u22122.63%). Regime that day: range.",
+   "forward": "$9,570.58 (\u22124.29%), holds AAPL, ABBV, ADP, COST, DIS, JNJ, KO, LLY, TMO, V as of the Nov 19 close. 12 fills logged, 1 sells. SPY buy-and-hold $9,545.95 (\u22124.54%). Regime that day: shock.",
    "risk": "It trailed plain SPY buy-and-hold in the second half and had a deeper drawdown (\u221239.4%). It is here to test whether regime switching adds anything, not because it already wins.",
    "regime": {
     "best": "trend_up and risk_off",
@@ -4851,13 +5035,13 @@
     "hasRecord": true
    },
    "stale": false,
-   "fwdPct": -2.6087,
-   "marks": 7,
-   "daysLive": 8,
+   "fwdPct": -4.2942,
+   "marks": 8,
+   "daysLive": 9,
    "isNew": false,
-   "rank": 20,
+   "rank": 19,
    "prevRank": 20,
-   "rankMove": 0
+   "rankMove": 1
   },
   "18": {
    "n": 18,
@@ -4869,8 +5053,8 @@
    "universe": "TQQQ (3x daily Nasdaq-100 ETF) or cash; signal from QQQ. Daily check. One position, all-in or all-out.",
    "window": "Forward paper from the Nov 11, 2026 close. First review after 30 trading days.",
    "start": "2026-11-11",
-   "asOf": "2026-11-18",
-   "asOfLabel": "mark of Nov 18",
+   "asOf": "2026-11-19",
+   "asOfLabel": "mark of Nov 19",
    "points": [
     {
      "date": "2026-11-11",
@@ -4894,6 +5078,10 @@
     },
     {
      "date": "2026-11-18",
+     "equity": 8847.19
+    },
+    {
+     "date": "2026-11-19",
      "equity": 8847.19
     }
    ],
@@ -4926,12 +5114,16 @@
      {
       "date": "2026-11-18",
       "equity": 9552.86
+     },
+     {
+      "date": "2026-11-19",
+      "equity": 9343.26
      }
     ]
    },
    "label": "proven in backtest",
    "riskLevel": "Aggressive",
-   "forward": "$8,847.19 (\u221211.53%), 100% cash as of the Nov 18 close. 2 fills logged, 1 sells. QQQ buy-and-hold $9,552.86 (\u22124.47%). Regime that day: range.",
+   "forward": "$8,847.19 (\u221211.53%), 100% cash as of the Nov 19 close. 2 fills logged, 1 sells. QQQ buy-and-hold $9,343.26 (\u22126.57%). Regime that day: shock.",
    "hypothesis": "Leveraged ETFs lose most of their value in long, choppy bear markets. Holding them only above the 200-day average (Gayed & Bilello, 'Leverage for the Long Run', 2016) is meant to keep the 3x upside in bull markets and step aside before the worst of the decay.",
    "rules": [
     "Signal: QQQ daily close versus its 200-day simple moving average.",
@@ -4970,8 +5162,8 @@
    },
    "stale": false,
    "fwdPct": -11.5281,
-   "marks": 6,
-   "daysLive": 7,
+   "marks": 7,
+   "daysLive": 8,
    "isNew": false,
    "rank": 22,
    "prevRank": 22,
@@ -4987,8 +5179,8 @@
    "universe": "SOXL (3x daily semiconductor ETF) or cash; signal from SOXX. Daily check. One position, all-in or all-out.",
    "window": "Forward paper from the Nov 11, 2026 close. First review after 30 trading days.",
    "start": "2026-11-11",
-   "asOf": "2026-11-18",
-   "asOfLabel": "mark of Nov 18",
+   "asOf": "2026-11-19",
+   "asOfLabel": "mark of Nov 19",
    "points": [
     {
      "date": "2026-11-11",
@@ -5012,6 +5204,10 @@
     },
     {
      "date": "2026-11-18",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-19",
      "equity": 10000.0
     }
    ],
@@ -5044,12 +5240,16 @@
      {
       "date": "2026-11-18",
       "equity": 9128.06
+     },
+     {
+      "date": "2026-11-19",
+      "equity": 8877.09
      }
     ]
    },
    "label": "proven in backtest",
    "riskLevel": "Aggressive",
-   "forward": "$10,000.00 (0.00%), 100% cash as of the Nov 18 close. 0 fills logged, 0 sells. SOXX buy-and-hold $9,128.06 (\u22128.72%). Regime that day: range.",
+   "forward": "$10,000.00 (0.00%), 100% cash as of the Nov 19 close. 0 fills logged, 0 sells. SOXX buy-and-hold $8,877.09 (\u221211.23%). Regime that day: shock.",
    "hypothesis": "Chip stocks trend harder than the overall market. The same 200-day filter is tested on the most volatile sector, to see if trend-following keeps a 3x chip fund survivable.",
    "rules": [
     "Signal: SOXX daily close versus its 200-day simple moving average.",
@@ -5088,12 +5288,12 @@
    },
    "stale": false,
    "fwdPct": 0.0,
-   "marks": 6,
-   "daysLive": 7,
+   "marks": 7,
+   "daysLive": 8,
    "isNew": false,
-   "rank": 9,
+   "rank": 8,
    "prevRank": 9,
-   "rankMove": 0
+   "rankMove": 1
   },
   "20": {
    "n": 20,
@@ -5105,8 +5305,8 @@
    "universe": "About 100 of the largest US stocks (today's list). Monthly rebalance. Ten positions, one tenth each. Cash when SPY is under its 200-day average.",
    "window": "Forward paper from the Nov 11, 2026 close. First review after 30 trading days.",
    "start": "2026-11-11",
-   "asOf": "2026-11-18",
-   "asOfLabel": "mark of Nov 18",
+   "asOf": "2026-11-19",
+   "asOfLabel": "mark of Nov 19",
    "points": [
     {
      "date": "2026-11-11",
@@ -5131,10 +5331,14 @@
     {
      "date": "2026-11-18",
      "equity": 9747.56
+    },
+    {
+     "date": "2026-11-19",
+     "equity": 9710.3
     }
    ],
-   "latest": 9747.56,
-   "change": "\u22122.52%",
+   "latest": 9710.3,
+   "change": "\u22122.90%",
    "benchmark": {
     "name": "SPY buy-and-hold",
     "color": "#f0c53a",
@@ -5162,12 +5366,16 @@
      {
       "date": "2026-11-18",
       "equity": 9610.3
+     },
+     {
+      "date": "2026-11-19",
+      "equity": 9421.7
      }
     ]
    },
    "label": "proven in backtest",
    "riskLevel": "Aggressive",
-   "forward": "$9,747.56 (\u22122.52%), holds ADI, ADP, COP, CRWD, DE, MRK, PANW, PGR, TXN, UNP as of the Nov 18 close. 10 fills logged, 0 sells. SPY buy-and-hold $9,610.30 (\u22123.90%). Regime that day: range.",
+   "forward": "$9,710.30 (\u22122.90%), holds ADI, ADP, COP, CRWD, DE, MRK, PANW, PGR, TXN, UNP as of the Nov 19 close. 10 fills logged, 0 sells. SPY buy-and-hold $9,421.70 (\u22125.78%). Regime that day: shock.",
    "hypothesis": "Plain momentum crashes when the market turns, because high-beta winners fall hardest. Ranking on the part of each return the market does not explain (Blitz, Huij & Martens 2011) aims for a steadier trend signal that fewer funds trade.",
    "rules": [
     "Each day, fit each stock's daily returns to SPY over the prior 252 days (alpha and beta). The residual is the part SPY does not explain.",
@@ -5207,13 +5415,13 @@
     "market": "stocks"
    },
    "stale": false,
-   "fwdPct": -2.5244,
-   "marks": 6,
-   "daysLive": 7,
+   "fwdPct": -2.897,
+   "marks": 7,
+   "daysLive": 8,
    "isNew": false,
-   "rank": 18,
+   "rank": 17,
    "prevRank": 18,
-   "rankMove": 0
+   "rankMove": 1
   },
   "21": {
    "n": 21,
@@ -5225,8 +5433,8 @@
    "universe": "TQQQ (3x daily Nasdaq-100 ETF) or cash; signal from QQQ's daily high, low and close. In the market about a third of the time.",
    "window": "Forward paper from the Nov 11, 2026 close. First review after 30 trading days.",
    "start": "2026-11-11",
-   "asOf": "2026-11-18",
-   "asOfLabel": "mark of Nov 18",
+   "asOf": "2026-11-19",
+   "asOfLabel": "mark of Nov 19",
    "points": [
     {
      "date": "2026-11-11",
@@ -5251,10 +5459,14 @@
     {
      "date": "2026-11-18",
      "equity": 10116.54
+    },
+    {
+     "date": "2026-11-19",
+     "equity": 9454.84
     }
    ],
-   "latest": 10116.54,
-   "change": "+1.17%",
+   "latest": 9454.84,
+   "change": "\u22125.45%",
    "benchmark": {
     "name": "QQQ buy-and-hold",
     "color": "#f0c53a",
@@ -5282,12 +5494,16 @@
      {
       "date": "2026-11-18",
       "equity": 9552.86
+     },
+     {
+      "date": "2026-11-19",
+      "equity": 9343.26
      }
     ]
    },
    "label": "proven in backtest",
    "riskLevel": "Aggressive",
-   "forward": "$10,116.54 (+1.17%), holds TQQQ as of the Nov 18 close. 1 fills logged, 0 sells. QQQ buy-and-hold $9,552.86 (\u22124.47%). Regime that day: range.",
+   "forward": "$9,454.84 (\u22125.45%), holds TQQQ as of the Nov 19 close. 1 fills logged, 0 sells. QQQ buy-and-hold $9,343.26 (\u22126.57%). Regime that day: shock.",
    "hypothesis": "Index ETFs that close near the day's low tend to bounce over the next few days (internal bar strength, Pagonidis 2014). Trading the bounce through a 3x fund for a few days at a time aims to get the leverage without holding it through long declines.",
    "rules": [
     "IBS = (close \u2212 low) / (high \u2212 low) of QQQ for the day.",
@@ -5327,13 +5543,13 @@
     "market": "stocks"
    },
    "stale": false,
-   "fwdPct": 1.1654,
-   "marks": 6,
-   "daysLive": 7,
+   "fwdPct": -5.4516,
+   "marks": 7,
+   "daysLive": 8,
    "isNew": false,
-   "rank": 2,
+   "rank": 20,
    "prevRank": 1,
-   "rankMove": -1
+   "rankMove": -19
   },
   "22": {
    "n": 22,
@@ -5345,8 +5561,8 @@
    "universe": "Top 10 coins excluding stablecoins: BTC, ETH, XRP, BNB, SOL, DOGE, ADA, TRX, LINK, AVAX. Weekly rebalance. Often partly in cash.",
    "window": "Forward paper from the Nov 10, 2026 UTC daily close (the latest completed crypto close at launch). First review after 30 days.",
    "start": "2026-11-10",
-   "asOf": "2026-11-19",
-   "asOfLabel": "mark of Nov 19",
+   "asOf": "2026-11-20",
+   "asOfLabel": "mark of Nov 20",
    "points": [
     {
      "date": "2026-11-10",
@@ -5386,6 +5602,10 @@
     },
     {
      "date": "2026-11-19",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-20",
      "equity": 10000.0
     }
    ],
@@ -5434,12 +5654,16 @@
      {
       "date": "2026-11-19",
       "equity": 8398.42
+     },
+     {
+      "date": "2026-11-20",
+      "equity": 7978.15
      }
     ]
    },
    "label": "new forward-test hybrid",
    "riskLevel": "Aggressive",
-   "forward": "$10,000.00 (0.00%), 100% cash as of the Nov 19 close. 0 fills logged, 0 sells. BTC buy-and-hold $8,398.42 (\u221216.02%). Regime that day: range.",
+   "forward": "$10,000.00 (0.00%), 100% cash as of the Nov 20 close. 0 fills logged, 0 sells. BTC buy-and-hold $7,978.15 (\u221220.22%). Regime that day: risk_off.",
    "hypothesis": "Time-series momentum works across markets (Moskowitz, Ooi & Pedersen 2012) and crypto shows strong short-horizon momentum (Liu & Tsyvinski 2021). Scaling each coin by its volatility and adding the BTC regime gate tests whether that trend can be held without the usual \u221260% to \u221280% crypto drawdowns.",
    "rules": [
     "Every 7 days: for each coin, the 28-day return and the 30-day volatility (annualized).",
@@ -5482,12 +5706,12 @@
    },
    "stale": false,
    "fwdPct": 0.0,
-   "marks": 10,
-   "daysLive": 9,
+   "marks": 11,
+   "daysLive": 10,
    "isNew": false,
-   "rank": 10,
+   "rank": 9,
    "prevRank": 10,
-   "rankMove": 0
+   "rankMove": 1
   },
   "23": {
    "n": 23,
@@ -5499,8 +5723,8 @@
    "universe": "BTC, ETH, SOL, BNB, XRP. Daily. Up to 5 positions, one fifth each. In the market only about 8% of the time.",
    "window": "Forward paper from the Nov 10, 2026 UTC daily close (the latest completed crypto close at launch). First review after 30 days.",
    "start": "2026-11-10",
-   "asOf": "2026-11-19",
-   "asOfLabel": "mark of Nov 19",
+   "asOf": "2026-11-20",
+   "asOfLabel": "mark of Nov 20",
    "points": [
     {
      "date": "2026-11-10",
@@ -5540,6 +5764,10 @@
     },
     {
      "date": "2026-11-19",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-20",
      "equity": 10000.0
     }
    ],
@@ -5588,6 +5816,10 @@
      {
       "date": "2026-11-19",
       "equity": 8398.42
+     },
+     {
+      "date": "2026-11-20",
+      "equity": 7978.15
      }
     ]
    },
@@ -5599,7 +5831,7 @@
     "Five slots of one fifth each. Fill at the next daily close. Cost 0.25% per side."
    ],
    "backtest": "Backtest Nov 2018 to Nov 10, 2026, $10,000, signal on the close and fill at the next close, costs 0.25% per side, uninvested cash earns 0%: CAGR +27.6%, maximum drawdown \u221213.4%, Sharpe 1.52, 235 closed trades, win rate 63%, profit factor 3.09. First half Nov 2018\u20132021: CAGR +49.1%, Sharpe 1.9. Second half 2022\u20132026: CAGR +15.3%, drawdown \u221213.4%, Sharpe 1.22. BTC buy-and-hold, same second half: CAGR +10.0%, drawdown \u221266.9%, Sharpe 0.44. Up in 75% of calendar years. Invested 8% of the time on average.",
-   "forward": "$10,000.00 (0.00%), 100% cash as of the Nov 19 close. 0 fills logged, 0 sells. BTC buy-and-hold $8,398.42 (\u221216.02%). Regime that day: range.",
+   "forward": "$10,000.00 (0.00%), 100% cash as of the Nov 20 close. 0 fills logged, 0 sells. BTC buy-and-hold $7,978.15 (\u221220.22%). Regime that day: risk_off.",
    "risk": "It is in cash most of the time, so long flat stretches are normal (2022 was 0%). A burst can reverse overnight; one bad week can cost 10%+. 2021 (+136%) dominates the full-sample figure.",
    "regime": {
     "best": "trend_up and range",
@@ -5636,12 +5868,12 @@
    },
    "stale": false,
    "fwdPct": 0.0,
-   "marks": 10,
-   "daysLive": 9,
+   "marks": 11,
+   "daysLive": 10,
    "isNew": false,
-   "rank": 11,
+   "rank": 10,
    "prevRank": 11,
-   "rankMove": 0
+   "rankMove": 1
   },
   "24": {
    "n": 24,
@@ -5653,8 +5885,8 @@
    "universe": "Top 10 coins excluding stablecoins: BTC, ETH, XRP, BNB, SOL, DOGE, ADA, TRX, LINK, AVAX. Weekly rebalance. Up to 3 positions, one third each.",
    "window": "Forward paper from the Nov 10, 2026 UTC daily close (the latest completed crypto close at launch). First review after 30 days.",
    "start": "2026-11-10",
-   "asOf": "2026-11-19",
-   "asOfLabel": "mark of Nov 19",
+   "asOf": "2026-11-20",
+   "asOfLabel": "mark of Nov 20",
    "points": [
     {
      "date": "2026-11-10",
@@ -5694,6 +5926,10 @@
     },
     {
      "date": "2026-11-19",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-20",
      "equity": 10000.0
     }
    ],
@@ -5742,6 +5978,10 @@
      {
       "date": "2026-11-19",
       "equity": 8398.42
+     },
+     {
+      "date": "2026-11-20",
+      "equity": 7978.15
      }
     ]
    },
@@ -5753,7 +5993,7 @@
     "Fill at the next daily close. Cost 0.25% per side."
    ],
    "backtest": "Backtest Nov 2018 to Nov 10, 2026, $10,000, signal on the close and fill at the next close, costs 0.25% per side, uninvested cash earns 0%: CAGR +72.6%, maximum drawdown \u221231.1%, Sharpe 1.52, 120 closed trades, win rate 52%, profit factor 4.24. First half Nov 2018\u20132021: CAGR +174.5%, Sharpe 2.11. Second half 2022\u20132026: CAGR +27.5%, drawdown \u221231.1%, Sharpe 0.98. BTC buy-and-hold, same second half: CAGR +10.0%, drawdown \u221266.9%, Sharpe 0.44. Up in 62% of calendar years. Invested 28% of the time on average.",
-   "forward": "$10,000.00 (0.00%), 100% cash as of the Nov 19 close. 0 fills logged, 0 sells. BTC buy-and-hold $8,398.42 (\u221216.02%). Regime that day: range.",
+   "forward": "$10,000.00 (0.00%), 100% cash as of the Nov 20 close. 0 fills logged, 0 sells. BTC buy-and-hold $7,978.15 (\u221220.22%). Regime that day: risk_off.",
    "risk": "The 2020\u20132021 bull run dominates the full-sample figure (+539% in 2021). It lost a little in 2025 and so far in 2026. Coins near highs can drop 30% in days, and weekly checks react slowly.",
    "regime": {
     "best": "trend_up",
@@ -5789,12 +6029,12 @@
    },
    "stale": false,
    "fwdPct": 0.0,
-   "marks": 10,
-   "daysLive": 9,
+   "marks": 11,
+   "daysLive": 10,
    "isNew": false,
-   "rank": 12,
+   "rank": 11,
    "prevRank": 12,
-   "rankMove": 0
+   "rankMove": 1
   },
   "25": {
    "n": 25,
@@ -5806,8 +6046,8 @@
    "universe": "Top 10 coins excluding stablecoins: BTC, ETH, XRP, BNB, SOL, DOGE, ADA, TRX, LINK, AVAX. Daily. Up to 5 positions, one fifth each.",
    "window": "Forward paper from the Nov 10, 2026 UTC daily close (the latest completed crypto close at launch). First review after 30 days.",
    "start": "2026-11-10",
-   "asOf": "2026-11-19",
-   "asOfLabel": "mark of Nov 19",
+   "asOf": "2026-11-20",
+   "asOfLabel": "mark of Nov 20",
    "points": [
     {
      "date": "2026-11-10",
@@ -5847,6 +6087,10 @@
     },
     {
      "date": "2026-11-19",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-20",
      "equity": 10000.0
     }
    ],
@@ -5895,6 +6139,10 @@
      {
       "date": "2026-11-19",
       "equity": 8398.42
+     },
+     {
+      "date": "2026-11-20",
+      "equity": 7978.15
      }
     ]
    },
@@ -5906,7 +6154,7 @@
     "Five slots of one fifth each. Fill at the next daily close. Cost 0.25% per side."
    ],
    "backtest": "Backtest Nov 2018 to Nov 10, 2026, $10,000, signal on the close and fill at the next close, costs 0.25% per side, uninvested cash earns 0%: CAGR +25.6%, maximum drawdown \u221236.8%, Sharpe 0.99, 202 closed trades, win rate 41%, profit factor 2.71. First half Nov 2018\u20132021: CAGR +37.8%, Sharpe 1.13. Second half 2022\u20132026: CAGR +18.3%, drawdown \u221219.9%, Sharpe 0.89. BTC buy-and-hold, same second half: CAGR +10.0%, drawdown \u221266.9%, Sharpe 0.44. Up in 75% of calendar years. Invested 18% of the time on average.",
-   "forward": "$10,000.00 (0.00%), 100% cash as of the Nov 19 close. 0 fills logged, 0 sells. BTC buy-and-hold $8,398.42 (\u221216.02%). Regime that day: range.",
+   "forward": "$10,000.00 (0.00%), 100% cash as of the Nov 20 close. 0 fills logged, 0 sells. BTC buy-and-hold $7,978.15 (\u221220.22%). Regime that day: risk_off.",
    "risk": "Most breakouts fail (win rate about 41%); profits come from a few big runs. 2019 lost 23%. Range regimes lost money in the backtest.",
    "regime": {
     "best": "trend_up",
@@ -5942,12 +6190,12 @@
    },
    "stale": false,
    "fwdPct": 0.0,
-   "marks": 10,
-   "daysLive": 9,
+   "marks": 11,
+   "daysLive": 10,
    "isNew": false,
-   "rank": 13,
+   "rank": 12,
    "prevRank": 13,
-   "rankMove": 0
+   "rankMove": 1
   },
   "26": {
    "n": 26,
@@ -5959,8 +6207,8 @@
    "universe": "BTC and ETH. Weekly rebalance. Half in each coin that qualifies.",
    "window": "Forward paper from the Nov 10, 2026 UTC daily close (the latest completed crypto close at launch). First review after 30 days.",
    "start": "2026-11-10",
-   "asOf": "2026-11-19",
-   "asOfLabel": "mark of Nov 19",
+   "asOf": "2026-11-20",
+   "asOfLabel": "mark of Nov 20",
    "points": [
     {
      "date": "2026-11-10",
@@ -6000,6 +6248,10 @@
     },
     {
      "date": "2026-11-19",
+     "equity": 10000.0
+    },
+    {
+     "date": "2026-11-20",
      "equity": 10000.0
     }
    ],
@@ -6048,6 +6300,10 @@
      {
       "date": "2026-11-19",
       "equity": 8398.42
+     },
+     {
+      "date": "2026-11-20",
+      "equity": 7978.15
      }
     ]
    },
@@ -6059,7 +6315,7 @@
     "Fill at the next daily close. Cost 0.25% per side."
    ],
    "backtest": "Backtest Nov 2018 to Nov 10, 2026, $10,000, signal on the close and fill at the next close, costs 0.25% per side, uninvested cash earns 0%: CAGR +30.1%, maximum drawdown \u221236.6%, Sharpe 0.9, 134 closed trades, win rate 48%, profit factor 2.22. First half Nov 2018\u20132021: CAGR +62.6%, Sharpe 1.26. Second half 2022\u20132026: CAGR +12.5%, drawdown \u221236.6%, Sharpe 0.57. BTC buy-and-hold, same second half: CAGR +10.0%, drawdown \u221266.9%, Sharpe 0.44. Up in 62% of calendar years. Invested 33% of the time on average.",
-   "forward": "$10,000.00 (0.00%), 100% cash as of the Nov 19 close. 0 fills logged, 0 sells. BTC buy-and-hold $8,398.42 (\u221216.02%). Regime that day: range.",
+   "forward": "$10,000.00 (0.00%), 100% cash as of the Nov 20 close. 0 fills logged, 0 sells. BTC buy-and-hold $7,978.15 (\u221220.22%). Regime that day: risk_off.",
    "risk": "The weakest of the four on a risk-adjusted basis (second-half Sharpe 0.57) with a \u221236.6% drawdown. Weekly flips can whipsaw in choppy markets; it lost a little in 2022, 2025 and 2026.",
    "regime": {
     "best": "trend_up and range",
@@ -6096,12 +6352,12 @@
    },
    "stale": false,
    "fwdPct": 0.0,
-   "marks": 10,
-   "daysLive": 9,
+   "marks": 11,
+   "daysLive": 10,
    "isNew": false,
-   "rank": 14,
+   "rank": 13,
    "prevRank": 14,
-   "rankMove": 0
+   "rankMove": 1
   }
  }
 }

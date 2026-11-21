@@ -1,8 +1,8 @@
 {
  "meta": {
-  "fingerprint": "6619bae64209c3ec",
-  "lastUpdatedISO": "2026-11-20T16:42:20-05:00",
-  "lastUpdatedET": "Nov 20, 2026, 4:42 PM ET",
+  "fingerprint": "22a54bc1b0f88531",
+  "lastUpdatedISO": "2026-11-20T20:45:29-05:00",
+  "lastUpdatedET": "Nov 20, 2026, 8:45 PM ET",
   "dataDay": "2026-11-20"
  },
  "entries": [
@@ -10,10 +10,10 @@
    "date": "2026-11-20",
    "kind": "daily",
    "title": "Daily update · Fri Nov 20",
-   "updatedET": "Nov 20, 2026, 4:42 PM ET",
+   "updatedET": "Nov 20, 2026, 8:45 PM ET",
    "items": [
     "Biggest drops: #8 S&P 500 dip-buy −6.55%; #3 Crypto Bollinger band reversion −4.11%; #2 Crypto z-score mean reversion −0.96%.",
-    "Market regime: stocks (SPY) range, crypto (BTC) range."
+    "Market regime: stocks (SPY) shock, crypto (BTC) risk off."
    ]
   },
   {

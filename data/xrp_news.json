@@ -1,8 +1,20 @@
 {
-  "generated_at": "2026-11-19T20:52:02-05:00",
+  "generated_at": "2026-11-20T20:46:51-05:00",
   "lookback_days": 16,
   "disclaimer": "Verification status as of last update; not financial advice.",
   "items": [
+    {
+      "date": "2026-11-20",
+      "headline": "CFTC Chair on Hyperliquid and onchain venues, Ripple CLO doubts Elizabeth Warren will set crypto policy, and more",
+      "summary": "In today's newsletter, CFTC Chair Selig outlines how Hyperliquid and other onchain venues could enter the US; Ripple's Alderoty doubts Elizabeth Warren will set US crypto policy; and more.",
+      "status": "Reported",
+      "sources": [
+        {
+          "name": "The Block",
+          "url": "https://www.theblock.co/newsletters/the-daily/2026-11-20-cftc-chair-hyperliquid-ripple-clo-elizabeth-warren-crypto-policy-more-news-444143"
+        }
+      ]
+    },
     {
       "date": "2026-11-19",
       "headline": "Ripple's Alderoty doubts Elizabeth Warren will ‘set crypto policy in this country,' backs durable agency rules",
@@ -12,18 +24,6 @@
         {
           "name": "The Block",
           "url": "https://www.theblock.co/news/regulation/2026-11-19-ripple-alderoty-elizabeth-warren-wont-set-crypto-policy-backs-durable-agency-rules-444105"
-        }
-      ]
-    },
-    {
-      "date": "2026-11-19",
-      "headline": "Roundhill scraps Solana and XRP income ETFs as rival funds indicate low demand",
-      "summary": "Roundhill withdrew plans for two funds designed to generate income from SOL and XRP, highlighting the gap between billions invested in spot crypto ETFs and limited demand for more specialized strategies.",
-      "status": "Reported",
-      "sources": [
-        {
-          "name": "CoinDesk",
-          "url": "https://www.coindesk.com/markets/2026/11/19/roundhill-scraps-solana-and-xrp-income-etfs-as-rival-funds-attract-just-usd12-million"
         }
       ]
     },
