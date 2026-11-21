@@ -1,11 +1,21 @@
 {
  "meta": {
-  "fingerprint": "22a54bc1b0f88531",
-  "lastUpdatedISO": "2026-11-20T20:45:29-05:00",
-  "lastUpdatedET": "Nov 20, 2026, 8:45 PM ET",
-  "dataDay": "2026-11-20"
+  "fingerprint": "2ad4a99b13308a3c",
+  "lastUpdatedISO": "2026-11-21T09:36:41-05:00",
+  "lastUpdatedET": "Nov 21, 2026, 9:36 AM ET",
+  "dataDay": "2026-11-21"
  },
  "entries": [
+  {
+   "date": "2026-11-21",
+   "kind": "daily",
+   "title": "Daily update · Sat Nov 21",
+   "updatedET": "Nov 21, 2026, 9:36 AM ET",
+   "items": [
+    "Biggest drops: #3 Crypto Bollinger band reversion −2.70%; #2 Crypto z-score mean reversion −0.47%.",
+    "Market regime: stocks (SPY) shock, crypto (BTC) risk off."
+   ]
+  },
   {
    "date": "2026-11-20",
    "kind": "daily",
