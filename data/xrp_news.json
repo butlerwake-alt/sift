@@ -1,8 +1,32 @@
 {
-  "generated_at": "2026-11-20T20:46:51-05:00",
+  "generated_at": "2026-11-21T20:45:57-05:00",
   "lookback_days": 16,
   "disclaimer": "Verification status as of last update; not financial advice.",
   "items": [
+    {
+      "date": "2026-11-21",
+      "headline": "XRP Sets New November Low on Coinbase, Down 10% in 24 Hours",
+      "summary": "XRP fell to $0.8663 late Friday, below its Nov.",
+      "status": "Reported",
+      "sources": [
+        {
+          "name": "The Defiant",
+          "url": "https://thedefiant.io/news/markets/xrp-sets-new-november-low-on-coinbase-down-10-in-24-hours"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-21",
+      "headline": "XRP falls 10% as long bets unwind and ETF assets slip below $1 billion",
+      "summary": "The token broke its previous November lows during Saturday's crypto selloff, with long positions accounting for most XRP liquidations and technical indicators showing further weakness.",
+      "status": "Reported",
+      "sources": [
+        {
+          "name": "CoinDesk",
+          "url": "https://www.coindesk.com/markets/2026/11/21/xrp-falls-10-as-long-bets-unwind-and-etf-assets-slip-below-usd1-billion"
+        }
+      ]
+    },
     {
       "date": "2026-11-20",
       "headline": "CFTC Chair on Hyperliquid and onchain venues, Ripple CLO doubts Elizabeth Warren will set crypto policy, and more",
