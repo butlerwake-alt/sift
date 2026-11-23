@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-21T20:45:57-05:00",
+  "generated_at": "2026-11-22T20:43:42-05:00",
   "lookback_days": 16,
   "disclaimer": "Verification status as of last update; not financial advice.",
   "items": [
@@ -40,18 +40,6 @@
       ]
     },
     {
-      "date": "2026-11-19",
-      "headline": "Ripple's Alderoty doubts Elizabeth Warren will ‘set crypto policy in this country,' backs durable agency rules",
-      "summary": "Ripple’s Alderoty backs durable agency rules as hopes for crypto market structure legislation fade.",
-      "status": "Reported",
-      "sources": [
-        {
-          "name": "The Block",
-          "url": "https://www.theblock.co/news/regulation/2026-11-19-ripple-alderoty-elizabeth-warren-wont-set-crypto-policy-backs-durable-agency-rules-444105"
-        }
-      ]
-    },
-    {
       "date": "2026-11-10",
       "headline": "XRP Ledger Foundation quantum roadmap: post-quantum account keys",
       "summary": "The XRP Ledger Foundation published a design that would let account owners add a quantum-resistant ML-DSA-44 signing key and retire the old one, with no change to the base fee and a targeted transition around 2028; it is still a proposal, not an activated upgrade.",
@@ -80,18 +68,6 @@
         {
           "name": "SEC EDGAR",
           "url": "https://www.sec.gov/Archives/edgar/data/2092592/000162828026072223/0001628280-26-072223-index.htm"
-        }
-      ]
-    },
-    {
-      "date": "2026-11-05",
-      "headline": "XRP Ledger fixes a disclosed bug that let creation of new tokens",
-      "summary": "CoinDesk reported that an XRP Ledger amendment took effect to close a loophole that could have let accounts authorized only to burn issued tokens also create new ones; the report said XRP’s own supply was not affected.",
-      "status": "Reported",
-      "sources": [
-        {
-          "name": "CoinDesk",
-          "url": "https://www.coindesk.com/markets/2026/11/05/xrp-ledger-closes-bug-that-let-approved-token-burners-create-new-tokens"
         }
       ]
     }
