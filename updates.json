@@ -1,11 +1,21 @@
 {
  "meta": {
-  "fingerprint": "acec773eb498e5a5",
-  "lastUpdatedISO": "2026-11-22T20:41:26-05:00",
-  "lastUpdatedET": "Nov 22, 2026, 8:41 PM ET",
-  "dataDay": "2026-11-22"
+  "fingerprint": "5dac95e6c19dc292",
+  "lastUpdatedISO": "2026-11-23T09:43:45-05:00",
+  "lastUpdatedET": "Nov 23, 2026, 9:43 AM ET",
+  "dataDay": "2026-11-23"
  },
  "entries": [
+  {
+   "date": "2026-11-23",
+   "kind": "daily",
+   "title": "Daily update · Mon Nov 23",
+   "updatedET": "Nov 23, 2026, 9:43 AM ET",
+   "items": [
+    "Biggest gains since the previous mark: #3 Crypto Bollinger band reversion +6.98%.",
+    "Market regime: stocks (SPY) shock, crypto (BTC) risk off."
+   ]
+  },
   {
    "date": "2026-11-22",
    "kind": "daily",
