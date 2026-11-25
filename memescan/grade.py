@@ -155,16 +155,25 @@ def _median(values):
 
 
 def base_rates(graded):
-    buckets = {name: [] for name in ("CLEAN", "WARN", "TRAP", "UNKNOWN")}
+    groups = {}
     for row in graded:
-        buckets.setdefault(row.get("verdict") or "UNKNOWN", []).append(row)
+        version = row.get("rule_version") or "v1"
+        feed = row.get("feed") or "—"
+        verdict = row.get("verdict") or "UNKNOWN"
+        groups.setdefault((verdict, version, feed), []).append(row)
     table = []
-    for name in ("CLEAN", "WARN", "TRAP", "UNKNOWN"):
-        rows = buckets.get(name) or []
+    keys = sorted(groups, key=lambda item: (item[1], item[2], item[0]))
+    if not keys:
+        keys = [(name, "v2", "—") for name in ("CLEAN", "WARN", "TRAP", "UNKNOWN")]
+        groups = {key: [] for key in keys}
+    for verdict, version, feed in keys:
+        rows = groups.get((verdict, version, feed)) or []
         count = len(rows)
         nets = [row["net_return"] for row in rows if isinstance(row.get("net_return"), (int, float))]
         table.append({
-            "verdict": name,
+            "verdict": verdict,
+            "rule_version": version,
+            "feed": feed,
             "n": count,
             "note": "too few to trust" if count < 30 else "",
             "pct_doubled": None if count == 0 else 100.0 * sum(1 for row in rows if row.get("doubled")) / count,
@@ -225,7 +234,9 @@ def main():
             continue
         sources = sorted({point.get("source") for point in points if point.get("source")})
         record = {
-            "label": plan.LABEL,
+            "label": card.get("label") or plan.LABEL,
+            "rule_version": card.get("rule_version") or "v1",
+            "feed": card.get("feed") or "—",
             "mint": card.get("mint"),
             "symbol": card.get("symbol"),
             "name": card.get("name"),

@@ -4,12 +4,20 @@ LABEL = (
     "NEW EXPERIMENT — memescan audit v1, started November 25, 2026, "
     "paper only, not original evidence."
 )
+LABEL_V2 = (
+    "memescan audit v2 — rule change started November 25, 2026, "
+    "paper only, not original evidence."
+)
 BANNER = "Paper only. Not financial advice. No trading, no wallet."
 WHY = (
     "Tests whether a rug/safety checklist actually separates memecoins that "
     "survive 24h from ones that collapse. Paper only, includes 1.5% slippage "
     "+ fees per side. Most memecoins go to zero; expect negative results — "
     "the point is to measure the checklist, not to find trades."
+)
+WHY_V2_NOTE = (
+    "v2 (started November 25, 2026): CLEAN no longer blocked by checks the "
+    "free data can't run; wider new-pair feed for more samples."
 )
 
 SLIPPAGE = 0.015
@@ -40,6 +48,7 @@ MAX_AGE_S = 48 * 3600
 NA_UNKNOWN_ABOVE = 4
 WARN_VERDICT_AT = 3
 CANDIDATE_CAP = 30
+CANDIDATE_CAP_V2 = 60
 STALE_MS = 60 * 60 * 1000
 
 

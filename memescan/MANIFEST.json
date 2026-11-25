@@ -2,7 +2,15 @@
   "experiment": "memescan audit v1",
   "started": "2026-11-25",
   "paperOnly": true,
-  "label": "NEW EXPERIMENT \u2014 memescan audit v1, started November 25, 2026, paper only, not original evidence.",
+  "label": "NEW EXPERIMENT — memescan audit v1, started November 25, 2026, paper only, not original evidence.",
   "rulesFile": "AUDIT_RULES.md",
-  "sha256": "e935fb9ae3b07dfb1138a2e6850f966e39d7555653e1af065c479b4a3d34f0b8"
+  "sha256": "e935fb9ae3b07dfb1138a2e6850f966e39d7555653e1af065c479b4a3d34f0b8",
+  "v2": {
+    "experiment": "memescan audit v2",
+    "started": "2026-11-25",
+    "paperOnly": true,
+    "label": "memescan audit v2 — rule change started November 25, 2026, paper only, not original evidence.",
+    "rulesFile": "AUDIT_RULES_v2.md",
+    "sha256": "577dfa0db7b960db3e1e0c89ed5918a5deacafcfa22ab9eda6c3ebf4c917834a"
+  }
 }

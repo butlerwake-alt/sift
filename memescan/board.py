@@ -6,18 +6,17 @@ import plan
 import store
 from audit import parse_time, utc_now
 
-RULES = store.ROOT / "AUDIT_RULES.md"
 MANIFEST = store.ROOT / "MANIFEST.json"
 
 
-def _rules_sha():
+def _manifest():
     import json
     if not MANIFEST.exists():
-        return None
+        return {}
     try:
-        return json.loads(MANIFEST.read_text(encoding="utf-8")).get("sha256")
+        return json.loads(MANIFEST.read_text(encoding="utf-8"))
     except json.JSONDecodeError:
-        return None
+        return {}
 
 
 def latest_audits():
@@ -27,11 +26,12 @@ def latest_audits():
         mint = row.get("mint")
         if not mint:
             continue
-        previous = newest.get(mint)
+        version = row.get("rule_version") or "v1"
+        key = (mint, version)
+        previous = newest.get(key)
         if previous is None or str(row.get("audited_at") or "") >= str(previous.get("audited_at") or ""):
-            newest[mint] = row
-    ordered = sorted(newest.values(), key=lambda row: str(row.get("audited_at") or ""), reverse=True)
-    return ordered[: plan.CANDIDATE_CAP]
+            newest[key] = row
+    return sorted(newest.values(), key=lambda row: (row.get("rule_version") or "v1", str(row.get("audited_at") or "")), reverse=True)
 
 
 def recent_graded(now):
@@ -49,12 +49,16 @@ def write_board():
     from grade import base_rates
 
     now = utc_now()
+    manifest = _manifest()
     payload = {
-        "label": plan.LABEL,
+        "label": plan.LABEL_V2,
+        "label_v1": plan.LABEL,
         "banner": plan.BANNER,
         "why": plan.WHY,
+        "why_v2": plan.WHY_V2_NOTE,
         "generated_at": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "rules_sha256": _rules_sha(),
+        "rules_sha256": manifest.get("sha256"),
+        "rules_sha256_v2": (manifest.get("v2") or {}).get("sha256"),
         "audits": latest_audits(),
         "graded": recent_graded(now),
         "base_rates": base_rates(store.read_jsonl("graded.jsonl")),

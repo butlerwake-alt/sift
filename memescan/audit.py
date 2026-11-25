@@ -102,7 +102,17 @@ def check(cid, name, status, value, source, fetched_at, detail=""):
     }
 
 
-def verdict_of(checks):
+FREE_DATA_IDS = ("C8", "C9", "C10")
+
+
+def _check(checks, cid):
+    for item in checks:
+        if item["id"] == cid:
+            return item
+    return None
+
+
+def verdict_v1(checks):
     statuses = [item["status"] for item in checks]
     if any(status == "pending" for status in statuses):
         return "UNKNOWN"
@@ -118,6 +128,50 @@ def verdict_of(checks):
     if nas:
         return "UNKNOWN"
     return "CLEAN"
+
+
+def verdict_v2(checks):
+    statuses = [item["status"] for item in checks]
+    if any(status == "pending" for status in statuses):
+        return "UNKNOWN"
+    if statuses.count("fail"):
+        return "TRAP"
+    for cid in ("C1", "C2", "C6"):
+        item = _check(checks, cid)
+        if item and item["status"] == "n/a":
+            return "UNKNOWN"
+    c3 = _check(checks, "C3")
+    if c3 and c3["status"] == "n/a" and "bonding curve" not in (c3.get("detail") or ""):
+        return "UNKNOWN"
+    other_na = sum(1 for item in checks if item["status"] == "n/a" and item["id"] not in FREE_DATA_IDS)
+    if other_na > plan.NA_UNKNOWN_ABOVE:
+        return "UNKNOWN"
+    if statuses.count("warn") >= plan.WARN_VERDICT_AT:
+        return "WARN"
+    return "CLEAN"
+
+
+def verdict_of(checks, rule_version="v1"):
+    if rule_version == "v2":
+        return verdict_v2(checks)
+    return verdict_v1(checks)
+
+
+def not_checked_line(checks):
+    missing = [item["id"] for item in checks if item["id"] in FREE_DATA_IDS and item["status"] == "n/a"]
+    if not missing:
+        return ""
+    return "not checked (no free data): " + ", ".join(missing)
+
+
+def backfill_rule_version(record):
+    """Add rule_version v1 when it is missing. Leave every other field alone."""
+    if not isinstance(record, dict):
+        return record
+    if record.get("rule_version"):
+        return record
+    record["rule_version"] = "v1"
+    return record
 
 
 def tally_score(checks):
@@ -332,7 +386,7 @@ def risk_levels(report):
     return levels
 
 
-def audit_observation(obs):
+def audit_observation(obs, rule_version="v2"):
     """Score one normalized observation. Missing values stay missing."""
     now = parse_time(obs.get("now")) or utc_now()
     texts = obs.get("texts") or {}
@@ -495,9 +549,18 @@ def audit_observation(obs):
         d1 = check("D1", "Description talks to bots", "pass", None, obs.get("texts_source"), obs.get("texts_fetched_at"), "No instruction-like token text.")
 
     checks = [c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, d1]
-    verdict = verdict_of(checks)
+    if obs.get("holders_fallback"):
+        note = " RugCheck holders after getTokenLargestAccounts was unavailable."
+        for item in (c4, c5):
+            if item["source"]:
+                item["source"] = "RugCheck " + item["source"]
+            item["detail"] = (item.get("detail") or "") + note
+    version = rule_version if rule_version in {"v1", "v2"} else "v2"
+    verdict = verdict_of(checks, version)
     return {
-        "label": plan.LABEL,
+        "label": plan.LABEL_V2 if version == "v2" else plan.LABEL,
+        "rule_version": version,
+        "not_checked": not_checked_line(checks) if version == "v2" else "",
         "mint": obs.get("mint"),
         "symbol": obs.get("symbol"),
         "name": obs.get("name"),
@@ -560,6 +623,7 @@ def observation_from_sources(candidate, pair, rug, rpc, fetched, now):
         "largest_non_pool_pct": largest,
         "holders_source": fetched.get("rug_source"),
         "holders_fetched_at": fetched.get("rug"),
+        "holders_fallback": bool(fetched.get("holders_fallback")),
         "liquidity_usd": _num((liquidity or {}).get("usd")) if isinstance(liquidity, dict) else None,
         "liquidity_source": fetched.get("dex_source"),
         "liquidity_fetched_at": fetched.get("dex"),
@@ -627,11 +691,25 @@ def read_mint_account(mint):
 
 
 def read_largest_accounts(mint):
-    """Fetched for the record. Owners are not in this method, so it does not set C4 or C5."""
-    payload, url = rpc_call("getTokenLargestAccounts", [mint])
-    value = ((payload or {}).get("result") or {}).get("value")
-    count = len(value) if isinstance(value, list) else None
-    return count, url
+    """One try plus up to two retries. Owners are not in this method, so it does not set C4 or C5."""
+    body = {"jsonrpc": "2.0", "id": 1, "method": "getTokenLargestAccounts", "params": [mint]}
+    last = None
+    for attempt in range(3):
+        for url in RPCS:
+            try:
+                payload = public_http.fetch_json(url, method="POST", body=body, timeout=25, attempts=1)
+            except public_http.SourceUnavailable as err:
+                last = err
+                continue
+            if isinstance(payload, dict) and payload.get("error"):
+                last = payload["error"]
+                continue
+            value = ((payload or {}).get("result") or {}).get("value")
+            count = len(value) if isinstance(value, list) else None
+            return count, url
+        if attempt < 2:
+            time.sleep(2 ** attempt)
+    raise public_http.SourceUnavailable("getTokenLargestAccounts down after retries: %s" % last)
 
 
 def fetch_pairs(mints):
@@ -720,9 +798,13 @@ def audit_candidate(candidate, pair, now):
         fetched["rpc_largest_source"] = largest_url + " getTokenLargestAccounts"
     except public_http.SourceUnavailable as err:
         errors.append("rpc getTokenLargestAccounts: %s" % err)
+        fetched["holders_fallback"] = True
     obs = observation_from_sources(candidate, pair, rug if isinstance(rug, dict) else None, rpc, fetched, now)
     result = audit_observation(obs)
     result["run_id"] = candidate.get("run_id")
+    result["rule_version"] = "v2"
+    result["feed"] = candidate.get("source")
+    result["sources"] = candidate.get("sources") or []
     result["pair_address"] = (pair or {}).get("pairAddress") or candidate.get("pair_address")
     result["pair_url"] = (pair or {}).get("url") or candidate.get("url")
     result["liquidity_usd"] = obs.get("liquidity_usd")
@@ -738,7 +820,8 @@ def write_card(result, now):
     if card_exists(result.get("mint"), now):
         return None
     card = {
-        "label": plan.LABEL,
+        "label": result.get("label") or plan.LABEL_V2,
+        "rule_version": "v2",
         "mint": result.get("mint"),
         "symbol": result.get("symbol"),
         "name": result.get("name"),
@@ -748,6 +831,9 @@ def write_card(result, now):
         "price_fetched_at": result.get("price_fetched_at"),
         "verdict": result.get("verdict"),
         "score": result.get("score"),
+        "feed": result.get("feed"),
+        "sources": result.get("sources") or [],
+        "not_checked": result.get("not_checked") or "",
         "plan": plan.plan_dict(),
     }
     store.append_jsonl("cards.jsonl", card)
@@ -766,9 +852,26 @@ def snapshot(mint, price, source, moment):
     })
 
 
+def backfill_saved_records():
+    """Write rule_version v1 onto old rows. Do not change any other field."""
+    import json
+    for name in ("audits.jsonl", "cards.jsonl", "graded.jsonl"):
+        rows = store.read_jsonl(name)
+        if not rows:
+            continue
+        if all(row.get("rule_version") for row in rows):
+            continue
+        for row in rows:
+            backfill_rule_version(row)
+        target = store.path(name)
+        lines = [json.dumps(row, ensure_ascii=False, separators=(",", ":")) for row in rows]
+        target.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
+
+
 def main():
     import board
 
+    backfill_saved_records()
     candidates, run_id = latest_candidates()
     if not candidates:
         print("memescan audit: no candidates for the latest scan. Skipping.")

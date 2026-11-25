@@ -31,7 +31,9 @@
     .src { display: block; color: var(--muted); font-size: 0.78rem; }
     .card-grid { display: grid; gap: 0.8rem; }
     .paper-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 0.8rem 0.9rem; background: var(--panel); }
-    .paper-card h3 { margin: 0 0 0.3rem; font-size: 1rem; }
+    .version-toggle { display: flex; gap: 0.4rem; margin: 0.6rem 0 0.2rem; }
+    .version-toggle button { border: 1px solid var(--line); background: var(--panel); color: var(--cream); border-radius: 999px; padding: 0.2rem 0.7rem; cursor: pointer; font: inherit; }
+    .version-toggle button[aria-pressed="true"] { background: var(--teal); color: #071018; }
   </style>
 </head>
 <body id="top">
@@ -59,9 +61,14 @@
   <main id="main" class="wrap">
     <p><a class="back" href="index.html">Back to the board</a></p>
     <p class="audit-banner" id="banner">Paper only. Not financial advice. No trading, no wallet.</p>
-    <p class="experiment-label" id="label">NEW EXPERIMENT — memescan audit v1, started November 25, 2026, paper only, not original evidence.</p>
+    <p class="experiment-label" id="label">memescan audit v2 — rule change started November 25, 2026, paper only, not original evidence.</p>
     <h1>Memescan audit</h1>
     <p class="lede" id="why">Tests whether a rug/safety checklist actually separates memecoins that survive 24h from ones that collapse. Paper only, includes 1.5% slippage + fees per side. Most memecoins go to zero; expect negative results — the point is to measure the checklist, not to find trades.</p>
+    <p id="why-v2">v2 (started November 25, 2026): CLEAN no longer blocked by checks the free data can't run; wider new-pair feed for more samples.</p>
+    <div class="version-toggle" role="group" aria-label="Rule version">
+      <button type="button" id="show-v2" aria-pressed="true">v2</button>
+      <button type="button" id="show-v1" aria-pressed="false">v1</button>
+    </div>
     <p class="src" id="board-age"></p>
 
     <section class="audit-section" id="live">
@@ -83,7 +90,7 @@
   <footer class="site-footer">
     <div class="footer-inner">
       <p class="footer-kicker">Paper only. Not financial advice. No trading, no wallet.</p>
-      <p id="footer-label">NEW EXPERIMENT — memescan audit v1, started November 25, 2026, paper only, not original evidence.</p>
+      <p id="footer-label">memescan audit v2 — rule change started November 25, 2026, paper only, not original evidence. v1 records stay on the v1 view.</p>
     </div>
   </footer>
   <script src="site-chrome.js?v=202611251215"></script>
@@ -199,6 +206,11 @@
         score.textContent = "Score " + formatValue(row.score) + " · audited " + ageText(row.audited_at);
         if (isStale(row.audited_at)) score.classList.add("stale");
         verdictCell.append(score);
+        if (row.not_checked) verdictCell.append(el("p", "", row.not_checked));
+        if (row.feed || (row.sources && row.sources.length)) {
+          var feeds = row.sources && row.sources.length ? row.sources.join(", ") : row.feed;
+          verdictCell.append(el("span", "src", "Feed " + feeds));
+        }
         tr.append(verdictCell);
         var toggleCell = el("td");
         var button = el("button", "check-toggle", "Checks");
@@ -266,7 +278,7 @@
       mount.textContent = "";
       var table = el("table", "audit");
       var head = el("tr");
-      ["Verdict", "n", "Doubled", "Fell > 50%", "Median plan result", "Best", "Worst"].forEach(function (label) {
+      ["Rule version", "Source", "Verdict", "n", "Doubled", "Fell > 50%", "Median plan result", "Best", "Worst"].forEach(function (label) {
         head.append(el("th", "", label));
       });
       var thead = el("thead");
@@ -275,6 +287,8 @@
       var body = el("tbody");
       (rows || []).forEach(function (row) {
         var tr = el("tr");
+        tr.append(el("td", "", row.rule_version || "v1"));
+        tr.append(el("td", "", row.feed || "—"));
         var verdictCell = el("td");
         verdictCell.append(badge(row.verdict));
         tr.append(verdictCell);
@@ -289,7 +303,6 @@
             else shown = (Math.round(value * 1000) / 10) + "%";
           }
           var cell = el("td", "", shown);
-          if (row.note) cell.append(el("span", "src", row.note));
           tr.append(cell);
         });
         body.append(tr);
@@ -298,13 +311,42 @@
       mount.append(table);
     }
 
-    function renderBoard(board) {
-      document.getElementById("board-age").textContent = "Board file " + ageText(board.generated_at) + (board.rules_sha256 ? " · rules " + board.rules_sha256.slice(0, 12) : "");
-      if (isStale(board.generated_at)) document.getElementById("board-age").classList.add("stale");
-      renderAudits(board.audits || []);
-      renderGraded(board.graded || []);
-      renderRates(board.base_rates || []);
+    var currentVersion = "v2";
+    var loadedBoard = null;
+
+    function versionOf(row) {
+      return row.rule_version || "v1";
     }
+
+    function applyVersion() {
+      if (!loadedBoard) return;
+      document.getElementById("label").textContent = currentVersion === "v2" ? (loadedBoard.label || document.getElementById("label").textContent) : (loadedBoard.label_v1 || document.getElementById("label").textContent);
+      document.getElementById("footer-label").textContent = document.getElementById("label").textContent;
+      document.getElementById("show-v2").setAttribute("aria-pressed", currentVersion === "v2" ? "true" : "false");
+      document.getElementById("show-v1").setAttribute("aria-pressed", currentVersion === "v1" ? "true" : "false");
+      var audits = (loadedBoard.audits || []).filter(function (row) { return versionOf(row) === currentVersion; });
+      var graded = (loadedBoard.graded || []).filter(function (row) { return versionOf(row) === currentVersion; });
+      var rates = (loadedBoard.base_rates || []).filter(function (row) { return (row.rule_version || "v2") === currentVersion; });
+      if (!rates.length) {
+        rates = ["CLEAN", "WARN", "TRAP", "UNKNOWN"].map(function (name) {
+          return { verdict: name, rule_version: currentVersion, feed: "—", n: 0, note: "too few to trust", pct_doubled: null, pct_fell_50: null, median_net: null, best: null, worst: null };
+        });
+      }
+      renderAudits(audits);
+      renderGraded(graded);
+      renderRates(rates);
+    }
+
+    function renderBoard(board) {
+      loadedBoard = board;
+      document.getElementById("board-age").textContent = "Board file " + ageText(board.generated_at) + (board.rules_sha256_v2 ? " · v2 rules " + board.rules_sha256_v2.slice(0, 12) : "");
+      if (isStale(board.generated_at)) document.getElementById("board-age").classList.add("stale");
+      if (board.why_v2) document.getElementById("why-v2").textContent = board.why_v2;
+      applyVersion();
+    }
+
+    document.getElementById("show-v2").addEventListener("click", function () { currentVersion = "v2"; applyVersion(); });
+    document.getElementById("show-v1").addEventListener("click", function () { currentVersion = "v1"; applyVersion(); });
 
     fetch("memescan/data/board.json?t=" + Date.now()).then(function (response) {
       if (!response.ok) throw new Error("missing board");

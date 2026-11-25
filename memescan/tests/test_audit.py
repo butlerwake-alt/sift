@@ -11,6 +11,7 @@ sys.path.insert(0, str(ROOT))
 
 import audit  # noqa: E402
 import grade  # noqa: E402
+import plan  # noqa: E402
 
 
 def clean_obs(**overrides):
@@ -127,6 +128,44 @@ class AuditTests(unittest.TestCase):
         self.assertEqual(rules_hash(), before)
         manifest = (ROOT / "MANIFEST.json").read_text(encoding="utf-8")
         self.assertIn(before, manifest)
+
+    def test_two_warns_and_free_data_gaps_are_clean_in_v2_only(self):
+        obs = clean_obs(top10_pct_ex_pool=30, largest_non_pool_pct=20, dev_sold_pct_6h=None, creator_launches_7d=None, bundled_linked=None)
+        newer = audit.audit_observation(obs, rule_version="v2")
+        older = audit.audit_observation(obs, rule_version="v1")
+        self.assertEqual(newer["verdict"], "CLEAN")
+        self.assertEqual(older["verdict"], "UNKNOWN")
+        self.assertEqual(newer["not_checked"], "not checked (no free data): C8, C9, C10")
+        self.assertEqual(newer["rule_version"], "v2")
+
+    def test_missing_mint_authority_is_unknown_in_v2(self):
+        result = audit.audit_observation(clean_obs(mint_authority_present=None), rule_version="v2")
+        self.assertEqual(result["verdict"], "UNKNOWN")
+
+    def test_duplicate_mint_keeps_both_feeds(self):
+        import scan
+        rows = [
+            {"mint": "MintOne", "feed": "boost", "liquidity_usd": 30000, "symbol": "A"},
+            {"mint": "MintOne", "feed": "new_pairs", "liquidity_usd": 40000, "symbol": "A"},
+        ]
+        merged = scan.merge_feed_rows(rows)
+        self.assertEqual(len(merged), 1)
+        self.assertEqual(merged[0]["sources"], ["boost", "new_pairs"])
+
+    def test_v1_record_only_gains_rule_version(self):
+        original = {
+            "mint": "OldMint",
+            "verdict": "UNKNOWN",
+            "score": 100,
+            "label": plan.LABEL,
+        }
+        before = dict(original)
+        filled = audit.backfill_rule_version(original)
+        self.assertEqual(filled["rule_version"], "v1")
+        for key, value in before.items():
+            self.assertEqual(filled[key], value)
+        already = {"mint": "NewMint", "rule_version": "v2", "verdict": "CLEAN"}
+        self.assertEqual(audit.backfill_rule_version(dict(already))["rule_version"], "v2")
 
     def test_gap_below_stop_is_grade_d(self):
         result = grade.grade_path(100, [

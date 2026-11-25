@@ -1,10 +1,1890 @@
 {
-  "label": "NEW EXPERIMENT — memescan audit v1, started November 25, 2026, paper only, not original evidence.",
+  "label": "memescan audit v2 — rule change started November 25, 2026, paper only, not original evidence.",
+  "label_v1": "NEW EXPERIMENT — memescan audit v1, started November 25, 2026, paper only, not original evidence.",
   "banner": "Paper only. Not financial advice. No trading, no wallet.",
   "why": "Tests whether a rug/safety checklist actually separates memecoins that survive 24h from ones that collapse. Paper only, includes 1.5% slippage + fees per side. Most memecoins go to zero; expect negative results — the point is to measure the checklist, not to find trades.",
-  "generated_at": "2026-11-25T17:49:42Z",
+  "why_v2": "v2 (started November 25, 2026): CLEAN no longer blocked by checks the free data can't run; wider new-pair feed for more samples.",
+  "generated_at": "2026-11-25T19:54:52Z",
   "rules_sha256": "e935fb9ae3b07dfb1138a2e6850f966e39d7555653e1af065c479b4a3d34f0b8",
+  "rules_sha256_v2": "577dfa0db7b960db3e1e0c89ed5918a5deacafcfa22ab9eda6c3ebf4c917834a",
   "audits": [
+    {
+      "label": "memescan audit v2 — rule change started November 25, 2026, paper only, not original evidence.",
+      "rule_version": "v2",
+      "not_checked": "not checked (no free data): C8, C9, C10",
+      "mint": "38M2z4UCfZEkUHFzD48vhKQhFhNyRGto8pZbLjNipump",
+      "symbol": "JIMMY",
+      "name": "Jimmy Rustles",
+      "verdict": "CLEAN",
+      "score": 100,
+      "checks": [
+        {
+          "id": "C1",
+          "name": "Mint authority revoked",
+          "status": "pass",
+          "value": null,
+          "source": "https://solana-rpc.publicnode.com getAccountInfo",
+          "fetched_at": "2026-11-25T19:54:09Z",
+          "detail": "Mint authority is null."
+        },
+        {
+          "id": "C2",
+          "name": "Freeze authority revoked",
+          "status": "pass",
+          "value": null,
+          "source": "https://solana-rpc.publicnode.com getAccountInfo",
+          "fetched_at": "2026-11-25T19:54:09Z",
+          "detail": "Freeze authority is null."
+        },
+        {
+          "id": "C3",
+          "name": "LP burned or locked",
+          "status": "pass",
+          "value": 100.0,
+          "source": "https://api.rugcheck.xyz/v1/tokens/38M2z4UCfZEkUHFzD48vhKQhFhNyRGto8pZbLjNipump/report",
+          "fetched_at": "2026-11-25T19:54:09Z",
+          "detail": "Locked or burned LP is at least 80%."
+        },
+        {
+          "id": "C4",
+          "name": "Top 10 holders ex pool and burn",
+          "status": "pass",
+          "value": 15.315537444894852,
+          "source": "RugCheck https://api.rugcheck.xyz/v1/tokens/38M2z4UCfZEkUHFzD48vhKQhFhNyRGto8pZbLjNipump/report",
+          "fetched_at": "2026-11-25T19:54:09Z",
+          "detail": "Top 10 non-pool wallets hold 25% or less. RugCheck holders after getTokenLargestAccounts was unavailable."
+        },
+        {
+          "id": "C5",
+          "name": "Largest non-pool wallet",
+          "status": "pass",
+          "value": 3.1320803526193646,
+          "source": "RugCheck https://api.rugcheck.xyz/v1/tokens/38M2z4UCfZEkUHFzD48vhKQhFhNyRGto8pZbLjNipump/report",
+          "fetched_at": "2026-11-25T19:54:09Z",
+          "detail": "Largest non-pool wallet holds 15% or less. RugCheck holders after getTokenLargestAccounts was unavailable."
+        },
+        {
+          "id": "C6",
+          "name": "Liquidity USD",
+          "status": "pass",
+          "value": 96941.4,
+          "source": "https://api.dexscreener.com/tokens/v1/solana/38M2z4UCfZEkUHFzD48vhKQhFhNyRGto8pZbLjNipump",
+          "fetched_at": "2026-11-25T19:54:09Z",
+          "detail": "Liquidity is at least $50,000."
+        },
+        {
+          "id": "C7",
+          "name": "Creator wallet holding",
+          "status": "pass",
+          "value": 0.0,
+          "source": "https://api.rugcheck.xyz/v1/tokens/38M2z4UCfZEkUHFzD48vhKQhFhNyRGto8pZbLjNipump/report",
+          "fetched_at": "2026-11-25T19:54:09Z",
+          "detail": "Creator holds 5% or less."
+        },
+        {
+          "id": "C8",
+          "name": "Creator sold in last 6h",
+          "status": "n/a",
+          "value": null,
+          "source": "https://api.rugcheck.xyz/v1/tokens/38M2z4UCfZEkUHFzD48vhKQhFhNyRGto8pZbLjNipump/report",
+          "fetched_at": "2026-11-25T19:54:09Z",
+          "detail": "RugCheck did not include a 6h creator-sale percent."
+        },
+        {
+          "id": "C9",
+          "name": "Creator launches in 7 days",
+          "status": "n/a",
+          "value": null,
+          "source": "https://api.rugcheck.xyz/v1/tokens/38M2z4UCfZEkUHFzD48vhKQhFhNyRGto8pZbLjNipump/report",
+          "fetched_at": "2026-11-25T19:54:09Z",
+          "detail": "No dated creator-token list in the RugCheck report."
+        },
+        {
+          "id": "C10",
+          "name": "Bundled launch",
+          "status": "n/a",
+          "value": null,
+          "source": "https://api.rugcheck.xyz/v1/tokens/38M2z4UCfZEkUHFzD48vhKQhFhNyRGto8pZbLjNipump/report",
+          "fetched_at": "2026-11-25T19:54:09Z",
+          "detail": "Best effort: no public field counts first-20 buyers funded by one wallet within 24h. Insider clusters are not used as a substitute."
+        },
+        {
+          "id": "C11",
+          "name": "Honeypot txns",
+          "status": "pass",
+          "value": {
+            "m5_buys": 57,
+            "m5_sells": 35
+          },
+          "source": "https://api.dexscreener.com/tokens/v1/solana/38M2z4UCfZEkUHFzD48vhKQhFhNyRGto8pZbLjNipump",
+          "fetched_at": "2026-11-25T19:54:09Z",
+          "detail": "DexScreener publishes a 5-minute bucket, not 10 minutes. This check uses m5 buys and sells."
+        },
+        {
+          "id": "C12",
+          "name": "Wash trading",
+          "status": "pass",
+          "value": {
+            "volume_over_liquidity": 0.5541310523677191,
+            "unique_traders_1h": null
+          },
+          "source": "https://api.dexscreener.com/tokens/v1/solana/38M2z4UCfZEkUHFzD48vhKQhFhNyRGto8pZbLjNipump",
+          "fetched_at": "2026-11-25T19:54:09Z",
+          "detail": "Wash condition was not met."
+        },
+        {
+          "id": "C13",
+          "name": "Coin age",
+          "status": "pass",
+          "value": 168178.0,
+          "source": "https://api.dexscreener.com/tokens/v1/solana/38M2z4UCfZEkUHFzD48vhKQhFhNyRGto8pZbLjNipump",
+          "fetched_at": "2026-11-25T19:54:09Z",
+          "detail": "Age is at least 3 minutes."
+        },
+        {
+          "id": "C14",
+          "name": "RugCheck risk list",
+          "status": "pass",
+          "value": [],
+          "source": "https://api.rugcheck.xyz/v1/tokens/38M2z4UCfZEkUHFzD48vhKQhFhNyRGto8pZbLjNipump/report",
+          "fetched_at": "2026-11-25T19:54:09Z",
+          "detail": "No danger or warn items."
+        },
+        {
+          "id": "D1",
+          "name": "Description talks to bots",
+          "status": "pass",
+          "value": null,
+          "source": "https://api.dexscreener.com/tokens/v1/solana/38M2z4UCfZEkUHFzD48vhKQhFhNyRGto8pZbLjNipump",
+          "fetched_at": "2026-11-25T19:54:09Z",
+          "detail": "No instruction-like token text."
+        }
+      ],
+      "price_usd": 0.001263,
+      "price_source": "https://api.dexscreener.com/tokens/v1/solana/38M2z4UCfZEkUHFzD48vhKQhFhNyRGto8pZbLjNipump",
+      "price_fetched_at": "2026-11-25T19:54:09Z",
+      "audited_at": "2026-11-25T19:54:09Z",
+      "run_id": "2026-11-25T19:46:18Z",
+      "feed": "new_pairs",
+      "sources": [
+        "new_pairs"
+      ],
+      "pair_address": "FnHWfV49ywCtGCDTyf34AVN8BiXxcgXUKqLctkrkP1gQ",
+      "pair_url": "https://dexscreener.com/solana/fnhwfv49ywctgcdtyf34avn8bixxcgxukqlctkrkp1gq",
+      "liquidity_usd": 96941.4,
+      "age_seconds": 168178.0,
+      "errors": [
+        "rpc getTokenLargestAccounts: getTokenLargestAccounts down after retries: unavailable https://api.mainnet-beta.solana.com: HTTP Error 429: Too Many Requests"
+      ],
+      "rpc_largest_accounts": null
+    },
+    {
+      "label": "memescan audit v2 — rule change started November 25, 2026, paper only, not original evidence.",
+      "rule_version": "v2",
+      "not_checked": "not checked (no free data): C8, C9, C10",
+      "mint": "3cL47ohWa2HApLYKtqPsqkjaxJ6HLvT5Ri1KvWdXpump",
+      "symbol": "GROKIA",
+      "name": "Grokia",
+      "verdict": "CLEAN",
+      "score": 90,
+      "checks": [
+        {
+          "id": "C1",
+          "name": "Mint authority revoked",
+          "status": "pass",
+          "value": null,
+          "source": "https://solana-rpc.publicnode.com getAccountInfo",
+          "fetched_at": "2026-11-25T19:53:23Z",
+          "detail": "Mint authority is null."
+        },
+        {
+          "id": "C2",
+          "name": "Freeze authority revoked",
+          "status": "pass",
+          "value": null,
+          "source": "https://solana-rpc.publicnode.com getAccountInfo",
+          "fetched_at": "2026-11-25T19:53:23Z",
+          "detail": "Freeze authority is null."
+        },
+        {
+          "id": "C3",
+          "name": "LP burned or locked",
+          "status": "pass",
+          "value": 100.0,
+          "source": "https://api.rugcheck.xyz/v1/tokens/3cL47ohWa2HApLYKtqPsqkjaxJ6HLvT5Ri1KvWdXpump/report",
+          "fetched_at": "2026-11-25T19:53:22Z",
+          "detail": "Locked or burned LP is at least 80%."
+        },
+        {
+          "id": "C4",
+          "name": "Top 10 holders ex pool and burn",
+          "status": "pass",
+          "value": 17.08602098899493,
+          "source": "RugCheck https://api.rugcheck.xyz/v1/tokens/3cL47ohWa2HApLYKtqPsqkjaxJ6HLvT5Ri1KvWdXpump/report",
+          "fetched_at": "2026-11-25T19:53:22Z",
+          "detail": "Top 10 non-pool wallets hold 25% or less. RugCheck holders after getTokenLargestAccounts was unavailable."
+        },
+        {
+          "id": "C5",
+          "name": "Largest non-pool wallet",
+          "status": "pass",
+          "value": 1.8212380072578187,
+          "source": "RugCheck https://api.rugcheck.xyz/v1/tokens/3cL47ohWa2HApLYKtqPsqkjaxJ6HLvT5Ri1KvWdXpump/report",
+          "fetched_at": "2026-11-25T19:53:22Z",
+          "detail": "Largest non-pool wallet holds 15% or less. RugCheck holders after getTokenLargestAccounts was unavailable."
+        },
+        {
+          "id": "C6",
+          "name": "Liquidity USD",
+          "status": "warn",
+          "value": 38799.94,
+          "source": "https://api.dexscreener.com/tokens/v1/solana/3cL47ohWa2HApLYKtqPsqkjaxJ6HLvT5Ri1KvWdXpump",
+          "fetched_at": "2026-11-25T19:53:22Z",
+          "detail": "Liquidity is under $50,000."
+        },
+        {
+          "id": "C7",
+          "name": "Creator wallet holding",
+          "status": "pass",
+          "value": 0.0,
+          "source": "https://api.rugcheck.xyz/v1/tokens/3cL47ohWa2HApLYKtqPsqkjaxJ6HLvT5Ri1KvWdXpump/report",
+          "fetched_at": "2026-11-25T19:53:22Z",
+          "detail": "Creator holds 5% or less."
+        },
+        {
+          "id": "C8",
+          "name": "Creator sold in last 6h",
+          "status": "n/a",
+          "value": null,
+          "source": "https://api.rugcheck.xyz/v1/tokens/3cL47ohWa2HApLYKtqPsqkjaxJ6HLvT5Ri1KvWdXpump/report",
+          "fetched_at": "2026-11-25T19:53:22Z",
+          "detail": "RugCheck did not include a 6h creator-sale percent."
+        },
+        {
+          "id": "C9",
+          "name": "Creator launches in 7 days",
+          "status": "n/a",
+          "value": null,
+          "source": "https://api.rugcheck.xyz/v1/tokens/3cL47ohWa2HApLYKtqPsqkjaxJ6HLvT5Ri1KvWdXpump/report",
+          "fetched_at": "2026-11-25T19:53:22Z",
+          "detail": "No dated creator-token list in the RugCheck report."
+        },
+        {
+          "id": "C10",
+          "name": "Bundled launch",
+          "status": "n/a",
+          "value": null,
+          "source": "https://api.rugcheck.xyz/v1/tokens/3cL47ohWa2HApLYKtqPsqkjaxJ6HLvT5Ri1KvWdXpump/report",
+          "fetched_at": "2026-11-25T19:53:22Z",
+          "detail": "Best effort: no public field counts first-20 buyers funded by one wallet within 24h. Insider clusters are not used as a substitute."
+        },
+        {
+          "id": "C11",
+          "name": "Honeypot txns",
+          "status": "pass",
+          "value": {
+            "m5_buys": 183,
+            "m5_sells": 215
+          },
+          "source": "https://api.dexscreener.com/tokens/v1/solana/3cL47ohWa2HApLYKtqPsqkjaxJ6HLvT5Ri1KvWdXpump",
+          "fetched_at": "2026-11-25T19:53:22Z",
+          "detail": "DexScreener publishes a 5-minute bucket, not 10 minutes. This check uses m5 buys and sells."
+        },
+        {
+          "id": "C12",
+          "name": "Wash trading",
+          "status": "pass",
+          "value": {
+            "volume_over_liquidity": 0.5599116905850885,
+            "unique_traders_1h": null
+          },
+          "source": "https://api.dexscreener.com/tokens/v1/solana/3cL47ohWa2HApLYKtqPsqkjaxJ6HLvT5Ri1KvWdXpump",
+          "fetched_at": "2026-11-25T19:53:22Z",
+          "detail": "Wash condition was not met."
+        },
+        {
+          "id": "C13",
+          "name": "Coin age",
+          "status": "pass",
+          "value": 149869.0,
+          "source": "https://api.dexscreener.com/tokens/v1/solana/3cL47ohWa2HApLYKtqPsqkjaxJ6HLvT5Ri1KvWdXpump",
+          "fetched_at": "2026-11-25T19:53:22Z",
+          "detail": "Age is at least 3 minutes."
+        },
+        {
+          "id": "C14",
+          "name": "RugCheck risk list",
+          "status": "pass",
+          "value": [],
+          "source": "https://api.rugcheck.xyz/v1/tokens/3cL47ohWa2HApLYKtqPsqkjaxJ6HLvT5Ri1KvWdXpump/report",
+          "fetched_at": "2026-11-25T19:53:22Z",
+          "detail": "No danger or warn items."
+        },
+        {
+          "id": "D1",
+          "name": "Description talks to bots",
+          "status": "pass",
+          "value": null,
+          "source": "https://api.dexscreener.com/tokens/v1/solana/3cL47ohWa2HApLYKtqPsqkjaxJ6HLvT5Ri1KvWdXpump",
+          "fetched_at": "2026-11-25T19:53:22Z",
+          "detail": "No instruction-like token text."
+        }
+      ],
+      "price_usd": 0.0002582,
+      "price_source": "https://api.dexscreener.com/tokens/v1/solana/3cL47ohWa2HApLYKtqPsqkjaxJ6HLvT5Ri1KvWdXpump",
+      "price_fetched_at": "2026-11-25T19:53:22Z",
+      "audited_at": "2026-11-25T19:53:22Z",
+      "run_id": "2026-11-25T19:46:18Z",
+      "feed": "new_pairs",
+      "sources": [
+        "new_pairs"
+      ],
+      "pair_address": "CpfB8pTVj8Uzu55nKj6sX4KmV6zVe7J2t3C22mLgCVGg",
+      "pair_url": "https://dexscreener.com/solana/cpfb8ptvj8uzu55nkj6sx4kmv6zve7j2t3c22mlgcvgg",
+      "liquidity_usd": 38799.94,
+      "age_seconds": 149869.0,
+      "errors": [
+        "rpc getTokenLargestAccounts: getTokenLargestAccounts down after retries: unavailable https://api.mainnet-beta.solana.com: HTTP Error 429: Too Many Requests"
+      ],
+      "rpc_largest_accounts": null
+    },
+    {
+      "label": "memescan audit v2 — rule change started November 25, 2026, paper only, not original evidence.",
+      "rule_version": "v2",
+      "not_checked": "not checked (no free data): C8, C9, C10",
+      "mint": "DVdWuNK8ncn79B6z8nCiwcNAiwyFcmBPfChgxJGTpump",
+      "symbol": "4CHAN",
+      "name": "4CHAN",
+      "verdict": "CLEAN",
+      "score": 90,
+      "checks": [
+        {
+          "id": "C1",
+          "name": "Mint authority revoked",
+          "status": "pass",
+          "value": null,
+          "source": "https://solana-rpc.publicnode.com getAccountInfo",
+          "fetched_at": "2026-11-25T19:52:40Z",
+          "detail": "Mint authority is null."
+        },
+        {
+          "id": "C2",
+          "name": "Freeze authority revoked",
+          "status": "pass",
+          "value": null,
+          "source": "https://solana-rpc.publicnode.com getAccountInfo",
+          "fetched_at": "2026-11-25T19:52:40Z",
+          "detail": "Freeze authority is null."
+        },
+        {
+          "id": "C3",
+          "name": "LP burned or locked",
+          "status": "pass",
+          "value": 100.0,
+          "source": "https://api.rugcheck.xyz/v1/tokens/DVdWuNK8ncn79B6z8nCiwcNAiwyFcmBPfChgxJGTpump/report",
+          "fetched_at": "2026-11-25T19:52:40Z",
+          "detail": "Locked or burned LP is at least 80%."
+        },
+        {
+          "id": "C4",
+          "name": "Top 10 holders ex pool and burn",
+          "status": "pass",
+          "value": 14.110129502078403,
+          "source": "RugCheck https://api.rugcheck.xyz/v1/tokens/DVdWuNK8ncn79B6z8nCiwcNAiwyFcmBPfChgxJGTpump/report",
+          "fetched_at": "2026-11-25T19:52:40Z",
+          "detail": "Top 10 non-pool wallets hold 25% or less. RugCheck holders after getTokenLargestAccounts was unavailable."
+        },
+        {
+          "id": "C5",
+          "name": "Largest non-pool wallet",
+          "status": "pass",
+          "value": 2.9577082327197664,
+          "source": "RugCheck https://api.rugcheck.xyz/v1/tokens/DVdWuNK8ncn79B6z8nCiwcNAiwyFcmBPfChgxJGTpump/report",
+          "fetched_at": "2026-11-25T19:52:40Z",
+          "detail": "Largest non-pool wallet holds 15% or less. RugCheck holders after getTokenLargestAccounts was unavailable."
+        },
+        {
+          "id": "C6",
+          "name": "Liquidity USD",
+          "status": "warn",
+          "value": 49466.84,
+          "source": "https://api.dexscreener.com/tokens/v1/solana/DVdWuNK8ncn79B6z8nCiwcNAiwyFcmBPfChgxJGTpump",
+          "fetched_at": "2026-11-25T19:52:39Z",
+          "detail": "Liquidity is under $50,000."
+        },
+        {
+          "id": "C7",
+          "name": "Creator wallet holding",
+          "status": "pass",
+          "value": 0.0,
+          "source": "https://api.rugcheck.xyz/v1/tokens/DVdWuNK8ncn79B6z8nCiwcNAiwyFcmBPfChgxJGTpump/report",
+          "fetched_at": "2026-11-25T19:52:40Z",
+          "detail": "Creator holds 5% or less."
+        },
+        {
+          "id": "C8",
+          "name": "Creator sold in last 6h",
+          "status": "n/a",
+          "value": null,
+          "source": "https://api.rugcheck.xyz/v1/tokens/DVdWuNK8ncn79B6z8nCiwcNAiwyFcmBPfChgxJGTpump/report",
+          "fetched_at": "2026-11-25T19:52:40Z",
+          "detail": "RugCheck did not include a 6h creator-sale percent."
+        },
+        {
+          "id": "C9",
+          "name": "Creator launches in 7 days",
+          "status": "n/a",
+          "value": null,
+          "source": "https://api.rugcheck.xyz/v1/tokens/DVdWuNK8ncn79B6z8nCiwcNAiwyFcmBPfChgxJGTpump/report",
+          "fetched_at": "2026-11-25T19:52:40Z",
+          "detail": "No dated creator-token list in the RugCheck report."
+        },
+        {
+          "id": "C10",
+          "name": "Bundled launch",
+          "status": "n/a",
+          "value": null,
+          "source": "https://api.rugcheck.xyz/v1/tokens/DVdWuNK8ncn79B6z8nCiwcNAiwyFcmBPfChgxJGTpump/report",
+          "fetched_at": "2026-11-25T19:52:40Z",
+          "detail": "Best effort: no public field counts first-20 buyers funded by one wallet within 24h. Insider clusters are not used as a substitute."
+        },
+        {
+          "id": "C11",
+          "name": "Honeypot txns",
+          "status": "pass",
+          "value": {
+            "m5_buys": 42,
+            "m5_sells": 52
+          },
+          "source": "https://api.dexscreener.com/tokens/v1/solana/DVdWuNK8ncn79B6z8nCiwcNAiwyFcmBPfChgxJGTpump",
+          "fetched_at": "2026-11-25T19:52:39Z",
+          "detail": "DexScreener publishes a 5-minute bucket, not 10 minutes. This check uses m5 buys and sells."
+        },
+        {
+          "id": "C12",
+          "name": "Wash trading",
+          "status": "pass",
+          "value": {
+            "volume_over_liquidity": 0.6619048235140955,
+            "unique_traders_1h": null
+          },
+          "source": "https://api.dexscreener.com/tokens/v1/solana/DVdWuNK8ncn79B6z8nCiwcNAiwyFcmBPfChgxJGTpump",
+          "fetched_at": "2026-11-25T19:52:39Z",
+          "detail": "Wash condition was not met."
+        },
+        {
+          "id": "C13",
+          "name": "Coin age",
+          "status": "pass",
+          "value": 78707.0,
+          "source": "https://api.dexscreener.com/tokens/v1/solana/DVdWuNK8ncn79B6z8nCiwcNAiwyFcmBPfChgxJGTpump",
+          "fetched_at": "2026-11-25T19:52:39Z",
+          "detail": "Age is at least 3 minutes."
+        },
+        {
+          "id": "C14",
+          "name": "RugCheck risk list",
+          "status": "pass",
+          "value": [],
+          "source": "https://api.rugcheck.xyz/v1/tokens/DVdWuNK8ncn79B6z8nCiwcNAiwyFcmBPfChgxJGTpump/report",
+          "fetched_at": "2026-11-25T19:52:40Z",
+          "detail": "No danger or warn items."
+        },
+        {
+          "id": "D1",
+          "name": "Description talks to bots",
+          "status": "pass",
+          "value": null,
+          "source": "https://api.dexscreener.com/tokens/v1/solana/DVdWuNK8ncn79B6z8nCiwcNAiwyFcmBPfChgxJGTpump",
+          "fetched_at": "2026-11-25T19:52:39Z",
+          "detail": "No instruction-like token text."
+        }
+      ],
+      "price_usd": 0.0003544,
+      "price_source": "https://api.dexscreener.com/tokens/v1/solana/DVdWuNK8ncn79B6z8nCiwcNAiwyFcmBPfChgxJGTpump",
+      "price_fetched_at": "2026-11-25T19:52:39Z",
+      "audited_at": "2026-11-25T19:52:39Z",
+      "run_id": "2026-11-25T19:46:18Z",
+      "feed": "new_pairs",
+      "sources": [
+        "new_pairs"
+      ],
+      "pair_address": "Ak4wr2ueEAJMqZSEcGPMX9EhCrwWRngP8CskvdEh1e6H",
+      "pair_url": "https://dexscreener.com/solana/ak4wr2ueeajmqzsecgpmx9ehcrwwrngp8cskvdeh1e6h",
+      "liquidity_usd": 49466.84,
+      "age_seconds": 78707.0,
+      "errors": [
+        "rpc getTokenLargestAccounts: getTokenLargestAccounts down after retries: unavailable https://api.mainnet-beta.solana.com: HTTP Error 429: Too Many Requests"
+      ],
+      "rpc_largest_accounts": null
+    },
+    {
+      "label": "memescan audit v2 — rule change started November 25, 2026, paper only, not original evidence.",
+      "rule_version": "v2",
+      "not_checked": "not checked (no free data): C8, C9, C10",
+      "mint": "GisWWjhwrSud4aFGSHvTMt85Ky14sY7LeBFCpfoFpump",
+      "symbol": "Jimmies",
+      "name": "That really rustled my jimmies",
+      "verdict": "CLEAN",
+      "score": 100,
+      "checks": [
+        {
+          "id": "C1",
+          "name": "Mint authority revoked",
+          "status": "pass",
+          "value": null,
+          "source": "https://solana-rpc.publicnode.com getAccountInfo",
+          "fetched_at": "2026-11-25T19:51:53Z",
+          "detail": "Mint authority is null."
+        },
+        {
+          "id": "C2",
+          "name": "Freeze authority revoked",
+          "status": "pass",
+          "value": null,
+          "source": "https://solana-rpc.publicnode.com getAccountInfo",
+          "fetched_at": "2026-11-25T19:51:53Z",
+          "detail": "Freeze authority is null."
+        },
+        {
+          "id": "C3",
+          "name": "LP burned or locked",
+          "status": "pass",
+          "value": 100.0,
+          "source": "https://api.rugcheck.xyz/v1/tokens/GisWWjhwrSud4aFGSHvTMt85Ky14sY7LeBFCpfoFpump/report",
+          "fetched_at": "2026-11-25T19:51:53Z",
+          "detail": "Locked or burned LP is at least 80%."
+        },
+        {
+          "id": "C4",
+          "name": "Top 10 holders ex pool and burn",
+          "status": "pass",
+          "value": 1.5298418642793725,
+          "source": "RugCheck https://api.rugcheck.xyz/v1/tokens/GisWWjhwrSud4aFGSHvTMt85Ky14sY7LeBFCpfoFpump/report",
+          "fetched_at": "2026-11-25T19:51:53Z",
+          "detail": "Top 10 non-pool wallets hold 25% or less. RugCheck holders after getTokenLargestAccounts was unavailable."
+        },
+        {
+          "id": "C5",
+          "name": "Largest non-pool wallet",
+          "status": "pass",
+          "value": 0.15700936661589884,
+          "source": "RugCheck https://api.rugcheck.xyz/v1/tokens/GisWWjhwrSud4aFGSHvTMt85Ky14sY7LeBFCpfoFpump/report",
+          "fetched_at": "2026-11-25T19:51:53Z",
+          "detail": "Largest non-pool wallet holds 15% or less. RugCheck holders after getTokenLargestAccounts was unavailable."
+        },
+        {
+          "id": "C6",
+          "name": "Liquidity USD",
+          "status": "pass",
+          "value": 60432.13,
+          "source": "https://api.dexscreener.com/tokens/v1/solana/GisWWjhwrSud4aFGSHvTMt85Ky14sY7LeBFCpfoFpump",
+          "fetched_at": "2026-11-25T19:51:52Z",
+          "detail": "Liquidity is at least $50,000."
+        },
+        {
+          "id": "C7",
+          "name": "Creator wallet holding",
+          "status": "pass",
+          "value": 0.0,
+          "source": "https://api.rugcheck.xyz/v1/tokens/GisWWjhwrSud4aFGSHvTMt85Ky14sY7LeBFCpfoFpump/report",
+          "fetched_at": "2026-11-25T19:51:53Z",
+          "detail": "Creator holds 5% or less."
+        },
+        {
+          "id": "C8",
+          "name": "Creator sold in last 6h",
+          "status": "n/a",
+          "value": null,
+          "source": "https://api.rugcheck.xyz/v1/tokens/GisWWjhwrSud4aFGSHvTMt85Ky14sY7LeBFCpfoFpump/report",
+          "fetched_at": "2026-11-25T19:51:53Z",
+          "detail": "RugCheck did not include a 6h creator-sale percent."
+        },
+        {
+          "id": "C9",
+          "name": "Creator launches in 7 days",
+          "status": "n/a",
+          "value": null,
+          "source": "https://api.rugcheck.xyz/v1/tokens/GisWWjhwrSud4aFGSHvTMt85Ky14sY7LeBFCpfoFpump/report",
+          "fetched_at": "2026-11-25T19:51:53Z",
+          "detail": "No dated creator-token list in the RugCheck report."
+        },
+        {
+          "id": "C10",
+          "name": "Bundled launch",
+          "status": "n/a",
+          "value": null,
+          "source": "https://api.rugcheck.xyz/v1/tokens/GisWWjhwrSud4aFGSHvTMt85Ky14sY7LeBFCpfoFpump/report",
+          "fetched_at": "2026-11-25T19:51:53Z",
+          "detail": "Best effort: no public field counts first-20 buyers funded by one wallet within 24h. Insider clusters are not used as a substitute."
+        },
+        {
+          "id": "C11",
+          "name": "Honeypot txns",
+          "status": "pass",
+          "value": {
+            "m5_buys": 51,
+            "m5_sells": 7
+          },
+          "source": "https://api.dexscreener.com/tokens/v1/solana/GisWWjhwrSud4aFGSHvTMt85Ky14sY7LeBFCpfoFpump",
+          "fetched_at": "2026-11-25T19:51:52Z",
+          "detail": "DexScreener publishes a 5-minute bucket, not 10 minutes. This check uses m5 buys and sells."
+        },
+        {
+          "id": "C12",
+          "name": "Wash trading",
+          "status": "pass",
+          "value": {
+            "volume_over_liquidity": 0.28850629623678664,
+            "unique_traders_1h": null
+          },
+          "source": "https://api.dexscreener.com/tokens/v1/solana/GisWWjhwrSud4aFGSHvTMt85Ky14sY7LeBFCpfoFpump",
+          "fetched_at": "2026-11-25T19:51:52Z",
+          "detail": "Wash condition was not met."
+        },
+        {
+          "id": "C13",
+          "name": "Coin age",
+          "status": "pass",
+          "value": 74077.0,
+          "source": "https://api.dexscreener.com/tokens/v1/solana/GisWWjhwrSud4aFGSHvTMt85Ky14sY7LeBFCpfoFpump",
+          "fetched_at": "2026-11-25T19:51:52Z",
+          "detail": "Age is at least 3 minutes."
+        },
+        {
+          "id": "C14",
+          "name": "RugCheck risk list",
+          "status": "pass",
+          "value": [],
+          "source": "https://api.rugcheck.xyz/v1/tokens/GisWWjhwrSud4aFGSHvTMt85Ky14sY7LeBFCpfoFpump/report",
+          "fetched_at": "2026-11-25T19:51:53Z",
+          "detail": "No danger or warn items."
+        },
+        {
+          "id": "D1",
+          "name": "Description talks to bots",
+          "status": "pass",
+          "value": null,
+          "source": "https://api.dexscreener.com/tokens/v1/solana/GisWWjhwrSud4aFGSHvTMt85Ky14sY7LeBFCpfoFpump",
+          "fetched_at": "2026-11-25T19:51:52Z",
+          "detail": "No instruction-like token text."
+        }
+      ],
+      "price_usd": 0.0007037,
+      "price_source": "https://api.dexscreener.com/tokens/v1/solana/GisWWjhwrSud4aFGSHvTMt85Ky14sY7LeBFCpfoFpump",
+      "price_fetched_at": "2026-11-25T19:51:52Z",
+      "audited_at": "2026-11-25T19:51:52Z",
+      "run_id": "2026-11-25T19:46:18Z",
+      "feed": "new_pairs",
+      "sources": [
+        "new_pairs"
+      ],
+      "pair_address": "BXrbrMuLSW1qaS4P3R7AUPR6YX2E56Re94WJedoxLiV5",
+      "pair_url": "https://dexscreener.com/solana/bxrbrmulsw1qas4p3r7aupr6yx2e56re94wjedoxliv5",
+      "liquidity_usd": 60432.13,
+      "age_seconds": 74077.0,
+      "errors": [
+        "rpc getTokenLargestAccounts: getTokenLargestAccounts down after retries: unavailable https://api.mainnet-beta.solana.com: HTTP Error 429: Too Many Requests"
+      ],
+      "rpc_largest_accounts": null
+    },
+    {
+      "label": "memescan audit v2 — rule change started November 25, 2026, paper only, not original evidence.",
+      "rule_version": "v2",
+      "not_checked": "not checked (no free data): C8, C9, C10",
+      "mint": "4Di56UJzpnb7E4D7aLXFf7aLF5TrpJYv9Q3mR398pump",
+      "symbol": "PERRO",
+      "name": "Perro Coin",
+      "verdict": "CLEAN",
+      "score": 90,
+      "checks": [
+        {
+          "id": "C1",
+          "name": "Mint authority revoked",
+          "status": "pass",
+          "value": null,
+          "source": "https://solana-rpc.publicnode.com getAccountInfo",
+          "fetched_at": "2026-11-25T19:51:10Z",
+          "detail": "Mint authority is null."
+        },
+        {
+          "id": "C2",
+          "name": "Freeze authority revoked",
+          "status": "pass",
+          "value": null,
+          "source": "https://solana-rpc.publicnode.com getAccountInfo",
+          "fetched_at": "2026-11-25T19:51:10Z",
+          "detail": "Freeze authority is null."
+        },
+        {
+          "id": "C3",
+          "name": "LP burned or locked",
+          "status": "pass",
+          "value": 100.0,
+          "source": "https://api.rugcheck.xyz/v1/tokens/4Di56UJzpnb7E4D7aLXFf7aLF5TrpJYv9Q3mR398pump/report",
+          "fetched_at": "2026-11-25T19:51:10Z",
+          "detail": "Locked or burned LP is at least 80%."
+        },
+        {
+          "id": "C4",
+          "name": "Top 10 holders ex pool and burn",
+          "status": "pass",
+          "value": 18.019574405547072,
+          "source": "RugCheck https://api.rugcheck.xyz/v1/tokens/4Di56UJzpnb7E4D7aLXFf7aLF5TrpJYv9Q3mR398pump/report",
+          "fetched_at": "2026-11-25T19:51:10Z",
+          "detail": "Top 10 non-pool wallets hold 25% or less. RugCheck holders after getTokenLargestAccounts was unavailable."
+        },
+        {
+          "id": "C5",
+          "name": "Largest non-pool wallet",
+          "status": "pass",
+          "value": 3.3128935004584608,
+          "source": "RugCheck https://api.rugcheck.xyz/v1/tokens/4Di56UJzpnb7E4D7aLXFf7aLF5TrpJYv9Q3mR398pump/report",
+          "fetched_at": "2026-11-25T19:51:10Z",
+          "detail": "Largest non-pool wallet holds 15% or less. RugCheck holders after getTokenLargestAccounts was unavailable."
+        },
+        {
+          "id": "C6",
+          "name": "Liquidity USD",
+          "status": "warn",
+          "value": 28816.06,
+          "source": "https://api.dexscreener.com/tokens/v1/solana/4Di56UJzpnb7E4D7aLXFf7aLF5TrpJYv9Q3mR398pump",
+          "fetched_at": "2026-11-25T19:51:10Z",
+          "detail": "Liquidity is under $50,000."
+        },
+        {
+          "id": "C7",
+          "name": "Creator wallet holding",
+          "status": "pass",
+          "value": 0.0,
+          "source": "https://api.rugcheck.xyz/v1/tokens/4Di56UJzpnb7E4D7aLXFf7aLF5TrpJYv9Q3mR398pump/report",
+          "fetched_at": "2026-11-25T19:51:10Z",
+          "detail": "Creator holds 5% or less."
+        },
+        {
+          "id": "C8",
+          "name": "Creator sold in last 6h",
+          "status": "n/a",
+          "value": null,
+          "source": "https://api.rugcheck.xyz/v1/tokens/4Di56UJzpnb7E4D7aLXFf7aLF5TrpJYv9Q3mR398pump/report",
+          "fetched_at": "2026-11-25T19:51:10Z",
+          "detail": "RugCheck did not include a 6h creator-sale percent."
+        },
+        {
+          "id": "C9",
+          "name": "Creator launches in 7 days",
+          "status": "n/a",
+          "value": null,
+          "source": "https://api.rugcheck.xyz/v1/tokens/4Di56UJzpnb7E4D7aLXFf7aLF5TrpJYv9Q3mR398pump/report",
+          "fetched_at": "2026-11-25T19:51:10Z",
+          "detail": "No dated creator-token list in the RugCheck report."
+        },
+        {
+          "id": "C10",
+          "name": "Bundled launch",
+          "status": "n/a",
+          "value": null,
+          "source": "https://api.rugcheck.xyz/v1/tokens/4Di56UJzpnb7E4D7aLXFf7aLF5TrpJYv9Q3mR398pump/report",
+          "fetched_at": "2026-11-25T19:51:10Z",
+          "detail": "Best effort: no public field counts first-20 buyers funded by one wallet within 24h. Insider clusters are not used as a substitute."
+        },
+        {
+          "id": "C11",
+          "name": "Honeypot txns",
+          "status": "pass",
+          "value": {
+            "m5_buys": 10,
+            "m5_sells": 20
+          },
+          "source": "https://api.dexscreener.com/tokens/v1/solana/4Di56UJzpnb7E4D7aLXFf7aLF5TrpJYv9Q3mR398pump",
+          "fetched_at": "2026-11-25T19:51:10Z",
+          "detail": "DexScreener publishes a 5-minute bucket, not 10 minutes. This check uses m5 buys and sells."
+        },
+        {
+          "id": "C12",
+          "name": "Wash trading",
+          "status": "pass",
+          "value": {
+            "volume_over_liquidity": 0.7946006497765481,
+            "unique_traders_1h": null
+          },
+          "source": "https://api.dexscreener.com/tokens/v1/solana/4Di56UJzpnb7E4D7aLXFf7aLF5TrpJYv9Q3mR398pump",
+          "fetched_at": "2026-11-25T19:51:10Z",
+          "detail": "Wash condition was not met."
+        },
+        {
+          "id": "C13",
+          "name": "Coin age",
+          "status": "pass",
+          "value": 66420.0,
+          "source": "https://api.dexscreener.com/tokens/v1/solana/4Di56UJzpnb7E4D7aLXFf7aLF5TrpJYv9Q3mR398pump",
+          "fetched_at": "2026-11-25T19:51:10Z",
+          "detail": "Age is at least 3 minutes."
+        },
+        {
+          "id": "C14",
+          "name": "RugCheck risk list",
+          "status": "pass",
+          "value": [],
+          "source": "https://api.rugcheck.xyz/v1/tokens/4Di56UJzpnb7E4D7aLXFf7aLF5TrpJYv9Q3mR398pump/report",
+          "fetched_at": "2026-11-25T19:51:10Z",
+          "detail": "No danger or warn items."
+        },
+        {
+          "id": "D1",
+          "name": "Description talks to bots",
+          "status": "pass",
+          "value": null,
+          "source": "https://api.dexscreener.com/tokens/v1/solana/4Di56UJzpnb7E4D7aLXFf7aLF5TrpJYv9Q3mR398pump",
+          "fetched_at": "2026-11-25T19:51:10Z",
+          "detail": "No instruction-like token text."
+        }
+      ],
+      "price_usd": 0.0001334,
+      "price_source": "https://api.dexscreener.com/tokens/v1/solana/4Di56UJzpnb7E4D7aLXFf7aLF5TrpJYv9Q3mR398pump",
+      "price_fetched_at": "2026-11-25T19:51:10Z",
+      "audited_at": "2026-11-25T19:51:10Z",
+      "run_id": "2026-11-25T19:46:18Z",
+      "feed": "new_pairs",
+      "sources": [
+        "new_pairs"
+      ],
+      "pair_address": "4s1epXdedd7TY1UtJ7frou3saSxuG98os7HcPtNEu8WH",
+      "pair_url": "https://dexscreener.com/solana/4s1epxdedd7ty1utj7frou3sasxug98os7hcptneu8wh",
+      "liquidity_usd": 28816.06,
+      "age_seconds": 66420.0,
+      "errors": [
+        "rpc getTokenLargestAccounts: getTokenLargestAccounts down after retries: unavailable https://api.mainnet-beta.solana.com: HTTP Error 429: Too Many Requests"
+      ],
+      "rpc_largest_accounts": null
+    },
+    {
+      "label": "memescan audit v2 — rule change started November 25, 2026, paper only, not original evidence.",
+      "rule_version": "v2",
+      "not_checked": "not checked (no free data): C8, C9, C10",
+      "mint": "3Tg6YnNrfPdFfsY14MaNsDMWLseAyrUDS3myJtbaJN6f",
+      "symbol": "BASKET",
+      "name": "Basket",
+      "verdict": "CLEAN",
+      "score": 100,
+      "checks": [
+        {
+          "id": "C1",
+          "name": "Mint authority revoked",
+          "status": "pass",
+          "value": null,
+          "source": "https://solana-rpc.publicnode.com getAccountInfo",
+          "fetched_at": "2026-11-25T19:50:27Z",
+          "detail": "Mint authority is null."
+        },
+        {
+          "id": "C2",
+          "name": "Freeze authority revoked",
+          "status": "pass",
+          "value": null,
+          "source": "https://solana-rpc.publicnode.com getAccountInfo",
+          "fetched_at": "2026-11-25T19:50:27Z",
+          "detail": "Freeze authority is null."
+        },
+        {
+          "id": "C3",
+          "name": "LP burned or locked",
+          "status": "pass",
+          "value": 99.97999999999323,
+          "source": "https://api.rugcheck.xyz/v1/tokens/3Tg6YnNrfPdFfsY14MaNsDMWLseAyrUDS3myJtbaJN6f/report",
+          "fetched_at": "2026-11-25T19:50:27Z",
+          "detail": "Locked or burned LP is at least 80%."
+        },
+        {
+          "id": "C4",
+          "name": "Top 10 holders ex pool and burn",
+          "status": "pass",
+          "value": 12.676625115827216,
+          "source": "RugCheck https://api.rugcheck.xyz/v1/tokens/3Tg6YnNrfPdFfsY14MaNsDMWLseAyrUDS3myJtbaJN6f/report",
+          "fetched_at": "2026-11-25T19:50:27Z",
+          "detail": "Top 10 non-pool wallets hold 25% or less. RugCheck holders after getTokenLargestAccounts was unavailable."
+        },
+        {
+          "id": "C5",
+          "name": "Largest non-pool wallet",
+          "status": "pass",
+          "value": 2.828311775372777,
+          "source": "RugCheck https://api.rugcheck.xyz/v1/tokens/3Tg6YnNrfPdFfsY14MaNsDMWLseAyrUDS3myJtbaJN6f/report",
+          "fetched_at": "2026-11-25T19:50:27Z",
+          "detail": "Largest non-pool wallet holds 15% or less. RugCheck holders after getTokenLargestAccounts was unavailable."
+        },
+        {
+          "id": "C6",
+          "name": "Liquidity USD",
+          "status": "pass",
+          "value": 122302.85,
+          "source": "https://api.dexscreener.com/tokens/v1/solana/3Tg6YnNrfPdFfsY14MaNsDMWLseAyrUDS3myJtbaJN6f",
+          "fetched_at": "2026-11-25T19:50:26Z",
+          "detail": "Liquidity is at least $50,000."
+        },
+        {
+          "id": "C7",
+          "name": "Creator wallet holding",
+          "status": "pass",
+          "value": 0.0,
+          "source": "https://api.rugcheck.xyz/v1/tokens/3Tg6YnNrfPdFfsY14MaNsDMWLseAyrUDS3myJtbaJN6f/report",
+          "fetched_at": "2026-11-25T19:50:27Z",
+          "detail": "Creator holds 5% or less."
+        },
+        {
+          "id": "C8",
+          "name": "Creator sold in last 6h",
+          "status": "n/a",
+          "value": null,
+          "source": "https://api.rugcheck.xyz/v1/tokens/3Tg6YnNrfPdFfsY14MaNsDMWLseAyrUDS3myJtbaJN6f/report",
+          "fetched_at": "2026-11-25T19:50:27Z",
+          "detail": "RugCheck did not include a 6h creator-sale percent."
+        },
+        {
+          "id": "C9",
+          "name": "Creator launches in 7 days",
+          "status": "n/a",
+          "value": null,
+          "source": "https://api.rugcheck.xyz/v1/tokens/3Tg6YnNrfPdFfsY14MaNsDMWLseAyrUDS3myJtbaJN6f/report",
+          "fetched_at": "2026-11-25T19:50:27Z",
+          "detail": "No dated creator-token list in the RugCheck report."
+        },
+        {
+          "id": "C10",
+          "name": "Bundled launch",
+          "status": "n/a",
+          "value": null,
+          "source": "https://api.rugcheck.xyz/v1/tokens/3Tg6YnNrfPdFfsY14MaNsDMWLseAyrUDS3myJtbaJN6f/report",
+          "fetched_at": "2026-11-25T19:50:27Z",
+          "detail": "Best effort: no public field counts first-20 buyers funded by one wallet within 24h. Insider clusters are not used as a substitute."
+        },
+        {
+          "id": "C11",
+          "name": "Honeypot txns",
+          "status": "pass",
+          "value": {
+            "m5_buys": 40,
+            "m5_sells": 37
+          },
+          "source": "https://api.dexscreener.com/tokens/v1/solana/3Tg6YnNrfPdFfsY14MaNsDMWLseAyrUDS3myJtbaJN6f",
+          "fetched_at": "2026-11-25T19:50:26Z",
+          "detail": "DexScreener publishes a 5-minute bucket, not 10 minutes. This check uses m5 buys and sells."
+        },
+        {
+          "id": "C12",
+          "name": "Wash trading",
+          "status": "pass",
+          "value": {
+            "volume_over_liquidity": 0.6992021036304551,
+            "unique_traders_1h": null
+          },
+          "source": "https://api.dexscreener.com/tokens/v1/solana/3Tg6YnNrfPdFfsY14MaNsDMWLseAyrUDS3myJtbaJN6f",
+          "fetched_at": "2026-11-25T19:50:26Z",
+          "detail": "Wash condition was not met."
+        },
+        {
+          "id": "C13",
+          "name": "Coin age",
+          "status": "pass",
+          "value": 54444.0,
+          "source": "https://api.dexscreener.com/tokens/v1/solana/3Tg6YnNrfPdFfsY14MaNsDMWLseAyrUDS3myJtbaJN6f",
+          "fetched_at": "2026-11-25T19:50:26Z",
+          "detail": "Age is at least 3 minutes."
+        },
+        {
+          "id": "C14",
+          "name": "RugCheck risk list",
+          "status": "pass",
+          "value": [],
+          "source": "https://api.rugcheck.xyz/v1/tokens/3Tg6YnNrfPdFfsY14MaNsDMWLseAyrUDS3myJtbaJN6f/report",
+          "fetched_at": "2026-11-25T19:50:27Z",
+          "detail": "No danger or warn items."
+        },
+        {
+          "id": "D1",
+          "name": "Description talks to bots",
+          "status": "pass",
+          "value": null,
+          "source": "https://api.dexscreener.com/tokens/v1/solana/3Tg6YnNrfPdFfsY14MaNsDMWLseAyrUDS3myJtbaJN6f",
+          "fetched_at": "2026-11-25T19:50:26Z",
+          "detail": "No instruction-like token text."
+        }
+      ],
+      "price_usd": 0.0007295,
+      "price_source": "https://api.dexscreener.com/tokens/v1/solana/3Tg6YnNrfPdFfsY14MaNsDMWLseAyrUDS3myJtbaJN6f",
+      "price_fetched_at": "2026-11-25T19:50:26Z",
+      "audited_at": "2026-11-25T19:50:26Z",
+      "run_id": "2026-11-25T19:46:18Z",
+      "feed": "new_pairs",
+      "sources": [
+        "new_pairs"
+      ],
+      "pair_address": "CixcofsPwHnYWjsoDxXxvLd6uM5fH7w8MFPL9mpQpqtX",
+      "pair_url": "https://dexscreener.com/solana/cixcofspwhnywjsodxxxvld6um5fh7w8mfpl9mpqpqtx",
+      "liquidity_usd": 122302.85,
+      "age_seconds": 54444.0,
+      "errors": [
+        "rpc getTokenLargestAccounts: getTokenLargestAccounts down after retries: unavailable https://api.mainnet-beta.solana.com: HTTP Error 429: Too Many Requests"
+      ],
+      "rpc_largest_accounts": null
+    },
+    {
+      "label": "memescan audit v2 — rule change started November 25, 2026, paper only, not original evidence.",
+      "rule_version": "v2",
+      "not_checked": "not checked (no free data): C8, C9, C10",
+      "mint": "Ya9PEJA9UZmbT5aim46TA6cPCkTNfsqEn1aEVrnpump",
+      "symbol": "ATX",
+      "name": "ATX",
+      "verdict": "CLEAN",
+      "score": 90,
+      "checks": [
+        {
+          "id": "C1",
+          "name": "Mint authority revoked",
+          "status": "pass",
+          "value": null,
+          "source": "https://solana-rpc.publicnode.com getAccountInfo",
+          "fetched_at": "2026-11-25T19:49:40Z",
+          "detail": "Mint authority is null."
+        },
+        {
+          "id": "C2",
+          "name": "Freeze authority revoked",
+          "status": "pass",
+          "value": null,
+          "source": "https://solana-rpc.publicnode.com getAccountInfo",
+          "fetched_at": "2026-11-25T19:49:40Z",
+          "detail": "Freeze authority is null."
+        },
+        {
+          "id": "C3",
+          "name": "LP burned or locked",
+          "status": "pass",
+          "value": 100.0,
+          "source": "https://api.rugcheck.xyz/v1/tokens/Ya9PEJA9UZmbT5aim46TA6cPCkTNfsqEn1aEVrnpump/report",
+          "fetched_at": "2026-11-25T19:49:40Z",
+          "detail": "Locked or burned LP is at least 80%."
+        },
+        {
+          "id": "C4",
+          "name": "Top 10 holders ex pool and burn",
+          "status": "pass",
+          "value": 0.4429500628099831,
+          "source": "RugCheck https://api.rugcheck.xyz/v1/tokens/Ya9PEJA9UZmbT5aim46TA6cPCkTNfsqEn1aEVrnpump/report",
+          "fetched_at": "2026-11-25T19:49:40Z",
+          "detail": "Top 10 non-pool wallets hold 25% or less. RugCheck holders after getTokenLargestAccounts was unavailable."
+        },
+        {
+          "id": "C5",
+          "name": "Largest non-pool wallet",
+          "status": "pass",
+          "value": 0.04429500629926833,
+          "source": "RugCheck https://api.rugcheck.xyz/v1/tokens/Ya9PEJA9UZmbT5aim46TA6cPCkTNfsqEn1aEVrnpump/report",
+          "fetched_at": "2026-11-25T19:49:40Z",
+          "detail": "Largest non-pool wallet holds 15% or less. RugCheck holders after getTokenLargestAccounts was unavailable."
+        },
+        {
+          "id": "C6",
+          "name": "Liquidity USD",
+          "status": "pass",
+          "value": 3039546.98,
+          "source": "https://api.dexscreener.com/tokens/v1/solana/Ya9PEJA9UZmbT5aim46TA6cPCkTNfsqEn1aEVrnpump",
+          "fetched_at": "2026-11-25T19:49:40Z",
+          "detail": "Liquidity is at least $50,000."
+        },
+        {
+          "id": "C7",
+          "name": "Creator wallet holding",
+          "status": "pass",
+          "value": 0.0,
+          "source": "https://api.rugcheck.xyz/v1/tokens/Ya9PEJA9UZmbT5aim46TA6cPCkTNfsqEn1aEVrnpump/report",
+          "fetched_at": "2026-11-25T19:49:40Z",
+          "detail": "Creator holds 5% or less."
+        },
+        {
+          "id": "C8",
+          "name": "Creator sold in last 6h",
+          "status": "n/a",
+          "value": null,
+          "source": "https://api.rugcheck.xyz/v1/tokens/Ya9PEJA9UZmbT5aim46TA6cPCkTNfsqEn1aEVrnpump/report",
+          "fetched_at": "2026-11-25T19:49:40Z",
+          "detail": "RugCheck did not include a 6h creator-sale percent."
+        },
+        {
+          "id": "C9",
+          "name": "Creator launches in 7 days",
+          "status": "n/a",
+          "value": null,
+          "source": "https://api.rugcheck.xyz/v1/tokens/Ya9PEJA9UZmbT5aim46TA6cPCkTNfsqEn1aEVrnpump/report",
+          "fetched_at": "2026-11-25T19:49:40Z",
+          "detail": "No dated creator-token list in the RugCheck report."
+        },
+        {
+          "id": "C10",
+          "name": "Bundled launch",
+          "status": "n/a",
+          "value": null,
+          "source": "https://api.rugcheck.xyz/v1/tokens/Ya9PEJA9UZmbT5aim46TA6cPCkTNfsqEn1aEVrnpump/report",
+          "fetched_at": "2026-11-25T19:49:40Z",
+          "detail": "Best effort: no public field counts first-20 buyers funded by one wallet within 24h. Insider clusters are not used as a substitute."
+        },
+        {
+          "id": "C11",
+          "name": "Honeypot txns",
+          "status": "pass",
+          "value": {
+            "m5_buys": 493,
+            "m5_sells": 183
+          },
+          "source": "https://api.dexscreener.com/tokens/v1/solana/Ya9PEJA9UZmbT5aim46TA6cPCkTNfsqEn1aEVrnpump",
+          "fetched_at": "2026-11-25T19:49:40Z",
+          "detail": "DexScreener publishes a 5-minute bucket, not 10 minutes. This check uses m5 buys and sells."
+        },
+        {
+          "id": "C12",
+          "name": "Wash trading",
+          "status": "pass",
+          "value": {
+            "volume_over_liquidity": 0.04511307800216992,
+            "unique_traders_1h": null
+          },
+          "source": "https://api.dexscreener.com/tokens/v1/solana/Ya9PEJA9UZmbT5aim46TA6cPCkTNfsqEn1aEVrnpump",
+          "fetched_at": "2026-11-25T19:49:40Z",
+          "detail": "Wash condition was not met."
+        },
+        {
+          "id": "C13",
+          "name": "Coin age",
+          "status": "pass",
+          "value": 41227.0,
+          "source": "https://api.dexscreener.com/tokens/v1/solana/Ya9PEJA9UZmbT5aim46TA6cPCkTNfsqEn1aEVrnpump",
+          "fetched_at": "2026-11-25T19:49:40Z",
+          "detail": "Age is at least 3 minutes."
+        },
+        {
+          "id": "C14",
+          "name": "RugCheck risk list",
+          "status": "warn",
+          "value": [
+            "warn",
+            "warn"
+          ],
+          "source": "https://api.rugcheck.xyz/v1/tokens/Ya9PEJA9UZmbT5aim46TA6cPCkTNfsqEn1aEVrnpump/report",
+          "fetched_at": "2026-11-25T19:49:40Z",
+          "detail": "RugCheck lists a warn item and no danger item."
+        },
+        {
+          "id": "D1",
+          "name": "Description talks to bots",
+          "status": "pass",
+          "value": null,
+          "source": "https://api.dexscreener.com/tokens/v1/solana/Ya9PEJA9UZmbT5aim46TA6cPCkTNfsqEn1aEVrnpump",
+          "fetched_at": "2026-11-25T19:49:40Z",
+          "detail": "No instruction-like token text."
+        }
+      ],
+      "price_usd": 1.86,
+      "price_source": "https://api.dexscreener.com/tokens/v1/solana/Ya9PEJA9UZmbT5aim46TA6cPCkTNfsqEn1aEVrnpump",
+      "price_fetched_at": "2026-11-25T19:49:40Z",
+      "audited_at": "2026-11-25T19:49:40Z",
+      "run_id": "2026-11-25T19:46:18Z",
+      "feed": "profile",
+      "sources": [
+        "profile"
+      ],
+      "pair_address": "BJbmxBiGv7sQRZa9soKci4StfrqTxLiWFFBWPoVKSqVQ",
+      "pair_url": "https://dexscreener.com/solana/bjbmxbigv7sqrza9sokci4stfrqtxliwffbwpovksqvq",
+      "liquidity_usd": 3039546.98,
+      "age_seconds": 41227.0,
+      "errors": [
+        "rpc getTokenLargestAccounts: getTokenLargestAccounts down after retries: unavailable https://api.mainnet-beta.solana.com: HTTP Error 429: Too Many Requests"
+      ],
+      "rpc_largest_accounts": null
+    },
+    {
+      "label": "memescan audit v2 — rule change started November 25, 2026, paper only, not original evidence.",
+      "rule_version": "v2",
+      "not_checked": "not checked (no free data): C8, C9, C10",
+      "mint": "5EmvWDizkpjAXbcfCcVq69w1id8GaLzi4LLwtuSgpump",
+      "symbol": "Pompom",
+      "name": "Pompompurin",
+      "verdict": "CLEAN",
+      "score": 100,
+      "checks": [
+        {
+          "id": "C1",
+          "name": "Mint authority revoked",
+          "status": "pass",
+          "value": null,
+          "source": "https://solana-rpc.publicnode.com getAccountInfo",
+          "fetched_at": "2026-11-25T19:48:57Z",
+          "detail": "Mint authority is null."
+        },
+        {
+          "id": "C2",
+          "name": "Freeze authority revoked",
+          "status": "pass",
+          "value": null,
+          "source": "https://solana-rpc.publicnode.com getAccountInfo",
+          "fetched_at": "2026-11-25T19:48:57Z",
+          "detail": "Freeze authority is null."
+        },
+        {
+          "id": "C3",
+          "name": "LP burned or locked",
+          "status": "pass",
+          "value": 99.96314750883711,
+          "source": "https://api.rugcheck.xyz/v1/tokens/5EmvWDizkpjAXbcfCcVq69w1id8GaLzi4LLwtuSgpump/report",
+          "fetched_at": "2026-11-25T19:48:57Z",
+          "detail": "Locked or burned LP is at least 80%."
+        },
+        {
+          "id": "C4",
+          "name": "Top 10 holders ex pool and burn",
+          "status": "pass",
+          "value": 12.22574760356101,
+          "source": "RugCheck https://api.rugcheck.xyz/v1/tokens/5EmvWDizkpjAXbcfCcVq69w1id8GaLzi4LLwtuSgpump/report",
+          "fetched_at": "2026-11-25T19:48:57Z",
+          "detail": "Top 10 non-pool wallets hold 25% or less. RugCheck holders after getTokenLargestAccounts was unavailable."
+        },
+        {
+          "id": "C5",
+          "name": "Largest non-pool wallet",
+          "status": "pass",
+          "value": 1.5568737798046033,
+          "source": "RugCheck https://api.rugcheck.xyz/v1/tokens/5EmvWDizkpjAXbcfCcVq69w1id8GaLzi4LLwtuSgpump/report",
+          "fetched_at": "2026-11-25T19:48:57Z",
+          "detail": "Largest non-pool wallet holds 15% or less. RugCheck holders after getTokenLargestAccounts was unavailable."
+        },
+        {
+          "id": "C6",
+          "name": "Liquidity USD",
+          "status": "pass",
+          "value": 53104.75,
+          "source": "https://api.dexscreener.com/tokens/v1/solana/5EmvWDizkpjAXbcfCcVq69w1id8GaLzi4LLwtuSgpump",
+          "fetched_at": "2026-11-25T19:48:57Z",
+          "detail": "Liquidity is at least $50,000."
+        },
+        {
+          "id": "C7",
+          "name": "Creator wallet holding",
+          "status": "pass",
+          "value": 0.0,
+          "source": "https://api.rugcheck.xyz/v1/tokens/5EmvWDizkpjAXbcfCcVq69w1id8GaLzi4LLwtuSgpump/report",
+          "fetched_at": "2026-11-25T19:48:57Z",
+          "detail": "Creator holds 5% or less."
+        },
+        {
+          "id": "C8",
+          "name": "Creator sold in last 6h",
+          "status": "n/a",
+          "value": null,
+          "source": "https://api.rugcheck.xyz/v1/tokens/5EmvWDizkpjAXbcfCcVq69w1id8GaLzi4LLwtuSgpump/report",
+          "fetched_at": "2026-11-25T19:48:57Z",
+          "detail": "RugCheck did not include a 6h creator-sale percent."
+        },
+        {
+          "id": "C9",
+          "name": "Creator launches in 7 days",
+          "status": "n/a",
+          "value": null,
+          "source": "https://api.rugcheck.xyz/v1/tokens/5EmvWDizkpjAXbcfCcVq69w1id8GaLzi4LLwtuSgpump/report",
+          "fetched_at": "2026-11-25T19:48:57Z",
+          "detail": "No dated creator-token list in the RugCheck report."
+        },
+        {
+          "id": "C10",
+          "name": "Bundled launch",
+          "status": "n/a",
+          "value": null,
+          "source": "https://api.rugcheck.xyz/v1/tokens/5EmvWDizkpjAXbcfCcVq69w1id8GaLzi4LLwtuSgpump/report",
+          "fetched_at": "2026-11-25T19:48:57Z",
+          "detail": "Best effort: no public field counts first-20 buyers funded by one wallet within 24h. Insider clusters are not used as a substitute."
+        },
+        {
+          "id": "C11",
+          "name": "Honeypot txns",
+          "status": "pass",
+          "value": {
+            "m5_buys": 97,
+            "m5_sells": 91
+          },
+          "source": "https://api.dexscreener.com/tokens/v1/solana/5EmvWDizkpjAXbcfCcVq69w1id8GaLzi4LLwtuSgpump",
+          "fetched_at": "2026-11-25T19:48:57Z",
+          "detail": "DexScreener publishes a 5-minute bucket, not 10 minutes. This check uses m5 buys and sells."
+        },
+        {
+          "id": "C12",
+          "name": "Wash trading",
+          "status": "pass",
+          "value": {
+            "volume_over_liquidity": 3.527944487075073,
+            "unique_traders_1h": null
+          },
+          "source": "https://api.dexscreener.com/tokens/v1/solana/5EmvWDizkpjAXbcfCcVq69w1id8GaLzi4LLwtuSgpump",
+          "fetched_at": "2026-11-25T19:48:57Z",
+          "detail": "Wash condition was not met."
+        },
+        {
+          "id": "C13",
+          "name": "Coin age",
+          "status": "pass",
+          "value": 30733.0,
+          "source": "https://api.dexscreener.com/tokens/v1/solana/5EmvWDizkpjAXbcfCcVq69w1id8GaLzi4LLwtuSgpump",
+          "fetched_at": "2026-11-25T19:48:57Z",
+          "detail": "Age is at least 3 minutes."
+        },
+        {
+          "id": "C14",
+          "name": "RugCheck risk list",
+          "status": "pass",
+          "value": [],
+          "source": "https://api.rugcheck.xyz/v1/tokens/5EmvWDizkpjAXbcfCcVq69w1id8GaLzi4LLwtuSgpump/report",
+          "fetched_at": "2026-11-25T19:48:57Z",
+          "detail": "No danger or warn items."
+        },
+        {
+          "id": "D1",
+          "name": "Description talks to bots",
+          "status": "pass",
+          "value": null,
+          "source": "https://api.dexscreener.com/tokens/v1/solana/5EmvWDizkpjAXbcfCcVq69w1id8GaLzi4LLwtuSgpump",
+          "fetched_at": "2026-11-25T19:48:57Z",
+          "detail": "No instruction-like token text."
+        }
+      ],
+      "price_usd": 0.0004331,
+      "price_source": "https://api.dexscreener.com/tokens/v1/solana/5EmvWDizkpjAXbcfCcVq69w1id8GaLzi4LLwtuSgpump",
+      "price_fetched_at": "2026-11-25T19:48:57Z",
+      "audited_at": "2026-11-25T19:48:57Z",
+      "run_id": "2026-11-25T19:46:18Z",
+      "feed": "boost,profile,new_pairs",
+      "sources": [
+        "boost",
+        "profile",
+        "new_pairs"
+      ],
+      "pair_address": "7kNYdYbHbGMdQczmKSxqNzg4p4pGc6VpERzMfPBptGso",
+      "pair_url": "https://dexscreener.com/solana/7knydybhbgmdqczmksxqnzg4p4pgc6vperzmfpbptgso",
+      "liquidity_usd": 53104.75,
+      "age_seconds": 30733.0,
+      "errors": [
+        "rpc getTokenLargestAccounts: getTokenLargestAccounts down after retries: unavailable https://api.mainnet-beta.solana.com: HTTP Error 429: Too Many Requests"
+      ],
+      "rpc_largest_accounts": null
+    },
+    {
+      "label": "memescan audit v2 — rule change started November 25, 2026, paper only, not original evidence.",
+      "rule_version": "v2",
+      "not_checked": "not checked (no free data): C8, C9, C10",
+      "mint": "EKAYUgoDp283tNs3QNKY42NydabpLLXUSSqFv8mCS4nL",
+      "symbol": "MEDIC",
+      "name": "Medic AI",
+      "verdict": "CLEAN",
+      "score": 80,
+      "checks": [
+        {
+          "id": "C1",
+          "name": "Mint authority revoked",
+          "status": "pass",
+          "value": null,
+          "source": "https://solana-rpc.publicnode.com getAccountInfo",
+          "fetched_at": "2026-11-25T19:48:10Z",
+          "detail": "Mint authority is null."
+        },
+        {
+          "id": "C2",
+          "name": "Freeze authority revoked",
+          "status": "pass",
+          "value": null,
+          "source": "https://solana-rpc.publicnode.com getAccountInfo",
+          "fetched_at": "2026-11-25T19:48:10Z",
+          "detail": "Freeze authority is null."
+        },
+        {
+          "id": "C3",
+          "name": "LP burned or locked",
+          "status": "pass",
+          "value": 100.0,
+          "source": "https://api.rugcheck.xyz/v1/tokens/EKAYUgoDp283tNs3QNKY42NydabpLLXUSSqFv8mCS4nL/report",
+          "fetched_at": "2026-11-25T19:48:10Z",
+          "detail": "Locked or burned LP is at least 80%."
+        },
+        {
+          "id": "C4",
+          "name": "Top 10 holders ex pool and burn",
+          "status": "warn",
+          "value": 47.075398745694194,
+          "source": "RugCheck https://api.rugcheck.xyz/v1/tokens/EKAYUgoDp283tNs3QNKY42NydabpLLXUSSqFv8mCS4nL/report",
+          "fetched_at": "2026-11-25T19:48:10Z",
+          "detail": "Top 10 non-pool wallets hold more than 25%. RugCheck holders after getTokenLargestAccounts was unavailable."
+        },
+        {
+          "id": "C5",
+          "name": "Largest non-pool wallet",
+          "status": "pass",
+          "value": 10.593511505599015,
+          "source": "RugCheck https://api.rugcheck.xyz/v1/tokens/EKAYUgoDp283tNs3QNKY42NydabpLLXUSSqFv8mCS4nL/report",
+          "fetched_at": "2026-11-25T19:48:10Z",
+          "detail": "Largest non-pool wallet holds 15% or less. RugCheck holders after getTokenLargestAccounts was unavailable."
+        },
+        {
+          "id": "C6",
+          "name": "Liquidity USD",
+          "status": "warn",
+          "value": 40224.77,
+          "source": "https://api.dexscreener.com/tokens/v1/solana/EKAYUgoDp283tNs3QNKY42NydabpLLXUSSqFv8mCS4nL",
+          "fetched_at": "2026-11-25T19:48:10Z",
+          "detail": "Liquidity is under $50,000."
+        },
+        {
+          "id": "C7",
+          "name": "Creator wallet holding",
+          "status": "pass",
+          "value": 3.419391394632053,
+          "source": "https://api.rugcheck.xyz/v1/tokens/EKAYUgoDp283tNs3QNKY42NydabpLLXUSSqFv8mCS4nL/report",
+          "fetched_at": "2026-11-25T19:48:10Z",
+          "detail": "Creator holds 5% or less."
+        },
+        {
+          "id": "C8",
+          "name": "Creator sold in last 6h",
+          "status": "n/a",
+          "value": null,
+          "source": "https://api.rugcheck.xyz/v1/tokens/EKAYUgoDp283tNs3QNKY42NydabpLLXUSSqFv8mCS4nL/report",
+          "fetched_at": "2026-11-25T19:48:10Z",
+          "detail": "RugCheck did not include a 6h creator-sale percent."
+        },
+        {
+          "id": "C9",
+          "name": "Creator launches in 7 days",
+          "status": "n/a",
+          "value": null,
+          "source": "https://api.rugcheck.xyz/v1/tokens/EKAYUgoDp283tNs3QNKY42NydabpLLXUSSqFv8mCS4nL/report",
+          "fetched_at": "2026-11-25T19:48:10Z",
+          "detail": "No dated creator-token list in the RugCheck report."
+        },
+        {
+          "id": "C10",
+          "name": "Bundled launch",
+          "status": "n/a",
+          "value": null,
+          "source": "https://api.rugcheck.xyz/v1/tokens/EKAYUgoDp283tNs3QNKY42NydabpLLXUSSqFv8mCS4nL/report",
+          "fetched_at": "2026-11-25T19:48:10Z",
+          "detail": "Best effort: no public field counts first-20 buyers funded by one wallet within 24h. Insider clusters are not used as a substitute."
+        },
+        {
+          "id": "C11",
+          "name": "Honeypot txns",
+          "status": "pass",
+          "value": {
+            "m5_buys": 10,
+            "m5_sells": 3
+          },
+          "source": "https://api.dexscreener.com/tokens/v1/solana/EKAYUgoDp283tNs3QNKY42NydabpLLXUSSqFv8mCS4nL",
+          "fetched_at": "2026-11-25T19:48:10Z",
+          "detail": "DexScreener publishes a 5-minute bucket, not 10 minutes. This check uses m5 buys and sells."
+        },
+        {
+          "id": "C12",
+          "name": "Wash trading",
+          "status": "pass",
+          "value": {
+            "volume_over_liquidity": 0.3162074015587908,
+            "unique_traders_1h": null
+          },
+          "source": "https://api.dexscreener.com/tokens/v1/solana/EKAYUgoDp283tNs3QNKY42NydabpLLXUSSqFv8mCS4nL",
+          "fetched_at": "2026-11-25T19:48:10Z",
+          "detail": "Wash condition was not met."
+        },
+        {
+          "id": "C13",
+          "name": "Coin age",
+          "status": "pass",
+          "value": 13969.0,
+          "source": "https://api.dexscreener.com/tokens/v1/solana/EKAYUgoDp283tNs3QNKY42NydabpLLXUSSqFv8mCS4nL",
+          "fetched_at": "2026-11-25T19:48:10Z",
+          "detail": "Age is at least 3 minutes."
+        },
+        {
+          "id": "C14",
+          "name": "RugCheck risk list",
+          "status": "pass",
+          "value": [],
+          "source": "https://api.rugcheck.xyz/v1/tokens/EKAYUgoDp283tNs3QNKY42NydabpLLXUSSqFv8mCS4nL/report",
+          "fetched_at": "2026-11-25T19:48:10Z",
+          "detail": "No danger or warn items."
+        },
+        {
+          "id": "D1",
+          "name": "Description talks to bots",
+          "status": "pass",
+          "value": null,
+          "source": "https://api.dexscreener.com/tokens/v1/solana/EKAYUgoDp283tNs3QNKY42NydabpLLXUSSqFv8mCS4nL",
+          "fetched_at": "2026-11-25T19:48:10Z",
+          "detail": "No instruction-like token text."
+        }
+      ],
+      "price_usd": 0.000318,
+      "price_source": "https://api.dexscreener.com/tokens/v1/solana/EKAYUgoDp283tNs3QNKY42NydabpLLXUSSqFv8mCS4nL",
+      "price_fetched_at": "2026-11-25T19:48:10Z",
+      "audited_at": "2026-11-25T19:48:10Z",
+      "run_id": "2026-11-25T19:46:18Z",
+      "feed": "profile",
+      "sources": [
+        "profile"
+      ],
+      "pair_address": "9kDp67z9CK3re4bqmw1ZQ3Wfqi7v9Fefm1WnA6tYf3TC",
+      "pair_url": "https://dexscreener.com/solana/9kdp67z9ck3re4bqmw1zq3wfqi7v9fefm1wna6tyf3tc",
+      "liquidity_usd": 40224.77,
+      "age_seconds": 13969.0,
+      "errors": [
+        "rpc getTokenLargestAccounts: getTokenLargestAccounts down after retries: unavailable https://api.mainnet-beta.solana.com: HTTP Error 429: Too Many Requests"
+      ],
+      "rpc_largest_accounts": null
+    },
+    {
+      "label": "memescan audit v2 — rule change started November 25, 2026, paper only, not original evidence.",
+      "rule_version": "v2",
+      "not_checked": "not checked (no free data): C8, C9, C10",
+      "mint": "AGazYig7A8Co6ZapAPterBRLitdiP6AAaWiPH8jWLend",
+      "symbol": "LENDR",
+      "name": "Lendr",
+      "verdict": "WARN",
+      "score": 70,
+      "checks": [
+        {
+          "id": "C1",
+          "name": "Mint authority revoked",
+          "status": "pass",
+          "value": null,
+          "source": "https://solana-rpc.publicnode.com getAccountInfo",
+          "fetched_at": "2026-11-25T19:47:27Z",
+          "detail": "Mint authority is null."
+        },
+        {
+          "id": "C2",
+          "name": "Freeze authority revoked",
+          "status": "pass",
+          "value": null,
+          "source": "https://solana-rpc.publicnode.com getAccountInfo",
+          "fetched_at": "2026-11-25T19:47:27Z",
+          "detail": "Freeze authority is null."
+        },
+        {
+          "id": "C3",
+          "name": "LP burned or locked",
+          "status": "pass",
+          "value": 100.0,
+          "source": "https://api.rugcheck.xyz/v1/tokens/AGazYig7A8Co6ZapAPterBRLitdiP6AAaWiPH8jWLend/report",
+          "fetched_at": "2026-11-25T19:47:27Z",
+          "detail": "Locked or burned LP is at least 80%."
+        },
+        {
+          "id": "C4",
+          "name": "Top 10 holders ex pool and burn",
+          "status": "warn",
+          "value": 28.04996534665547,
+          "source": "RugCheck https://api.rugcheck.xyz/v1/tokens/AGazYig7A8Co6ZapAPterBRLitdiP6AAaWiPH8jWLend/report",
+          "fetched_at": "2026-11-25T19:47:27Z",
+          "detail": "Top 10 non-pool wallets hold more than 25%. RugCheck holders after getTokenLargestAccounts was unavailable."
+        },
+        {
+          "id": "C5",
+          "name": "Largest non-pool wallet",
+          "status": "warn",
+          "value": 20.228822434054226,
+          "source": "RugCheck https://api.rugcheck.xyz/v1/tokens/AGazYig7A8Co6ZapAPterBRLitdiP6AAaWiPH8jWLend/report",
+          "fetched_at": "2026-11-25T19:47:27Z",
+          "detail": "Largest non-pool wallet holds more than 15%. RugCheck holders after getTokenLargestAccounts was unavailable."
+        },
+        {
+          "id": "C6",
+          "name": "Liquidity USD",
+          "status": "pass",
+          "value": 57937.79,
+          "source": "https://api.dexscreener.com/tokens/v1/solana/AGazYig7A8Co6ZapAPterBRLitdiP6AAaWiPH8jWLend",
+          "fetched_at": "2026-11-25T19:47:27Z",
+          "detail": "Liquidity is at least $50,000."
+        },
+        {
+          "id": "C7",
+          "name": "Creator wallet holding",
+          "status": "pass",
+          "value": 0.0,
+          "source": "https://api.rugcheck.xyz/v1/tokens/AGazYig7A8Co6ZapAPterBRLitdiP6AAaWiPH8jWLend/report",
+          "fetched_at": "2026-11-25T19:47:27Z",
+          "detail": "Creator holds 5% or less."
+        },
+        {
+          "id": "C8",
+          "name": "Creator sold in last 6h",
+          "status": "n/a",
+          "value": null,
+          "source": "https://api.rugcheck.xyz/v1/tokens/AGazYig7A8Co6ZapAPterBRLitdiP6AAaWiPH8jWLend/report",
+          "fetched_at": "2026-11-25T19:47:27Z",
+          "detail": "RugCheck did not include a 6h creator-sale percent."
+        },
+        {
+          "id": "C9",
+          "name": "Creator launches in 7 days",
+          "status": "n/a",
+          "value": null,
+          "source": "https://api.rugcheck.xyz/v1/tokens/AGazYig7A8Co6ZapAPterBRLitdiP6AAaWiPH8jWLend/report",
+          "fetched_at": "2026-11-25T19:47:27Z",
+          "detail": "No dated creator-token list in the RugCheck report."
+        },
+        {
+          "id": "C10",
+          "name": "Bundled launch",
+          "status": "n/a",
+          "value": null,
+          "source": "https://api.rugcheck.xyz/v1/tokens/AGazYig7A8Co6ZapAPterBRLitdiP6AAaWiPH8jWLend/report",
+          "fetched_at": "2026-11-25T19:47:27Z",
+          "detail": "Best effort: no public field counts first-20 buyers funded by one wallet within 24h. Insider clusters are not used as a substitute."
+        },
+        {
+          "id": "C11",
+          "name": "Honeypot txns",
+          "status": "pass",
+          "value": {
+            "m5_buys": 48,
+            "m5_sells": 25
+          },
+          "source": "https://api.dexscreener.com/tokens/v1/solana/AGazYig7A8Co6ZapAPterBRLitdiP6AAaWiPH8jWLend",
+          "fetched_at": "2026-11-25T19:47:27Z",
+          "detail": "DexScreener publishes a 5-minute bucket, not 10 minutes. This check uses m5 buys and sells."
+        },
+        {
+          "id": "C12",
+          "name": "Wash trading",
+          "status": "pass",
+          "value": {
+            "volume_over_liquidity": 2.1333987713373257,
+            "unique_traders_1h": null
+          },
+          "source": "https://api.dexscreener.com/tokens/v1/solana/AGazYig7A8Co6ZapAPterBRLitdiP6AAaWiPH8jWLend",
+          "fetched_at": "2026-11-25T19:47:27Z",
+          "detail": "Wash condition was not met."
+        },
+        {
+          "id": "C13",
+          "name": "Coin age",
+          "status": "pass",
+          "value": 8418.0,
+          "source": "https://api.dexscreener.com/tokens/v1/solana/AGazYig7A8Co6ZapAPterBRLitdiP6AAaWiPH8jWLend",
+          "fetched_at": "2026-11-25T19:47:27Z",
+          "detail": "Age is at least 3 minutes."
+        },
+        {
+          "id": "C14",
+          "name": "RugCheck risk list",
+          "status": "warn",
+          "value": [
+            "warn"
+          ],
+          "source": "https://api.rugcheck.xyz/v1/tokens/AGazYig7A8Co6ZapAPterBRLitdiP6AAaWiPH8jWLend/report",
+          "fetched_at": "2026-11-25T19:47:27Z",
+          "detail": "RugCheck lists a warn item and no danger item."
+        },
+        {
+          "id": "D1",
+          "name": "Description talks to bots",
+          "status": "pass",
+          "value": null,
+          "source": "https://api.dexscreener.com/tokens/v1/solana/AGazYig7A8Co6ZapAPterBRLitdiP6AAaWiPH8jWLend",
+          "fetched_at": "2026-11-25T19:47:27Z",
+          "detail": "No instruction-like token text."
+        }
+      ],
+      "price_usd": 0.0006268,
+      "price_source": "https://api.dexscreener.com/tokens/v1/solana/AGazYig7A8Co6ZapAPterBRLitdiP6AAaWiPH8jWLend",
+      "price_fetched_at": "2026-11-25T19:47:27Z",
+      "audited_at": "2026-11-25T19:47:27Z",
+      "run_id": "2026-11-25T19:46:18Z",
+      "feed": "new_pairs",
+      "sources": [
+        "new_pairs"
+      ],
+      "pair_address": "Gkn3NWwF8prNKeS7rqknQsmoZhDfCADKvxGN2a63jrWC",
+      "pair_url": "https://dexscreener.com/solana/gkn3nwwf8prnkes7rqknqsmozhdfcadkvxgn2a63jrwc",
+      "liquidity_usd": 57937.79,
+      "age_seconds": 8418.0,
+      "errors": [
+        "rpc getTokenLargestAccounts: getTokenLargestAccounts down after retries: unavailable https://api.mainnet-beta.solana.com: HTTP Error 429: Too Many Requests"
+      ],
+      "rpc_largest_accounts": null
+    },
+    {
+      "label": "memescan audit v2 — rule change started November 25, 2026, paper only, not original evidence.",
+      "rule_version": "v2",
+      "not_checked": "not checked (no free data): C8, C9, C10",
+      "mint": "437T35ficBfJK9N8GH4gWbiHb86AsRJRkQjARd7Ppump",
+      "symbol": "4CHAN",
+      "name": "4CHAN",
+      "verdict": "CLEAN",
+      "score": 90,
+      "checks": [
+        {
+          "id": "C1",
+          "name": "Mint authority revoked",
+          "status": "pass",
+          "value": null,
+          "source": "https://solana-rpc.publicnode.com getAccountInfo",
+          "fetched_at": "2026-11-25T19:46:45Z",
+          "detail": "Mint authority is null."
+        },
+        {
+          "id": "C2",
+          "name": "Freeze authority revoked",
+          "status": "pass",
+          "value": null,
+          "source": "https://solana-rpc.publicnode.com getAccountInfo",
+          "fetched_at": "2026-11-25T19:46:45Z",
+          "detail": "Freeze authority is null."
+        },
+        {
+          "id": "C3",
+          "name": "LP burned or locked",
+          "status": "pass",
+          "value": 100.0,
+          "source": "https://api.rugcheck.xyz/v1/tokens/437T35ficBfJK9N8GH4gWbiHb86AsRJRkQjARd7Ppump/report",
+          "fetched_at": "2026-11-25T19:46:44Z",
+          "detail": "Locked or burned LP is at least 80%."
+        },
+        {
+          "id": "C4",
+          "name": "Top 10 holders ex pool and burn",
+          "status": "pass",
+          "value": 1.6268522095651095,
+          "source": "RugCheck https://api.rugcheck.xyz/v1/tokens/437T35ficBfJK9N8GH4gWbiHb86AsRJRkQjARd7Ppump/report",
+          "fetched_at": "2026-11-25T19:46:44Z",
+          "detail": "Top 10 non-pool wallets hold 25% or less. RugCheck holders after getTokenLargestAccounts was unavailable."
+        },
+        {
+          "id": "C5",
+          "name": "Largest non-pool wallet",
+          "status": "pass",
+          "value": 0.16492121288118897,
+          "source": "RugCheck https://api.rugcheck.xyz/v1/tokens/437T35ficBfJK9N8GH4gWbiHb86AsRJRkQjARd7Ppump/report",
+          "fetched_at": "2026-11-25T19:46:44Z",
+          "detail": "Largest non-pool wallet holds 15% or less. RugCheck holders after getTokenLargestAccounts was unavailable."
+        },
+        {
+          "id": "C6",
+          "name": "Liquidity USD",
+          "status": "warn",
+          "value": 34236.35,
+          "source": "https://api.dexscreener.com/tokens/v1/solana/437T35ficBfJK9N8GH4gWbiHb86AsRJRkQjARd7Ppump",
+          "fetched_at": "2026-11-25T19:46:44Z",
+          "detail": "Liquidity is under $50,000."
+        },
+        {
+          "id": "C7",
+          "name": "Creator wallet holding",
+          "status": "pass",
+          "value": 0.0,
+          "source": "https://api.rugcheck.xyz/v1/tokens/437T35ficBfJK9N8GH4gWbiHb86AsRJRkQjARd7Ppump/report",
+          "fetched_at": "2026-11-25T19:46:44Z",
+          "detail": "Creator holds 5% or less."
+        },
+        {
+          "id": "C8",
+          "name": "Creator sold in last 6h",
+          "status": "n/a",
+          "value": null,
+          "source": "https://api.rugcheck.xyz/v1/tokens/437T35ficBfJK9N8GH4gWbiHb86AsRJRkQjARd7Ppump/report",
+          "fetched_at": "2026-11-25T19:46:44Z",
+          "detail": "RugCheck did not include a 6h creator-sale percent."
+        },
+        {
+          "id": "C9",
+          "name": "Creator launches in 7 days",
+          "status": "n/a",
+          "value": null,
+          "source": "https://api.rugcheck.xyz/v1/tokens/437T35ficBfJK9N8GH4gWbiHb86AsRJRkQjARd7Ppump/report",
+          "fetched_at": "2026-11-25T19:46:44Z",
+          "detail": "No dated creator-token list in the RugCheck report."
+        },
+        {
+          "id": "C10",
+          "name": "Bundled launch",
+          "status": "n/a",
+          "value": null,
+          "source": "https://api.rugcheck.xyz/v1/tokens/437T35ficBfJK9N8GH4gWbiHb86AsRJRkQjARd7Ppump/report",
+          "fetched_at": "2026-11-25T19:46:44Z",
+          "detail": "Best effort: no public field counts first-20 buyers funded by one wallet within 24h. Insider clusters are not used as a substitute."
+        },
+        {
+          "id": "C11",
+          "name": "Honeypot txns",
+          "status": "pass",
+          "value": {
+            "m5_buys": 202,
+            "m5_sells": 83
+          },
+          "source": "https://api.dexscreener.com/tokens/v1/solana/437T35ficBfJK9N8GH4gWbiHb86AsRJRkQjARd7Ppump",
+          "fetched_at": "2026-11-25T19:46:44Z",
+          "detail": "DexScreener publishes a 5-minute bucket, not 10 minutes. This check uses m5 buys and sells."
+        },
+        {
+          "id": "C12",
+          "name": "Wash trading",
+          "status": "pass",
+          "value": {
+            "volume_over_liquidity": 6.4741425414800355,
+            "unique_traders_1h": null
+          },
+          "source": "https://api.dexscreener.com/tokens/v1/solana/437T35ficBfJK9N8GH4gWbiHb86AsRJRkQjARd7Ppump",
+          "fetched_at": "2026-11-25T19:46:44Z",
+          "detail": "Wash condition was not met."
+        },
+        {
+          "id": "C13",
+          "name": "Coin age",
+          "status": "pass",
+          "value": 6738.0,
+          "source": "https://api.dexscreener.com/tokens/v1/solana/437T35ficBfJK9N8GH4gWbiHb86AsRJRkQjARd7Ppump",
+          "fetched_at": "2026-11-25T19:46:44Z",
+          "detail": "Age is at least 3 minutes."
+        },
+        {
+          "id": "C14",
+          "name": "RugCheck risk list",
+          "status": "pass",
+          "value": [],
+          "source": "https://api.rugcheck.xyz/v1/tokens/437T35ficBfJK9N8GH4gWbiHb86AsRJRkQjARd7Ppump/report",
+          "fetched_at": "2026-11-25T19:46:44Z",
+          "detail": "No danger or warn items."
+        },
+        {
+          "id": "D1",
+          "name": "Description talks to bots",
+          "status": "pass",
+          "value": null,
+          "source": "https://api.dexscreener.com/tokens/v1/solana/437T35ficBfJK9N8GH4gWbiHb86AsRJRkQjARd7Ppump",
+          "fetched_at": "2026-11-25T19:46:44Z",
+          "detail": "No instruction-like token text."
+        }
+      ],
+      "price_usd": 0.0002385,
+      "price_source": "https://api.dexscreener.com/tokens/v1/solana/437T35ficBfJK9N8GH4gWbiHb86AsRJRkQjARd7Ppump",
+      "price_fetched_at": "2026-11-25T19:46:44Z",
+      "audited_at": "2026-11-25T19:46:44Z",
+      "run_id": "2026-11-25T19:46:18Z",
+      "feed": "profile",
+      "sources": [
+        "profile"
+      ],
+      "pair_address": "33QPvkvid4v8ZoiXVaRukVoU5hEiAHnwGy632wgnzEFi",
+      "pair_url": "https://dexscreener.com/solana/33qpvkvid4v8zoixvarukvou5heiahnwgy632wgnzefi",
+      "liquidity_usd": 34236.35,
+      "age_seconds": 6738.0,
+      "errors": [
+        "rpc getTokenLargestAccounts: getTokenLargestAccounts down after retries: unavailable https://api.mainnet-beta.solana.com: HTTP Error 429: Too Many Requests"
+      ],
+      "rpc_largest_accounts": null
+    },
     {
       "label": "NEW EXPERIMENT — memescan audit v1, started November 25, 2026, paper only, not original evidence.",
       "mint": "AGazYig7A8Co6ZapAPterBRLitdiP6AAaWiPH8jWLend",
@@ -169,7 +2049,8 @@
       "errors": [
         "rpc getTokenLargestAccounts: rpc down: unavailable https://api.mainnet-beta.solana.com: HTTP Error 429: Too Many Requests"
       ],
-      "rpc_largest_accounts": null
+      "rpc_largest_accounts": null,
+      "rule_version": "v1"
     },
     {
       "label": "NEW EXPERIMENT — memescan audit v1, started November 25, 2026, paper only, not original evidence.",
@@ -333,7 +2214,8 @@
       "errors": [
         "rpc getTokenLargestAccounts: rpc down: unavailable https://api.mainnet-beta.solana.com: HTTP Error 429: Too Many Requests"
       ],
-      "rpc_largest_accounts": null
+      "rpc_largest_accounts": null,
+      "rule_version": "v1"
     },
     {
       "label": "NEW EXPERIMENT — memescan audit v1, started November 25, 2026, paper only, not original evidence.",
@@ -497,7 +2379,8 @@
       "errors": [
         "rpc getTokenLargestAccounts: rpc down: unavailable https://api.mainnet-beta.solana.com: HTTP Error 429: Too Many Requests"
       ],
-      "rpc_largest_accounts": null
+      "rpc_largest_accounts": null,
+      "rule_version": "v1"
     },
     {
       "label": "NEW EXPERIMENT — memescan audit v1, started November 25, 2026, paper only, not original evidence.",
@@ -661,13 +2544,16 @@
       "errors": [
         "rpc getTokenLargestAccounts: rpc down: unavailable https://api.mainnet-beta.solana.com: HTTP Error 429: Too Many Requests"
       ],
-      "rpc_largest_accounts": null
+      "rpc_largest_accounts": null,
+      "rule_version": "v1"
     }
   ],
   "graded": [],
   "base_rates": [
     {
       "verdict": "CLEAN",
+      "rule_version": "v2",
+      "feed": "—",
       "n": 0,
       "note": "too few to trust",
       "pct_doubled": null,
@@ -678,6 +2564,8 @@
     },
     {
       "verdict": "WARN",
+      "rule_version": "v2",
+      "feed": "—",
       "n": 0,
       "note": "too few to trust",
       "pct_doubled": null,
@@ -688,6 +2576,8 @@
     },
     {
       "verdict": "TRAP",
+      "rule_version": "v2",
+      "feed": "—",
       "n": 0,
       "note": "too few to trust",
       "pct_doubled": null,
@@ -698,6 +2588,8 @@
     },
     {
       "verdict": "UNKNOWN",
+      "rule_version": "v2",
+      "feed": "—",
       "n": 0,
       "note": "too few to trust",
       "pct_doubled": null,
