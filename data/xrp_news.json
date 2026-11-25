@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-11-23T20:55:29-05:00",
+  "generated_at": "2026-11-24T20:44:27-05:00",
   "lookback_days": 16,
   "disclaimer": "Verification status as of last update; not financial advice.",
   "items": [
     {
-      "date": "2026-11-23",
+      "date": "2026-11-24",
       "headline": "Aviva's £50m tokenized fund: What changes for investors",
       "summary": "Aviva Investors launched a tokenized share class of its roughly £22 billion sterling liquidity fund on the XRP Ledger and invested £50 million of its own money in the new class.",
       "status": "Reported",
@@ -12,6 +12,42 @@
         {
           "name": "DL News",
           "url": "https://www.dlnews.com/articles/markets/aviva-tokenized-liquidity-fund-explained/"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-24",
+      "headline": "Aave Horizon Adds HINC High-Yield Fund as Collateral",
+      "summary": "Eligible holders can borrow USDC, GHO and RLUSD without redeeming the fund, with standard initial borrowing capped at 55% of collateral value.",
+      "status": "Reported",
+      "sources": [
+        {
+          "name": "The Defiant",
+          "url": "https://thedefiant.io/news/defi/aave-horizon-adds-hinc-high-yield-fund-as-collateral"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-24",
+      "headline": "Neuberger Berman's HINC fund brings high-yield credit to Aave's institutional lending platform",
+      "summary": "Neuberger Berman's tokenized high-yield fund HINC launches on Aave Horizon, letting eligible investors borrow USDC, GHO and RLUSD against it.",
+      "status": "Reported",
+      "sources": [
+        {
+          "name": "The Block",
+          "url": "https://www.theblock.co/news/markets/2026-11-24-neuberger-berman-tokenized-hinc-fund-aave-horizon-collateral-445391"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-23",
+      "headline": "How Heurist and t54 built a machine scale payments rail on XRPL",
+      "summary": "Traditional payment rails make sub-cent AI agent transactions economically unviable, with processing fees often exceeding the query cost itself.",
+      "status": "Confirmed",
+      "sources": [
+        {
+          "name": "XRP Ledger",
+          "url": "https://xrpl.org/blog/2026/heurist-t54-xrpl-case-study-agentic-payments"
         }
       ]
     },
@@ -24,18 +60,6 @@
         {
           "name": "Decrypt",
           "url": "https://decrypt.co/383800/tom-lee-ethereum-scarce-bitcoin-bitmine-buys-more"
-        }
-      ]
-    },
-    {
-      "date": "2026-11-21",
-      "headline": "XRP Sets New November Low on Coinbase, Down 10% in 24 Hours",
-      "summary": "XRP fell to $0.8663 late Friday, below its Nov.",
-      "status": "Reported",
-      "sources": [
-        {
-          "name": "The Defiant",
-          "url": "https://thedefiant.io/news/markets/xrp-sets-new-november-low-on-coinbase-down-10-in-24-hours"
         }
       ]
     },
@@ -68,6 +92,10 @@
         {
           "name": "SEC EDGAR",
           "url": "https://www.sec.gov/Archives/edgar/data/2092592/000162828026072223/0001628280-26-072223-index.htm"
+        },
+        {
+          "name": "The Block",
+          "url": "https://www.theblock.co/news/markets/2026-11-24-xrpl-dex-volume-q3-2026-evernorth-report-445395"
         }
       ]
     }
