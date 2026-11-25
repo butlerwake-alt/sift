@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <script>(function(){try{var t=localStorage.getItem("sift.theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-store">
+  <title>Memescan audit · SIFT</title>
+  <meta name="description" content="Paper-only memecoin safety audit and 24 hour paper grades. Not financial advice. No wallet.">
+  <meta name="theme-color" content="#0a1018">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css?v=202611251215">
+  <style>
+    .audit-banner { margin: 0.4rem 0 0.8rem; padding: 0.7rem 0.9rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); font-weight: 700; }
+    .experiment-label { color: var(--muted); font-size: 0.92rem; }
+    .audit-section { margin: 1.6rem 0; }
+    .scroll { overflow-x: auto; }
+    table.audit { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+    table.audit th, table.audit td { text-align: left; padding: 0.45rem 0.5rem; border-bottom: 1px solid var(--line); vertical-align: top; max-width: 280px; }
+    .src { overflow-wrap: anywhere; }
+    table.audit th { color: var(--muted); font-weight: 600; }
+    .badge { display: inline-block; padding: 0.08rem 0.45rem; border-radius: 999px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.03em; }
+    .badge-CLEAN { background: var(--green); color: #062214; }
+    .badge-WARN { background: var(--yellow); color: #2a1d00; }
+    .badge-TRAP { background: var(--red); color: #2a060c; }
+    .badge-UNKNOWN { background: #8b98ab; color: #121820; }
+    .stale, tr.is-stale { color: #8b98ab; }
+    button.check-toggle { background: transparent; border: 0; color: var(--teal); padding: 0; cursor: pointer; font: inherit; }
+    .check-list { margin: 0.2rem 0 0.6rem; padding: 0; list-style: none; }
+    .check-list li { padding: 0.35rem 0; border-bottom: 1px solid var(--line); }
+    .src { display: block; color: var(--muted); font-size: 0.78rem; }
+    .card-grid { display: grid; gap: 0.8rem; }
+    .paper-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 0.8rem 0.9rem; background: var(--panel); }
+    .paper-card h3 { margin: 0 0 0.3rem; font-size: 1rem; }
+  </style>
+</head>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="mast">
+    <nav class="site-nav" aria-label="Primary">
+      <div class="nav-bar">
+        <a class="nav-brand" href="index.html"><img src="favicon.svg" width="28" height="28" alt=""><span>SIFT</span></a>
+        <div class="nav-panel" id="site-menu">
+          <a href="index.html#leaderboard">Leaderboard</a>
+          <a href="index.html#board">Strategies</a>
+          <a href="research.html">Research</a>
+          <a href="follow_money.html">Follow the Money</a>
+          <a href="memescan.html" aria-current="page">Memescan audit</a>
+          <a href="qqqi.html">QQQ vs QQQI</a>
+          <a href="news.html">XRP news</a>
+          <a href="updates.html">Updates</a>
+          <a href="index.html#method">How it works</a>
+          <a href="videos.html" data-videos-nav hidden>Videos</a>
+        </div>
+        <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-menu"><span class="nav-toggle-bars" aria-hidden="true"></span>Menu</button>
+      </div>
+    </nav>
+  </header>
+  <main id="main" class="wrap">
+    <p><a class="back" href="index.html">Back to the board</a></p>
+    <p class="audit-banner" id="banner">Paper only. Not financial advice. No trading, no wallet.</p>
+    <p class="experiment-label" id="label">NEW EXPERIMENT — memescan audit v1, started November 25, 2026, paper only, not original evidence.</p>
+    <h1>Memescan audit</h1>
+    <p class="lede" id="why">Tests whether a rug/safety checklist actually separates memecoins that survive 24h from ones that collapse. Paper only, includes 1.5% slippage + fees per side. Most memecoins go to zero; expect negative results — the point is to measure the checklist, not to find trades.</p>
+    <p class="src" id="board-age"></p>
+
+    <section class="audit-section" id="live">
+      <h2>Live audit</h2>
+      <div class="scroll" id="live-mount"><p>Loading the paper audit file…</p></div>
+    </section>
+
+    <section class="audit-section" id="graded">
+      <h2>Graded paper cards</h2>
+      <p class="src">Last 7 days. A card grades only after a saved price path covers 24 hours.</p>
+      <div id="graded-mount"></div>
+    </section>
+
+    <section class="audit-section" id="rates">
+      <h2>Base rate by verdict</h2>
+      <div class="scroll" id="rates-mount"></div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="footer-kicker">Paper only. Not financial advice. No trading, no wallet.</p>
+      <p id="footer-label">NEW EXPERIMENT — memescan audit v1, started November 25, 2026, paper only, not original evidence.</p>
+    </div>
+  </footer>
+  <script src="site-chrome.js?v=202611251215"></script>
+  <script>
+    var STALE_MS = 60 * 60 * 1000;
+
+    function ageMs(iso) {
+      var t = Date.parse(iso || "");
+      if (!isFinite(t)) return null;
+      return Date.now() - t;
+    }
+
+    function ageText(iso) {
+      var ms = ageMs(iso);
+      if (ms == null) return "time missing";
+      var min = Math.round(ms / 60000);
+      if (Math.abs(min) < 1) return "just now";
+      if (Math.abs(min) < 60) return Math.abs(min) + "m old";
+      var hr = ms / 3600000;
+      return (Math.round(hr * 10) / 10) + "h old";
+    }
+
+    function isStale(iso) {
+      var ms = ageMs(iso);
+      return ms != null && ms > STALE_MS;
+    }
+
+    function el(tag, className, text) {
+      var node = document.createElement(tag);
+      if (className) node.className = className;
+      if (text != null) node.textContent = text;
+      return node;
+    }
+
+    function formatValue(value) {
+      if (value == null || value === "") return "—";
+      if (typeof value === "number") {
+        if (Math.abs(value) >= 1000) return value.toLocaleString("en-US", { maximumFractionDigits: 0 });
+        return String(Math.round(value * 100) / 100);
+      }
+      if (typeof value === "string") return value;
+      try { return JSON.stringify(value); } catch (err) { return String(value); }
+    }
+
+    function hostOf(source) {
+      try { return new URL(source).host; } catch (err) { return source || ""; }
+    }
+
+    function sourceLine(source, fetched, compact) {
+      var line = el("span", "src" + (isStale(fetched) ? " stale" : ""));
+      var shown = source ? (compact ? hostOf(source) : source) : "";
+      var bits = [];
+      if (shown) bits.push(shown);
+      bits.push(ageText(fetched));
+      line.textContent = bits.join(" · ");
+      if (source) line.title = source;
+      return line;
+    }
+
+    function badge(verdict) {
+      var name = verdict || "UNKNOWN";
+      return el("span", "badge badge-" + name, name);
+    }
+
+    function numberCell(value, source, fetched) {
+      var cell = el("td", isStale(fetched) ? "stale" : "");
+      cell.append(el("div", "", formatValue(value)));
+      cell.append(sourceLine(source, fetched, true));
+      return cell;
+    }
+
+    function renderAudits(audits) {
+      var mount = document.getElementById("live-mount");
+      mount.textContent = "";
+      if (!audits || !audits.length) {
+        mount.append(el("p", "", "No audited coins in the paper file yet."));
+        return;
+      }
+      var table = el("table", "audit");
+      var head = el("tr");
+      ["Coin", "Age", "Liquidity", "Verdict", ""].forEach(function (label) {
+        head.append(el("th", "", label));
+      });
+      var thead = el("thead");
+      thead.append(head);
+      table.append(thead);
+      var body = el("tbody");
+      audits.forEach(function (row, index) {
+        var checks = row.checks || [];
+        var age = checks.filter(function (item) { return item.id === "C13"; })[0] || {};
+        var liq = checks.filter(function (item) { return item.id === "C6"; })[0] || {};
+        var tr = el("tr", isStale(liq.fetched_at) ? "is-stale" : "");
+        var coin = el("td");
+        coin.append(el("strong", "", (row.symbol || "—") + " "));
+        coin.append(el("span", "", row.name || ""));
+        if (row.pair_url) {
+          var link = el("a");
+          link.href = row.pair_url;
+          link.textContent = "DexScreener";
+          link.rel = "noopener";
+          var src = el("span", "src");
+          src.append(link);
+          coin.append(src);
+        }
+        tr.append(coin);
+        var ageValue = typeof age.value === "number" ? Math.round(age.value / 60) + " min" : age.value;
+        tr.append(numberCell(ageValue, age.source, age.fetched_at));
+        var liqValue = typeof liq.value === "number" ? "$" + formatValue(liq.value) : liq.value;
+        tr.append(numberCell(liqValue, liq.source, liq.fetched_at));
+        var verdictCell = el("td");
+        verdictCell.append(badge(row.verdict));
+        var score = el("span", "src");
+        score.textContent = "Score " + formatValue(row.score) + " · audited " + ageText(row.audited_at);
+        if (isStale(row.audited_at)) score.classList.add("stale");
+        verdictCell.append(score);
+        tr.append(verdictCell);
+        var toggleCell = el("td");
+        var button = el("button", "check-toggle", "Checks");
+        button.type = "button";
+        button.setAttribute("aria-expanded", "false");
+        button.setAttribute("aria-controls", "checks-" + index);
+        toggleCell.append(button);
+        tr.append(toggleCell);
+        body.append(tr);
+        var detail = el("tr");
+        var detailCell = el("td");
+        detailCell.colSpan = 5;
+        detailCell.hidden = true;
+        detailCell.id = "checks-" + index;
+        var list = el("ul", "check-list");
+        checks.forEach(function (item) {
+          var li = el("li", isStale(item.fetched_at) ? "stale" : "");
+          li.append(el("strong", "", item.id + " " + item.name + " · " + item.status));
+          li.append(el("div", "", "Value: " + formatValue(item.value)));
+          if (item.detail) li.append(el("div", "", item.detail));
+          li.append(sourceLine(item.source, item.fetched_at));
+          list.append(li);
+        });
+        detailCell.append(list);
+        detail.append(detailCell);
+        body.append(detail);
+        button.addEventListener("click", function () {
+          var open = detailCell.hidden;
+          detailCell.hidden = !open;
+          button.setAttribute("aria-expanded", open ? "true" : "false");
+          button.textContent = open ? "Hide" : "Checks";
+        });
+      });
+      table.append(body);
+      mount.append(table);
+    }
+
+    function renderGraded(rows) {
+      var mount = document.getElementById("graded-mount");
+      mount.textContent = "";
+      if (!rows || !rows.length) {
+        mount.append(el("p", "", "No graded paper cards in the last 7 days."));
+        return;
+      }
+      var grid = el("div", "card-grid");
+      rows.forEach(function (row) {
+        var card = el("article", "paper-card");
+        card.append(el("h3", "", (row.symbol || "—") + " · grade " + (row.grade || "—")));
+        card.append(badge(row.verdict));
+        var net = typeof row.net_return === "number" ? (Math.round(row.net_return * 1000) / 10) + "%" : "—";
+        card.append(el("p", "", "Plan result after costs: " + net));
+        card.append(sourceLine((row.snapshot_sources || []).join(", ") || row.price_source, row.graded_at));
+        card.append(el("p", "", "Doubled: " + (row.doubled ? "yes" : "no") + ". Fell more than 50%: " + (row.fell_50 ? "yes" : "no") + "."));
+        if (row.grade === "F") {
+          card.append(el("p", "", "Audit flagged it: " + (row.audit_flagged ? "yes" : "no") + "."));
+        }
+        if (row.trap_call) card.append(el("p", "", "TRAP call: " + row.trap_call + "."));
+        grid.append(card);
+      });
+      mount.append(grid);
+    }
+
+    function renderRates(rows) {
+      var mount = document.getElementById("rates-mount");
+      mount.textContent = "";
+      var table = el("table", "audit");
+      var head = el("tr");
+      ["Verdict", "n", "Doubled", "Fell > 50%", "Median plan result", "Best", "Worst"].forEach(function (label) {
+        head.append(el("th", "", label));
+      });
+      var thead = el("thead");
+      thead.append(head);
+      table.append(thead);
+      var body = el("tbody");
+      (rows || []).forEach(function (row) {
+        var tr = el("tr");
+        var verdictCell = el("td");
+        verdictCell.append(badge(row.verdict));
+        tr.append(verdictCell);
+        var nCell = el("td", "", String(row.n));
+        if (row.note) nCell.append(el("span", "src", row.note));
+        tr.append(nCell);
+        ["pct_doubled", "pct_fell_50", "median_net", "best", "worst"].forEach(function (key) {
+          var value = row[key];
+          var shown = "—";
+          if (typeof value === "number") {
+            if (key.indexOf("pct_") === 0) shown = (Math.round(value * 10) / 10) + "%";
+            else shown = (Math.round(value * 1000) / 10) + "%";
+          }
+          var cell = el("td", "", shown);
+          if (row.note) cell.append(el("span", "src", row.note));
+          tr.append(cell);
+        });
+        body.append(tr);
+      });
+      table.append(body);
+      mount.append(table);
+    }
+
+    function renderBoard(board) {
+      document.getElementById("board-age").textContent = "Board file " + ageText(board.generated_at) + (board.rules_sha256 ? " · rules " + board.rules_sha256.slice(0, 12) : "");
+      if (isStale(board.generated_at)) document.getElementById("board-age").classList.add("stale");
+      renderAudits(board.audits || []);
+      renderGraded(board.graded || []);
+      renderRates(board.base_rates || []);
+    }
+
+    fetch("memescan/data/board.json?t=" + Date.now()).then(function (response) {
+      if (!response.ok) throw new Error("missing board");
+      return response.json();
+    }).then(renderBoard).catch(function () {
+      document.getElementById("live-mount").textContent = "The paper audit file is not available yet.";
+      document.getElementById("graded-mount").textContent = "No graded paper cards in the last 7 days.";
+    });
+  </script>
+</body>
+</html>

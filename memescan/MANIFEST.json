@@ -1,0 +1,8 @@
+{
+  "experiment": "memescan audit v1",
+  "started": "2026-11-25",
+  "paperOnly": true,
+  "label": "NEW EXPERIMENT \u2014 memescan audit v1, started November 25, 2026, paper only, not original evidence.",
+  "rulesFile": "AUDIT_RULES.md",
+  "sha256": "e935fb9ae3b07dfb1138a2e6850f966e39d7555653e1af065c479b4a3d34f0b8"
+}

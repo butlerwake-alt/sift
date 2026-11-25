@@ -1,0 +1,35 @@
+name: memescan-audit
+
+on:
+  schedule:
+    # Scan and audit every 15 minutes. Grade runs inside memescan/run.py
+    # when the UTC minute is under 10, which is the hourly tick.
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: memescan-paper-audit
+  cancel-in-progress: false
+
+jobs:
+  paper:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Scan, audit, and grade on the hour
+        run: python memescan/run.py ${{ github.event_name == 'workflow_dispatch' && '--grade' || '' }}
+      - name: Commit paper data only
+        run: |
+          git add memescan/data
+          if git diff --cached --quiet; then
+            echo "No paper data changes."
+            exit 0
+          fi
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" commit -m "memescan: record paper audit data"
+          git push
