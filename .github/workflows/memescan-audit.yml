@@ -1,10 +1,9 @@
 name: memescan-audit
 
 on:
-  schedule:
-    # Scan and audit every 15 minutes. Grade runs inside memescan/run.py
-    # when the UTC minute is under 10, which is the hourly tick.
-    - cron: "*/15 * * * *"
+  # Cadence is the box runner at /workspace/memescan_runner/run.sh.
+  # GitHub's */15 cron only fired twice in ~20 hours, so it is off to
+  # avoid double commits with the box. Manual runs stay available.
   workflow_dispatch:
 
 permissions:

@@ -192,6 +192,10 @@ def points_for(card, snaps, now):
         return None
     if now < opened + timedelta(seconds=plan.HORIZON_S):
         return None
+    # Open-card refreshes already run through 26h. If a 15-minute tick was
+    # skipped, there may be no print in the last hour of the 24h window.
+    # Accept a print from that tail as the horizon price (elapsed capped).
+    close = opened + timedelta(seconds=plan.HORIZON_S + 2 * 3600)
     chosen = []
     for snap in snaps:
         if snap.get("mint") != card.get("mint"):
@@ -200,10 +204,10 @@ def points_for(card, snaps, now):
         price = snap.get("price_usd")
         if moment is None or price is None:
             continue
-        if moment < opened or moment > opened + timedelta(seconds=plan.HORIZON_S):
+        if moment < opened or moment > close:
             continue
         chosen.append({
-            "elapsed_s": (moment - opened).total_seconds(),
+            "elapsed_s": min((moment - opened).total_seconds(), float(plan.HORIZON_S)),
             "price": price,
             "source": snap.get("source"),
             "fetched_at": snap.get("fetched_at"),

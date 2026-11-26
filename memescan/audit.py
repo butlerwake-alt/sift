@@ -666,7 +666,9 @@ def rpc_call(method, params):
     last = None
     for url in RPCS:
         try:
-            payload = public_http.fetch_json(url, method="POST", body=body, timeout=25)
+            # Two attempts per endpoint (not four) so a 429 fails over to the
+            # next public RPC instead of burning the 15-minute run budget.
+            payload = public_http.fetch_json(url, method="POST", body=body, timeout=15, attempts=2)
         except public_http.SourceUnavailable as err:
             last = err
             continue
@@ -691,24 +693,26 @@ def read_mint_account(mint):
 
 
 def read_largest_accounts(mint):
-    """One try plus up to two retries. Owners are not in this method, so it does not set C4 or C5."""
+    """One pass of each public RPC. On failure, C4/C5 fall back to RugCheck.
+
+    A three-round retry with backoff was the main reason a ~11-coin GitHub
+    run took 9-11 minutes. Owners are not in this method, so it does not
+    set C4 or C5 either way.
+    """
     body = {"jsonrpc": "2.0", "id": 1, "method": "getTokenLargestAccounts", "params": [mint]}
     last = None
-    for attempt in range(3):
-        for url in RPCS:
-            try:
-                payload = public_http.fetch_json(url, method="POST", body=body, timeout=25, attempts=1)
-            except public_http.SourceUnavailable as err:
-                last = err
-                continue
-            if isinstance(payload, dict) and payload.get("error"):
-                last = payload["error"]
-                continue
-            value = ((payload or {}).get("result") or {}).get("value")
-            count = len(value) if isinstance(value, list) else None
-            return count, url
-        if attempt < 2:
-            time.sleep(2 ** attempt)
+    for url in RPCS:
+        try:
+            payload = public_http.fetch_json(url, method="POST", body=body, timeout=15, attempts=1)
+        except public_http.SourceUnavailable as err:
+            last = err
+            continue
+        if isinstance(payload, dict) and payload.get("error"):
+            last = payload["error"]
+            continue
+        value = ((payload or {}).get("result") or {}).get("value")
+        count = len(value) if isinstance(value, list) else None
+        return count, url
     raise public_http.SourceUnavailable("getTokenLargestAccounts down after retries: %s" % last)
 
 
@@ -740,6 +744,45 @@ def latest_candidates():
     run_id = marker.get("run_id")
     rows = [row for row in store.read_jsonl("candidates.jsonl") if row.get("run_id") == run_id]
     return rows, run_id
+
+
+AUDIT_BUDGET_S = 11 * 60
+LEFTOVER_WINDOW_S = 2 * 3600
+
+
+def pending_to_audit(now):
+    """Latest scan first, then unaudited coins from a run that hit the budget."""
+    latest, run_id = latest_candidates()
+    audited_keys = {(row.get("run_id"), row.get("mint")) for row in store.read_jsonl("audits.jsonl")}
+    recently_audited = set()
+    for row in store.read_jsonl("audits.jsonl"):
+        when = parse_time(row.get("audited_at"))
+        if when is not None and (now - when).total_seconds() <= LEFTOVER_WINDOW_S:
+            recently_audited.add(row.get("mint"))
+    pending = []
+    seen = set()
+
+    def take(row, skip_if_recent=False):
+        mint = row.get("mint")
+        key = (row.get("run_id"), mint)
+        if not mint or mint in seen or key in audited_keys:
+            return
+        if skip_if_recent and mint in recently_audited:
+            return
+        pending.append(row)
+        seen.add(mint)
+
+    for row in latest:
+        take(row, skip_if_recent=False)
+    others = []
+    for row in store.read_jsonl("candidates.jsonl"):
+        fetched = parse_time(row.get("fetched_at") or row.get("run_id"))
+        if fetched is None or (now - fetched).total_seconds() > LEFTOVER_WINDOW_S:
+            continue
+        others.append((fetched, row))
+    for _fetched, row in sorted(others, key=lambda item: item[0], reverse=True):
+        take(row, skip_if_recent=True)
+    return pending, run_id
 
 
 def open_cards():
@@ -872,24 +915,29 @@ def main():
     import board
 
     backfill_saved_records()
-    candidates, run_id = latest_candidates()
-    if not candidates:
-        print("memescan audit: no candidates for the latest scan. Skipping.")
-        board.write_board()
-        return 0
-    done = already_audited(run_id)
-    pending = [row for row in candidates if row.get("mint") not in done]
+    started = utc_now()
+    pending, run_id = pending_to_audit(started)
     if not pending:
-        print("memescan audit: run %s already audited." % run_id)
+        print("memescan audit: no pending candidates. Skipping.")
         board.write_board()
         return 0
+    pairs = {}
+    mints = [row["mint"] for row in pending if row.get("mint")]
     try:
-        pairs = fetch_pairs([row["mint"] for row in pending if row.get("mint")])
+        for start in range(0, len(mints), 20):
+            pairs.update(fetch_pairs(mints[start:start + 20]))
+            time.sleep(0.3)
     except public_http.SourceUnavailable as err:
         print("memescan audit: DexScreener down (%s). Skipping run." % err)
         return 0
     now = utc_now()
+    deadline = started.timestamp() + AUDIT_BUDGET_S
+    finished = 0
     for candidate in pending:
+        if utc_now().timestamp() >= deadline:
+            left = len(pending) - finished
+            print("memescan audit: 11-minute budget reached after %s coins; %s left for the next run." % (finished, left))
+            break
         mint = candidate.get("mint")
         pair = pairs.get(mint)
         if pair is None:
@@ -903,6 +951,7 @@ def main():
         write_card(result, now)
         snapshot(mint, result.get("price_usd"), result.get("price_source"), parse_time(result.get("price_fetched_at")) or now)
         print("%s %s %s score %s" % (result.get("symbol"), mint, result.get("verdict"), result.get("score")))
+        finished += 1
         time.sleep(0.25)
     board.write_board()
     return 0
