@@ -1,8 +1,44 @@
 {
-  "generated_at": "2026-11-24T20:44:27-05:00",
+  "generated_at": "2026-11-25T20:43:26-05:00",
   "lookback_days": 16,
   "disclaimer": "Verification status as of last update; not financial advice.",
   "items": [
+    {
+      "date": "2026-11-25",
+      "headline": "Just 10 accounts drove all of the XRP Ledger's trading growth last quarter",
+      "summary": "Data shows that the ten busiest accounts accounted for more than all of the exchange's quarterly growth, while trading by everyone else declined.",
+      "status": "Reported",
+      "sources": [
+        {
+          "name": "CoinDesk",
+          "url": "https://www.coindesk.com/markets/2026/11/25/ten-accounts-drove-all-of-the-xrp-ledger-s-trading-growth-last-quarter"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-25",
+      "headline": "Yapı Kredi and Ripple Partner to Advance Institutional Digital Asset Custody in Türkiye",
+      "summary": "Ripple reported that yapı Kredi and Ripple Partner to Advance Institutional Digital Asset Custody in Türkiye.",
+      "status": "Confirmed",
+      "sources": [
+        {
+          "name": "Ripple",
+          "url": "https://ripple.com/ripple-press/yapi-kredi-and-ripple-partner-to-advance-institutional-digital-asset-custody-in-turkey/"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-24",
+      "headline": "How Heurist and t54 built a machine scale payments rail on XRPL",
+      "summary": "Traditional payment rails make sub-cent AI agent transactions economically unviable, with processing fees often exceeding the query cost itself.",
+      "status": "Confirmed",
+      "sources": [
+        {
+          "name": "XRP Ledger",
+          "url": "https://xrpl.org/blog/2026/heurist-t54-xrpl-case-study-agentic-payments"
+        }
+      ]
+    },
     {
       "date": "2026-11-24",
       "headline": "Aviva's £50m tokenized fund: What changes for investors",
@@ -24,42 +60,6 @@
         {
           "name": "The Defiant",
           "url": "https://thedefiant.io/news/defi/aave-horizon-adds-hinc-high-yield-fund-as-collateral"
-        }
-      ]
-    },
-    {
-      "date": "2026-11-24",
-      "headline": "Neuberger Berman's HINC fund brings high-yield credit to Aave's institutional lending platform",
-      "summary": "Neuberger Berman's tokenized high-yield fund HINC launches on Aave Horizon, letting eligible investors borrow USDC, GHO and RLUSD against it.",
-      "status": "Reported",
-      "sources": [
-        {
-          "name": "The Block",
-          "url": "https://www.theblock.co/news/markets/2026-11-24-neuberger-berman-tokenized-hinc-fund-aave-horizon-collateral-445391"
-        }
-      ]
-    },
-    {
-      "date": "2026-11-23",
-      "headline": "How Heurist and t54 built a machine scale payments rail on XRPL",
-      "summary": "Traditional payment rails make sub-cent AI agent transactions economically unviable, with processing fees often exceeding the query cost itself.",
-      "status": "Confirmed",
-      "sources": [
-        {
-          "name": "XRP Ledger",
-          "url": "https://xrpl.org/blog/2026/heurist-t54-xrpl-case-study-agentic-payments"
-        }
-      ]
-    },
-    {
-      "date": "2026-11-23",
-      "headline": "Tom Lee Says Ethereum Is as Scarce as Bitcoin—And Bitmine Just Bought More",
-      "summary": "Chairman Tom Lee argued ETH’s supply has grown just 0.90% annually since mid-2025—roughly matching Bitcoin’s 0.82% and far below Solana, XRP and Cardano.",
-      "status": "Reported",
-      "sources": [
-        {
-          "name": "Decrypt",
-          "url": "https://decrypt.co/383800/tom-lee-ethereum-scarce-bitcoin-bitmine-buys-more"
         }
       ]
     },
@@ -92,10 +92,6 @@
         {
           "name": "SEC EDGAR",
           "url": "https://www.sec.gov/Archives/edgar/data/2092592/000162828026072223/0001628280-26-072223-index.htm"
-        },
-        {
-          "name": "The Block",
-          "url": "https://www.theblock.co/news/markets/2026-11-24-xrpl-dex-volume-q3-2026-evernorth-report-445395"
         }
       ]
     }
