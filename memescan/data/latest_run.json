@@ -1,13 +1,13 @@
 {
-  "run_id": "2026-11-25T19:46:18Z",
+  "run_id": "2026-11-26T01:33:01Z",
   "rule_version": "v2",
-  "count": 11,
+  "count": 14,
   "by_source": {
-    "boost": 1,
-    "profile": 4,
-    "new_pairs": 8
+    "boost": 2,
+    "profile": 6,
+    "new_pairs": 10
   },
   "skipped": false,
   "errors": [],
-  "fetched_at": "2026-11-25T19:46:18Z"
+  "fetched_at": "2026-11-26T01:33:01Z"
 }
