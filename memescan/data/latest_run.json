@@ -1,5 +1,5 @@
 {
-  "run_id": "2026-11-26T19:33:35Z",
+  "run_id": "2026-11-26T19:35:31Z",
   "rule_version": "v2",
   "count": 9,
   "by_source": {
@@ -9,5 +9,5 @@
   },
   "skipped": false,
   "errors": [],
-  "fetched_at": "2026-11-26T19:33:35Z"
+  "fetched_at": "2026-11-26T19:35:31Z"
 }
