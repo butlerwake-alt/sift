@@ -5,35 +5,74 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Cache-Control" content="no-store">
-  <title>Memescan audit · SIFT</title>
-  <meta name="description" content="Paper-only memecoin safety audit and 24 hour paper grades. Not financial advice. No wallet.">
+  <title>Paper Money · Memescan · SIFT</title>
+  <meta name="description" content="Paper-only memecoin dollars from the fixed FOMO paper plan. Hypothetical results with simulated fees and slippage. Not financial advice. No wallet.">
   <meta name="theme-color" content="#0a1018">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=202611251215">
+  <link rel="stylesheet" href="styles.css?v=202611271015">
   <style>
-    .audit-banner { margin: 0.4rem 0 0.8rem; padding: 0.7rem 0.9rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); font-weight: 700; }
+    .audit-banner { margin: 0.4rem 0 0.8rem; padding: 0.75rem 0.9rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); font-weight: 650; line-height: 1.45; }
+    .audit-banner .n-line { display: block; margin-top: 0.35rem; color: var(--muted); font-weight: 600; font-size: 0.9rem; }
     .experiment-label { color: var(--muted); font-size: 0.92rem; }
-    .audit-section { margin: 1.6rem 0; }
-    .scroll { overflow-x: auto; }
-    table.audit { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
-    table.audit th, table.audit td { text-align: left; padding: 0.45rem 0.5rem; border-bottom: 1px solid var(--line); vertical-align: top; max-width: 280px; }
-    .src { overflow-wrap: anywhere; }
-    table.audit th { color: var(--muted); font-weight: 600; }
+    .audit-section { margin: 1.4rem 0; }
+    .version-toggle, .stake-row { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin: 0.6rem 0 0.2rem; }
+    .version-toggle button { border: 1px solid var(--line); background: var(--panel); color: var(--cream); border-radius: 999px; padding: 0.2rem 0.7rem; cursor: pointer; font: inherit; }
+    .version-toggle button[aria-pressed="true"] { background: var(--teal); color: #071018; }
+    .stake-row label { font-weight: 650; }
+    .stake-row input {
+      width: 6.5rem; padding: 0.35rem 0.5rem; border-radius: 8px; border: 1px solid var(--line);
+      background: var(--bg-elev); color: var(--cream); font: 650 1rem/1.2 var(--sans); font-variant-numeric: tabular-nums;
+    }
+    .summary-grid { display: grid; gap: 0.75rem; grid-template-columns: 1fr; }
+    @media (min-width: 720px) { .summary-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .summary-card {
+      border: 1px solid var(--line); border-radius: var(--radius); padding: 0.85rem 0.95rem; background: var(--panel);
+      border-top: 3px solid var(--muted);
+    }
+    .summary-card h3 { margin: 0 0 0.35rem; font: 700 0.95rem/1.25 var(--sans); }
+    .summary-card .pnl { font: 700 1.55rem/1.1 var(--sans); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+    .summary-card .pnl.up { color: var(--green); }
+    .summary-card .pnl.down { color: var(--red); }
+    .summary-card .pnl.flat { color: var(--yellow); }
+    .summary-card dl { margin: 0.55rem 0 0; display: grid; grid-template-columns: auto 1fr; gap: 0.2rem 0.65rem; font-size: 0.88rem; }
+    .summary-card dt { color: var(--muted); }
+    .summary-card dd { margin: 0; font-variant-numeric: tabular-nums; }
+    .trap-note { margin: 0.7rem 0 0; color: var(--muted); font-size: 0.9rem; }
+    .chart-wrap {
+      border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel);
+      padding: 0.7rem 0.6rem 0.5rem; overflow: hidden;
+    }
+    .chart-wrap svg { display: block; width: 100%; height: auto; }
+    .chart-caption { margin: 0.35rem 0 0; color: var(--muted); font-size: 0.82rem; }
+    .card-grid { display: grid; gap: 0.75rem; }
+    .paper-card {
+      border: 1px solid var(--line); border-radius: var(--radius); padding: 0.85rem 0.95rem; background: var(--panel);
+      display: grid; gap: 0.3rem;
+    }
+    .paper-card .row-top { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; justify-content: space-between; }
+    .paper-card h3 { margin: 0; font: 700 1.05rem/1.25 var(--sans); }
+    .paper-card .meta { color: var(--muted); font-size: 0.84rem; }
+    .paper-card .money { font: 700 1.2rem/1.2 var(--sans); font-variant-numeric: tabular-nums; }
+    .paper-card .money.up { color: var(--green); }
+    .paper-card .money.down { color: var(--red); }
+    .paper-card .money.flat { color: var(--yellow); }
     .badge { display: inline-block; padding: 0.08rem 0.45rem; border-radius: 999px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.03em; }
     .badge-CLEAN { background: var(--green); color: #062214; }
     .badge-WARN { background: var(--yellow); color: #2a1d00; }
     .badge-TRAP { background: var(--red); color: #2a060c; }
     .badge-UNKNOWN { background: #8b98ab; color: #121820; }
-    .stale, tr.is-stale { color: #8b98ab; }
+    .badge-PENDING { background: #3a4658; color: #d7deea; }
+    .badge-SKIP { background: #3a4658; color: #d7deea; }
+    .grade-pill { display: inline-block; min-width: 1.6rem; text-align: center; font-weight: 800; }
+    .src { display: block; color: var(--muted); font-size: 0.78rem; }
+    .stale { color: #8b98ab; }
+    .scroll { overflow-x: auto; }
+    table.audit { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+    table.audit th, table.audit td { text-align: left; padding: 0.45rem 0.5rem; border-bottom: 1px solid var(--line); vertical-align: top; max-width: 280px; }
+    table.audit th { color: var(--muted); font-weight: 600; }
     button.check-toggle { background: transparent; border: 0; color: var(--teal); padding: 0; cursor: pointer; font: inherit; }
     .check-list { margin: 0.2rem 0 0.6rem; padding: 0; list-style: none; }
     .check-list li { padding: 0.35rem 0; border-bottom: 1px solid var(--line); }
-    .src { display: block; color: var(--muted); font-size: 0.78rem; }
-    .card-grid { display: grid; gap: 0.8rem; }
-    .paper-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 0.8rem 0.9rem; background: var(--panel); }
-    .version-toggle { display: flex; gap: 0.4rem; margin: 0.6rem 0 0.2rem; }
-    .version-toggle button { border: 1px solid var(--line); background: var(--panel); color: var(--cream); border-radius: 999px; padding: 0.2rem 0.7rem; cursor: pointer; font: inherit; }
-    .version-toggle button[aria-pressed="true"] { background: var(--teal); color: #071018; }
   </style>
 </head>
 <body id="top">
@@ -60,29 +99,51 @@
   </header>
   <main id="main" class="wrap">
     <p><a class="back" href="index.html">Back to the board</a></p>
-    <p class="audit-banner" id="banner">Paper only. Not financial advice. No trading, no wallet.</p>
+    <p class="audit-banner" id="banner">
+      Paper test. Hypothetical results with simulated fees and slippage. Real fills on memecoins are often much worse. Base rates need 30+ graded coins per verdict before they mean anything.
+      <span class="n-line" id="n-by-verdict">Loading graded counts…</span>
+    </p>
     <p class="experiment-label" id="label">memescan audit v2 — rule change started November 25, 2026, paper only, not original evidence.</p>
-    <h1>Memescan audit</h1>
+    <h1>Paper Money</h1>
     <p class="lede" id="why">Tests whether a rug/safety checklist actually separates memecoins that survive 24h from ones that collapse. Paper only, includes 1.5% slippage + fees per side. Most memecoins go to zero; expect negative results — the point is to measure the checklist, not to find trades.</p>
     <p id="why-v2">v2 (started November 25, 2026): CLEAN no longer blocked by checks the free data can't run; wider new-pair feed for more samples.</p>
+
     <div class="version-toggle" role="group" aria-label="Rule version">
       <button type="button" id="show-v2" aria-pressed="true">v2</button>
       <button type="button" id="show-v1" aria-pressed="false">v1</button>
     </div>
     <p class="src" id="board-age"></p>
 
-    <section class="audit-section" id="live">
+    <div class="stake-row">
+      <label for="stake">Paper stake per coin ($)</label>
+      <input id="stake" type="number" min="1" step="1" value="100" inputmode="decimal">
+    </div>
+
+    <section class="audit-section" id="paper-summary">
+      <h2>Paper P&amp;L summary</h2>
+      <p class="src">Fixed plan from the FOMO screenshots: enter at audit price, −25% stop, sell half at +100%, 35% trailing stop on the rest, dead-money exit after 45 minutes, 1.5% slippage + 0.25% fee per side, graded after 24 hours. Dollars are computed from already-graded results — rules are not re-run here.</p>
+      <div class="summary-grid" id="summary-mount"></div>
+      <p class="trap-note" id="trap-note"></p>
+    </section>
+
+    <section class="audit-section" id="paper-chart">
+      <h2>Running paper balance</h2>
+      <p class="src">Cumulative paper portfolio value in grade-time order for buyable coins (CLEAN + WARN + UNKNOWN). TRAP stays skipped.</p>
+      <div class="chart-wrap" id="chart-mount"></div>
+      <p class="chart-caption" id="chart-caption"></p>
+    </section>
+
+    <section class="audit-section" id="paper-cards">
+      <h2>Per-coin paper cards</h2>
+      <div class="card-grid" id="coin-mount"></div>
+    </section>
+
+    <section class="audit-section" id="live" data-fold-title="Live audit" data-fold-sum="Latest checklist verdicts." data-fold-group="memescan" data-fold-id="memescan-live">
       <h2>Live audit</h2>
       <div class="scroll" id="live-mount"><p>Loading the paper audit file…</p></div>
     </section>
 
-    <section class="audit-section" id="graded">
-      <h2>Graded paper cards</h2>
-      <p class="src">Last 7 days. A card grades only after a saved price path covers 24 hours.</p>
-      <div id="graded-mount"></div>
-    </section>
-
-    <section class="audit-section" id="rates">
+    <section class="audit-section" id="rates" data-fold-title="Base rate by verdict" data-fold-sum="Need 30+ graded coins per verdict." data-fold-group="memescan" data-fold-id="memescan-rates">
       <h2>Base rate by verdict</h2>
       <div class="scroll" id="rates-mount"></div>
     </section>
@@ -91,40 +152,63 @@
     <div class="footer-inner">
       <p class="footer-kicker">Paper only. Not financial advice. No trading, no wallet.</p>
       <p id="footer-label">memescan audit v2 — rule change started November 25, 2026, paper only, not original evidence. v1 records stay on the v1 view.</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="index.html#leaderboard">Leaderboard</a>
+        <a href="index.html#board">Strategies</a>
+        <a href="research.html">Research</a>
+        <a href="follow_money.html">Follow the Money</a>
+        <a href="memescan.html">Memescan audit</a>
+        <a href="qqqi.html">QQQ vs QQQI</a>
+        <a href="news.html">XRP news</a>
+        <a href="updates.html">Updates</a>
+        <a href="index.html#method">How it works</a>
+        <a href="videos.html" data-videos-nav hidden>Videos</a>
+      </nav>
     </div>
   </footer>
-  <script src="site-chrome.js?v=202611251215"></script>
+  <nav class="tabbar" aria-label="Mobile">
+    <a href="index.html"><span>Home</span></a>
+    <a href="index.html#board"><span>Strategies</span></a>
+    <a href="follow_money.html" aria-label="Follow the Money"><span>Money</span></a>
+    <a href="memescan.html" aria-current="page"><span>Memes</span></a>
+    <a href="news.html"><span>News</span></a>
+    <a href="qqqi.html"><span>QQQI</span></a>
+    <a href="updates.html"><span>Updates</span></a>
+    <a href="videos.html" data-videos-nav hidden><span>Videos</span></a>
+  </nav>
+  <a class="to-top" href="#top" aria-label="Back to top">↑</a>
+  <script src="site-config.js?v=202611271015"></script>
+  <script src="site-chrome.js?v=202611271015"></script>
   <script>
     var STALE_MS = 60 * 60 * 1000;
+    var DEFAULT_STAKE = 100;
+    var currentVersion = "v2";
+    var loadedBoard = null;
+    var loadedCards = [];
 
     function ageMs(iso) {
       var t = Date.parse(iso || "");
       if (!isFinite(t)) return null;
       return Date.now() - t;
     }
-
     function ageText(iso) {
       var ms = ageMs(iso);
       if (ms == null) return "time missing";
       var min = Math.round(ms / 60000);
       if (Math.abs(min) < 1) return "just now";
       if (Math.abs(min) < 60) return Math.abs(min) + "m old";
-      var hr = ms / 3600000;
-      return (Math.round(hr * 10) / 10) + "h old";
+      return (Math.round((ms / 3600000) * 10) / 10) + "h old";
     }
-
     function isStale(iso) {
       var ms = ageMs(iso);
       return ms != null && ms > STALE_MS;
     }
-
     function el(tag, className, text) {
       var node = document.createElement(tag);
       if (className) node.className = className;
       if (text != null) node.textContent = text;
       return node;
     }
-
     function formatValue(value) {
       if (value == null || value === "") return "—";
       if (typeof value === "number") {
@@ -134,11 +218,9 @@
       if (typeof value === "string") return value;
       try { return JSON.stringify(value); } catch (err) { return String(value); }
     }
-
     function hostOf(source) {
       try { return new URL(source).host; } catch (err) { return source || ""; }
     }
-
     function sourceLine(source, fetched, compact) {
       var line = el("span", "src" + (isStale(fetched) ? " stale" : ""));
       var shown = source ? (compact ? hostOf(source) : source) : "";
@@ -149,10 +231,281 @@
       if (source) line.title = source;
       return line;
     }
-
     function badge(verdict) {
       var name = verdict || "UNKNOWN";
       return el("span", "badge badge-" + name, name);
+    }
+    function moneyClass(n) {
+      if (!isFinite(n) || Math.abs(n) < 1e-9) return "flat";
+      return n > 0 ? "up" : "down";
+    }
+    function fmtMoney(n) {
+      if (!isFinite(n)) return "—";
+      var sign = n > 0 ? "+" : n < 0 ? "−" : "";
+      return sign + "$" + Math.abs(n).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+    function fmtPct(n) {
+      if (!isFinite(n)) return "—";
+      var sign = n > 0 ? "+" : n < 0 ? "−" : "";
+      return sign + (Math.abs(n) * 100).toLocaleString("en-US", { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + "%";
+    }
+    function fmtPrice(n) {
+      if (n == null || !isFinite(n)) return "—";
+      if (n === 0) return "0";
+      if (n >= 1) return n.toLocaleString("en-US", { maximumFractionDigits: 4 });
+      if (n >= 0.0001) return n.toLocaleString("en-US", { maximumFractionDigits: 8 });
+      return n.toExponential(3);
+    }
+    function fmtTime(iso) {
+      if (!iso) return "—";
+      var d = new Date(iso);
+      if (!isFinite(d.getTime())) return iso;
+      return d.toLocaleString("en-US", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit", timeZoneName: "short" });
+    }
+    function exitLabel(reason) {
+      var map = {
+        stop: "Stop",
+        stop_gap: "Stop",
+        tp1: "Take-profit",
+        trail: "Trail",
+        trail_gap: "Trail",
+        dead: "Dead money",
+        horizon: "24h"
+      };
+      return map[reason] || (reason || "—");
+    }
+    function versionOf(row) { return row.rule_version || "v1"; }
+    function isBuyable(row) {
+      var v = row.verdict || "UNKNOWN";
+      return v !== "TRAP";
+    }
+    function stakeValue() {
+      var raw = parseFloat(document.getElementById("stake").value);
+      if (!isFinite(raw) || raw <= 0) return DEFAULT_STAKE;
+      return raw;
+    }
+    function gradedForVersion() {
+      return (loadedBoard && loadedBoard.graded || []).filter(function (row) {
+        return versionOf(row) === currentVersion;
+      });
+    }
+    function ratesForVersion() {
+      return (loadedBoard && loadedBoard.base_rates || []).filter(function (row) {
+        return (row.rule_version || "v2") === currentVersion;
+      });
+    }
+    function pendingForVersion() {
+      var gradedKeys = {};
+      gradedForVersion().forEach(function (row) {
+        gradedKeys[(row.mint || "") + "|" + (row.t0 || "")] = true;
+      });
+      return (loadedCards || []).filter(function (card) {
+        if (versionOf(card) !== currentVersion) return false;
+        return !gradedKeys[(card.mint || "") + "|" + (card.t0 || "")];
+      });
+    }
+    function summarize(rows, stake) {
+      var bought = rows.filter(isBuyable);
+      var dollars = bought.map(function (row) {
+        var net = typeof row.net_return === "number" ? row.net_return : 0;
+        return { row: row, pnl: stake * net, net: net };
+      });
+      var invested = stake * dollars.length;
+      var totalPnl = dollars.reduce(function (sum, item) { return sum + item.pnl; }, 0);
+      var wins = dollars.filter(function (item) { return item.pnl > 0; }).length;
+      var losses = dollars.filter(function (item) { return item.pnl <= 0; }).length;
+      var best = null, worst = null;
+      dollars.forEach(function (item) {
+        if (!best || item.pnl > best.pnl) best = item;
+        if (!worst || item.pnl < worst.pnl) worst = item;
+      });
+      return {
+        count: dollars.length,
+        invested: invested,
+        totalPnl: totalPnl,
+        pct: invested ? totalPnl / invested : 0,
+        wins: wins,
+        losses: losses,
+        best: best,
+        worst: worst
+      };
+    }
+    function renderSummaryCard(title, stats) {
+      var card = el("article", "summary-card");
+      card.append(el("h3", "", title));
+      var pnl = el("div", "pnl " + moneyClass(stats.totalPnl), fmtMoney(stats.totalPnl) + " (" + fmtPct(stats.pct) + ")");
+      card.append(pnl);
+      var dl = el("dl");
+      [
+        ["Paper-bought", String(stats.count)],
+        ["Invested", "$" + stats.invested.toLocaleString("en-US", { maximumFractionDigits: 0 })],
+        ["Wins / losses", stats.wins + " / " + stats.losses],
+        ["Biggest winner", stats.best ? ((stats.best.row.symbol || "—") + " " + fmtMoney(stats.best.pnl)) : "—"],
+        ["Biggest loser", stats.worst ? ((stats.worst.row.symbol || "—") + " " + fmtMoney(stats.worst.pnl)) : "—"]
+      ].forEach(function (pair) {
+        dl.append(el("dt", "", pair[0]));
+        dl.append(el("dd", "", pair[1]));
+      });
+      card.append(dl);
+      return card;
+    }
+    function renderNLine() {
+      var rates = ratesForVersion();
+      var by = { CLEAN: 0, WARN: 0, TRAP: 0, UNKNOWN: 0 };
+      rates.forEach(function (row) {
+        var v = row.verdict || "UNKNOWN";
+        by[v] = (by[v] || 0) + (row.n || 0);
+      });
+      var windowCounts = { CLEAN: 0, WARN: 0, TRAP: 0, UNKNOWN: 0 };
+      gradedForVersion().forEach(function (row) {
+        var v = row.verdict || "UNKNOWN";
+        windowCounts[v] = (windowCounts[v] || 0) + 1;
+      });
+      document.getElementById("n-by-verdict").textContent =
+        currentVersion.toUpperCase() + " base-rate n — CLEAN " + (by.CLEAN || 0) +
+        ", WARN " + (by.WARN || 0) +
+        ", TRAP " + (by.TRAP || 0) +
+        ", UNKNOWN " + (by.UNKNOWN || 0) +
+        ". Last-7-day cards on this page: CLEAN " + (windowCounts.CLEAN || 0) +
+        ", WARN " + (windowCounts.WARN || 0) +
+        ", TRAP " + (windowCounts.TRAP || 0) +
+        ", UNKNOWN " + (windowCounts.UNKNOWN || 0) +
+        ". Trust the rate only at 30+ per verdict.";
+    }
+    function renderPaperSummary() {
+      var stake = stakeValue();
+      var graded = gradedForVersion();
+      var clean = graded.filter(function (r) { return r.verdict === "CLEAN"; });
+      var warn = graded.filter(function (r) { return r.verdict === "WARN"; });
+      var every = graded.filter(isBuyable);
+      var traps = graded.filter(function (r) { return r.verdict === "TRAP"; });
+      var mount = document.getElementById("summary-mount");
+      mount.textContent = "";
+      mount.append(renderSummaryCard("If you bought every CLEAN coin", summarize(clean, stake)));
+      mount.append(renderSummaryCard("If you bought every WARN coin", summarize(warn, stake)));
+      mount.append(renderSummaryCard("If you bought every coin", summarize(every, stake)));
+      var trapNote = traps.length
+        ? ("TRAP coins graded this window: " + traps.length + " — skipped (TRAP), not paper-bought.")
+        : "TRAP coins: none graded in this window — skipped (TRAP) if they appear.";
+      var pendingTraps = pendingForVersion().filter(function (r) { return r.verdict === "TRAP"; }).length;
+      if (pendingTraps) trapNote += " Pending TRAP cards also stay skipped (" + pendingTraps + ").";
+      document.getElementById("trap-note").textContent = trapNote;
+    }
+    function renderChart() {
+      var stake = stakeValue();
+      var rows = gradedForVersion().filter(isBuyable).slice().sort(function (a, b) {
+        return String(a.graded_at || a.t0 || "").localeCompare(String(b.graded_at || b.t0 || ""));
+      });
+      var mount = document.getElementById("chart-mount");
+      mount.textContent = "";
+      var caption = document.getElementById("chart-caption");
+      if (!rows.length) {
+        mount.append(el("p", "", "No buyable graded coins yet for " + currentVersion + "."));
+        caption.textContent = "";
+        return;
+      }
+      var points = [{ x: 0, y: 0, label: "start" }];
+      var bal = 0;
+      rows.forEach(function (row, i) {
+        var net = typeof row.net_return === "number" ? row.net_return : 0;
+        bal += stake * (1 + net);
+        points.push({ x: i + 1, y: bal, label: row.symbol || ("#" + (i + 1)) });
+      });
+      var W = 720, H = 260, pad = { l: 54, r: 16, t: 16, b: 36 };
+      var ys = points.map(function (p) { return p.y; });
+      var yMin = Math.min(0, Math.min.apply(null, ys));
+      var yMax = Math.max(stake, Math.max.apply(null, ys));
+      if (yMax === yMin) yMax = yMin + 1;
+      var xMax = Math.max(1, points[points.length - 1].x);
+      function X(x) { return pad.l + (x / xMax) * (W - pad.l - pad.r); }
+      function Y(y) { return pad.t + (1 - (y - yMin) / (yMax - yMin)) * (H - pad.t - pad.b); }
+      var d = points.map(function (p, i) { return (i ? "L" : "M") + X(p.x).toFixed(1) + "," + Y(p.y).toFixed(1); }).join(" ");
+      var zeroY = Y(0);
+      var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+      svg.setAttribute("role", "img");
+      svg.setAttribute("aria-label", "Running paper balance for buyable coins");
+      function svgEl(name, attrs) {
+        var node = document.createElementNS("http://www.w3.org/2000/svg", name);
+        Object.keys(attrs).forEach(function (k) { node.setAttribute(k, attrs[k]); });
+        return node;
+      }
+      svg.appendChild(svgEl("line", { x1: pad.l, x2: W - pad.r, y1: zeroY, y2: zeroY, stroke: "#5c4634", "stroke-width": "1.5" }));
+      svg.appendChild(svgEl("path", { d: d, fill: "none", stroke: "#3cd6c8", "stroke-width": "3", "stroke-linejoin": "round", "stroke-linecap": "round" }));
+      var end = points[points.length - 1];
+      svg.appendChild(svgEl("circle", { cx: X(end.x), cy: Y(end.y), r: 4.5, fill: "#3cd6c8" }));
+      var yTicks = [yMin, 0, yMax];
+      yTicks.forEach(function (v) {
+        var ty = Y(v);
+        var label = svgEl("text", { x: 6, y: ty + 4, fill: "#a9b4c4", "font-size": "12" });
+        label.textContent = "$" + Math.round(v).toLocaleString("en-US");
+        svg.appendChild(label);
+      });
+      var leftLabel = svgEl("text", { x: pad.l, y: H - 10, fill: "#a9b4c4", "font-size": "12" });
+      leftLabel.textContent = "1st graded";
+      svg.appendChild(leftLabel);
+      var rightLabel = svgEl("text", { x: W - pad.r, y: H - 10, fill: "#a9b4c4", "font-size": "12", "text-anchor": "end" });
+      rightLabel.textContent = rows.length + " coins";
+      svg.appendChild(rightLabel);
+      mount.appendChild(svg);
+      caption.textContent = "Ends at " + fmtMoney(end.y) + " after " + rows.length + " paper buys at $" + stake.toLocaleString("en-US") + " each (" + currentVersion + ").";
+    }
+    function renderCoinCards() {
+      var stake = stakeValue();
+      var mount = document.getElementById("coin-mount");
+      mount.textContent = "";
+      var graded = gradedForVersion().slice().sort(function (a, b) {
+        return String(b.graded_at || "").localeCompare(String(a.graded_at || ""));
+      });
+      var pending = pendingForVersion().slice().sort(function (a, b) {
+        return String(b.t0 || "").localeCompare(String(a.t0 || ""));
+      });
+      if (!graded.length && !pending.length) {
+        mount.append(el("p", "", "No paper cards for " + currentVersion + " yet."));
+        return;
+      }
+      graded.forEach(function (row) {
+        var card = el("article", "paper-card");
+        var top = el("div", "row-top");
+        top.append(el("h3", "", (row.symbol || "—") + (row.name ? " · " + row.name : "")));
+        var right = el("div");
+        right.append(badge(row.verdict));
+        right.append(document.createTextNode(" "));
+        right.append(el("span", "grade-pill", "Grade " + (row.grade || "—")));
+        top.append(right);
+        card.append(top);
+        if (row.verdict === "TRAP") {
+          card.append(el("p", "meta", "Skipped (TRAP) — not paper-bought."));
+          card.append(el("p", "meta", "Entry " + fmtTime(row.t0) + " @ " + fmtPrice(row.price_t0)));
+          card.append(el("p", "meta", "Would-be exit: " + exitLabel(row.exit_reason) + " · plan net " + fmtPct(row.net_return)));
+        } else {
+          var pnl = stake * (typeof row.net_return === "number" ? row.net_return : 0);
+          card.append(el("div", "money " + moneyClass(pnl), fmtMoney(pnl) + "  ·  " + fmtPct(row.net_return)));
+          card.append(el("p", "meta", "Entry " + fmtTime(row.t0) + " @ " + fmtPrice(row.price_t0)));
+          card.append(el("p", "meta", "Exit: " + exitLabel(row.exit_reason) + " · graded " + fmtTime(row.graded_at)));
+          card.append(el("p", "meta", "Stake $" + stake.toLocaleString("en-US") + " · " + currentVersion));
+        }
+        mount.append(card);
+      });
+      pending.forEach(function (row) {
+        var card = el("article", "paper-card");
+        var top = el("div", "row-top");
+        top.append(el("h3", "", (row.symbol || "—") + (row.name ? " · " + row.name : "")));
+        var right = el("div");
+        right.append(badge(row.verdict));
+        right.append(document.createTextNode(" "));
+        right.append(el("span", "badge badge-PENDING", "Pending"));
+        top.append(right);
+        card.append(top);
+        if (row.verdict === "TRAP") {
+          card.append(el("p", "meta", "Skipped (TRAP). Pending, grades after 24h."));
+        } else {
+          card.append(el("p", "meta", "Pending, grades after 24h."));
+        }
+        card.append(el("p", "meta", "Entry " + fmtTime(row.t0) + " @ " + fmtPrice(row.price_t0)));
+        card.append(el("p", "meta", "Paper stake reserved: $" + stake.toLocaleString("en-US") + " · " + currentVersion));
+        mount.append(card);
+      });
     }
 
     function numberCell(value, source, fetched) {
@@ -161,7 +514,6 @@
       cell.append(sourceLine(source, fetched, true));
       return cell;
     }
-
     function renderAudits(audits) {
       var mount = document.getElementById("live-mount");
       mount.textContent = "";
@@ -171,12 +523,8 @@
       }
       var table = el("table", "audit");
       var head = el("tr");
-      ["Coin", "Age", "Liquidity", "Verdict", ""].forEach(function (label) {
-        head.append(el("th", "", label));
-      });
-      var thead = el("thead");
-      thead.append(head);
-      table.append(thead);
+      ["Coin", "Age", "Liquidity", "Verdict", ""].forEach(function (label) { head.append(el("th", "", label)); });
+      var thead = el("thead"); thead.append(head); table.append(thead);
       var body = el("tbody");
       audits.forEach(function (row, index) {
         var checks = row.checks || [];
@@ -207,10 +555,6 @@
         if (isStale(row.audited_at)) score.classList.add("stale");
         verdictCell.append(score);
         if (row.not_checked) verdictCell.append(el("p", "", row.not_checked));
-        if (row.feed || (row.sources && row.sources.length)) {
-          var feeds = row.sources && row.sources.length ? row.sources.join(", ") : row.feed;
-          verdictCell.append(el("span", "src", "Feed " + feeds));
-        }
         tr.append(verdictCell);
         var toggleCell = el("td");
         var button = el("button", "check-toggle", "Checks");
@@ -247,32 +591,6 @@
       table.append(body);
       mount.append(table);
     }
-
-    function renderGraded(rows) {
-      var mount = document.getElementById("graded-mount");
-      mount.textContent = "";
-      if (!rows || !rows.length) {
-        mount.append(el("p", "", "No graded paper cards in the last 7 days."));
-        return;
-      }
-      var grid = el("div", "card-grid");
-      rows.forEach(function (row) {
-        var card = el("article", "paper-card");
-        card.append(el("h3", "", (row.symbol || "—") + " · grade " + (row.grade || "—")));
-        card.append(badge(row.verdict));
-        var net = typeof row.net_return === "number" ? (Math.round(row.net_return * 1000) / 10) + "%" : "—";
-        card.append(el("p", "", "Plan result after costs: " + net));
-        card.append(sourceLine((row.snapshot_sources || []).join(", ") || row.price_source, row.graded_at));
-        card.append(el("p", "", "Doubled: " + (row.doubled ? "yes" : "no") + ". Fell more than 50%: " + (row.fell_50 ? "yes" : "no") + "."));
-        if (row.grade === "F") {
-          card.append(el("p", "", "Audit flagged it: " + (row.audit_flagged ? "yes" : "no") + "."));
-        }
-        if (row.trap_call) card.append(el("p", "", "TRAP call: " + row.trap_call + "."));
-        grid.append(card);
-      });
-      mount.append(grid);
-    }
-
     function renderRates(rows) {
       var mount = document.getElementById("rates-mount");
       mount.textContent = "";
@@ -281,9 +599,7 @@
       ["Rule version", "Source", "Verdict", "n", "Doubled", "Fell > 50%", "Median plan result", "Best", "Worst"].forEach(function (label) {
         head.append(el("th", "", label));
       });
-      var thead = el("thead");
-      thead.append(head);
-      table.append(thead);
+      var thead = el("thead"); thead.append(head); table.append(thead);
       var body = el("tbody");
       (rows || []).forEach(function (row) {
         var tr = el("tr");
@@ -302,8 +618,7 @@
             if (key.indexOf("pct_") === 0) shown = (Math.round(value * 10) / 10) + "%";
             else shown = (Math.round(value * 1000) / 10) + "%";
           }
-          var cell = el("td", "", shown);
-          tr.append(cell);
+          tr.append(el("td", "", shown));
         });
         body.append(tr);
       });
@@ -311,49 +626,65 @@
       mount.append(table);
     }
 
-    var currentVersion = "v2";
-    var loadedBoard = null;
-
-    function versionOf(row) {
-      return row.rule_version || "v1";
-    }
-
     function applyVersion() {
       if (!loadedBoard) return;
-      document.getElementById("label").textContent = currentVersion === "v2" ? (loadedBoard.label || document.getElementById("label").textContent) : (loadedBoard.label_v1 || document.getElementById("label").textContent);
-      document.getElementById("footer-label").textContent = document.getElementById("label").textContent;
+      document.getElementById("label").textContent = currentVersion === "v2"
+        ? (loadedBoard.label || document.getElementById("label").textContent)
+        : (loadedBoard.label_v1 || document.getElementById("label").textContent);
+      document.getElementById("footer-label").textContent = document.getElementById("label").textContent + " v1 and v2 stay separate.";
       document.getElementById("show-v2").setAttribute("aria-pressed", currentVersion === "v2" ? "true" : "false");
       document.getElementById("show-v1").setAttribute("aria-pressed", currentVersion === "v1" ? "true" : "false");
       var audits = (loadedBoard.audits || []).filter(function (row) { return versionOf(row) === currentVersion; });
-      var graded = (loadedBoard.graded || []).filter(function (row) { return versionOf(row) === currentVersion; });
-      var rates = (loadedBoard.base_rates || []).filter(function (row) { return (row.rule_version || "v2") === currentVersion; });
+      var rates = ratesForVersion();
       if (!rates.length) {
         rates = ["CLEAN", "WARN", "TRAP", "UNKNOWN"].map(function (name) {
           return { verdict: name, rule_version: currentVersion, feed: "—", n: 0, note: "too few to trust", pct_doubled: null, pct_fell_50: null, median_net: null, best: null, worst: null };
         });
       }
+      renderNLine();
+      renderPaperSummary();
+      renderChart();
+      renderCoinCards();
       renderAudits(audits);
-      renderGraded(graded);
       renderRates(rates);
+      if (window.siftChrome && window.siftChrome.wrap) window.siftChrome.wrap();
     }
 
-    function renderBoard(board) {
-      loadedBoard = board;
-      document.getElementById("board-age").textContent = "Board file " + ageText(board.generated_at) + (board.rules_sha256_v2 ? " · v2 rules " + board.rules_sha256_v2.slice(0, 12) : "");
-      if (isStale(board.generated_at)) document.getElementById("board-age").classList.add("stale");
-      if (board.why_v2) document.getElementById("why-v2").textContent = board.why_v2;
-      applyVersion();
+    function parseJsonl(text) {
+      return text.split(/\n+/).map(function (line) { return line.trim(); }).filter(Boolean).map(function (line) {
+        return JSON.parse(line);
+      });
     }
 
     document.getElementById("show-v2").addEventListener("click", function () { currentVersion = "v2"; applyVersion(); });
     document.getElementById("show-v1").addEventListener("click", function () { currentVersion = "v1"; applyVersion(); });
+    document.getElementById("stake").addEventListener("input", function () {
+      renderPaperSummary();
+      renderChart();
+      renderCoinCards();
+    });
 
-    fetch("memescan/data/board.json?t=" + Date.now()).then(function (response) {
-      if (!response.ok) throw new Error("missing board");
-      return response.json();
-    }).then(renderBoard).catch(function () {
+    Promise.all([
+      fetch("memescan/data/board.json?t=" + Date.now()).then(function (r) {
+        if (!r.ok) throw new Error("missing board");
+        return r.json();
+      }),
+      fetch("memescan/data/cards.jsonl?t=" + Date.now()).then(function (r) {
+        if (!r.ok) return "";
+        return r.text();
+      }).catch(function () { return ""; })
+    ]).then(function (parts) {
+      loadedBoard = parts[0];
+      try { loadedCards = parts[1] ? parseJsonl(parts[1]) : []; } catch (err) { loadedCards = []; }
+      document.getElementById("board-age").textContent = "Board file " + ageText(loadedBoard.generated_at) + (loadedBoard.rules_sha256_v2 ? " · v2 rules " + loadedBoard.rules_sha256_v2.slice(0, 12) : "");
+      if (isStale(loadedBoard.generated_at)) document.getElementById("board-age").classList.add("stale");
+      if (loadedBoard.why) document.getElementById("why").textContent = loadedBoard.why;
+      if (loadedBoard.why_v2) document.getElementById("why-v2").textContent = loadedBoard.why_v2;
+      applyVersion();
+    }).catch(function () {
+      document.getElementById("summary-mount").textContent = "The paper audit file is not available yet.";
       document.getElementById("live-mount").textContent = "The paper audit file is not available yet.";
-      document.getElementById("graded-mount").textContent = "No graded paper cards in the last 7 days.";
+      document.getElementById("coin-mount").textContent = "No graded paper cards yet.";
     });
   </script>
 </body>
