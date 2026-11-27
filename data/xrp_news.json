@@ -1,17 +1,17 @@
 {
-  "generated_at": "2026-11-25T20:43:26-05:00",
+  "generated_at": "2026-11-26T20:48:00-05:00",
   "lookback_days": 16,
   "disclaimer": "Verification status as of last update; not financial advice.",
   "items": [
     {
-      "date": "2026-11-25",
-      "headline": "Just 10 accounts drove all of the XRP Ledger's trading growth last quarter",
-      "summary": "Data shows that the ten busiest accounts accounted for more than all of the exchange's quarterly growth, while trading by everyone else declined.",
+      "date": "2026-11-26",
+      "headline": "Ripple is worth $90 a share to one fund and $300 to another, SEC filings show",
+      "summary": "Two SEC-registered funds open to ordinary investors marked Ripple stock 70% apart on Sept.",
       "status": "Reported",
       "sources": [
         {
           "name": "CoinDesk",
-          "url": "https://www.coindesk.com/markets/2026/11/25/ten-accounts-drove-all-of-the-xrp-ledger-s-trading-growth-last-quarter"
+          "url": "https://www.coindesk.com/markets/2026/11/26/ripple-is-worth-usd90-a-share-to-one-fund-and-usd300-to-another-sec-filings-show"
         }
       ]
     },
@@ -52,18 +52,6 @@
       ]
     },
     {
-      "date": "2026-11-24",
-      "headline": "Aave Horizon Adds HINC High-Yield Fund as Collateral",
-      "summary": "Eligible holders can borrow USDC, GHO and RLUSD without redeeming the fund, with standard initial borrowing capped at 55% of collateral value.",
-      "status": "Reported",
-      "sources": [
-        {
-          "name": "The Defiant",
-          "url": "https://thedefiant.io/news/defi/aave-horizon-adds-hinc-high-yield-fund-as-collateral"
-        }
-      ]
-    },
-    {
       "date": "2026-11-10",
       "headline": "XRP Ledger Foundation quantum roadmap: post-quantum account keys",
       "summary": "The XRP Ledger Foundation published a design that would let account owners add a quantum-resistant ML-DSA-44 signing key and retire the old one, with no change to the base fee and a targeted transition around 2028; it is still a proposal, not an activated upgrade.",
@@ -74,24 +62,8 @@
           "url": "https://pages.xrpl.foundation/protocol-roadmap/research/quantum"
         },
         {
-          "name": "CoinDesk",
-          "url": "https://www.coindesk.com/tech/2026/11/10/xrp-ledger-maps-out-quantum-proof-accounts-with-no-extra-fees-for-users"
-        },
-        {
           "name": "crypto.news",
           "url": "https://crypto.news/xrp-ledger-quantum-resistant-accounts-2028/"
-        }
-      ]
-    },
-    {
-      "date": "2026-11-09",
-      "headline": "Evernorth Holdings files final prospectus for resale of up to 73.7 million shares",
-      "summary": "A final SEC prospectus dated Nov. 9 lets existing holders of Evernorth (Nasdaq: XRPN), the XRP treasury company, resell up to 73.7 million Class A shares; Evernorth receives no proceeds from those sales.",
-      "status": "Confirmed",
-      "sources": [
-        {
-          "name": "SEC EDGAR",
-          "url": "https://www.sec.gov/Archives/edgar/data/2092592/000162828026072223/0001628280-26-072223-index.htm"
         }
       ]
     }
