@@ -15,5 +15,11 @@ v="$(date +%Y%m%d%H%M)"
 sed -i -E "s/\?v=[0-9a-z]+/?v=${v}/g" index.html strategy.html research.html updates.html
 git add -A
 git commit -q -m "Paper results update $(date '+%Y-%m-%d %H:%M %Z')"
+# Bring in commits pushed by other runners (memescan) first, so the push isn't rejected.
+if ! git pull --rebase -q origin main; then
+  git rebase --abort 2>/dev/null || true
+  echo "Pull before push failed (conflict?); nothing pushed." >&2
+  exit 1
+fi
 git push -q origin main
 echo "Pushed $(git rev-parse --short HEAD)"
