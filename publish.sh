@@ -6,6 +6,8 @@ cd "$(dirname "$0")"
 if [[ -f paper_tests/new_2026_11/update_daily.py ]]; then
   python3 paper_tests/new_2026_11/update_daily.py || echo "new_2026_11 update skipped (non-fatal)" >&2
 fi
+# Keep the last snapshot when the market data providers are unavailable.
+python3 tools/refresh_markets.py || echo 'Market snapshot refresh skipped (non-fatal)' >&2
 python3 build_data.py
 node -e "const fs=require('fs');eval(fs.readFileSync('data.js','utf8')+';if(!SIFT||!Array.isArray(SIFT.strategies)||SIFT.strategies.length<1)throw new Error(\"bad SIFT\");for(const s of SIFT.strategies){if(!s.planned&&!(s.points&&s.points.length))throw new Error(\"no points for \"+s.n);if(!s.why||!s.why.text)throw new Error(\"no why for \"+s.n)}console.log(\"data.js OK:\",SIFT.strategies.length,\"strategies, asOf\",SIFT.asOf)')"
 node -e "const fs=require('fs');eval(fs.readFileSync('research_data.js','utf8')+';if(!RESEARCH||!Array.isArray(RESEARCH.strategies)||RESEARCH.strategies.length<1)throw new Error(\"bad RESEARCH\");for(const s of RESEARCH.strategies){for(const k of [\"name\",\"plain\",\"why\",\"verdict\"])if(!s[k])throw new Error(\"research \"+s.key+\" missing \"+k);if(!s.sources||!s.sources.length||!s.rules||!s.rules.length)throw new Error(\"research \"+s.key+\" missing sources/rules\")}console.log(\"research_data.js OK:\",RESEARCH.strategies.length,\"strategies\")')"
