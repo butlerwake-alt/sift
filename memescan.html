@@ -5,11 +5,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Cache-Control" content="no-store">
-  <title>Paper Money · Memescan · SIFT</title>
-  <meta name="description" content="Paper-only memecoin dollars from the fixed FOMO paper plan. Hypothetical results with simulated fees and slippage. Not financial advice. No wallet.">
+  <title>Meme Coins · SIFT</title>
+  <meta name="description" content="Paper-only meme coin trades: open positions, closed trades, P&L, and win rate from the memescan audit. Hypothetical results with simulated fees and slippage. Not financial advice. No wallet.">
   <meta name="theme-color" content="#0a1018">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=202611271015">
+  <link rel="stylesheet" href="styles.css?v=202611280100">
   <style>
     .audit-banner { margin: 0.4rem 0 0.8rem; padding: 0.75rem 0.9rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); font-weight: 650; line-height: 1.45; }
     .audit-banner .n-line { display: block; margin-top: 0.35rem; color: var(--muted); font-weight: 600; font-size: 0.9rem; }
@@ -86,7 +86,7 @@
           <a href="index.html#board">Strategies</a>
           <a href="research.html">Research</a>
           <a href="follow_money.html">Follow the Money</a>
-          <a href="memescan.html" aria-current="page">Memescan audit</a>
+          <a class="nav-cta" href="memescan.html" aria-current="page">Meme Coins</a>
           <a href="qqqi.html">QQQ vs QQQI</a>
           <a href="news.html">XRP news</a>
           <a href="updates.html">Updates</a>
@@ -104,8 +104,8 @@
       <span class="n-line" id="n-by-verdict">Loading graded counts…</span>
     </p>
     <p class="experiment-label" id="label">memescan audit v2 — rule change started November 25, 2026, paper only, not original evidence.</p>
-    <h1>Paper Money</h1>
-    <p class="lede" id="why">Tests whether a rug/safety checklist actually separates memecoins that survive 24h from ones that collapse. Paper only, includes 1.5% slippage + fees per side. Most memecoins go to zero; expect negative results — the point is to measure the checklist, not to find trades.</p>
+    <h1>Meme Coins</h1>
+    <p class="lede" id="why">Paper trades from the memescan audit: open positions still waiting on a 24h grade, closed trades with P&amp;L, and win rate. Includes 1.5% slippage + fees per side. Most memecoins go to zero — the point is to measure the checklist, not to find trades.</p>
     <p id="why-v2">v2 (started November 25, 2026): CLEAN no longer blocked by checks the free data can't run; wider new-pair feed for more samples.</p>
 
     <div class="version-toggle" role="group" aria-label="Rule version">
@@ -119,11 +119,28 @@
       <input id="stake" type="number" min="1" step="1" value="100" inputmode="decimal">
     </div>
 
+    <div class="stat-strip" id="headline-stats" aria-live="polite"></div>
+
     <section class="audit-section" id="paper-summary">
       <h2>Paper P&amp;L summary</h2>
       <p class="src">Fixed plan from the FOMO screenshots: enter at audit price, −25% stop, sell half at +100%, 35% trailing stop on the rest, dead-money exit after 45 minutes, 1.5% slippage + 0.25% fee per side, graded after 24 hours. Dollars are computed from already-graded results — rules are not re-run here.</p>
       <div class="summary-grid" id="summary-mount"></div>
       <p class="trap-note" id="trap-note"></p>
+    </section>
+
+    <section class="audit-section" id="open-closed">
+      <h2>Open positions and closed trades</h2>
+      <p class="src">Open = paper cards still pending a 24h grade. Closed = graded paper cards with a plan net return. TRAP stays skipped.</p>
+      <div class="pos-split">
+        <div class="pos-col">
+          <h3>Open positions <span class="count-pill" id="open-count">0</span></h3>
+          <div class="card-grid" id="open-mount"></div>
+        </div>
+        <div class="pos-col">
+          <h3>Closed trades <span class="count-pill" id="closed-count">0</span></h3>
+          <div class="card-grid" id="closed-mount"></div>
+        </div>
+      </div>
     </section>
 
     <section class="audit-section" id="paper-chart">
@@ -133,7 +150,7 @@
       <p class="chart-caption" id="chart-caption"></p>
     </section>
 
-    <section class="audit-section" id="paper-cards">
+    <section class="audit-section" id="paper-cards" hidden>
       <h2>Per-coin paper cards</h2>
       <div class="card-grid" id="coin-mount"></div>
     </section>
@@ -157,7 +174,7 @@
         <a href="index.html#board">Strategies</a>
         <a href="research.html">Research</a>
         <a href="follow_money.html">Follow the Money</a>
-        <a href="memescan.html">Memescan audit</a>
+        <a href="memescan.html">Meme Coins</a>
         <a href="qqqi.html">QQQ vs QQQI</a>
         <a href="news.html">XRP news</a>
         <a href="updates.html">Updates</a>
@@ -177,8 +194,8 @@
     <a href="videos.html" data-videos-nav hidden><span>Videos</span></a>
   </nav>
   <a class="to-top" href="#top" aria-label="Back to top">↑</a>
-  <script src="site-config.js?v=202611271015"></script>
-  <script src="site-chrome.js?v=202611271015"></script>
+  <script src="site-config.js?v=202611280100"></script>
+  <script src="site-chrome.js?v=202611280100"></script>
   <script>
     var STALE_MS = 60 * 60 * 1000;
     var DEFAULT_STAKE = 100;
@@ -450,62 +467,86 @@
       mount.appendChild(svg);
       caption.textContent = "Ends at " + fmtMoney(end.y) + " after " + rows.length + " paper buys at $" + stake.toLocaleString("en-US") + " each (" + currentVersion + ").";
     }
-    function renderCoinCards() {
+    function buildTradeCard(row, stake, pending) {
+      var card = el("article", "paper-card");
+      var top = el("div", "row-top");
+      top.append(el("h3", "", (row.symbol || "—") + (row.name ? " · " + row.name : "")));
+      var right = el("div");
+      right.append(badge(row.verdict));
+      right.append(document.createTextNode(" "));
+      if (pending) right.append(el("span", "badge badge-PENDING", "Open"));
+      else right.append(el("span", "grade-pill", "Grade " + (row.grade || "—")));
+      top.append(right);
+      card.append(top);
+      if (pending) {
+        if (row.verdict === "TRAP") card.append(el("p", "meta", "Skipped (TRAP). Pending, grades after 24h."));
+        else card.append(el("p", "meta", "Open paper position — grades after 24h."));
+        card.append(el("p", "meta", "Entry " + fmtTime(row.t0) + " @ " + fmtPrice(row.price_t0)));
+        card.append(el("p", "meta", "Paper stake reserved: $" + stake.toLocaleString("en-US") + " · " + currentVersion));
+        return card;
+      }
+      if (row.verdict === "TRAP") {
+        card.append(el("p", "meta", "Skipped (TRAP) — not paper-bought."));
+        card.append(el("p", "meta", "Entry " + fmtTime(row.t0) + " @ " + fmtPrice(row.price_t0)));
+        card.append(el("p", "meta", "Would-be exit: " + exitLabel(row.exit_reason) + " · plan net " + fmtPct(row.net_return)));
+        return card;
+      }
+      var pnl = stake * (typeof row.net_return === "number" ? row.net_return : 0);
+      card.append(el("div", "money " + moneyClass(pnl), fmtMoney(pnl) + "  ·  " + fmtPct(row.net_return)));
+      card.append(el("p", "meta", "Entry " + fmtTime(row.t0) + " @ " + fmtPrice(row.price_t0)));
+      card.append(el("p", "meta", "Exit: " + exitLabel(row.exit_reason) + " · graded " + fmtTime(row.graded_at)));
+      card.append(el("p", "meta", "Stake $" + stake.toLocaleString("en-US") + " · " + currentVersion));
+      return card;
+    }
+    function renderHeadlineStats() {
       var stake = stakeValue();
-      var mount = document.getElementById("coin-mount");
+      var graded = gradedForVersion();
+      var buyable = graded.filter(isBuyable);
+      var pending = pendingForVersion().filter(isBuyable);
+      var stats = summarize(buyable, stake);
+      var winRate = stats.count ? (100 * stats.wins / stats.count) : null;
+      var mount = document.getElementById("headline-stats");
+      if (!mount) return;
       mount.textContent = "";
+      [
+        { label: "Open positions", value: String(pending.length), hint: "Pending 24h grade", cls: "" },
+        { label: "Closed trades", value: String(stats.count), hint: "Buyable graded cards", cls: "" },
+        { label: "Paper P&L", value: fmtMoney(stats.totalPnl), hint: fmtPct(stats.pct) + " on invested", cls: moneyClass(stats.totalPnl) },
+        { label: "Win rate", value: winRate == null ? "—" : (Math.round(winRate * 10) / 10) + "%", hint: stats.wins + " wins / " + stats.losses + " losses", cls: "" }
+      ].forEach(function (tile) {
+        var article = el("article", "stat-tile");
+        article.append(el("p", "label", tile.label));
+        article.append(el("p", "value" + (tile.cls ? (" " + tile.cls) : ""), tile.value));
+        article.append(el("p", "hint", tile.hint));
+        mount.append(article);
+      });
+    }
+    function renderOpenClosed() {
+      var stake = stakeValue();
+      var openMount = document.getElementById("open-mount");
+      var closedMount = document.getElementById("closed-mount");
+      var openCount = document.getElementById("open-count");
+      var closedCount = document.getElementById("closed-count");
       var graded = gradedForVersion().slice().sort(function (a, b) {
         return String(b.graded_at || "").localeCompare(String(a.graded_at || ""));
       });
       var pending = pendingForVersion().slice().sort(function (a, b) {
         return String(b.t0 || "").localeCompare(String(a.t0 || ""));
       });
-      if (!graded.length && !pending.length) {
-        mount.append(el("p", "", "No paper cards for " + currentVersion + " yet."));
-        return;
-      }
-      graded.forEach(function (row) {
-        var card = el("article", "paper-card");
-        var top = el("div", "row-top");
-        top.append(el("h3", "", (row.symbol || "—") + (row.name ? " · " + row.name : "")));
-        var right = el("div");
-        right.append(badge(row.verdict));
-        right.append(document.createTextNode(" "));
-        right.append(el("span", "grade-pill", "Grade " + (row.grade || "—")));
-        top.append(right);
-        card.append(top);
-        if (row.verdict === "TRAP") {
-          card.append(el("p", "meta", "Skipped (TRAP) — not paper-bought."));
-          card.append(el("p", "meta", "Entry " + fmtTime(row.t0) + " @ " + fmtPrice(row.price_t0)));
-          card.append(el("p", "meta", "Would-be exit: " + exitLabel(row.exit_reason) + " · plan net " + fmtPct(row.net_return)));
-        } else {
-          var pnl = stake * (typeof row.net_return === "number" ? row.net_return : 0);
-          card.append(el("div", "money " + moneyClass(pnl), fmtMoney(pnl) + "  ·  " + fmtPct(row.net_return)));
-          card.append(el("p", "meta", "Entry " + fmtTime(row.t0) + " @ " + fmtPrice(row.price_t0)));
-          card.append(el("p", "meta", "Exit: " + exitLabel(row.exit_reason) + " · graded " + fmtTime(row.graded_at)));
-          card.append(el("p", "meta", "Stake $" + stake.toLocaleString("en-US") + " · " + currentVersion));
-        }
-        mount.append(card);
-      });
-      pending.forEach(function (row) {
-        var card = el("article", "paper-card");
-        var top = el("div", "row-top");
-        top.append(el("h3", "", (row.symbol || "—") + (row.name ? " · " + row.name : "")));
-        var right = el("div");
-        right.append(badge(row.verdict));
-        right.append(document.createTextNode(" "));
-        right.append(el("span", "badge badge-PENDING", "Pending"));
-        top.append(right);
-        card.append(top);
-        if (row.verdict === "TRAP") {
-          card.append(el("p", "meta", "Skipped (TRAP). Pending, grades after 24h."));
-        } else {
-          card.append(el("p", "meta", "Pending, grades after 24h."));
-        }
-        card.append(el("p", "meta", "Entry " + fmtTime(row.t0) + " @ " + fmtPrice(row.price_t0)));
-        card.append(el("p", "meta", "Paper stake reserved: $" + stake.toLocaleString("en-US") + " · " + currentVersion));
-        mount.append(card);
-      });
+      openMount.textContent = "";
+      closedMount.textContent = "";
+      if (openCount) openCount.textContent = String(pending.length);
+      if (closedCount) closedCount.textContent = String(graded.length);
+      if (!pending.length) openMount.append(el("p", "meta", "No open paper positions for " + currentVersion + "."));
+      else pending.forEach(function (row) { openMount.append(buildTradeCard(row, stake, true)); });
+      if (!graded.length) closedMount.append(el("p", "meta", "No closed paper trades for " + currentVersion + "."));
+      else graded.forEach(function (row) { closedMount.append(buildTradeCard(row, stake, false)); });
+      var legacy = document.getElementById("coin-mount");
+      if (legacy) legacy.textContent = "";
+    }
+    function renderCoinCards() {
+      renderHeadlineStats();
+      renderOpenClosed();
     }
 
     function numberCell(value, source, fetched) {
