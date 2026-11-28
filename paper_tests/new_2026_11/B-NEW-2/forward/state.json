@@ -1,0 +1,10 @@
+{
+  "spot_units": 0.1664342017314503,
+  "short_notional": 9962.5,
+  "short_entry_px": 59858.49,
+  "funding_cash": -37.51,
+  "as_of": "2026-11-28",
+  "experiment_label": "New experiment, started November 27, 2026",
+  "id": "B-NEW-2",
+  "counterparty_risk": "not modeled"
+}

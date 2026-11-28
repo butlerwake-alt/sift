@@ -1,0 +1,24 @@
+{
+  "id": "S-NEW-3",
+  "name": "Asset-Class Momentum Top 3",
+  "category": "Stock Strategy",
+  "source": "https://www.cxoadvisory.com/momentum-strategy/",
+  "why": "Cross-asset momentum is a long-studied premium. Frozen universe and 4-month lookback with monthly top-3 equal weight; no search over lookbacks.",
+  "why_fail": "Momentum crashes after sharp reversals; ETF universe is today's list (survivorship); monthly rebalance + 1.5\u00d7 costs reduce edge.",
+  "rules": [
+    "Universe: SPY, IWM, EFA, EEM, TLT, LQD, VNQ, GLD, DBC; BIL as cash.",
+    "At each month-end, rank by 4-month total return; hold equal-weight top 3 for 1 month.",
+    "If fewer than 3 have data, hold what is available; cash remainder earns BIL.",
+    "Cost: 0.075% per side on rebalance turnover (1.5\u00d7 desk)."
+  ],
+  "benchmarks": [
+    "SPY buy-and-hold",
+    "60/40 SPY/TLT"
+  ],
+  "fee_per_side": 0.00075,
+  "comparisons_note": "comparison only, not a pick",
+  "experiment_label": "New experiment, started November 27, 2026",
+  "forward_start": "2026-11-27",
+  "capital": 10000.0,
+  "desk_dd_limit": 0.1
+}

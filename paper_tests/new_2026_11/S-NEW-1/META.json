@@ -1,0 +1,25 @@
+{
+  "id": "S-NEW-1",
+  "name": "Turn of the Month (SPY)",
+  "category": "Stock Strategy",
+  "source": "https://ripbacktest.com/posts/turn-of-the-month-effect-spy/",
+  "why": "Classic calendar effect: historically concentrated equity premium around month turns. Frozen rule from Rip Backtest; no parameter search.",
+  "why_fail": "Calendar effects can fade once crowded; gap risk over weekends; 1.5x costs and idle-cash modeling can erase thin edges.",
+  "rules": [
+    "Buy SPY at the close of the 2nd-to-last trading day of the month.",
+    "Sell SPY at the close of the 3rd trading day of the next month.",
+    "Hold cash (BIL yield) otherwise.",
+    "Cost: 0.075% fee+slippage per side (1.5\u00d7 desk 0.05%).",
+    "No leverage. Paper only."
+  ],
+  "benchmarks": [
+    "SPY buy-and-hold",
+    "Random 4-day holds in the same months (comparison only)"
+  ],
+  "fee_per_side": 0.00075,
+  "comparisons_note": "comparison only, not a pick",
+  "experiment_label": "New experiment, started November 27, 2026",
+  "forward_start": "2026-11-27",
+  "capital": 10000.0,
+  "desk_dd_limit": 0.1
+}

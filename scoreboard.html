@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <script>(function(){try{var t=localStorage.getItem("sift.theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-store">
+  <title>1-Year Strategy Scoreboard · SIFT</title>
+  <meta name="description" content="Paper-only scoreboard ranking SIFT forward tests. Not financial advice.">
+  <meta name="theme-color" content="#0a1018">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css?v=202611280230">
+</head>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="mast">
+    <nav class="site-nav" aria-label="Primary">
+      <div class="nav-bar">
+        <a class="nav-brand" href="index.html"><img src="favicon.svg" width="28" height="28" alt=""><span>SIFT</span></a>
+        <div class="nav-panel" id="site-menu">
+          <a href="index.html#leaderboard">Leaderboard</a>
+          <a href="index.html#board">Strategies</a>
+          <a href="scoreboard.html" aria-current="page">Scoreboard</a>
+          <a href="bots.html">Bots</a>
+          <a href="research.html">Research</a>
+          <a href="follow_money.html">Follow the Money</a>
+          <a class="nav-cta" href="memescan.html">Meme Coins</a>
+          <a href="qqqi.html">QQQ vs QQQI</a>
+          <a href="news.html">XRP news</a>
+          <a href="updates.html">Updates</a>
+          <a href="index.html#method">How it works</a>
+          <a href="videos.html" data-videos-nav hidden>Videos</a>
+        </div>
+        <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-menu"><span class="nav-toggle-bars" aria-hidden="true"></span>Menu</button>
+      </div>
+    </nav>
+  </header>
+  <main id="main" class="wrap">
+    <p><a class="back" href="index.html">Back to the board</a></p>
+    <h1>1-Year Strategy Scoreboard</h1>
+    <p class="lede">Every paper test on SIFT in one place — existing desk strategies, new Nov 2026 experiments, and the memecoin audit book. Ranked by risk-adjusted forward return when enough marks exist.</p>
+    <p class="score-banner">A strategy needs 12 months of forward paper results, inside a 10% drawdown, beating its benchmark after costs before it's considered for real trading.</p>
+    <p class="meta" id="exclude-note">Vol-targeted trend b1/b2 variants are left out of all rankings.</p>
+    <div class="score-filters" role="group" aria-label="Filters">
+      <label>Category
+        <select id="filter-cat">
+          <option value="all">All</option>
+          <option value="Stock Strategy">Stock Strategy</option>
+          <option value="Crypto Bot">Crypto Bot</option>
+          <option value="Memecoin Audit">Memecoin Audit</option>
+          <option value="Existing Desk">Existing Desk</option>
+        </select>
+      </label>
+      <label class="chk"><input type="checkbox" id="filter-dd"> Only within the 10% DD limit</label>
+    </div>
+    <div class="rtable lb-scroll" id="scoreboard-mount"><p class="meta">Loading scoreboard…</p></div>
+  </main>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="footer-kicker">Paper trading, not financial advice.</p>
+      <p>Scoreboard mixes existing desk marks from data.js with new experiments and memescan paper results. b1/b2 excluded.</p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="index.html#leaderboard">Leaderboard</a>
+        <a href="scoreboard.html">Scoreboard</a>
+        <a href="bots.html">Bots</a>
+        <a href="memescan.html">Meme Coins</a>
+        <a href="updates.html">Updates</a>
+      </nav>
+    </div>
+  </footer>
+  <nav class="tabbar" aria-label="Mobile">
+    <a href="index.html"><span>Home</span></a>
+    <a href="scoreboard.html" aria-current="page"><span>Score</span></a>
+    <a href="bots.html"><span>Bots</span></a>
+    <a href="memescan.html"><span>Memes</span></a>
+    <a href="index.html#board"><span>More</span></a>
+  </nav>
+  <a class="to-top" href="#top" aria-label="Back to top">↑</a>
+  <script src="site-config.js?v=202611280230"></script>
+  <script src="data.js?v=202611280230"></script>
+  <script src="new_experiments_data.js?v=202611280230"></script>
+  <script src="scoreboard.js?v=202611280230"></script>
+  <script src="site-chrome.js?v=202611280230"></script>
+</body>
+</html>

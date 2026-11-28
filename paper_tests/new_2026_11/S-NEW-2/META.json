@@ -1,0 +1,23 @@
+{
+  "id": "S-NEW-2",
+  "name": "3 Days Down Overnight (SPY)",
+  "category": "Stock Strategy",
+  "source": "https://x.com/QuantifiedStrat/status/2123808598535094771",
+  "why": "Tests a simple overnight mean-reversion claim after three down closes. Rules frozen from the public post; no tuning.",
+  "why_fail": "Overnight gaps can go the wrong way; consecutive down days cluster in crashes; costs at 1.5\u00d7 desk rates hurt high-turnover edges.",
+  "rules": [
+    "After 3 consecutive lower closes (close < prior close), buy SPY at that close.",
+    "Sell at the next open (primary).",
+    "Cost: 0.075% per side (1.5\u00d7 desk).",
+    "Comparison only: sell at the next close instead."
+  ],
+  "benchmarks": [
+    "SPY buy-and-hold"
+  ],
+  "fee_per_side": 0.00075,
+  "comparisons_note": "comparison only, not a pick",
+  "experiment_label": "New experiment, started November 27, 2026",
+  "forward_start": "2026-11-27",
+  "capital": 10000.0,
+  "desk_dd_limit": 0.1
+}

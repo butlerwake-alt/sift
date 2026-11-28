@@ -1,0 +1,26 @@
+{
+  "id": "B-NEW-1",
+  "name": "BTC/ETH Monthly Rotation Bot",
+  "category": "Crypto Bot",
+  "source": "https://myprofitfactor.com/en/crypto/btc-eth-momentum-rotation-strategy/",
+  "why": "Simple relative-strength rotation between the two largest coins. Frozen 90-day lookback and monthly cadence; no search.",
+  "why_fail": "Crypto momentum fails in prolonged dual drawdowns; monthly decisions miss fast flips; 1.5\u00d7 crypto costs are large on rotations.",
+  "rules": [
+    "On the 1st available daily bar of each month, compare BTC and ETH 90-day returns using closes already known.",
+    "Hold the one with the higher positive return; if both <= 0, hold cash (USD).",
+    "Fill at that day's open.",
+    "Cost: 0.375% per side (1.5\u00d7 desk crypto 0.25%).",
+    "Comparison only: 60-day and 120-day lookbacks."
+  ],
+  "benchmarks": [
+    "BTC buy-and-hold",
+    "ETH buy-and-hold",
+    "50/50 BTC/ETH"
+  ],
+  "fee_per_side": 0.00375,
+  "comparisons_note": "comparison only, not a pick",
+  "experiment_label": "New experiment, started November 27, 2026",
+  "forward_start": "2026-11-27",
+  "capital": 10000.0,
+  "desk_dd_limit": 0.1
+}

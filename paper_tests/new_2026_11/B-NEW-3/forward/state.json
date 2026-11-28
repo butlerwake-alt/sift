@@ -1,0 +1,13 @@
+{
+  "cash": 5270.23,
+  "btc": 0.0826506937038024,
+  "center": 60495.56,
+  "band": [
+    54446.004,
+    66545.11600000001
+  ],
+  "levels": 20,
+  "as_of": "2026-11-28",
+  "experiment_label": "New experiment, started November 27, 2026",
+  "id": "B-NEW-3"
+}

@@ -1,0 +1,3 @@
+timestamp,side,symbol,price,qty,fees,pnl,reason
+2026-11-27T00:00:00Z,BUY_SPOT,BTC,59858.49,0.1664342017314503,37.5,,open cash-and-carry
+2026-11-27T00:00:00Z,SHORT_PERP,BTC-PERP,59858.49,0.1664342017314503,37.5,,open 1x hedge

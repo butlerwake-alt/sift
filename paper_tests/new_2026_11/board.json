@@ -1,0 +1,501 @@
+{
+  "generated_at": "2026-11-27T22:40:44.624808-05:00",
+  "experiment_label": "New experiment, started November 27, 2026",
+  "forward_start": "2026-11-27",
+  "cost_note": "New tests use 1.5\u00d7 the desk's usual fee/slippage. Idle cash earns BIL where the rules allow.",
+  "dd_limit": 0.1,
+  "ranking_note": "Vol-targeted trend b1/b2 variants are excluded from all rankings.",
+  "strategies": [
+    {
+      "id": "S-NEW-1",
+      "name": "Turn of the Month (SPY)",
+      "category": "Stock Strategy",
+      "experiment_label": "New experiment, started November 27, 2026",
+      "source": "https://ripbacktest.com/posts/turn-of-the-month-effect-spy/",
+      "why": "Classic calendar effect: historically concentrated equity premium around month turns. Frozen rule from Rip Backtest; no parameter search.",
+      "why_fail": "Calendar effects can fade once crowded; gap risk over weekends; 1.5x costs and idle-cash modeling can erase thin edges.",
+      "rules": [
+        "Buy SPY at the close of the 2nd-to-last trading day of the month.",
+        "Sell SPY at the close of the 3rd trading day of the next month.",
+        "Hold cash (BIL yield) otherwise.",
+        "Cost: 0.075% fee+slippage per side (1.5\u00d7 desk 0.05%).",
+        "No leverage. Paper only."
+      ],
+      "forward_start": "2026-11-27",
+      "as_of": "2026-11-27",
+      "days_running": 0,
+      "equity": 10003.27,
+      "return": 0.0003269999999999662,
+      "benchmark_equity": 10000.0,
+      "benchmark_return": 0.0,
+      "beat_benchmark": true,
+      "max_drawdown": 0.0,
+      "over_10pct_dd": false,
+      "forward_trades": 0,
+      "idle_cash_income": 3.27,
+      "idle_cash_label": "Idle cash (BIL)",
+      "backtest": {
+        "cagr": 0.028741973018759248,
+        "sharpe": 0.40292127429308394,
+        "deflated_sharpe": 1.0,
+        "max_drawdown": -0.1408947963425996,
+        "trades": 262,
+        "win_rate": 0.5267175572519084,
+        "average_trade": 10.277290076335875,
+        "time_in_market": 0.2380693159136273,
+        "over_10pct_dd": true,
+        "crash_periods": {
+          "2020": {
+            "return": -0.0022274047645061135,
+            "max_drawdown": -0.05994515112782284
+          },
+          "2022": {
+            "return": -0.03121243588948519,
+            "max_drawdown": -0.08215279201194692
+          }
+        },
+        "label": "Historical backtest, not forward results",
+        "start": "2005-01-03",
+        "end": "2026-11-27",
+        "extra": {
+          "benchmark_spy_cagr": 0.1056619117760611,
+          "benchmark_spy_total_return": 7.994545648640425,
+          "comparison_random_4day": {
+            "note": "comparison only, not a pick",
+            "total_return": 0.8583630000000002,
+            "max_drawdown": -0.1408947963425996
+          }
+        }
+      },
+      "equity_curve": [
+        {
+          "date": "2026-11-27",
+          "equity": 10003.27
+        }
+      ],
+      "state": {
+        "cash": 10003.27,
+        "shares": 0.0,
+        "symbol": null,
+        "as_of": "2026-11-27",
+        "price": 728.3200073242188,
+        "idle_cash_income": 3.27,
+        "experiment_label": "New experiment, started November 27, 2026",
+        "id": "S-NEW-1"
+      }
+    },
+    {
+      "id": "S-NEW-2",
+      "name": "3 Days Down Overnight (SPY)",
+      "category": "Stock Strategy",
+      "experiment_label": "New experiment, started November 27, 2026",
+      "source": "https://x.com/QuantifiedStrat/status/2123808598535094771",
+      "why": "Tests a simple overnight mean-reversion claim after three down closes. Rules frozen from the public post; no tuning.",
+      "why_fail": "Overnight gaps can go the wrong way; consecutive down days cluster in crashes; costs at 1.5\u00d7 desk rates hurt high-turnover edges.",
+      "rules": [
+        "After 3 consecutive lower closes (close < prior close), buy SPY at that close.",
+        "Sell at the next open (primary).",
+        "Cost: 0.075% per side (1.5\u00d7 desk).",
+        "Comparison only: sell at the next close instead."
+      ],
+      "forward_start": "2026-11-27",
+      "as_of": "2026-11-27",
+      "days_running": 0,
+      "equity": 10003.27,
+      "return": 0.0003269999999999662,
+      "benchmark_equity": 10000.0,
+      "benchmark_return": 0.0,
+      "beat_benchmark": true,
+      "max_drawdown": 0.0,
+      "over_10pct_dd": false,
+      "forward_trades": 0,
+      "idle_cash_income": 3.27,
+      "idle_cash_label": "Idle cash (BIL)",
+      "backtest": {
+        "cagr": 0.02511789013353538,
+        "sharpe": 0.5730369714971288,
+        "deflated_sharpe": 1.0,
+        "max_drawdown": -0.08982148449733784,
+        "trades": 466,
+        "win_rate": 0.5300429184549357,
+        "average_trade": 2.1890343347639485,
+        "time_in_market": 0.08455815641444384,
+        "over_10pct_dd": false,
+        "crash_periods": {
+          "2020": {
+            "return": -0.0018856428435778394,
+            "max_drawdown": -0.051279227893609614
+          },
+          "2022": {
+            "return": -0.07756125099124755,
+            "max_drawdown": -0.08982148449733784
+          }
+        },
+        "label": "Historical backtest, not forward results",
+        "start": "2005-01-03",
+        "end": "2026-11-27",
+        "extra": {
+          "benchmark_spy_total_return": 7.994545648640425,
+          "comparison_sell_next_close": {
+            "note": "comparison only, not a pick",
+            "total_return": 1.405599,
+            "max_drawdown": -0.17109868808253337,
+            "trades": 466
+          }
+        }
+      },
+      "equity_curve": [
+        {
+          "date": "2026-11-27",
+          "equity": 10003.27
+        }
+      ],
+      "state": {
+        "cash": 10003.27,
+        "shares": 0.0,
+        "pending_sell": null,
+        "as_of": "2026-11-27",
+        "idle_cash_income": 3.27,
+        "experiment_label": "New experiment, started November 27, 2026",
+        "id": "S-NEW-2"
+      }
+    },
+    {
+      "id": "S-NEW-3",
+      "name": "Asset-Class Momentum Top 3",
+      "category": "Stock Strategy",
+      "experiment_label": "New experiment, started November 27, 2026",
+      "source": "https://www.cxoadvisory.com/momentum-strategy/",
+      "why": "Cross-asset momentum is a long-studied premium. Frozen universe and 4-month lookback with monthly top-3 equal weight; no search over lookbacks.",
+      "why_fail": "Momentum crashes after sharp reversals; ETF universe is today's list (survivorship); monthly rebalance + 1.5\u00d7 costs reduce edge.",
+      "rules": [
+        "Universe: SPY, IWM, EFA, EEM, TLT, LQD, VNQ, GLD, DBC; BIL as cash.",
+        "At each month-end, rank by 4-month total return; hold equal-weight top 3 for 1 month.",
+        "If fewer than 3 have data, hold what is available; cash remainder earns BIL.",
+        "Cost: 0.075% per side on rebalance turnover (1.5\u00d7 desk)."
+      ],
+      "forward_start": "2026-11-27",
+      "as_of": "2026-11-27",
+      "days_running": 0,
+      "equity": 9992.5,
+      "return": -0.0007500000000000284,
+      "benchmark_equity": 10000.0,
+      "benchmark_return": 0.0,
+      "beat_benchmark": false,
+      "max_drawdown": -0.0007500000000000284,
+      "over_10pct_dd": false,
+      "forward_trades": 3,
+      "idle_cash_income": 0.0,
+      "idle_cash_label": "Idle cash (BIL)",
+      "backtest": {
+        "cagr": 0.07865579447546511,
+        "sharpe": 0.5981431779878305,
+        "deflated_sharpe": 1.0,
+        "max_drawdown": -0.3341390675654118,
+        "trades": 741,
+        "win_rate": null,
+        "average_trade": null,
+        "time_in_market": 1.0,
+        "over_10pct_dd": true,
+        "crash_periods": {
+          "2020": {
+            "return": -0.03866866591217022,
+            "max_drawdown": -0.1909294670295557
+          },
+          "2022": {
+            "return": -0.09284548521227032,
+            "max_drawdown": -0.21144845527804124
+          }
+        },
+        "label": "Historical backtest, not forward results",
+        "start": "2006-01-03",
+        "end": "2026-11-27",
+        "extra": {
+          "benchmark_spy_total_return": 7.392193571629637,
+          "benchmark_60_40_total_return": 4.728099367201539
+        }
+      },
+      "equity_curve": [
+        {
+          "date": "2026-11-27",
+          "equity": 9992.5
+        }
+      ],
+      "state": {
+        "cash": 0.0,
+        "holdings": {
+          "TLT": 40.98478492576024,
+          "LQD": 32.027243589743584,
+          "DBC": 112.71855902980604
+        },
+        "as_of": "2026-11-27",
+        "idle_cash_income": 0.0,
+        "experiment_label": "New experiment, started November 27, 2026",
+        "id": "S-NEW-3"
+      }
+    },
+    {
+      "id": "B-NEW-1",
+      "name": "BTC/ETH Monthly Rotation Bot",
+      "category": "Crypto Bot",
+      "experiment_label": "New experiment, started November 27, 2026",
+      "source": "https://myprofitfactor.com/en/crypto/btc-eth-momentum-rotation-strategy/",
+      "why": "Simple relative-strength rotation between the two largest coins. Frozen 90-day lookback and monthly cadence; no search.",
+      "why_fail": "Crypto momentum fails in prolonged dual drawdowns; monthly decisions miss fast flips; 1.5\u00d7 crypto costs are large on rotations.",
+      "rules": [
+        "On the 1st available daily bar of each month, compare BTC and ETH 90-day returns using closes already known.",
+        "Hold the one with the higher positive return; if both <= 0, hold cash (USD).",
+        "Fill at that day's open.",
+        "Cost: 0.375% per side (1.5\u00d7 desk crypto 0.25%).",
+        "Comparison only: 60-day and 120-day lookbacks."
+      ],
+      "forward_start": "2026-11-27",
+      "as_of": "2026-11-28",
+      "days_running": 1,
+      "equity": 10000.0,
+      "return": 0.0,
+      "benchmark_equity": 10005.2,
+      "benchmark_return": 0.000520000000000076,
+      "beat_benchmark": false,
+      "max_drawdown": 0.0,
+      "over_10pct_dd": false,
+      "forward_trades": 0,
+      "idle_cash_income": 0.0,
+      "idle_cash_label": "Idle cash (USD, no T-bill on this rule)",
+      "backtest": {
+        "cagr": 0.7505085563882616,
+        "sharpe": 1.138559863163225,
+        "deflated_sharpe": 1.0,
+        "max_drawdown": -0.8405416571234128,
+        "trades": 29,
+        "win_rate": 0.5862068965517241,
+        "average_trade": 162700.92793103444,
+        "time_in_market": 0.6561768530559168,
+        "over_10pct_dd": true,
+        "crash_periods": {
+          "2020": {
+            "return": -0.40010213940014383,
+            "max_drawdown": -0.5786420221880306
+          },
+          "2022": {
+            "return": -0.4094940319041126,
+            "max_drawdown": -0.5588778735796572
+          }
+        },
+        "label": "Historical backtest, not forward results",
+        "start": "2016-05-18",
+        "end": "2026-11-28",
+        "extra": {
+          "benchmark_btc_total_return": 130.46378084116253,
+          "benchmark_eth_total_return": 125.12974203338392,
+          "benchmark_50_50_total_return": 127.7967614372732,
+          "comparison_60d": {
+            "note": "comparison only, not a pick",
+            "total_return": 85.818797,
+            "max_drawdown": -0.8554545653898538,
+            "trades": 42
+          },
+          "comparison_120d": {
+            "note": "comparison only, not a pick",
+            "total_return": 57.698749,
+            "max_drawdown": -0.9194740955411033,
+            "trades": 31
+          }
+        }
+      },
+      "equity_curve": [
+        {
+          "date": "2026-11-27",
+          "equity": 10000.0
+        },
+        {
+          "date": "2026-11-28",
+          "equity": 10000.0
+        }
+      ],
+      "state": {
+        "cash": 10000.0,
+        "units": 0.0,
+        "asset": null,
+        "as_of": "2026-11-28",
+        "experiment_label": "New experiment, started November 27, 2026",
+        "id": "B-NEW-1"
+      }
+    },
+    {
+      "id": "B-NEW-2",
+      "name": "Cash-and-Carry Bot (BTC, 1x hedged)",
+      "category": "Crypto Bot",
+      "experiment_label": "New experiment, started November 27, 2026",
+      "source": "https://www.investwealth.com/learn/guides/crypto-basis-trade",
+      "why": "Harvests perpetual funding while staying roughly delta-neutral at 1x. Frozen hedge band 90\u2013110%; no leverage beyond the 1x short hedge.",
+      "why_fail": "Funding can flip negative for long stretches; hedge slippage and fees; exchange/counterparty risk is not modeled.",
+      "rules": [
+        "Hold BTC spot and short an equal dollar amount of BTC perpetual (1x, delta-neutral).",
+        "Collect or pay every funding print from Deribit public history.",
+        "Rebalance legs if notional drift leaves the 90\u2013110% band.",
+        "Spot/perp trade cost: 0.375% per side (1.5\u00d7 desk).",
+        "Comparison only: ETH version.",
+        "Note: exchange/counterparty risk is not modeled.",
+        "Benchmark: T-bill (BIL) yield."
+      ],
+      "forward_start": "2026-11-27",
+      "as_of": "2026-11-28",
+      "days_running": 1,
+      "equity": 9924.99,
+      "return": -0.00750099999999998,
+      "benchmark_equity": 10000.0,
+      "benchmark_return": 0.0,
+      "beat_benchmark": false,
+      "max_drawdown": -0.00750099999999998,
+      "over_10pct_dd": false,
+      "forward_trades": 2,
+      "idle_cash_income": -37.51,
+      "idle_cash_label": "Funding income (cash-and-carry)",
+      "backtest": {
+        "cagr": 0.41311501726822897,
+        "sharpe": 1.0548866098963747,
+        "deflated_sharpe": 1.0,
+        "max_drawdown": -0.570905113142185,
+        "trades": 146,
+        "win_rate": null,
+        "average_trade": null,
+        "time_in_market": 1.0,
+        "over_10pct_dd": true,
+        "crash_periods": {
+          "2020": {
+            "return": -0.182509937373306,
+            "max_drawdown": -0.3570927382491631
+          },
+          "2022": {
+            "return": -0.4593845713452652,
+            "max_drawdown": -0.4845360084914573
+          }
+        },
+        "label": "Historical backtest, not forward results",
+        "start": "2019-07-31",
+        "end": "2026-11-28",
+        "extra": {
+          "funding_income": 61266.71,
+          "worst_dip": -0.5709050721399542,
+          "benchmark_tbill_total_return": 0.21699391805380963,
+          "comparison_eth": {
+            "note": "comparison only, not a pick",
+            "total_return": 1.4891320887950337,
+            "max_drawdown": -0.05123798751023256
+          }
+        }
+      },
+      "equity_curve": [
+        {
+          "date": "2026-11-27",
+          "equity": 9925.0
+        },
+        {
+          "date": "2026-11-28",
+          "equity": 9924.99
+        }
+      ],
+      "state": {
+        "spot_units": 0.1664342017314503,
+        "short_notional": 9962.5,
+        "short_entry_px": 59858.49,
+        "funding_cash": -37.51,
+        "as_of": "2026-11-28",
+        "experiment_label": "New experiment, started November 27, 2026",
+        "id": "B-NEW-2",
+        "counterparty_risk": "not modeled"
+      }
+    },
+    {
+      "id": "B-NEW-3",
+      "name": "Spot Grid Bot (BTC, frozen)",
+      "category": "Crypto Bot",
+      "experiment_label": "New experiment, started November 27, 2026",
+      "source": "https://edgoro.com/blog/grid-trading-bot-bitcoin-backtest",
+      "why": "Frozen geometric grid tests whether range-bound BTC months can harvest mean reversion without discretionary tweaks.",
+      "why_fail": "Strong trends leave the band and idle; marking inventory to market can show large unrealized losses; grid profits alone are misleading.",
+      "rules": [
+        "Each month, start a fresh $10,000 book.",
+        "Geometric grid centered on the month's first open, \u00b110% band, 20 lines, same BTC size per line.",
+        "Spot only.",
+        "Fee: 0.15% per fill (1.5\u00d7 the stated 0.1%).",
+        "Mark inventory to market at the month's close (never count only closed-grid profit).",
+        "If price leaves the band, hold until the next monthly reset."
+      ],
+      "forward_start": "2026-11-27",
+      "as_of": "2026-11-28",
+      "days_running": 1,
+      "equity": 10219.35,
+      "return": 0.021935000000000038,
+      "benchmark_equity": 10003.6,
+      "benchmark_return": 0.000360000000000138,
+      "beat_benchmark": true,
+      "max_drawdown": 0.0,
+      "over_10pct_dd": false,
+      "forward_trades": 12,
+      "idle_cash_income": 0.0,
+      "idle_cash_label": "Idle cash (USD, no T-bill on this rule)",
+      "backtest": {
+        "cagr": -0.1427102789433743,
+        "sharpe": -0.1594057672229813,
+        "deflated_sharpe": 0.0,
+        "max_drawdown": -0.889293191789668,
+        "trades": 5773,
+        "win_rate": null,
+        "average_trade": null,
+        "time_in_market": 1.0,
+        "over_10pct_dd": true,
+        "crash_periods": {
+          "2020": {
+            "return": -0.22898309306597753,
+            "max_drawdown": -0.4283391792897939
+          },
+          "2022": {
+            "return": -0.5509285585835167,
+            "max_drawdown": -0.5871401562097507
+          }
+        },
+        "label": "Historical backtest, not forward results",
+        "start": "2017-01-01",
+        "end": "2026-11-28",
+        "extra": {
+          "benchmark_btc_total_return": 59.305201671786094
+        }
+      },
+      "equity_curve": [
+        {
+          "date": "2026-11-27",
+          "equity": 10218.17
+        },
+        {
+          "date": "2026-11-28",
+          "equity": 10219.35
+        }
+      ],
+      "state": {
+        "cash": 5270.23,
+        "btc": 0.0826506937038024,
+        "center": 60495.56,
+        "band": [
+          54446.004,
+          66545.11600000001
+        ],
+        "levels": 20,
+        "as_of": "2026-11-28",
+        "experiment_label": "New experiment, started November 27, 2026",
+        "id": "B-NEW-3"
+      }
+    }
+  ],
+  "desk_bot_existing": {
+    "id": "DESK-BOT-EXISTING",
+    "name": "Desk Paper Bot (existing)",
+    "category": "Crypto Bot",
+    "experiment_label": "Existing desk paper bot (read-only; not a new experiment)",
+    "note": "Provisional quantdesk b1/b2 vol-target bots are excluded from rankings. This card is read-only; engine files under /workspace/quantdesk are not modified here. If tearsheets are absent on this host, status is unavailable.",
+    "available": false,
+    "excluded_from_rankings": true,
+    "reason_excluded": "b1/b2 vol-targeted variants are left out of all rankings by standing desk rule."
+  }
+}

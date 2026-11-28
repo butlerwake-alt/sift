@@ -1,0 +1,26 @@
+{
+  "id": "B-NEW-2",
+  "name": "Cash-and-Carry Bot (BTC, 1x hedged)",
+  "category": "Crypto Bot",
+  "source": "https://www.investwealth.com/learn/guides/crypto-basis-trade",
+  "why": "Harvests perpetual funding while staying roughly delta-neutral at 1x. Frozen hedge band 90\u2013110%; no leverage beyond the 1x short hedge.",
+  "why_fail": "Funding can flip negative for long stretches; hedge slippage and fees; exchange/counterparty risk is not modeled.",
+  "rules": [
+    "Hold BTC spot and short an equal dollar amount of BTC perpetual (1x, delta-neutral).",
+    "Collect or pay every funding print from Deribit public history.",
+    "Rebalance legs if notional drift leaves the 90\u2013110% band.",
+    "Spot/perp trade cost: 0.375% per side (1.5\u00d7 desk).",
+    "Comparison only: ETH version.",
+    "Note: exchange/counterparty risk is not modeled.",
+    "Benchmark: T-bill (BIL) yield."
+  ],
+  "benchmarks": [
+    "T-bill (BIL)"
+  ],
+  "fee_per_side": 0.00375,
+  "comparisons_note": "comparison only, not a pick",
+  "experiment_label": "New experiment, started November 27, 2026",
+  "forward_start": "2026-11-27",
+  "capital": 10000.0,
+  "desk_dd_limit": 0.1
+}

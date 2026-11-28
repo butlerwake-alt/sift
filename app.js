@@ -846,8 +846,16 @@ function copyPack(strategy) {
 
 function renderStrategy() {
   const params = new URLSearchParams(location.search);
-  const strategy = SIFT.strategies.find((item) => item.n === Number(params.get("n")));
   const root = document.getElementById("detail");
+  // New Nov 2026 stock experiments use ?new=ID (handled by new_stock.js).
+  if (params.get("new") && !params.get("n")) {
+    return;
+  }
+  if (!params.get("n")) {
+    if (root) root.innerHTML = "";
+    return;
+  }
+  const strategy = SIFT.strategies.find((item) => item.n === Number(params.get("n")));
   if (!strategy) {
     root.textContent = "That strategy is not on the board.";
     return;

@@ -1,0 +1,25 @@
+{
+  "id": "B-NEW-3",
+  "name": "Spot Grid Bot (BTC, frozen)",
+  "category": "Crypto Bot",
+  "source": "https://edgoro.com/blog/grid-trading-bot-bitcoin-backtest",
+  "why": "Frozen geometric grid tests whether range-bound BTC months can harvest mean reversion without discretionary tweaks.",
+  "why_fail": "Strong trends leave the band and idle; marking inventory to market can show large unrealized losses; grid profits alone are misleading.",
+  "rules": [
+    "Each month, start a fresh $10,000 book.",
+    "Geometric grid centered on the month's first open, \u00b110% band, 20 lines, same BTC size per line.",
+    "Spot only.",
+    "Fee: 0.15% per fill (1.5\u00d7 the stated 0.1%).",
+    "Mark inventory to market at the month's close (never count only closed-grid profit).",
+    "If price leaves the band, hold until the next monthly reset."
+  ],
+  "benchmarks": [
+    "BTC buy-and-hold"
+  ],
+  "fee_per_side": 0.0015,
+  "comparisons_note": "comparison only, not a pick",
+  "experiment_label": "New experiment, started November 27, 2026",
+  "forward_start": "2026-11-27",
+  "capital": 10000.0,
+  "desk_dd_limit": 0.1
+}

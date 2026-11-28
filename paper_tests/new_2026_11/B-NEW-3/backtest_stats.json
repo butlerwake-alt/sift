@@ -1,0 +1,28 @@
+{
+  "label": "Historical backtest, not forward results",
+  "start": "2017-01-01",
+  "end": "2026-11-28",
+  "n_days": 3619,
+  "final_equity": 2249.87,
+  "total_return": -0.7827520246267223,
+  "cagr": -0.1427102789433743,
+  "sharpe": -0.1594057672229813,
+  "deflated_sharpe": 0.0,
+  "max_drawdown": -0.889293191789668,
+  "trades": 5773,
+  "win_rate": null,
+  "average_trade": null,
+  "time_in_market": 1.0,
+  "over_10pct_dd": true,
+  "crash_periods": {
+    "2020": {
+      "return": -0.22898309306597753,
+      "max_drawdown": -0.4283391792897939
+    },
+    "2022": {
+      "return": -0.5509285585835167,
+      "max_drawdown": -0.5871401562097507
+    }
+  },
+  "benchmark_btc_total_return": 59.305201671786094
+}

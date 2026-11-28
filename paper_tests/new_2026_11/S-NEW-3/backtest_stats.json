@@ -1,0 +1,29 @@
+{
+  "label": "Historical backtest, not forward results",
+  "start": "2006-01-03",
+  "end": "2026-11-27",
+  "n_days": 5259,
+  "final_equity": 48555.05,
+  "total_return": 3.855505,
+  "cagr": 0.07865579447546511,
+  "sharpe": 0.5981431779878305,
+  "deflated_sharpe": 1.0,
+  "max_drawdown": -0.3341390675654118,
+  "trades": 741,
+  "win_rate": null,
+  "average_trade": null,
+  "time_in_market": 1.0,
+  "over_10pct_dd": true,
+  "crash_periods": {
+    "2020": {
+      "return": -0.03866866591217022,
+      "max_drawdown": -0.1909294670295557
+    },
+    "2022": {
+      "return": -0.09284548521227032,
+      "max_drawdown": -0.21144845527804124
+    }
+  },
+  "benchmark_spy_total_return": 7.392193571629637,
+  "benchmark_60_40_total_return": 4.728099367201539
+}

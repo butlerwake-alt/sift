@@ -1,0 +1,36 @@
+{
+  "label": "Historical backtest, not forward results",
+  "start": "2019-07-31",
+  "end": "2026-11-28",
+  "n_days": 2678,
+  "final_equity": 125591.45,
+  "total_return": 11.643006059190611,
+  "cagr": 0.41311501726822897,
+  "sharpe": 1.0548866098963747,
+  "deflated_sharpe": 1.0,
+  "max_drawdown": -0.570905113142185,
+  "trades": 146,
+  "win_rate": null,
+  "average_trade": null,
+  "time_in_market": 1.0,
+  "over_10pct_dd": true,
+  "crash_periods": {
+    "2020": {
+      "return": -0.182509937373306,
+      "max_drawdown": -0.3570927382491631
+    },
+    "2022": {
+      "return": -0.4593845713452652,
+      "max_drawdown": -0.4845360084914573
+    }
+  },
+  "funding_income": 61266.71,
+  "worst_dip": -0.5709050721399542,
+  "fees_note": "Includes open and rebalance fees at 1.5\u00d7 desk crypto rate",
+  "benchmark_tbill_total_return": 0.21699391805380963,
+  "comparison_eth": {
+    "note": "comparison only, not a pick",
+    "total_return": 1.4891320887950337,
+    "max_drawdown": -0.05123798751023256
+  }
+}
