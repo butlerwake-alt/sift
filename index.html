@@ -5,8 +5,8 @@
   <script>(function(){try{var t=localStorage.getItem("sift.theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Cache-Control" content="no-store">
-  <title>SIFT</title>
-  <meta name="description" content="Your everyday resource for backtested, forward-tested trading strategies: what's working, what isn't, and why. Paper results from real closing prices, not financial advice.">
+  <title>SIFT | Stock &amp; Crypto Market Hub</title>
+  <meta name="description" content="Explore stock and crypto closing prices, build a watchlist, and follow SIFT’s paper-trading research.">
   <meta name="theme-color" content="#0a1018">
   <meta name="application-name" content="SIFT">
   <meta name="apple-mobile-web-app-title" content="SIFT">
@@ -20,7 +20,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="SIFT">
   <meta property="og:title" content="SIFT">
-  <meta property="og:description" content="Your everyday resource for backtested, forward-tested trading strategies: what's working, what isn't, and why. Paper results from real closing prices, not financial advice.">
+  <meta property="og:description" content="Explore stock and crypto closing prices, build a watchlist, and follow SIFT’s paper-trading research.">
   <meta property="og:image" content="https://butlerwake-alt.github.io/sift/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -28,25 +28,20 @@
   <meta property="og:url" content="https://butlerwake-alt.github.io/sift/">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="SIFT">
-  <meta name="twitter:description" content="Your everyday resource for backtested, forward-tested trading strategies: what's working, what isn't, and why. Paper results from real closing prices, not financial advice.">
+  <meta name="twitter:description" content="Explore stock and crypto closing prices, build a watchlist, and follow SIFT’s paper-trading research.">
   <meta name="twitter:image" content="https://butlerwake-alt.github.io/sift/og-image.png">
   <link rel="stylesheet" href="styles.css?v=202611280230">
+  <link rel="stylesheet" href="markets.css?v=1">
 </head>
 <body id="top">
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="top-stack">
-    <div id="crypto-ticker" class="crypto-ticker" role="region" aria-label="Live crypto prices">
-      <p class="ticker-fallback">Loading coin prices…</p>
-    </div>
-    <div class="rates-slot" id="rates" role="note">
-      <span class="slot-kicker">Rates</span>
-      <p>Fed funds, 2-year, 5-year, 10-year, and the yield curve. <b>Coming soon.</b> No yields are shown until a source is connected.</p>
-    </div>
     <header class="mast">
       <nav class="site-nav" aria-label="Primary">
         <div class="nav-bar">
           <a class="nav-brand" href="index.html" aria-current="page"><img src="favicon.svg" width="28" height="28" alt=""><span>SIFT</span></a>
           <div class="nav-panel" id="site-menu">
+            <a href="#markets">Markets</a>
             <a href="#leaderboard">Leaderboard</a>
             <a href="#board">Strategies</a>
           <a href="scoreboard.html">Scoreboard</a>
@@ -66,19 +61,70 @@
     </header>
   </div>
   <main id="main" class="wrap">
+    <section class="market-hub" id="markets" aria-labelledby="markets-title">
+      <div class="market-heading">
+        <div>
+          <h1 id="markets-title">Stock &amp; crypto markets</h1>
+          <p>Daily closing prices in USD</p>
+        </div>
+        <a class="btn-cta btn-cta-ghost" href="#leaderboard">Paper strategy results ↓</a>
+      </div>
+      <div class="market-grid" id="market-dashboard" hidden>
+        <section class="market-panel market-chart-panel" aria-labelledby="market-symbol">
+          <div class="market-chart-header">
+            <div>
+              <h2 id="market-symbol"></h2>
+              <p id="market-price"></p>
+            </div>
+            <button type="button" id="market-save"></button>
+          </div>
+          <div class="market-controls" id="market-ranges" role="group" aria-label="Chart range">
+            <button type="button" data-range="7" aria-pressed="false">7D</button>
+            <button type="button" data-range="30" aria-pressed="true">30D</button>
+            <button type="button" data-range="90" aria-pressed="false">90D</button>
+          </div>
+          <p class="market-range-summary" id="market-range-summary"></p>
+          <canvas id="market-chart" role="img" aria-label="Closing price chart" aria-describedby="market-range-summary"></canvas>
+          <p id="market-source"></p>
+          <p class="market-note" id="market-note" role="status"></p>
+        </section>
+        <section class="market-panel market-list-panel" aria-labelledby="market-list-title">
+          <h2 id="market-list-title">Market watch</h2>
+          <div class="market-controls" id="market-filters" role="group" aria-label="Filter assets">
+            <button type="button" data-filter="all" aria-pressed="true">All</button>
+            <button type="button" data-filter="stocks" aria-pressed="false">Stocks &amp; ETFs</button>
+            <button type="button" data-filter="crypto" aria-pressed="false">Crypto</button>
+            <button type="button" data-filter="saved" aria-pressed="false">Watchlist</button>
+          </div>
+          <label for="market-search">Find a symbol or name</label>
+          <input id="market-search" type="search" placeholder="Search covered assets">
+          <div class="market-list-head" aria-hidden="true"><span>Asset</span><span>Close</span><span>Change</span></div>
+          <ul id="market-list" aria-label="Market prices"></ul>
+          <p id="market-empty" role="status" hidden></p>
+        </section>
+      </div>
+      <p id="market-load" role="status">Loading market prices…</p>
+      <noscript>Enable JavaScript to explore closing prices and charts.</noscript>
+      <nav class="market-links" aria-label="Market research">
+        <a href="research.html"><strong>Strategy research</strong><span>Rules, evidence and historical tests</span></a>
+        <a href="follow_money.html"><strong>Follow the Money</strong><span>Stock disclosures and crypto treasuries</span></a>
+        <a href="bots.html"><strong>Crypto paper bots</strong><span>Signals and simulated results</span></a>
+        <a href="scoreboard.html"><strong>Paper scoreboard</strong><span>Returns and risk across experiments</span></a>
+      </nav>
+    </section>
+
     <section class="hero hero-compact">
       <div class="hero-copy">
         <p class="updated-stamp" id="updated-stamp"><b id="stamp-when">Last updated: Nov 27, 2026, 8:42 PM ET</b><span class="stamp-next">Next update: daily after the market close (about 8:30 PM ET)</span><a href="updates.html">All updates →</a></p>
         <p class="eyebrow" id="hero-kicker">Daily check-in · November 11, 2026</p>
         <div class="brand-lockup">
           <img class="brand-mark" src="brand-mark.svg" width="48" height="48" alt="">
-          <h1>SIFT</h1>
+          <h2>SIFT paper-trading desk</h2>
         </div>
         <p class="lede">Paper trading research: what's working, what isn't, and why.</p>
         <p class="hero-note">Simulated $10,000 accounts from real closing prices. Not financial advice.</p>
         <div class="hero-cta-row">
-          <a class="btn-cta" href="memescan.html">Meme Coins</a>
-          <a class="btn-cta btn-cta-ghost" href="#leaderboard">Top Strategies</a>
+          <a class="btn-cta" href="#leaderboard">Top strategies</a>
         </div>
       </div>
       <dl class="hero-facts" id="hero-facts"></dl>
@@ -323,9 +369,10 @@
   <a class="to-top" href="#top" aria-label="Back to top">↑</a>
   <script src="site-config.js?v=202611280230"></script>
   <script src="data.js?v=202611280100"></script>
-  <script src="app.js?v=202611280100"></script>
+  <script src="app.js?v=202611280231"></script>
   <script>renderBoard();</script>
   <script src="videos.js?v=202611280100"></script>
   <script src="site-chrome.js?v=202611280230"></script>
+  <script src="markets.js?v=1" defer></script>
 </body>
 </html>

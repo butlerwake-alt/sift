@@ -27,7 +27,7 @@ function dayCount(start, end) {
 }
 
 function versusText(gap) {
-  if (gap == null || !Number.isFinite(gap)) return "No buy-and-hold benchmark recorded";
+  if (gap == null || !Number.isFinite(gap)) return "No matching-period benchmark";
   if (Math.abs(gap) < 0.005) return "Even with buy-and-hold";
   return (gap > 0 ? "Ahead of buy-and-hold by " : "Behind buy-and-hold by ") + Math.abs(gap).toFixed(2) + " points";
 }
@@ -165,12 +165,14 @@ function toneOf(pct) {
 }
 
 function benchPctOf(strategy) {
-  if (strategy.benchmark && strategy.benchmark.points && strategy.benchmark.points.length) {
-    const last = strategy.benchmark.points[strategy.benchmark.points.length - 1].equity;
-    return (last / SIFT.capital - 1) * 100;
-  }
-  if (strategy.benchmark && Number.isFinite(strategy.benchmark.stated)) return strategy.benchmark.stated;
-  return null;
+  const paper = strategy.points || [];
+  const benchmark = strategy.benchmark?.points || [];
+  if (paper.length < 2 || benchmark.length < 2 ||
+      paper[0].date !== benchmark[0].date ||
+      paper.at(-1).date !== benchmark.at(-1).date) return null;
+  const first = benchmark[0].equity;
+  const last = benchmark.at(-1).equity;
+  return first > 0 && Number.isFinite(last) ? (last / first - 1) * 100 : null;
 }
 
 function resultOf(strategy) {
@@ -398,10 +400,10 @@ function renderLeaderboard() {
   }).join("");
   const body = rows.map((x) => `<tr class="${x.s.stale ? "is-stale" : ""}">
       <td class="num-col col-rank rank-col">${x.rank || "—"}${rankMoveHtml(x.s)}</td>
-      <th scope="row" class="col-name"><a href="strategy.html?n=${x.s.n}"><span class="lb-n">${String(x.s.n).padStart(2, "0")}</span> ${esc(x.s.name)}</a>${x.s.label ? " " + labelChip(x.s) : ""}${x.s.isNew ? ' <span class="chip chip-new">New</span>' : ""}<span class="lb-sub">${esc(x.s.category)} · started ${x.s.start ? shortDate(x.s.start) : "—"}${x.s.stale ? " · stale" : ""}</span></th>
+      <th scope="row" class="col-name"><a href="strategy.html?n=${x.s.n}"><span class="lb-n">${String(x.s.n).padStart(2, "0")}</span> ${esc(x.s.name)}</a>${x.s.label ? " " + labelChip(x.s) : ""}${x.s.isNew ? ' <span class="chip chip-new">New</span>' : ""}<span class="lb-sub">${esc(x.s.category)} · ${x.s.start ? shortDate(x.s.start) + " – " + shortDate(x.s.asOf) : "Not started"}${x.s.stale ? " · stale" : ""}</span></th>
       <td class="num-col col-ret ${tone(x.pct)}">${x.pct == null ? "Not started" : `<span class="ret-num num-mono">${signedPct(x.pct)}</span>`}${earlyFlag(x.days)}</td>
       <td class="num-col col-wr">${winRateHtml(x.wr)}</td>
-      <td class="num-col col-dd">${x.dd == null ? "—" : (x.dd > -0.005 ? "0.00%" : signedPct(x.dd))}</td>
+      <td class="num-col col-dd">${x.dd == null ? "—" : (x.dd > -0.005 ? "0.00%" : signedPct(x.dd))}${x.dd < -10 ? '<span class="lb-sub tone-down">Beyond 10% limit</span>' : ""}</td>
       <td class="col-spark">${x.s.planned ? `<span class="spark-empty">—</span>` : pathSpark(x.s.points, sparkTone(x.pct))}</td>
       <td class="col-mkt">${esc(x.market)}</td>
       <td class="num-col col-dollars ${tone(x.delta)}">${x.delta == null ? "—" : signedMoney(x.delta)}</td>
@@ -417,7 +419,7 @@ function renderLeaderboard() {
     else banner.textContent = "";
   }
   host.innerHTML = `<div class="section-head lb-head"><div><p class="desk-label">Full board</p><h2 id="lb-title">All strategies</h2></div><p class="lb-asof">As of ${esc(SIFT.asOf)} · click a column to sort</p></div>
-    <details class="lb-help"><summary>How this rank works</summary><p>Every strategy ranked best to worst by its forward paper return since its own start date, as of ${esc(SIFT.asOf)}, and re-ranked after every daily update. Arrows show the move versus the previous day's rank${SIFT.rankPrevDay ? " (" + shortDate(SIFT.rankPrevDay) + ")" : ""}; “New” means fewer than 5 days live. Ties go to the lower strategy number; not-started strategies sit at the bottom. Win rate comes from the published forward note when closed trades are recorded; otherwise it shows as a dash. Max drawdown is the worst drop between recorded daily marks. A forward test under 90 days is marked too early to tell.</p></details>
+    <details class="lb-help"><summary>How this rank works</summary><p>Every strategy ranked best to worst by its forward paper return since its own start date, as of ${esc(SIFT.asOf)}, and re-ranked after every daily update. Arrows show the move versus the previous day's rank${SIFT.rankPrevDay ? " (" + shortDate(SIFT.rankPrevDay) + ")" : ""}; “New” means fewer than 5 days live. Ties go to the lower strategy number; not-started strategies sit at the bottom. Win rate comes from the published forward note when closed trades are recorded; otherwise it shows as a dash. Max drawdown is the worst peak-to-trough drop across recorded daily marks. SIFT flags drawdowns beyond 10%. Vs hold shows a gap only when both series cover the same dates. A forward test under 90 days is marked too early to tell.</p></details>
     <div class="rtable lb-table lb-scroll"><table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div>`;
   host.querySelectorAll("thead button").forEach((btn) => btn.addEventListener("click", () => {
     const key = btn.dataset.key;
