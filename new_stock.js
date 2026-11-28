@@ -44,7 +44,7 @@
     var bt = s.backtest || {};
     return '<article class="new-stock-card" id="' + esc(s.id) + '">' +
       '<div class="card-top"><span class="chip chip-stock">Stock Strategy</span><span class="exp-label">' + esc(s.experiment_label) + "</span></div>" +
-      "<h2><a href=\"strategy.html?new=" + encodeURIComponent(s.id) + "\">" + esc(s.id) + " · " + esc(s.name) + "</a></h2>" +
+      "<h2><a href=\"bots.html?id=" + encodeURIComponent(s.id) + "\">" + esc(s.id) + " · " + esc(s.name) + "</a></h2>" +
       '<p class="bot-ret tone-' + tone(s.return) + '">' + money(s.equity) + " <small>(" + pct(s.return) + ")</small></p>" +
       spark(s.equity_curve) +
       '<dl class="bot-facts">' +

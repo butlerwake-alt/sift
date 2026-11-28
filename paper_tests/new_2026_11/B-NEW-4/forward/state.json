@@ -1,0 +1,21 @@
+{
+  "cash": 0.0,
+  "btc": 0.08234075360241314,
+  "eth": 2.952376718824087,
+  "as_of": "2026-11-28",
+  "exposure": 1.0,
+  "btc_weight": 0.501339,
+  "eth_weight": 0.498661,
+  "last_signal": "hold",
+  "last_decision": {
+    "signal_date": "2026-11-28",
+    "btc_weight": 0.5013,
+    "eth_weight": 0.4987,
+    "action": "hold_inside_band"
+  },
+  "status": "Invested",
+  "data_failures": [],
+  "data_source": "Coinbase Exchange public daily candles (BTC-USD, ETH-USD)",
+  "experiment_label": "New experiment, started November 27, 2026",
+  "id": "B-NEW-4"
+}

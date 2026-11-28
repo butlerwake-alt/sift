@@ -41,11 +41,11 @@
         <div class="nav-bar">
           <a class="nav-brand" href="index.html" aria-current="page"><img src="favicon.svg" width="28" height="28" alt=""><span>SIFT</span></a>
           <div class="nav-panel" id="site-menu">
-            <a href="#markets">Markets</a>
+            <a href="bots.html">Paper Bots</a>
+          <a href="#markets">Markets</a>
             <a href="#leaderboard">Leaderboard</a>
             <a href="#board">Strategies</a>
           <a href="scoreboard.html">Scoreboard</a>
-          <a href="bots.html">Bots</a>
             <a href="research.html">Research</a>
             <a href="follow_money.html">Follow the Money</a>
             <a class="nav-cta" href="memescan.html">Meme Coins</a>
@@ -108,9 +108,20 @@
       <nav class="market-links" aria-label="Market research">
         <a href="research.html"><strong>Strategy research</strong><span>Rules, evidence and historical tests</span></a>
         <a href="follow_money.html"><strong>Follow the Money</strong><span>Stock disclosures and crypto treasuries</span></a>
-        <a href="bots.html"><strong>Crypto paper bots</strong><span>Signals and simulated results</span></a>
+        <a href="bots.html"><strong>Paper bots</strong><span>Frozen rules, forward ledgers, fill logs</span></a>
         <a href="scoreboard.html"><strong>Paper scoreboard</strong><span>Returns and risk across experiments</span></a>
       </nav>
+    </section>
+
+    <section class="paper-bots-home" id="paper-bots" aria-labelledby="paper-bots-title">
+      <div class="section-head">
+        <p class="desk-label">New experiment · November 27, 2026</p>
+        <h2 id="paper-bots-title">Paper Bots</h2>
+        <p>Live status from the shared forward ledger. Figures below are forward paper returns only — historical backtests stay on each bot’s detail page and are never mixed into these numbers.</p>
+        <p class="meta" id="paper-bots-stamp">Loading paper bots…</p>
+      </div>
+      <div class="paper-bots-grid" id="paper-bots-mount"><p class="meta">Loading…</p></div>
+      <p class="paper-bots-more"><a class="btn-cta" href="bots.html">Open all paper bots</a></p>
     </section>
 
     <section class="hero hero-compact">
@@ -125,6 +136,7 @@
         <p class="hero-note">Simulated $10,000 accounts from real closing prices. Not financial advice.</p>
         <div class="hero-cta-row">
           <a class="btn-cta" href="#leaderboard">Top strategies</a>
+          <a class="btn-cta btn-cta-ghost" href="#paper-bots">Paper bots</a>
         </div>
       </div>
       <dl class="hero-facts" id="hero-facts"></dl>
@@ -172,9 +184,9 @@
         <span>Open a name on the leaderboard. The strategy page lists the rules, the latest holdings when they are on record, and buttons to copy or download them.</span>
       </a>
       <a class="home-callout" href="bots.html">
-        <p class="kicker">Crypto bots</p>
-        <strong>Bot Paper Testing</strong>
-        <span>B-NEW-1..3 forward paper bots plus a read-only desk bot card. New experiment, started November 27, 2026.</span>
+        <p class="kicker">Paper bots</p>
+        <strong>Paper Bots</strong>
+        <span>S-NEW and B-NEW forward ledgers, including ETF Trend &amp; Cash and BTC/ETH Band Rebalance. New experiment, started November 27, 2026.</span>
       </a>
       <a class="home-callout" href="follow_money.html">
         <p class="kicker">Follow the Money</p>
@@ -343,10 +355,10 @@
       <p class="footer-kicker">Paper trading, not financial advice.</p>
       <p>Educational paper-trading research. Simulated $10,000 accounts; no real money and no orders. Past and simulated results do not guarantee future results. A loss is possible for every strategy. Terms such as drawdown, Sharpe, and profit factor are in the <a href="#glossary">glossary</a>. Fills, costs, and backtest versus forward are in <a href="#method">How it works</a>.</p>
       <nav class="footer-nav" aria-label="Footer">
+        <a href="bots.html">Paper Bots</a>
         <a href="#leaderboard">Leaderboard</a>
         <a href="#board">Strategies</a>
         <a href="scoreboard.html">Scoreboard</a>
-        <a href="bots.html">Bots</a>
         <a href="research.html">Research</a>
         <a href="follow_money.html">Follow the Money</a>
         <a href="memescan.html">Meme Coins</a>
@@ -361,18 +373,20 @@
   </footer>
   <nav class="tabbar" aria-label="Mobile">
     <a href="index.html" aria-current="page"><span>Home</span></a>
+    <a href="bots.html"><span>Paper Bots</span></a>
     <a href="scoreboard.html"><span>Score</span></a>
-    <a href="bots.html"><span>Bots</span></a>
     <a href="memescan.html"><span>Memes</span></a>
     <a href="index.html#board"><span>More</span></a>
   </nav>
   <a class="to-top" href="#top" aria-label="Back to top">↑</a>
-  <script src="site-config.js?v=202611280230"></script>
-  <script src="data.js?v=202611280100"></script>
-  <script src="app.js?v=202611280231"></script>
+  <script src="site-config.js?v=202611280400"></script>
+  <script src="data.js?v=202611280400"></script>
+  <script src="new_experiments_data.js?v=202611280400"></script>
+  <script src="app.js?v=202611280400"></script>
   <script>renderBoard();</script>
-  <script src="videos.js?v=202611280100"></script>
-  <script src="site-chrome.js?v=202611280230"></script>
-  <script src="markets.js?v=1" defer></script>
+  <script src="paper_bots_home.js?v=202611280400"></script>
+  <script src="videos.js?v=202611280400"></script>
+  <script src="site-chrome.js?v=202611280400"></script>
+  <script src="markets.js?v=202611280400" defer></script>
 </body>
 </html>

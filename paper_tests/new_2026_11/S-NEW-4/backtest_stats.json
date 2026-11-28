@@ -1,0 +1,43 @@
+{
+  "label": "Historical backtest, not forward results",
+  "start": "2006-12-01",
+  "end": "2026-11-25",
+  "n_days": 5027,
+  "final_equity": 22393.95,
+  "total_return": 1.245405951732789,
+  "cagr": 0.0413822392530363,
+  "sharpe": 0.5499433828089973,
+  "deflated_sharpe": 1.0,
+  "max_drawdown": -0.1400747429608965,
+  "trades": 1618,
+  "win_rate": null,
+  "average_trade": null,
+  "time_in_market": null,
+  "over_10pct_dd": true,
+  "crash_periods": {
+    "2020": {
+      "return": -0.050366846792974096,
+      "max_drawdown": -0.06188453444029596
+    },
+    "2022": {
+      "return": -0.04779205294127509,
+      "max_drawdown": -0.06225377331705806
+    }
+  },
+  "data_source": "Yahoo Finance (yfinance) adjusted OHLC, auto_adjust=True",
+  "warmup_months": 10,
+  "holdout_start": "2006-12-01",
+  "holdout_end": "2026-11-25",
+  "fill_count": 1618,
+  "turnover": 12.22498035697723,
+  "turnover_total": 243.8689533909704,
+  "benchmark_passive5_total_return": 1.1579540000000001,
+  "benchmark_passive5_max_drawdown": -0.47835070147725034,
+  "benchmark_gap": 0.08144099999999987,
+  "drawdown_reduction": 0.33827595851635384,
+  "return_given_up": -0.08144099999999987,
+  "doubled_cost_total_return": 0.7562930000000001,
+  "doubled_cost_max_drawdown": -0.15249052111055894,
+  "doubled_cost_fill_count": 1618,
+  "vs_published_research": "Faber (2007, SSRN 962461) used monthly trend vs 10-month SMA on asset-class proxies and moved to T-bills when below the average. This paper test uses liquid ETF sleeves (SPY/EFA/IEF/VNQ/DBC), Yahoo dividend-adjusted prices, next-session-open fills after month-end signals (no same-close execution), BIL as the cash proxy, and 1.5\u00d7 desk costs. Equal 20% sleeve caps match the five-asset equal-risk framing; the original write-up also discusses absolute momentum with cash, which we keep."
+}

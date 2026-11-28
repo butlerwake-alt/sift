@@ -3,3 +3,4 @@ history.json.tmp
 __pycache__/
 paper_tests/new_2026_11/cache/
 paper_tests/new_2026_11/__pycache__/
+paper_tests/new_2026_11/_test_tmp/

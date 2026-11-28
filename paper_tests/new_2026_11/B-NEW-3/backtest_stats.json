@@ -3,10 +3,10 @@
   "start": "2017-01-01",
   "end": "2026-11-28",
   "n_days": 3619,
-  "final_equity": 2249.87,
-  "total_return": -0.7827520246267223,
-  "cagr": -0.1427102789433743,
-  "sharpe": -0.1594057672229813,
+  "final_equity": 2253.35,
+  "total_return": -0.7824159950097671,
+  "cagr": -0.14257663419155575,
+  "sharpe": -0.15902751352440042,
   "deflated_sharpe": 0.0,
   "max_drawdown": -0.889293191789668,
   "trades": 5773,
@@ -24,5 +24,5 @@
       "max_drawdown": -0.5871401562097507
     }
   },
-  "benchmark_btc_total_return": 59.305201671786094
+  "benchmark_btc_total_return": 59.40491464827031
 }

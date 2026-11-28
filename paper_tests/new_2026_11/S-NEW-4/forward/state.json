@@ -1,0 +1,18 @@
+{
+  "cash": 10003.27,
+  "holdings": {},
+  "as_of": "2026-11-27",
+  "idle_cash_income": 3.27,
+  "exposure": 0.0,
+  "last_signal": "awaiting",
+  "last_decision": {
+    "action": "hold_cash",
+    "note": "Awaiting first month-end SMA signal",
+    "cash": 10003.27
+  },
+  "status": "In cash",
+  "data_failures": [],
+  "data_source": "Yahoo Finance (yfinance) adjusted OHLC, auto_adjust=True",
+  "experiment_label": "New experiment, started November 27, 2026",
+  "id": "S-NEW-4"
+}

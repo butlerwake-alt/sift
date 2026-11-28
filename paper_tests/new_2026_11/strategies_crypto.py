@@ -15,12 +15,15 @@ from common import (
     GRID_FEE,
     HERE,
     StrategyMeta,
+    classify_status,
     fetch_coinbase_daily,
     fetch_deribit_funding,
     load_yahoo,
     max_drawdown,
     summarize_backtest,
+    turnover_from_trades,
     write_csv,
+    write_forward_ledger,
     write_json,
 )
 
@@ -540,4 +543,378 @@ def run_b_new_3() -> dict:
     write_csv(folder / "forward" / "equity.csv", forward_equity)
     write_csv(folder / "forward" / "trades.csv", forward_trades, fieldnames=["timestamp", "side", "symbol", "price", "qty", "fees", "pnl", "reason"])
     write_json(folder / "forward" / "state.json", state)
+    return {"meta": meta.to_public(), "stats": stats, "forward": forward_equity[-1], "state": state}
+
+
+def run_b_new_4() -> dict:
+    """BTC/ETH Band Rebalance — allocation-control experiment. Frozen before inspecting results."""
+    meta = StrategyMeta(
+        id="B-NEW-4",
+        name="BTC/ETH Band Rebalance",
+        category="Crypto Bot",
+        source="https://corporate.vanguard.com/content/dam/corp/research/pdf/rational_rebalancing_analytical_approach_to_multiasset_portfolio_rebalancing.pdf",
+        why="Allocation-control test: does a 40/60 band around a 50/50 BTC–ETH book change exposure, turnover, and risk versus letting weights drift or rebalancing on a calendar? Rules frozen from the band-rebalancing idea before inspecting results.",
+        why_fail="Crypto gaps can blow through bands between daily closes; 1.5× crypto fees make frequent rebalances costly; two-asset spot books ignore stablecoin/cash sleeves and exchange risk.",
+        rules=[
+            "Start at 50% BTC and 50% ETH using Coinbase spot USD pairs (BTC-USD, ETH-USD).",
+            "After each completed UTC day, measure portfolio weights from that day’s closes only.",
+            "If BTC’s weight is below 40% or above 60%, submit a simulated rebalance back to 50/50 at the next bar’s open (previously completed data only).",
+            "Otherwise hold.",
+            f"Cost: {CRYPTO_FEE*100:.3f}% per side (1.5× desk crypto 0.25%). Also report doubled-cost results.",
+            "Benchmarks (same feed, start, execution assumptions, cost model): (1) buy-and-hold 50/50 with drift; (2) calendar-monthly rebalance to 50/50 at month-start open.",
+            "Long-only, unleveraged, paper only. No exchange credentials.",
+        ],
+        benchmarks=["50/50 buy-and-hold (drift)", "Calendar-monthly 50/50 rebalance"],
+        fee_per_side=CRYPTO_FEE,
+    )
+    data_source = "Coinbase Exchange public daily candles (BTC-USD, ETH-USD)"
+    btc = fetch_coinbase_daily("BTC-USD", date(2017, 1, 1))
+    eth = fetch_coinbase_daily("ETH-USD", date(2017, 1, 1))
+    idx = btc.index.intersection(eth.index).sort_values()
+    btc = btc.loc[idx]
+    eth = eth.loc[idx]
+    month_starts = set(_month_starts(idx))
+
+    if len(idx) < 60:
+        folder = HERE / "B-NEW-4"
+        stats = {
+            "label": "Historical backtest, not forward results",
+            "awaiting_verified_historical_data": True,
+            "reason": "Insufficient Coinbase daily coverage for BTC and ETH to warm up and hold out a chronological sample.",
+            "data_source": data_source,
+            "cagr": None,
+            "sharpe": None,
+            "max_drawdown": None,
+            "trades": None,
+            "over_10pct_dd": None,
+            "crash_periods": {},
+            "start": None,
+            "end": None,
+        }
+        write_json(folder / "META.json", meta.to_public())
+        write_json(folder / "backtest_stats.json", stats)
+        write_forward_ledger(
+            folder,
+            [{"date": FORWARD_START.isoformat(), "equity": CAPITAL, "benchmark_drift": CAPITAL, "benchmark_monthly": CAPITAL}],
+            [],
+            {
+                "cash": 0.0,
+                "btc": 0.0,
+                "eth": 0.0,
+                "as_of": None,
+                "exposure": 0.0,
+                "btc_weight": None,
+                "eth_weight": None,
+                "last_signal": "awaiting",
+                "status": "Awaiting first mark",
+                "data_failure": stats["reason"],
+                "experiment_label": EXPERIMENT_LABEL,
+                "id": meta.id,
+            },
+        )
+        return {"meta": meta.to_public(), "stats": stats, "forward": {"equity": CAPITAL}, "state": {}}
+
+    def simulate(fee: float, start: pd.Timestamp, end: pd.Timestamp):
+        use = idx[(idx >= start) & (idx <= end)]
+        if len(use) < 2:
+            return {
+                "equity": [],
+                "trades": [],
+                "drift": [],
+                "monthly": [],
+                "weight_rows": [],
+                "data_failures": ["Window too short"],
+                "last_signal": "awaiting",
+                "last_decision": None,
+                "btc": 0.0,
+                "eth": 0.0,
+                "skipped": 0,
+            }
+        trades = []
+        equity = []
+        drift_eq = []
+        monthly_eq = []
+        weight_rows = []
+        data_failures = []
+        skipped = 0
+        last_signal = "hold"
+        last_decision = None
+        pending_band = False  # rebalance at next open
+
+        def open_px(d, which):
+            row = btc.loc[d] if which == "BTC" else eth.loc[d]
+            return float(row["Open"])
+
+        def close_px(d, which):
+            row = btc.loc[d] if which == "BTC" else eth.loc[d]
+            return float(row["Close"])
+
+        d0 = use[0]
+        # Seed 50/50 at first open
+        try:
+            b_o = open_px(d0, "BTC")
+            e_o = open_px(d0, "ETH")
+        except Exception as err:
+            return {
+                "equity": [],
+                "trades": [],
+                "drift": [],
+                "monthly": [],
+                "weight_rows": [],
+                "data_failures": [f"Missing opens at {d0.date()}: {err}"],
+                "last_signal": "awaiting",
+                "last_decision": None,
+                "btc": 0.0,
+                "eth": 0.0,
+                "skipped": 1,
+            }
+        # Band book
+        half = CAPITAL * 0.5
+        fee_b = half * fee
+        fee_e = half * fee
+        btc_u = (half - fee_b) / b_o
+        eth_u = (half - fee_e) / e_o
+        trades.append({"date": str(d0.date()), "side": "BUY", "symbol": "BTC", "price": b_o, "qty": btc_u, "fees": round(fee_b, 4), "pnl": None, "reason": "seed 50%"})
+        trades.append({"date": str(d0.date()), "side": "BUY", "symbol": "ETH", "price": e_o, "qty": eth_u, "fees": round(fee_e, 4), "pnl": None, "reason": "seed 50%"})
+        # Drift book (same seed, never rebalances)
+        d_btc, d_eth = btc_u, eth_u
+        # Monthly book
+        m_btc, m_eth = btc_u, eth_u
+
+        for i, d in enumerate(use):
+            # Execute pending band rebalance at open (decision from prior completed day)
+            if pending_band and i > 0:
+                try:
+                    b_o = open_px(d, "BTC")
+                    e_o = open_px(d, "ETH")
+                except Exception:
+                    data_failures.append(f"{d.date()}: missing open for band rebalance; skipped")
+                    skipped += 1
+                    pending_band = False
+                else:
+                    # Mark value at open, then reset to 50/50
+                    port = btc_u * b_o + eth_u * e_o
+                    # Sell all
+                    for sym, units, px in (("BTC", btc_u, b_o), ("ETH", eth_u, e_o)):
+                        if units <= 0:
+                            continue
+                        proceeds = units * px
+                        f = proceeds * fee
+                        trades.append({"date": str(d.date()), "side": "SELL", "symbol": sym, "price": px, "qty": units, "fees": round(f, 4), "pnl": None, "reason": "band rebalance exit"})
+                    # Buy 50/50
+                    half = port  # fees taken on sells already reduced? use post-sell cash
+                    cash = (btc_u * b_o) * (1 - fee) + (eth_u * e_o) * (1 - fee)
+                    half = cash * 0.5
+                    fee_b = half * fee
+                    fee_e = half * fee
+                    btc_u = (half - fee_b) / b_o
+                    eth_u = (half - fee_e) / e_o
+                    trades.append({"date": str(d.date()), "side": "BUY", "symbol": "BTC", "price": b_o, "qty": btc_u, "fees": round(fee_b, 4), "pnl": None, "reason": "band rebalance to 50/50"})
+                    trades.append({"date": str(d.date()), "side": "BUY", "symbol": "ETH", "price": e_o, "qty": eth_u, "fees": round(fee_e, 4), "pnl": None, "reason": "band rebalance to 50/50"})
+                    last_signal = "rebalance"
+                    last_decision = {"date": str(d.date()), "action": "rebalance_50_50", "trigger": "BTC weight outside 40–60% on prior close"}
+                    pending_band = False
+
+            # Calendar monthly rebalance at month-start open (benchmark)
+            if d in month_starts and i > 0:
+                try:
+                    b_o = open_px(d, "BTC")
+                    e_o = open_px(d, "ETH")
+                    cash_m = m_btc * b_o * (1 - fee) + m_eth * e_o * (1 - fee)
+                    half = cash_m * 0.5
+                    m_btc = (half - half * fee) / b_o
+                    m_eth = (half - half * fee) / e_o
+                except Exception:
+                    data_failures.append(f"{d.date()}: monthly bench open missing; skipped monthly rebalance mark")
+
+            # End-of-day marks from completed closes
+            try:
+                b_c = close_px(d, "BTC")
+                e_c = close_px(d, "ETH")
+            except Exception:
+                data_failures.append(f"{d.date()}: missing close; skipped mark")
+                skipped += 1
+                continue
+            port = btc_u * b_c + eth_u * e_c
+            w_btc = (btc_u * b_c / port) if port else 0.5
+            w_eth = 1.0 - w_btc
+            equity.append({"date": str(d.date()), "equity": round(port, 2)})
+            drift_eq.append({"date": str(d.date()), "equity": round(d_btc * b_c + d_eth * e_c, 2)})
+            monthly_eq.append({"date": str(d.date()), "equity": round(m_btc * b_c + m_eth * e_c, 2)})
+            weight_rows.append({"date": str(d.date()), "btc_weight": round(w_btc, 6), "eth_weight": round(w_eth, 6)})
+
+            # Decision after completed day → next bar open
+            if w_btc < 0.40 or w_btc > 0.60:
+                pending_band = True
+                last_signal = "band_breach"
+                last_decision = {
+                    "signal_date": str(d.date()),
+                    "btc_weight": round(w_btc, 4),
+                    "eth_weight": round(w_eth, 4),
+                    "action": "queue_rebalance_next_open",
+                }
+            elif last_signal != "rebalance":
+                last_signal = "hold"
+                last_decision = {
+                    "signal_date": str(d.date()),
+                    "btc_weight": round(w_btc, 4),
+                    "eth_weight": round(w_eth, 4),
+                    "action": "hold_inside_band",
+                }
+
+        return {
+            "equity": equity,
+            "trades": trades,
+            "drift": drift_eq,
+            "monthly": monthly_eq,
+            "weight_rows": weight_rows,
+            "data_failures": data_failures,
+            "last_signal": last_signal,
+            "last_decision": last_decision,
+            "btc": btc_u,
+            "eth": eth_u,
+            "skipped": skipped,
+        }
+
+    # Holdout: from first bar 2017 (warm-up none beyond seed) through day before FORWARD_START
+    holdout_start = idx[0]
+    holdout_end_list = [d for d in idx if d.date() < FORWARD_START]
+    holdout_end = holdout_end_list[-1] if holdout_end_list else idx[-1]
+    base = simulate(CRYPTO_FEE, holdout_start, holdout_end)
+    doubled = simulate(CRYPTO_FEE * 2.0, holdout_start, holdout_end)
+
+    eq_s = pd.Series({pd.Timestamp(r["date"]): r["equity"] for r in base["equity"]})
+    drift_s = pd.Series({pd.Timestamp(r["date"]): r["equity"] for r in base["drift"]})
+    monthly_s = pd.Series({pd.Timestamp(r["date"]): r["equity"] for r in base["monthly"]})
+    closed = [{"pnl": 0.0} for t in base["trades"] if t["side"] == "SELL"]
+    stats = summarize_backtest(eq_s, closed, periods_per_year=365) if len(eq_s) >= 2 else {
+        "label": "Historical backtest, not forward results",
+        "awaiting_verified_historical_data": True,
+        "reason": "Holdout equity path too short.",
+        "cagr": None,
+        "sharpe": None,
+        "max_drawdown": None,
+        "trades": None,
+        "over_10pct_dd": None,
+        "crash_periods": {},
+        "start": None,
+        "end": None,
+    }
+    if len(eq_s) >= 2:
+        stats["data_source"] = data_source
+        stats["holdout_start"] = str(holdout_start.date())
+        stats["holdout_end"] = str(holdout_end.date())
+        stats["fill_count"] = len(base["trades"])
+        stats["trades"] = sum(1 for t in base["trades"] if t["side"] in ("BUY", "SELL"))
+        raw_to = turnover_from_trades(base["trades"])
+        years = max(len(eq_s) / 365.0, 1e-9)
+        stats["turnover"] = raw_to / years  # average one-way turnover per year vs initial capital
+        stats["turnover_total"] = raw_to
+        stats["win_rate"] = None
+        stats["average_trade"] = None
+        stats["time_in_market"] = 1.0
+        if len(drift_s) >= 2:
+            stats["benchmark_drift_total_return"] = float(drift_s.iloc[-1] / CAPITAL - 1)
+            stats["benchmark_drift_max_drawdown"] = max_drawdown(drift_s)
+            stats["benchmark_gap_vs_drift"] = float(eq_s.iloc[-1] / CAPITAL - drift_s.iloc[-1] / CAPITAL)
+        if len(monthly_s) >= 2:
+            stats["benchmark_monthly_total_return"] = float(monthly_s.iloc[-1] / CAPITAL - 1)
+            stats["benchmark_monthly_max_drawdown"] = max_drawdown(monthly_s)
+            stats["benchmark_gap_vs_monthly"] = float(eq_s.iloc[-1] / CAPITAL - monthly_s.iloc[-1] / CAPITAL)
+        if base["weight_rows"]:
+            drifts = [abs(r["btc_weight"] - 0.5) for r in base["weight_rows"]]
+            stats["weight_drift_avg_abs"] = float(np.mean(drifts))
+            stats["weight_drift_max_abs"] = float(np.max(drifts))
+            stats["band_breach_days"] = int(sum(1 for r in base["weight_rows"] if r["btc_weight"] < 0.40 or r["btc_weight"] > 0.60))
+        dbl_s = pd.Series({pd.Timestamp(r["date"]): r["equity"] for r in doubled["equity"]})
+        if len(dbl_s) >= 2:
+            stats["doubled_cost_total_return"] = float(dbl_s.iloc[-1] / CAPITAL - 1)
+            stats["doubled_cost_max_drawdown"] = max_drawdown(dbl_s)
+            stats["doubled_cost_fill_count"] = len(doubled["trades"])
+        stats["vs_published_research"] = (
+            "Vanguard’s rational-rebalancing note studies multi-asset band vs calendar rebalancing "
+            "for traditional portfolios. This experiment applies a fixed 10-percentage-point band "
+            "around 50/50 on BTC/ETH spot only, with next-bar-open execution after a completed UTC "
+            "day and 1.5× crypto costs. It is an allocation-control test, not a return forecast."
+        )
+
+    folder = HERE / "B-NEW-4"
+    write_json(folder / "META.json", meta.to_public())
+    write_json(folder / "backtest_stats.json", stats)
+    write_csv(folder / "equity_backtest.csv", base["equity"])
+    write_csv(folder / "trades_backtest.csv", base["trades"])
+    write_csv(folder / "comparisons" / "drift_equity.csv", base["drift"])
+    write_csv(folder / "comparisons" / "monthly_equity.csv", base["monthly"])
+    write_csv(folder / "comparisons" / "weights.csv", base["weight_rows"])
+    write_csv(folder / "comparisons" / "doubled_cost_equity.csv", doubled["equity"])
+
+    # Forward from FORWARD_START
+    fwd_idx = idx[idx.date >= FORWARD_START]
+    if len(fwd_idx) == 0:
+        fwd_idx = idx[-1:]
+    fwd = simulate(CRYPTO_FEE, fwd_idx[0], fwd_idx[-1])
+    forward_trades = []
+    for t in fwd["trades"]:
+        forward_trades.append(
+            {
+                "timestamp": f"{t['date']}T00:00:00Z",
+                "side": t["side"],
+                "symbol": t["symbol"],
+                "price": t["price"],
+                "qty": t["qty"],
+                "fees": t["fees"],
+                "pnl": "" if t.get("pnl") is None else t["pnl"],
+                "reason": t["reason"],
+            }
+        )
+    forward_equity = []
+    for i, r in enumerate(fwd["equity"]):
+        forward_equity.append(
+            {
+                "date": r["date"],
+                "equity": r["equity"],
+                "benchmark_drift": fwd["drift"][i]["equity"] if i < len(fwd["drift"]) else CAPITAL,
+                "benchmark_monthly": fwd["monthly"][i]["equity"] if i < len(fwd["monthly"]) else CAPITAL,
+            }
+        )
+    if not forward_equity:
+        forward_equity = [
+            {
+                "date": FORWARD_START.isoformat(),
+                "equity": CAPITAL,
+                "benchmark_drift": CAPITAL,
+                "benchmark_monthly": CAPITAL,
+            }
+        ]
+
+    last = forward_equity[-1]
+    port = last["equity"] or CAPITAL
+    # weights from last weight row if any
+    btc_w = fwd["weight_rows"][-1]["btc_weight"] if fwd["weight_rows"] else 0.5
+    eth_w = fwd["weight_rows"][-1]["eth_weight"] if fwd["weight_rows"] else 0.5
+    exposure = 1.0  # always fully invested long-only
+    status = classify_status(
+        as_of=last["date"],
+        exposure=exposure,
+        last_signal=fwd["last_signal"],
+        data_failure="; ".join(fwd["data_failures"][-3:]) if fwd["skipped"] and not fwd["equity"] else None,
+        category="Crypto Bot",
+    )
+    state = {
+        "cash": 0.0,
+        "btc": fwd["btc"],
+        "eth": fwd["eth"],
+        "as_of": last["date"],
+        "exposure": exposure,
+        "btc_weight": btc_w,
+        "eth_weight": eth_w,
+        "last_signal": fwd["last_signal"],
+        "last_decision": fwd["last_decision"],
+        "status": status,
+        "data_failures": fwd["data_failures"][-10:],
+        "data_source": data_source,
+        "experiment_label": EXPERIMENT_LABEL,
+        "id": meta.id,
+    }
+    write_forward_ledger(folder, forward_equity, forward_trades, state)
     return {"meta": meta.to_public(), "stats": stats, "forward": forward_equity[-1], "state": state}
