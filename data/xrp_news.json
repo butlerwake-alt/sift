@@ -1,17 +1,29 @@
 {
-  "generated_at": "2026-11-26T20:48:00-05:00",
+  "generated_at": "2026-11-27T20:43:25-05:00",
   "lookback_days": 16,
   "disclaimer": "Verification status as of last update; not financial advice.",
   "items": [
     {
-      "date": "2026-11-26",
-      "headline": "Ripple is worth $90 a share to one fund and $300 to another, SEC filings show",
-      "summary": "Two SEC-registered funds open to ordinary investors marked Ripple stock 70% apart on Sept.",
+      "date": "2026-11-27",
+      "headline": "XRP Ledger Lending Clears Vote Threshold, Eyes Dec. 11",
+      "summary": "Both lending amendments drew 29 yes votes in XRPSCAN’s tally.",
+      "status": "Reported",
+      "sources": [
+        {
+          "name": "The Defiant",
+          "url": "https://thedefiant.io/news/defi/xrp-ledger-lending-clears-vote-threshold-eyes-dec-11"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-27",
+      "headline": "Ripple's lending plan moves closer to tapping XRP Ledger's $800 million in stablecoins",
+      "summary": "The vaults that would hold lenders' money are on track to switch on Dec.",
       "status": "Reported",
       "sources": [
         {
           "name": "CoinDesk",
-          "url": "https://www.coindesk.com/markets/2026/11/26/ripple-is-worth-usd90-a-share-to-one-fund-and-usd300-to-another-sec-filings-show"
+          "url": "https://www.coindesk.com/markets/2026/11/27/ripple-s-lending-plan-moves-closer-to-tapping-xrp-ledger-s-usd950-million-in-stablecoins"
         }
       ]
     },
@@ -48,22 +60,6 @@
         {
           "name": "DL News",
           "url": "https://www.dlnews.com/articles/markets/aviva-tokenized-liquidity-fund-explained/"
-        }
-      ]
-    },
-    {
-      "date": "2026-11-10",
-      "headline": "XRP Ledger Foundation quantum roadmap: post-quantum account keys",
-      "summary": "The XRP Ledger Foundation published a design that would let account owners add a quantum-resistant ML-DSA-44 signing key and retire the old one, with no change to the base fee and a targeted transition around 2028; it is still a proposal, not an activated upgrade.",
-      "status": "Confirmed",
-      "sources": [
-        {
-          "name": "XRP Ledger Foundation",
-          "url": "https://pages.xrpl.foundation/protocol-roadmap/research/quantum"
-        },
-        {
-          "name": "crypto.news",
-          "url": "https://crypto.news/xrp-ledger-quantum-resistant-accounts-2028/"
         }
       ]
     }
