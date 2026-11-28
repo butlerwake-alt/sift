@@ -101,7 +101,7 @@
         overDd: !!s.over_10pct_dd,
         sharpe: forwardSharpe(s.equity_curve),
         trades: s.forward_trades,
-        href: s.category === "Crypto Bot" ? "bots.html" : "strategy.html?new=" + encodeURIComponent(s.id)
+        href: "bots.html?id=" + encodeURIComponent(s.id)
       });
     });
 

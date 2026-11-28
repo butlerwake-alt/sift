@@ -99,6 +99,92 @@ def load_yahoo_ohlc(ticker: str, start: str = "2005-01-01") -> pd.DataFrame:
     return raw
 
 
+def load_yahoo_ohlc_panel(tickers: list[str], start: str = "2005-01-01") -> dict[str, pd.DataFrame]:
+    """Adjusted OHLC panels per ticker (dividend/split consistent via auto_adjust)."""
+    out: dict[str, pd.DataFrame] = {}
+    for t in tickers:
+        out[t] = load_yahoo_ohlc(t, start)
+    return out
+
+
+def trade_key(row: dict) -> str:
+    """Stable idempotency key for a simulated fill."""
+    return "|".join(
+        str(row.get(k, ""))
+        for k in ("timestamp", "side", "symbol", "price", "qty", "reason")
+    )
+
+
+def write_forward_ledger(folder: Path, equity_rows: list[dict], trades: list[dict], state: dict) -> None:
+    """Overwrite forward equity/trades/state. Deterministic rewrite = no duplicate fills on re-run."""
+    fwd = ensure_dir(folder / "forward")
+    # Deduplicate trades by key while preserving order (safety if a runner appends).
+    seen: set[str] = set()
+    unique: list[dict] = []
+    for t in trades:
+        k = trade_key(t)
+        if k in seen:
+            continue
+        seen.add(k)
+        unique.append(t)
+    write_csv(
+        fwd / "equity.csv",
+        equity_rows,
+        fieldnames=list(equity_rows[0].keys()) if equity_rows else ["date", "equity"],
+    )
+    write_csv(
+        fwd / "trades.csv",
+        unique,
+        fieldnames=["timestamp", "side", "symbol", "price", "qty", "fees", "pnl", "reason"],
+    )
+    write_json(fwd / "state.json", state)
+
+
+def classify_status(
+    *,
+    as_of: str | None,
+    exposure: float,
+    last_signal: str | None,
+    data_failure: str | None,
+    category: str,
+    today: date | None = None,
+) -> str:
+    """UI status labels required by the Paper Bots front page."""
+    today = today or TODAY
+    if data_failure:
+        return "Data stale"
+    if not as_of:
+        return "Awaiting first mark"
+    try:
+        mark = date.fromisoformat(str(as_of)[:10])
+    except ValueError:
+        return "Data stale"
+    # Stocks: allow weekend/holiday lag; crypto: tighter.
+    max_lag = 4 if category == "Stock Strategy" else 2
+    if (today - mark).days > max_lag:
+        return "Data stale"
+    if exposure is not None and exposure < 0.005:
+        if last_signal in (None, "", "none", "no_signal", "awaiting"):
+            return "No signal"
+        return "In cash"
+    if last_signal in ("awaiting", "awaiting_first_mark"):
+        return "Awaiting first mark"
+    return "Invested"
+
+
+def turnover_from_trades(trades: list[dict], capital: float = CAPITAL) -> float:
+    """Approximate one-way turnover as sum(|notional|) / capital / 2 over the period."""
+    if not trades or capital <= 0:
+        return 0.0
+    notionals = []
+    for t in trades:
+        try:
+            notionals.append(abs(float(t.get("price") or 0) * float(t.get("qty") or t.get("shares") or 0)))
+        except (TypeError, ValueError):
+            continue
+    return float(sum(notionals) / capital / 2.0) if notionals else 0.0
+
+
 def fetch_coinbase_daily(product: str = "BTC-USD", start: date | None = None) -> pd.DataFrame:
     """Daily candles from Coinbase public API. Columns: Open, High, Low, Close, Volume."""
     start = start or date(2016, 1, 1)

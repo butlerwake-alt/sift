@@ -3,10 +3,10 @@
   "start": "2016-05-18",
   "end": "2026-11-28",
   "n_days": 3845,
-  "final_equity": 3643779.1,
-  "total_return": 363.37791,
-  "cagr": 0.7505085563882616,
-  "sharpe": 1.138559863163225,
+  "final_equity": 3649869.34,
+  "total_return": 363.98693399999996,
+  "cagr": 0.7507860895358951,
+  "sharpe": 1.1387815657324845,
   "deflated_sharpe": 1.0,
   "max_drawdown": -0.8405416571234128,
   "trades": 29,
@@ -24,18 +24,18 @@
       "max_drawdown": -0.5588778735796572
     }
   },
-  "benchmark_btc_total_return": 130.46378084116253,
-  "benchmark_eth_total_return": 125.12974203338392,
-  "benchmark_50_50_total_return": 127.7967614372732,
+  "benchmark_btc_total_return": 130.68351040477654,
+  "benchmark_eth_total_return": 125.29817905918057,
+  "benchmark_50_50_total_return": 127.99084473197857,
   "comparison_60d": {
     "note": "comparison only, not a pick",
-    "total_return": 85.818797,
+    "total_return": 85.96390600000001,
     "max_drawdown": -0.8554545653898538,
     "trades": 42
   },
   "comparison_120d": {
     "note": "comparison only, not a pick",
-    "total_return": 57.698749,
+    "total_return": 57.777136999999996,
     "max_drawdown": -0.9194740955411033,
     "trades": 31
   }

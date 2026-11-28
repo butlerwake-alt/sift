@@ -6,9 +6,9 @@
   "final_equity": 48555.05,
   "total_return": 3.855505,
   "cagr": 0.07865579447546511,
-  "sharpe": 0.5981431779878305,
+  "sharpe": 0.5981433616704035,
   "deflated_sharpe": 1.0,
-  "max_drawdown": -0.3341390675654118,
+  "max_drawdown": -0.334138617475387,
   "trades": 741,
   "win_rate": null,
   "average_trade": null,
@@ -16,14 +16,14 @@
   "over_10pct_dd": true,
   "crash_periods": {
     "2020": {
-      "return": -0.03866866591217022,
-      "max_drawdown": -0.1909294670295557
+      "return": -0.038669013171592104,
+      "max_drawdown": -0.19092970840303447
     },
     "2022": {
-      "return": -0.09284548521227032,
-      "max_drawdown": -0.21144845527804124
+      "return": -0.09284520894210468,
+      "max_drawdown": -0.2114484048758326
     }
   },
-  "benchmark_spy_total_return": 7.392193571629637,
-  "benchmark_60_40_total_return": 4.728099367201539
+  "benchmark_spy_total_return": 7.392194309396009,
+  "benchmark_60_40_total_return": 4.728099697220881
 }

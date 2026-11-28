@@ -1,0 +1,28 @@
+{
+  "id": "S-NEW-4",
+  "name": "ETF Trend & Cash",
+  "category": "Stock Strategy",
+  "source": "https://ssrn.com/abstract=962461",
+  "why": "Tests whether a published 10-month SMA trend filter on five liquid ETFs reduces drawdown versus a passive equal-weight of the same sleeves. Rules frozen from Faber (2007) before looking at results; no parameter search.",
+  "why_fail": "Trend filters lag sharp reversals; five-ETF universe is today's liquid proxies (survivorship); month-end signals with next-open fills and 1.5\u00d7 costs can erase thin edges; cash proxy (BIL) differs from T-bills in the paper.",
+  "rules": [
+    "Universe (five equal sleeves): SPY, EFA, IEF, VNQ, DBC.",
+    "Signal series: dividend- and split-adjusted monthly closes (Yahoo Finance auto_adjust).",
+    "At each month-end close, compare each ETF\u2019s adjusted close to its 10-month simple moving average, including the just-completed month.",
+    "Allocate 20% to each ETF above its 10-month SMA; hold remaining weight in cash (BIL yield).",
+    "Execute the rebalance at the next regular session open using tradable opens under the same corporate-action adjustment.",
+    "Base cost: 0.075% fee+slippage per side on turnover (1.5\u00d7 desk 0.05%). Also report doubled-cost results.",
+    "Benchmark: same five ETFs, always 20% each, rebalanced on the same month-end\u2192next-open schedule with the same cost model.",
+    "Long-only, unleveraged, paper only. No broker credentials."
+  ],
+  "benchmarks": [
+    "Passive 5-ETF equal weight (same schedule)",
+    "Doubled-cost trend variant (comparison)"
+  ],
+  "fee_per_side": 0.00075,
+  "comparisons_note": "comparison only, not a pick",
+  "experiment_label": "New experiment, started November 27, 2026",
+  "forward_start": "2026-11-27",
+  "capital": 10000.0,
+  "desk_dd_limit": 0.1
+}

@@ -3,32 +3,32 @@
   "start": "2005-01-03",
   "end": "2026-11-27",
   "n_days": 5511,
-  "final_equity": 17203.35,
-  "total_return": 0.720335,
-  "cagr": 0.02511789013353538,
-  "sharpe": 0.5730369714971288,
+  "final_equity": 17202.78,
+  "total_return": 0.720278,
+  "cagr": 0.02511633698626059,
+  "sharpe": 0.5730020838992363,
   "deflated_sharpe": 1.0,
-  "max_drawdown": -0.08982148449733784,
+  "max_drawdown": -0.0898206461102653,
   "trades": 466,
   "win_rate": 0.5300429184549357,
-  "average_trade": 2.1890343347639485,
+  "average_trade": 2.188583690987125,
   "time_in_market": 0.08455815641444384,
   "over_10pct_dd": false,
   "crash_periods": {
     "2020": {
-      "return": -0.0018856428435778394,
-      "max_drawdown": -0.051279227893609614
+      "return": -0.0018849037567508775,
+      "max_drawdown": -0.051279812678494574
     },
     "2022": {
-      "return": -0.07756125099124755,
-      "max_drawdown": -0.08982148449733784
+      "return": -0.07755928695720105,
+      "max_drawdown": -0.0898206461102653
     }
   },
   "benchmark_spy_total_return": 7.994545648640425,
   "comparison_sell_next_close": {
     "note": "comparison only, not a pick",
-    "total_return": 1.405599,
-    "max_drawdown": -0.17109868808253337,
+    "total_return": 1.405519,
+    "max_drawdown": -0.1710983780417321,
     "trades": 466
   }
 }

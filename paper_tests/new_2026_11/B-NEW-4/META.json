@@ -1,0 +1,27 @@
+{
+  "id": "B-NEW-4",
+  "name": "BTC/ETH Band Rebalance",
+  "category": "Crypto Bot",
+  "source": "https://corporate.vanguard.com/content/dam/corp/research/pdf/rational_rebalancing_analytical_approach_to_multiasset_portfolio_rebalancing.pdf",
+  "why": "Allocation-control test: does a 40/60 band around a 50/50 BTC\u2013ETH book change exposure, turnover, and risk versus letting weights drift or rebalancing on a calendar? Rules frozen from the band-rebalancing idea before inspecting results.",
+  "why_fail": "Crypto gaps can blow through bands between daily closes; 1.5\u00d7 crypto fees make frequent rebalances costly; two-asset spot books ignore stablecoin/cash sleeves and exchange risk.",
+  "rules": [
+    "Start at 50% BTC and 50% ETH using Coinbase spot USD pairs (BTC-USD, ETH-USD).",
+    "After each completed UTC day, measure portfolio weights from that day\u2019s closes only.",
+    "If BTC\u2019s weight is below 40% or above 60%, submit a simulated rebalance back to 50/50 at the next bar\u2019s open (previously completed data only).",
+    "Otherwise hold.",
+    "Cost: 0.375% per side (1.5\u00d7 desk crypto 0.25%). Also report doubled-cost results.",
+    "Benchmarks (same feed, start, execution assumptions, cost model): (1) buy-and-hold 50/50 with drift; (2) calendar-monthly rebalance to 50/50 at month-start open.",
+    "Long-only, unleveraged, paper only. No exchange credentials."
+  ],
+  "benchmarks": [
+    "50/50 buy-and-hold (drift)",
+    "Calendar-monthly 50/50 rebalance"
+  ],
+  "fee_per_side": 0.00375,
+  "comparisons_note": "comparison only, not a pick",
+  "experiment_label": "New experiment, started November 27, 2026",
+  "forward_start": "2026-11-27",
+  "capital": 10000.0,
+  "desk_dd_limit": 0.1
+}
