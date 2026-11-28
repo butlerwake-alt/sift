@@ -239,6 +239,27 @@ function maxDrawdownOf(strategy) {
   pts.forEach((p) => { peak = Math.max(peak, p.equity); worst = Math.min(worst, (p.equity / peak - 1) * 100); });
   return worst;
 }
+function winRateOf(strategy) {
+  const text = strategy.forward || "";
+  const labeled = text.match(/win rate\s+([\d.]+)\s*%/i);
+  if (labeled) {
+    const value = Number(labeled[1]);
+    return Number.isFinite(value) ? value : null;
+  }
+  const won = text.match(/(\d+)\s+won/i);
+  const lost = text.match(/(\d+)\s+lost/i);
+  if (won && lost) {
+    const wins = Number(won[1]);
+    const losses = Number(lost[1]);
+    const n = wins + losses;
+    if (n > 0) return (100 * wins) / n;
+  }
+  return null;
+}
+function winRateHtml(value) {
+  if (value == null || !Number.isFinite(value)) return "—";
+  return `<span class="num-mono">${value.toFixed(value % 1 ? 1 : 0)}%</span>`;
+}
 function setSum(id, text) {
   const el = document.getElementById(id);
   if (el && text) el.textContent = text;
@@ -272,13 +293,14 @@ function renderHero() {
 const LB_COLS = [
   { key: "rank", label: "#", num: true, cls: "col-rank" },
   { key: "name", label: "Strategy", cls: "col-name" },
-  { key: "pct", label: "Forward return", num: true, cls: "col-ret" },
+  { key: "pct", label: "Return", num: true, cls: "col-ret" },
+  { key: "wr", label: "Win rate", num: true, cls: "col-wr" },
+  { key: "dd", label: "Max DD", num: true, cls: "col-dd" },
   { key: "spark", label: "Path", cls: "col-spark", nosort: true },
   { key: "market", label: "Market", cls: "col-mkt" },
   { key: "delta", label: "Dollars", num: true, cls: "col-dollars" },
-  { key: "dd", label: "Max drawdown", num: true, cls: "col-dd" },
-  { key: "days", label: "Days live", num: true, cls: "col-days" },
-  { key: "gap", label: "Versus hold", num: true, cls: "col-gap" }
+  { key: "days", label: "Days", num: true, cls: "col-days" },
+  { key: "gap", label: "Vs hold", num: true, cls: "col-gap" }
 ];
 function earlyFlag(days) {
   if (days == null || days >= 90) return "";
@@ -306,13 +328,55 @@ function leaderboardRows() {
   return SIFT.strategies.map((s) => {
     const r = resultOf(s);
     const b = benchPctOf(s);
-    return { s, r, name: s.name, market: marketOf(s), pct: r.pct, delta: r.delta, dd: s.planned ? null : maxDrawdownOf(s),
-      days: s.planned ? null : dayCount(s.start, s.asOf), gap: r.pct == null || b == null ? null : r.pct - b };
+    return {
+      s, r, name: s.name, market: marketOf(s), pct: r.pct, delta: r.delta,
+      dd: s.planned ? null : maxDrawdownOf(s),
+      wr: s.planned ? null : winRateOf(s),
+      days: s.planned ? null : dayCount(s.start, s.asOf),
+      gap: r.pct == null || b == null ? null : r.pct - b
+    };
   });
+}
+function renderTopStrategies() {
+  const host = document.getElementById("top-strategies-mount");
+  if (!host) return;
+  const ranked = leaderboardRows()
+    .filter((x) => x.pct != null && Number.isFinite(x.pct))
+    .sort((a, b) => b.pct - a.pct || a.s.n - b.s.n)
+    .slice(0, 5);
+  if (!ranked.length) {
+    host.innerHTML = `<div class="top-strats"><div class="top-strats-head"><div><p class="desk-label">Forward paper</p><h2>Top Strategies</h2></div><p>No paper returns yet.</p></div></div>`;
+    return;
+  }
+  const tone = (v) => v == null ? "flat" : v > 0.005 ? "up" : v < -0.005 ? "down" : "flat";
+  const cards = ranked.map((x, i) => {
+    const t = tone(x.pct);
+    const ddText = x.dd == null ? "—" : (x.dd > -0.005 ? "0.00%" : signedPct(x.dd));
+    const wrText = x.wr == null || !Number.isFinite(x.wr) ? "—" : (x.wr.toFixed(x.wr % 1 ? 1 : 0) + "%");
+    return `<a class="top-card tone-${t}" href="strategy.html?n=${x.s.n}">
+      <span class="top-card-rank">#${i + 1}${x.s.rank ? " · board " + x.s.rank : ""}</span>
+      <h3 class="top-card-name">${esc(x.s.name)}</h3>
+      <div class="top-card-ret tone-${t}">${signedPct(x.pct)}</div>
+      ${pathSpark(x.s.points, t)}
+      <div class="top-card-meta">
+        <span>Win rate<b>${esc(wrText)}</b></span>
+        <span>Max drawdown<b>${esc(ddText)}</b></span>
+      </div>
+      ${earlyFlag(x.days)}
+    </a>`;
+  }).join("");
+  host.innerHTML = `<div class="top-strats">
+    <div class="top-strats-head">
+      <div><p class="desk-label">Forward paper</p><h2 id="top-strats-title">Top Strategies</h2></div>
+      <p>Ranked by paper return · as of ${esc(SIFT.asOf)}</p>
+    </div>
+    <div class="top-strats-grid">${cards}</div>
+  </div>`;
 }
 function renderLeaderboard() {
   const host = document.getElementById("leaderboard-mount");
   if (!host) return;
+  renderTopStrategies();
   const rows = leaderboardRows();
   rows.forEach((x) => { x.rank = x.s.rank == null ? null : x.s.rank; });
   const k = LB_SORT.key, dir = LB_SORT.dir;
@@ -335,11 +399,12 @@ function renderLeaderboard() {
   const body = rows.map((x) => `<tr class="${x.s.stale ? "is-stale" : ""}">
       <td class="num-col col-rank rank-col">${x.rank || "—"}${rankMoveHtml(x.s)}</td>
       <th scope="row" class="col-name"><a href="strategy.html?n=${x.s.n}"><span class="lb-n">${String(x.s.n).padStart(2, "0")}</span> ${esc(x.s.name)}</a>${x.s.label ? " " + labelChip(x.s) : ""}${x.s.isNew ? ' <span class="chip chip-new">New</span>' : ""}<span class="lb-sub">${esc(x.s.category)} · started ${x.s.start ? shortDate(x.s.start) : "—"}${x.s.stale ? " · stale" : ""}</span></th>
-      <td class="num-col col-ret ${tone(x.pct)}">${x.pct == null ? "Not started" : `<span class="ret-num">${signedPct(x.pct)}</span>`}${earlyFlag(x.days)}</td>
+      <td class="num-col col-ret ${tone(x.pct)}">${x.pct == null ? "Not started" : `<span class="ret-num num-mono">${signedPct(x.pct)}</span>`}${earlyFlag(x.days)}</td>
+      <td class="num-col col-wr">${winRateHtml(x.wr)}</td>
+      <td class="num-col col-dd">${x.dd == null ? "—" : (x.dd > -0.005 ? "0.00%" : signedPct(x.dd))}</td>
       <td class="col-spark">${x.s.planned ? `<span class="spark-empty">—</span>` : pathSpark(x.s.points, sparkTone(x.pct))}</td>
       <td class="col-mkt">${esc(x.market)}</td>
       <td class="num-col col-dollars ${tone(x.delta)}">${x.delta == null ? "—" : signedMoney(x.delta)}</td>
-      <td class="num-col col-dd">${x.dd == null ? "—" : (x.dd > -0.005 ? "0.00%" : signedPct(x.dd))}</td>
       <td class="num-col col-days">${x.days == null ? "—" : x.days}</td>
       <td class="num-col col-gap ${tone(x.gap)}">${pts(x.gap)}</td>
     </tr>`).join("");
@@ -351,8 +416,8 @@ function renderLeaderboard() {
     else if (earlyN) banner.textContent = earlyN + " of " + tracked.length + " forward tests have fewer than 90 days of marks: too early to tell.";
     else banner.textContent = "";
   }
-  host.innerHTML = `<div class="section-head lb-head"><div><p class="desk-label">Forward paper</p><h2 id="lb-title">Leaderboard</h2></div><p class="lb-asof">As of ${esc(SIFT.asOf)}</p></div>
-    <details class="lb-help"><summary>How this rank works</summary><p>Every strategy ranked best to worst by its forward paper return since its own start date, as of ${esc(SIFT.asOf)}, and re-ranked after every daily update. Arrows show the move versus the previous day's rank${SIFT.rankPrevDay ? " (" + shortDate(SIFT.rankPrevDay) + ")" : ""}; “New” means fewer than 5 days live. Ties go to the lower strategy number; not-started strategies sit at the bottom. Click a column to sort. Max drawdown is the worst drop between recorded daily marks. A forward test under 90 days is marked too early to tell.</p></details>
+  host.innerHTML = `<div class="section-head lb-head"><div><p class="desk-label">Full board</p><h2 id="lb-title">All strategies</h2></div><p class="lb-asof">As of ${esc(SIFT.asOf)} · click a column to sort</p></div>
+    <details class="lb-help"><summary>How this rank works</summary><p>Every strategy ranked best to worst by its forward paper return since its own start date, as of ${esc(SIFT.asOf)}, and re-ranked after every daily update. Arrows show the move versus the previous day's rank${SIFT.rankPrevDay ? " (" + shortDate(SIFT.rankPrevDay) + ")" : ""}; “New” means fewer than 5 days live. Ties go to the lower strategy number; not-started strategies sit at the bottom. Win rate comes from the published forward note when closed trades are recorded; otherwise it shows as a dash. Max drawdown is the worst drop between recorded daily marks. A forward test under 90 days is marked too early to tell.</p></details>
     <div class="rtable lb-table lb-scroll"><table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div>`;
   host.querySelectorAll("thead button").forEach((btn) => btn.addEventListener("click", () => {
     const key = btn.dataset.key;
