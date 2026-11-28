@@ -30,7 +30,10 @@
   <meta name="twitter:title" content="SIFT">
   <meta name="twitter:description" content="Your everyday resource for backtested, forward-tested trading strategies: what's working, what isn't, and why. Paper results from real closing prices, not financial advice.">
   <meta name="twitter:image" content="https://butlerwake-alt.github.io/sift/og-image.png">
-  <link rel="stylesheet" href="styles.css?v=202611272043">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=202611280300">
 </head>
 <body id="top">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -47,11 +50,11 @@
         <div class="nav-bar">
           <a class="nav-brand" href="index.html" aria-current="page"><img src="favicon.svg" width="28" height="28" alt=""><span>SIFT</span></a>
           <div class="nav-panel" id="site-menu">
-            <a href="#leaderboard">Leaderboard</a>
+            <a href="#leaderboard">Top Strategies</a>
+            <a class="nav-cta" href="memescan.html">Meme Coins</a>
             <a href="#board">Strategies</a>
             <a href="research.html">Research</a>
             <a href="follow_money.html">Follow the Money</a>
-            <a href="memescan.html">Memescan audit</a>
             <a href="qqqi.html">QQQ vs QQQI</a>
             <a href="news.html">XRP news</a>
             <a href="updates.html">Updates</a>
@@ -64,7 +67,7 @@
     </header>
   </div>
   <main id="main" class="wrap">
-    <section class="hero">
+    <section class="hero hero-board">
       <div class="hero-copy">
         <p class="updated-stamp" id="updated-stamp"><b id="stamp-when">Last updated: Nov 27, 2026, 8:42 PM ET</b><span class="stamp-next">Next update: daily after the market close (about 8:30 PM ET)</span><a href="updates.html">All updates →</a></p>
         <p class="eyebrow" id="hero-kicker">Daily check-in · November 11, 2026</p>
@@ -74,6 +77,10 @@
         </div>
         <p class="lede">Your everyday resource for backtested, forward-tested trading strategies: what's working, what isn't, and why.</p>
         <p class="hero-note">Paper results from real closing prices, not financial advice.</p>
+        <div class="hero-actions">
+          <a class="btn-cta btn-cta-solid" href="memescan.html">Meme Coins</a>
+          <a class="btn-cta btn-cta-ghost" href="#leaderboard">Top Strategies</a>
+        </div>
       </div>
       <dl class="hero-facts" id="hero-facts"></dl>
       <p class="score-line" id="score-line"></p>
@@ -95,10 +102,10 @@
     </section>
 
     <div class="callout-row">
-      <a class="home-callout" href="#leaderboard">
-        <p class="kicker">Copy a strategy</p>
-        <strong>Take the published rules to a paper account</strong>
-        <span>Open a name on the leaderboard. The strategy page lists the rules, the latest holdings when they are on record, and buttons to copy or download them.</span>
+      <a class="home-callout" href="memescan.html">
+        <p class="kicker">Meme Coins</p>
+        <strong>Paper P&amp;L on the memescan board</strong>
+        <span>Open positions, closed trades, win rate, and dollars from the FOMO paper plan. Simulated fees and slippage. Not advice.</span>
       </a>
       <a class="home-callout" href="follow_money.html">
         <p class="kicker">Follow the Money</p>
@@ -246,7 +253,7 @@
             <div><dt>Drawdown</dt><dd>The drop from an account's highest value to a later low, in percent. “Max drawdown” is the worst one.</dd></div>
             <div><dt>CAGR</dt><dd>Compound annual growth rate: the steady yearly return that would turn the start value into the end value.</dd></div>
             <div><dt>Sharpe ratio</dt><dd>Return divided by how bumpy the ride was (volatility), per year. Higher is smoother; about 1 is good for a simple strategy.</dd></div>
-            <div><dt>Win rate</dt><dd>The share of closed trades that made money. A low win rate can still be profitable if the winners are big.</dd></div>
+            <div><dt>Win rate</dt><dd>The share of closed trades that made money. A low win rate can still be profitable if the winners are big. The forward board's <b>Up days</b> column is different: it is the share of daily marks that rose, because closed-trade win rate is not in the forward feed.</dd></div>
             <div><dt>Profit factor</dt><dd>Total gains on winning trades divided by total losses on losing trades. Above 1 means it made more than it lost.</dd></div>
             <div><dt>Market regime</dt><dd>A daily label for the market's state (trend up, range, risk-off, trend down, shock) from closing prices only.</dd></div>
             <div><dt>Moving average</dt><dd>The average closing price over the last N days, such as the 50-day or 200-day average.</dd></div>
@@ -267,11 +274,11 @@
       <p class="footer-kicker">Paper trading, not financial advice.</p>
       <p>Educational paper-trading research. Simulated $10,000 accounts; no real money and no orders. Past and simulated results do not guarantee future results. A loss is possible for every strategy. Terms such as drawdown, Sharpe, and profit factor are in the <a href="#glossary">glossary</a>. Fills, costs, and backtest versus forward are in <a href="#method">How it works</a>.</p>
       <nav class="footer-nav" aria-label="Footer">
-        <a href="#leaderboard">Leaderboard</a>
+        <a href="#leaderboard">Top Strategies</a>
+        <a href="memescan.html">Meme Coins</a>
         <a href="#board">Strategies</a>
         <a href="research.html">Research</a>
         <a href="follow_money.html">Follow the Money</a>
-        <a href="memescan.html">Memescan audit</a>
         <a href="qqqi.html">QQQ vs QQQI</a>
         <a href="news.html">XRP news</a>
         <a href="updates.html">Updates</a>
@@ -283,7 +290,7 @@
   </footer>
   <nav class="tabbar" aria-label="Mobile">
     <a href="index.html" aria-current="page"><span>Home</span></a>
-    <a href="index.html#board"><span>Strategies</span></a>
+    <a href="index.html#leaderboard"><span>Top</span></a>
     <a href="follow_money.html" aria-label="Follow the Money"><span>Money</span></a>
     <a href="memescan.html"><span>Memes</span></a>
     <a href="news.html"><span>News</span></a>
@@ -292,11 +299,11 @@
     <a href="videos.html" data-videos-nav hidden><span>Videos</span></a>
   </nav>
   <a class="to-top" href="#top" aria-label="Back to top">↑</a>
-  <script src="site-config.js?v=202611272043"></script>
-  <script src="data.js?v=202611272043"></script>
-  <script src="app.js?v=202611272043"></script>
+  <script src="site-config.js?v=202611280300"></script>
+  <script src="data.js?v=202611280300"></script>
+  <script src="app.js?v=202611280300"></script>
   <script>renderBoard();</script>
-  <script src="videos.js?v=202611272043"></script>
-  <script src="site-chrome.js?v=202611272043"></script>
+  <script src="videos.js?v=202611280300"></script>
+  <script src="site-chrome.js?v=202611280300"></script>
 </body>
 </html>

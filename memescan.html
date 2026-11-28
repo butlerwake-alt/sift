@@ -5,11 +5,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Cache-Control" content="no-store">
-  <title>Paper Money · Memescan · SIFT</title>
-  <meta name="description" content="Paper-only memecoin dollars from the fixed FOMO paper plan. Hypothetical results with simulated fees and slippage. Not financial advice. No wallet.">
+  <title>Meme Coins · Paper Money · SIFT</title>
+  <meta name="description" content="Paper-only meme coin results: open positions, closed trades, P&amp;L, and win rate from the FOMO paper plan. Simulated fees and slippage. Not financial advice. No wallet.">
   <meta name="theme-color" content="#0a1018">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=202611271015">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=202611280300">
   <style>
     .audit-banner { margin: 0.4rem 0 0.8rem; padding: 0.75rem 0.9rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); font-weight: 650; line-height: 1.45; }
     .audit-banner .n-line { display: block; margin-top: 0.35rem; color: var(--muted); font-weight: 600; font-size: 0.9rem; }
@@ -82,11 +85,11 @@
       <div class="nav-bar">
         <a class="nav-brand" href="index.html"><img src="favicon.svg" width="28" height="28" alt=""><span>SIFT</span></a>
         <div class="nav-panel" id="site-menu">
-          <a href="index.html#leaderboard">Leaderboard</a>
+          <a href="index.html#leaderboard">Top Strategies</a>
+            <a class="nav-cta" href="memescan.html" aria-current="page">Meme Coins</a>
           <a href="index.html#board">Strategies</a>
           <a href="research.html">Research</a>
           <a href="follow_money.html">Follow the Money</a>
-          <a href="memescan.html" aria-current="page">Memescan audit</a>
           <a href="qqqi.html">QQQ vs QQQI</a>
           <a href="news.html">XRP news</a>
           <a href="updates.html">Updates</a>
@@ -104,8 +107,8 @@
       <span class="n-line" id="n-by-verdict">Loading graded counts…</span>
     </p>
     <p class="experiment-label" id="label">memescan audit v2 — rule change started November 25, 2026, paper only, not original evidence.</p>
-    <h1>Paper Money</h1>
-    <p class="lede" id="why">Tests whether a rug/safety checklist actually separates memecoins that survive 24h from ones that collapse. Paper only, includes 1.5% slippage + fees per side. Most memecoins go to zero; expect negative results — the point is to measure the checklist, not to find trades.</p>
+    <h1>Meme Coins</h1>
+    <p class="lede" id="why">Paper-only board for the memescan FOMO plan: open positions still waiting on the 24h grade, closed trades with P&amp;L, and win rate from graded results. Includes 1.5% slippage + fees per side. Most meme coins go to zero; expect negative results — the point is to measure the checklist, not to find trades.</p>
     <p id="why-v2">v2 (started November 25, 2026): CLEAN no longer blocked by checks the free data can't run; wider new-pair feed for more samples.</p>
 
     <div class="version-toggle" role="group" aria-label="Rule version">
@@ -120,8 +123,8 @@
     </div>
 
     <section class="audit-section" id="paper-summary">
-      <h2>Paper P&amp;L summary</h2>
-      <p class="src">Fixed plan from the FOMO screenshots: enter at audit price, −25% stop, sell half at +100%, 35% trailing stop on the rest, dead-money exit after 45 minutes, 1.5% slippage + 0.25% fee per side, graded after 24 hours. Dollars are computed from already-graded results — rules are not re-run here.</p>
+      <h2>Paper P&amp;L and win rate</h2>
+      <p class="src">Fixed plan from the FOMO screenshots: enter at audit price, −25% stop, sell half at +100%, 35% trailing stop on the rest, dead-money exit after 45 minutes, 1.5% slippage + 0.25% fee per side, graded after 24 hours. Dollars and win rate come from already-graded results — rules are not re-run here.</p>
       <div class="summary-grid" id="summary-mount"></div>
       <p class="trap-note" id="trap-note"></p>
     </section>
@@ -133,7 +136,19 @@
       <p class="chart-caption" id="chart-caption"></p>
     </section>
 
-    <section class="audit-section" id="paper-cards">
+    <section class="audit-section" id="open-positions">
+      <h2>Open positions</h2>
+      <p class="src">Audited coins still waiting on the 24h grade. Paper stake is reserved; P&amp;L is not final.</p>
+      <div class="card-grid" id="open-mount"></div>
+    </section>
+
+    <section class="audit-section" id="closed-trades">
+      <h2>Closed trades</h2>
+      <p class="src">Graded paper exits with net return after simulated fees and slippage.</p>
+      <div class="card-grid" id="closed-mount"></div>
+    </section>
+
+    <section class="audit-section" id="paper-cards" hidden>
       <h2>Per-coin paper cards</h2>
       <div class="card-grid" id="coin-mount"></div>
     </section>
@@ -153,11 +168,11 @@
       <p class="footer-kicker">Paper only. Not financial advice. No trading, no wallet.</p>
       <p id="footer-label">memescan audit v2 — rule change started November 25, 2026, paper only, not original evidence. v1 records stay on the v1 view.</p>
       <nav class="footer-nav" aria-label="Footer">
-        <a href="index.html#leaderboard">Leaderboard</a>
+        <a href="index.html#leaderboard">Top Strategies</a>
         <a href="index.html#board">Strategies</a>
         <a href="research.html">Research</a>
         <a href="follow_money.html">Follow the Money</a>
-        <a href="memescan.html">Memescan audit</a>
+        <a href="memescan.html">Meme Coins</a>
         <a href="qqqi.html">QQQ vs QQQI</a>
         <a href="news.html">XRP news</a>
         <a href="updates.html">Updates</a>
@@ -177,8 +192,8 @@
     <a href="videos.html" data-videos-nav hidden><span>Videos</span></a>
   </nav>
   <a class="to-top" href="#top" aria-label="Back to top">↑</a>
-  <script src="site-config.js?v=202611271015"></script>
-  <script src="site-chrome.js?v=202611271015"></script>
+  <script src="site-config.js?v=202611280300"></script>
+  <script src="site-chrome.js?v=202611280300"></script>
   <script>
     var STALE_MS = 60 * 60 * 1000;
     var DEFAULT_STAKE = 100;
@@ -339,6 +354,7 @@
       [
         ["Paper-bought", String(stats.count)],
         ["Invested", "$" + stats.invested.toLocaleString("en-US", { maximumFractionDigits: 0 })],
+        ["Win rate", stats.count ? ((100 * stats.wins / stats.count).toFixed(0) + "% (" + stats.wins + " / " + stats.count + ")") : "—"],
         ["Wins / losses", stats.wins + " / " + stats.losses],
         ["Biggest winner", stats.best ? ((stats.best.row.symbol || "—") + " " + fmtMoney(stats.best.pnl)) : "—"],
         ["Biggest loser", stats.worst ? ((stats.worst.row.symbol || "—") + " " + fmtMoney(stats.worst.pnl)) : "—"]
@@ -450,62 +466,78 @@
       mount.appendChild(svg);
       caption.textContent = "Ends at " + fmtMoney(end.y) + " after " + rows.length + " paper buys at $" + stake.toLocaleString("en-US") + " each (" + currentVersion + ").";
     }
+    function gradedCard(row, stake) {
+      var card = el("article", "paper-card");
+      var top = el("div", "row-top");
+      top.append(el("h3", "", (row.symbol || "—") + (row.name ? " · " + row.name : "")));
+      var right = el("div");
+      right.append(badge(row.verdict));
+      right.append(document.createTextNode(" "));
+      right.append(el("span", "grade-pill", "Grade " + (row.grade || "—")));
+      top.append(right);
+      card.append(top);
+      if (row.verdict === "TRAP") {
+        card.append(el("p", "meta", "Skipped (TRAP) — not paper-bought."));
+        card.append(el("p", "meta", "Entry " + fmtTime(row.t0) + " @ " + fmtPrice(row.price_t0)));
+        card.append(el("p", "meta", "Would-be exit: " + exitLabel(row.exit_reason) + " · plan net " + fmtPct(row.net_return)));
+      } else {
+        var pnl = stake * (typeof row.net_return === "number" ? row.net_return : 0);
+        card.append(el("div", "money " + moneyClass(pnl), fmtMoney(pnl) + "  ·  " + fmtPct(row.net_return)));
+        card.append(el("p", "meta", "Entry " + fmtTime(row.t0) + " @ " + fmtPrice(row.price_t0)));
+        card.append(el("p", "meta", "Exit: " + exitLabel(row.exit_reason) + " · graded " + fmtTime(row.graded_at)));
+        card.append(el("p", "meta", "Stake $" + stake.toLocaleString("en-US") + " · " + currentVersion));
+      }
+      return card;
+    }
+    function pendingCard(row, stake) {
+      var card = el("article", "paper-card");
+      var top = el("div", "row-top");
+      top.append(el("h3", "", (row.symbol || "—") + (row.name ? " · " + row.name : "")));
+      var right = el("div");
+      right.append(badge(row.verdict));
+      right.append(document.createTextNode(" "));
+      right.append(el("span", "badge badge-PENDING", "Open"));
+      top.append(right);
+      card.append(top);
+      if (row.verdict === "TRAP") {
+        card.append(el("p", "meta", "Skipped (TRAP). Open until the 24h grade."));
+      } else {
+        card.append(el("p", "meta", "Open position — grades after 24h."));
+      }
+      card.append(el("p", "meta", "Entry " + fmtTime(row.t0) + " @ " + fmtPrice(row.price_t0)));
+      card.append(el("p", "meta", "Paper stake reserved: $" + stake.toLocaleString("en-US") + " · " + currentVersion));
+      return card;
+    }
     function renderCoinCards() {
       var stake = stakeValue();
-      var mount = document.getElementById("coin-mount");
-      mount.textContent = "";
+      var openMount = document.getElementById("open-mount");
+      var closedMount = document.getElementById("closed-mount");
+      var legacy = document.getElementById("coin-mount");
+      if (openMount) openMount.textContent = "";
+      if (closedMount) closedMount.textContent = "";
+      if (legacy) legacy.textContent = "";
       var graded = gradedForVersion().slice().sort(function (a, b) {
         return String(b.graded_at || "").localeCompare(String(a.graded_at || ""));
       });
       var pending = pendingForVersion().slice().sort(function (a, b) {
         return String(b.t0 || "").localeCompare(String(a.t0 || ""));
       });
-      if (!graded.length && !pending.length) {
-        mount.append(el("p", "", "No paper cards for " + currentVersion + " yet."));
-        return;
+      if (openMount) {
+        if (!pending.length) openMount.append(el("p", "", "No open positions for " + currentVersion + "."));
+        else pending.forEach(function (row) { openMount.append(pendingCard(row, stake)); });
       }
-      graded.forEach(function (row) {
-        var card = el("article", "paper-card");
-        var top = el("div", "row-top");
-        top.append(el("h3", "", (row.symbol || "—") + (row.name ? " · " + row.name : "")));
-        var right = el("div");
-        right.append(badge(row.verdict));
-        right.append(document.createTextNode(" "));
-        right.append(el("span", "grade-pill", "Grade " + (row.grade || "—")));
-        top.append(right);
-        card.append(top);
-        if (row.verdict === "TRAP") {
-          card.append(el("p", "meta", "Skipped (TRAP) — not paper-bought."));
-          card.append(el("p", "meta", "Entry " + fmtTime(row.t0) + " @ " + fmtPrice(row.price_t0)));
-          card.append(el("p", "meta", "Would-be exit: " + exitLabel(row.exit_reason) + " · plan net " + fmtPct(row.net_return)));
-        } else {
-          var pnl = stake * (typeof row.net_return === "number" ? row.net_return : 0);
-          card.append(el("div", "money " + moneyClass(pnl), fmtMoney(pnl) + "  ·  " + fmtPct(row.net_return)));
-          card.append(el("p", "meta", "Entry " + fmtTime(row.t0) + " @ " + fmtPrice(row.price_t0)));
-          card.append(el("p", "meta", "Exit: " + exitLabel(row.exit_reason) + " · graded " + fmtTime(row.graded_at)));
-          card.append(el("p", "meta", "Stake $" + stake.toLocaleString("en-US") + " · " + currentVersion));
+      if (closedMount) {
+        if (!graded.length) closedMount.append(el("p", "", "No closed trades for " + currentVersion + " yet."));
+        else graded.forEach(function (row) { closedMount.append(gradedCard(row, stake)); });
+      }
+      if (legacy && !openMount) {
+        if (!graded.length && !pending.length) {
+          legacy.append(el("p", "", "No paper cards for " + currentVersion + " yet."));
+          return;
         }
-        mount.append(card);
-      });
-      pending.forEach(function (row) {
-        var card = el("article", "paper-card");
-        var top = el("div", "row-top");
-        top.append(el("h3", "", (row.symbol || "—") + (row.name ? " · " + row.name : "")));
-        var right = el("div");
-        right.append(badge(row.verdict));
-        right.append(document.createTextNode(" "));
-        right.append(el("span", "badge badge-PENDING", "Pending"));
-        top.append(right);
-        card.append(top);
-        if (row.verdict === "TRAP") {
-          card.append(el("p", "meta", "Skipped (TRAP). Pending, grades after 24h."));
-        } else {
-          card.append(el("p", "meta", "Pending, grades after 24h."));
-        }
-        card.append(el("p", "meta", "Entry " + fmtTime(row.t0) + " @ " + fmtPrice(row.price_t0)));
-        card.append(el("p", "meta", "Paper stake reserved: $" + stake.toLocaleString("en-US") + " · " + currentVersion));
-        mount.append(card);
-      });
+        graded.forEach(function (row) { legacy.append(gradedCard(row, stake)); });
+        pending.forEach(function (row) { legacy.append(pendingCard(row, stake)); });
+      }
     }
 
     function numberCell(value, source, fetched) {
